@@ -10,7 +10,6 @@ const NavBar = () => {
 
   const showNavbar = () => {
     navRef.current.classList.toggle(`${styles.responsive_nav}`);
-    console.log(navRef.current);
   };
 
   const router = useRouter();
@@ -24,7 +23,7 @@ const NavBar = () => {
           </div>
           <div ref={navRef} className={styles.navbar__menu}>
             <ul>
-              <li claassName="big-screens">
+              <li className={styles.big_screens}>
                 <a
                   className={router.pathname == '/' ? styles.active : ''}
                   href="#"

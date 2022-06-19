@@ -5,7 +5,6 @@ import Link from 'next/link';
 
 const Card = ({ state, progress, voteControl, type }) => {
   const stateSlug = state?.split(' ').slice(0, -1).join(' ').toLowerCase();
-  console.log(type);
   return (
     <div className={styles.card}>
       <div className={styles.state}>

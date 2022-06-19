@@ -13,8 +13,6 @@ const homepage = () => {
   const router = useRouter();
   const query = router.query;
 
-  console.log(query);
-
   return (
     <div className={styles.homepage}>
       <div className={styles.hero}>
@@ -44,9 +42,9 @@ const homepage = () => {
           </div>
         </div>
       </div>
-        <div className={styles.states}>
-          <States />
-        </div>
+      <div className={styles.states}>
+        <States />
+      </div>
       <div className={styles.support_groups}>
         <SupportGroups />
       </div>

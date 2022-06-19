@@ -4,7 +4,6 @@ import peterobi from '../../assets/peterobi.png';
 
 const StateProgress = ({ progress }) => {
   const [style, setStyle] = useState({});
-  //   console.log(progress);
   setTimeout(() => {
     const newStyle = {
       opacity: 1,
