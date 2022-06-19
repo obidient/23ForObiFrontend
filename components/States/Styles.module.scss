@@ -1,0 +1,36 @@
+.states {
+
+    .heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 6.1rem;
+
+        &__input {
+            position: relative;
+            input {
+                /* Text_colour/4 */
+                border: 1px solid var(--text-color-4);
+                border-radius: 48px;
+                outline: none;
+                padding: 1.1rem;
+                width: 27rem;
+                padding-left: 5rem;
+
+                &::placeholder {
+                    @media only screen and (max-width: 56rem) {
+                        font-size: 2rem;
+                        padding-left: 2rem;
+                    }
+                }
+            }
+        }
+        
+        &__search_icon {
+            position: absolute;
+            top: .7rem;
+            left: 2rem;
+        }
+    }
+
+}

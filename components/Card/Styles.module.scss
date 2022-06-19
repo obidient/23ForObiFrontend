@@ -1,0 +1,86 @@
+.card {
+    box-shadow: 0px 4px 13px rgba(2, 106, 32, 0.05);
+    padding: 3rem 1.5rem;
+    border-radius: 19px;
+    border: 1px solid #F1F1F1;
+
+    .state {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        
+        h5 {
+            font-weight: 700;
+            font-size: var(--font-header-3);
+            line-height: 130%;
+            color: var(--text-color-1);
+        }
+
+        .chevron {
+            font-size: 1.5rem;
+            color: #201B33;
+            display: flex;
+            align-items: center;
+            margin: 0;
+            cursor: pointer;
+        }
+    }
+
+    .progress {
+        border-bottom: 1px solid #E1E1E1;
+        border-top: 1px solid #E1E1E1;
+        padding: 2.5rem 0 2.1rem;
+        margin: 1.5rem 0 2rem;
+
+        p {
+            font-weight: 400;
+            line-height: 130%;
+            color: var(--text-color-1);
+        }
+
+        .percent {
+            display: flex;
+            justify-content: space-between;
+
+            p {
+                font-weight: 400;
+                font-size: var(--font-p-text-2);
+                line-height: 130%;
+                color: var(--text-color-1);
+
+                @media (max-width: 26.43em) {
+                    font-size: 1.7rem;
+                }
+
+                &:last-child {
+                    color: var(--text-color-5);
+                }
+            }
+        }
+    }
+
+    .control {
+        display: flex;
+        justify-content: space-between;
+
+        p {
+            font-weight: 300;
+            line-height: 21px;
+
+            &:last-child {
+                font-weight: 700;
+            }
+
+        }
+    }
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem 2rem;
+    
+    @media (max-width: 56.25em) {
+        grid-template-columns: repeat(2, 1fr);
+	}
+}

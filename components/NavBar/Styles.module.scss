@@ -1,0 +1,133 @@
+.nav{
+    position: relative;
+    width: 100%;
+    // margin-bottom: -104px;
+}
+
+.navbar {
+    display: flex;
+    padding-top: 6.1rem;
+    justify-content: space-between;
+    align-items: center;
+
+    &__menu {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        ul {
+            display: flex;
+            list-style-type: none;
+            column-gap: 3rem;
+
+            li {
+                font-size: var(--font-p-text-1);
+                font-weight: 400;
+                
+                .active {
+                    font-weight: 700;
+                    font-size: var(--font-p-text-1);
+                    line-height: 130%;
+                    color: var(--primary-color);
+                    position: relative;
+
+                    @media only screen and (max-width: 56rem) {
+                        font-size: 2.5rem;
+                        color: var(--tertiary-color);
+                    }
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        width: 2rem;
+                        height: 3px;
+                        left: 0;
+                        bottom: -5px;
+                        background-color: var(--secondary-color);
+                    }
+                }
+            }
+        }
+    }
+
+    .hamburger {
+        display: none;
+        font-size: 2.5rem;
+            @media only screen and (max-width: 56rem) {
+                display: block;
+            }
+    }
+
+    button {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        padding-left: 4rem;
+        padding-right: 4rem;
+    }
+
+    .btn_vote, .btn_vote_mobile {
+        border-radius: 48px;
+        padding: 4rem, 2rem, 4rem, 2rem;
+        border: none;
+        background: var(--primary-color);
+        color: var(--tertiary-color);       
+
+    }
+    
+    .btn_vote {
+        @media only screen and (max-width: 56rem) {
+            display: none;
+        }
+    }
+
+    .btn_vote_mobile {
+        border: 2px solid var(--tertiary-color);
+        @media only screen and (min-width: 56rem) {
+            display: none;
+        }
+    }
+}
+
+.navbar__menu {
+
+    @media only screen and (max-width: 56rem) {
+        
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+        gap: 1.5rem;
+        background-color: var(--primary-color);
+        transition: 1s;
+        transform: translateX(-130rem);
+        z-index: 100;
+        
+        ul {
+            display: flex;
+            flex-direction: column;
+            padding: 5rem;
+
+            li{
+                font-family: var(--font-face);
+                color: var(--tertiary-color);
+                padding-bottom: 3rem;
+                font-size: 2.5rem;
+            }
+        }
+
+        .nav_close {
+            position: absolute;
+            top: 5rem;
+            right: 5rem;
+            color: var(--tertiary-color);
+        }
+    }
+}
+
+.responsive_nav {
+        @media only screen and (max-width: 56rem) {
+            transform: none;
+        }
+}

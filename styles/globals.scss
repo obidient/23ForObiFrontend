@@ -1,0 +1,100 @@
+:root {
+  /* Colors */
+  --primary-color: #018226;
+  --secondary-color: #D60602;
+  --tertiary-color: #FFFFFF;
+  --bg-color: #E1E1E1;
+  
+  /*Fonts */
+  --font-face: "Lato";
+  --font-header-1: 3.2rem;
+  --font-header-2: 2.5rem;
+  --font-header-3: 2rem;
+  --font-p-text-1: 1.6rem;
+  --font-p-text-2: 1.3rem;
+
+  // Text Colors
+  --text-color-1: #2F3733;
+  --text-color-2: #5F6160;
+  --text-color-3: #7A7B7B;
+  --text-color-4: #979797;
+  --text-color-5: #C4C4C4;
+  --text-color-6: #D7D7D7;
+  --text-color-7: #E1E1E1;
+  --text-color-8: #F1F1F1;
+  
+  //Width
+  --max-width: 1240px;
+
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  font-family: var(--font-face);
+}
+
+html {
+  font-size: 62.5%;
+  color: var(--text-color-1);
+
+  @media (max-width: 75em) {
+        font-size: 56.25%;
+      }
+
+    @media (max-width: 56.25em) {
+        font-size: 50%;
+      }
+
+    @media (max-width: 35.25em) {
+        font-size: 40%;
+      }    
+
+    @media (max-width: 26.43em) {
+        font-size: 35.25%;
+      }
+
+      
+}
+
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+h1 {
+  font-size: clamp(1rem, 1rem + 5vw, var(--font-header-1));
+}
+
+h2 {
+  font-size: var(--font-header-2);
+}
+
+h5 {
+  font-size: var(--font-header-3);
+}
+
+p {
+  font-size: var(--font-p-text-1);
+     @media (max-width: 26.43em) {
+        font-size: 2rem;
+      }
+}
+
+button {
+  font-family: var(--font-face);
+  cursor: pointer;
+}
+
+.container {
+  padding: 0 5rem;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}

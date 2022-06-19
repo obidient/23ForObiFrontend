@@ -1,0 +1,234 @@
+.state_heading {
+    margin: 11.7rem 0 6.9rem;
+
+    &__title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 5.5rem  0 7.3rem;
+
+        h1 {
+            font-size: var(--font-header-1);
+            font-weight: 700;
+            line-height: 42px;
+            color: var(--text-color-1);
+
+        }
+
+        .vill_control {
+            display: grid;
+            column-gap: 2rem;
+            grid-template-columns: 17rem auto;
+            align-items: center;
+            // justify-content: stretch;
+            width: 45rem;
+
+            &__text {
+                h5 {
+                    font-size: var(--font-header-3);
+                    line-height: 130%;
+                    color: var(--text-color-3);
+                }
+                p {
+                    font-size: var(--font-p-text-2);
+                    line-height: 130%;
+                    color: var(--text-color-4);
+
+                    @media (max-width: 26.43em) {
+                    font-size: 1.7rem;
+                }
+                }
+            }
+
+            &__progress {
+                
+            }
+        }
+    }
+
+    &__govt {
+        border-top: 1px solid #E1E1E1;
+        border-bottom: 1px solid #E1E1E1;
+        padding: 3rem 0;
+
+        .govt_box {
+            background: #F3FFF7;
+            /* Green_shade/7 */
+
+            border: 1px solid #CDFFDB;
+            border-radius: 19px;
+            display: flex;
+            align-items: center;
+            column-gap: 5.4rem;
+            padding: 2rem 3rem;
+
+            .hr {
+                height: 100px;
+                width: 2px;
+                background: #E1E1E1;
+
+            }
+
+            p {
+                color: var(--text-color-3);
+            }
+
+            .current_gov {
+
+                &__details {
+                    display: flex;
+                    align-items: center;
+                    padding-top: 2.1rem;
+                    column-gap: 1.4rem;
+
+                    h5 {
+                        font-weight: 700;
+                        font-size: var(--font-header-3);
+                        line-height: 130%;
+                        color: var(--text-color-1);
+
+                    }
+
+                    p:last-child {
+                        color: var(--text-color-1);
+                    }
+                }
+            }
+
+            .vote_dir {
+
+                &__details {
+                    display: flex;
+                    align-items: center;
+                    padding-top: 2.1rem;
+                    column-gap: 1.4rem;
+                    
+                    h5 {
+                        font-size: var(--font-header-1);
+                        line-height: 130%;
+                        font-weight: 700;
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+.state_vilage_controlled, .state_vilage_not_controlled {
+    margin: 1rem 0 10rem;
+    
+    .state_vilage_controlled__head, .state_vilage_not_controlled__head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 6.1rem;
+
+        h5 {
+            font-size: var(--font-header-3);
+            line-height: 130%;
+            color: var(--text-color-3);
+
+        }
+
+        .head_input {
+            position: relative;
+            input {
+                /* Text_colour/4 */
+                border: 1px solid var(--text-color-4);
+                border-radius: 48px;
+                outline: none;
+                padding: 1.1rem;
+                width: 27rem;
+                padding-left: 5rem;
+
+                &::placeholder {
+                    @media only screen and (max-width: 56rem) {
+                        font-size: 2rem;
+                        padding-left: 2rem;
+                    }
+                }
+            }
+        }
+        
+        .search_icon {
+            position: absolute;
+            top: .7rem;
+            left: 2rem;
+        }
+    }
+
+    .state_body_cards {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 3rem 2rem;
+    
+        @media (max-width: 56.25em) {
+            grid-template-columns: repeat(2, 1fr);
+	    }
+    }
+
+}
+
+.btn_missing {
+        display: flex;
+        justify-content: center;
+        button {
+            padding: 2.5rem 12.5rem;
+            background: var(--primary-color);
+            font-size: 1.6rem;
+            border-radius: 48px;
+            outline: none;
+            border: none;
+            margin-bottom: 12rem;
+            color: var(--tertiary-color);
+            cursor: pointer;
+        }
+}
+
+.social_media_image{
+    margin-bottom: 10rem;
+    &__head {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding-bottom: 3rem;
+
+        .head_text {
+
+            h5 {
+                font-weight: 700;
+                font-size: var(--font-header-1);
+                line-height: 130%;
+                color: var(--text-color-1);
+            }
+
+            p {
+                line-height: 130%;
+                color: var(--text-color-3);
+            }
+        }
+
+        .head_btn {
+
+            button {
+                border: 1px solid var(--primary-color);
+                color: var(--primary-color);
+                border-radius: 48px;
+                outline: none;
+                background: var(--tertiary-color);
+                padding: 1rem 2rem;
+            }
+        }
+    }
+
+    .state_body_cards {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 3rem 2rem;
+
+        @media (max-width: 56.25em) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+}
