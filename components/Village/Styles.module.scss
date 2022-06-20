@@ -212,5 +212,86 @@
                 color: var(--text-color-1);
             }
         }
+
+        //////// CONTRIBUTE IMAGE STYLE /////////////
+                .file_input {
+
+                    form {
+                        
+                        margin-top: 3rem;
+                        .input_text {
+                            padding-bottom: 8rem;
+                            padding-top: 1.5rem;
+                        }
+
+                        .btn_upload {
+                            position: relative;
+                            display: flex;
+                            column-gap: .75rem;
+                            align-items: center;
+                            justify-content: center;
+                            padding: 3.5rem 0;
+                            overflow: hidden;
+
+                            background: #F3FFF7;
+                            border: 1px dashed #81F9A4;
+                            border-radius: 72px;
+                            width: 100%;
+
+                            input[type="file"] {
+                                cursor: pointer;
+                                position: absolute;
+                                transform: scale(3);
+                                opacity: 0;
+                            }
+
+                        }
+
+
+                        .btn_submit {
+                            background: #018226;
+                            border-radius: 48px;
+                            outline: none;
+                            border: none;
+                            width: 100%;
+                            padding: 1.2rem 0;
+                            color: var(--tertiary-color);
+                        }
+                    }
+
+                    .images_prev_container {
+                        display: flex;
+                        column-gap: 1rem;
+                        flex-wrap: wrap;
+                        margin-bottom: 3rem;
+                        
+                        span {
+                            width: 12rem !important;
+                            height: 13rem !important;
+
+                            img {
+                                border-radius: 15px;
+                                
+                            }
+                        }
+
+                        .image_preview {
+                            position: relative;
+                            
+                            .cancel {
+                                position: absolute;
+                                top: 2rem;
+                                right: 1rem;
+                                z-index: 1000;
+                                font-size: 2rem;
+                                color: #fff;
+                                background: none;
+                                border: none;
+                                font-weight: 300;
+                            }
+                        }
+
+                    }
+                }
     }
 }
