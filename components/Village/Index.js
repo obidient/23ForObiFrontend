@@ -3,6 +3,8 @@ import styles from './Styles.module.scss';
 import Contributor from './Contributor';
 import Image from 'next/image';
 import check from '../../assets/check.png';
+import Modal from '../Modal/Index';
+import { useState } from 'react';
 
 /* Images Import */
 import village_img_1 from '../../assets/village_img_1.png';
@@ -11,7 +13,13 @@ import village_img_3 from '../../assets/village_img_3.png';
 import village_img_4 from '../../assets/village_img_4.png';
 import village_img_5 from '../../assets/village_img_5.png';
 
+import google from '../../assets/google.png';
+import facebook from '../../assets/facebook.png';
+import twitter from '../../assets/twitter.png';
+import apple from '../../assets/google.png';
+
 const Village = () => {
+  const [showModal, setShowModal] = useState(false);
   return (
     <div className={styles.state}>
       <div className="container">
@@ -19,8 +27,73 @@ const Village = () => {
           <div className={styles.state_heading__title}>
             <h1>Eziama village</h1>
             <div className={styles.title_btn}>
-              <button>Contribute here</button>
+              <button onClick={() => setShowModal(true)}>
+                Contribute here
+              </button>
             </div>
+            {/* CONTRIBUTE MODAL */}
+            {showModal && (
+              <Modal show={showModal} onClose={() => setShowModal(false)}>
+                <div className={styles.modal}>
+                  <div className={styles.modal__heading}>
+                    <h2>
+                      Contribute <br />
+                      <span>Your image</span>
+                    </h2>
+                  </div>
+                  <div className={styles.modal__body}>
+                    <p>
+                      You can add new images from activities around your states
+                      and village. File should be in .pdf, .jpeg, .jpg, .png
+                      formats with less than 10 MB size
+                    </p>
+                    <div className={styles.file_input}>
+                      <form>
+                        <input type="file" name="" id="" />
+                        <p>You can upload upto 3 pdf or 10 image files</p>
+                        <button>Complete</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </Modal>
+            )}
+
+            {/* SIGN IN MODAL  */}
+
+            {/* {showModal && (
+              <Modal show={showModal} onClose={() => setShowModal(false)}>
+                <div className={styles.modal}>
+                  <div className={styles.modal__heading}>
+                    <h2>
+                      Welcome to <br />
+                      <span>Peter Obi Campaign</span>
+                    </h2>
+                  </div>
+                  <div className={styles.modal__body}>
+                    <p>Sign-up with social media</p>
+                    <div className={styles.social_login}>
+                      <button>
+                        <Image src={google} />
+                        Join with Google
+                      </button>
+                      <button>
+                        <Image src={facebook} />
+                        Join with Facebook
+                      </button>
+                      <button>
+                        <Image src={twitter} />
+                        Join with Twitter
+                      </button>
+                      <button>
+                        <Image src={apple} />
+                        Join with Apple
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </Modal>
+            )} */}
           </div>
           <div className={styles.state_heading__contribution_progress}>
             <div className={styles.text}>

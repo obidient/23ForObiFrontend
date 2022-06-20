@@ -232,3 +232,55 @@
         }
     }
 }
+
+
+.modal {
+    padding: 3rem 3.5rem;
+    &__heading {
+        padding-bottom: 1.5rem;
+        margin-bottom: 2.5rem;
+        h2 {
+            font-weight: 300;
+            font-size: var(--font-header-3);
+            line-height: 115%;
+            color: var(--text-color-1);
+            
+            span {
+                font-weight: 700;
+                
+            }
+        }
+
+        border-bottom: 1px solid #E1E1E1;
+
+    }
+
+    &__body {
+        p {
+            line-height: 130%;
+            color: var(--text-color-3);
+        }
+        
+        form {
+            margin-top: 2.5rem;
+
+            input {
+                width: 100%;
+                border-radius: 48px;
+                padding: 1rem;
+                border: 1px solid #2F3733;
+            }
+
+            button {
+                margin-top: 10rem;
+                background: #018226;
+                border-radius: 48px;
+                outline: none;
+                border: none;
+                width: 100%;
+                padding: 1.2rem 0;
+                color: var(--tertiary-color);
+            }
+        }
+    }
+}

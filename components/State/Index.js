@@ -1,12 +1,13 @@
 import Image from 'next/image';
 import styles from './Styles.module.scss';
-import search from '../../assets/search.png';
-
-//Images
-import pdp from '../../assets/pdp.png';
-import ikpeazu from '../../assets/ikpeazu.png';
+import { useState } from 'react';
 import SingleStateProgress from './../misc/SingleStateProgress';
 import Card from '../Card/Card';
+
+//Images
+import search from '../../assets/search.png';
+import pdp from '../../assets/pdp.png';
+import ikpeazu from '../../assets/ikpeazu.png';
 
 import sm_image_1 from '../../assets/sm_image_1.png';
 import sm_image_2 from '../../assets/sm_image_2.png';
@@ -24,8 +25,11 @@ import sm_image_13 from '../../assets/sm_image_13.png';
 import sm_image_14 from '../../assets/sm_image_14.png';
 import sm_image_15 from '../../assets/sm_image_15.png';
 import sm_image_16 from '../../assets/sm_image_16.png';
+import Modal from '../Modal/Index';
 
 const State = ({ id }) => {
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <div className={styles.state}>
       <div className="container">
@@ -84,7 +88,7 @@ const State = ({ id }) => {
               type="contributor"
               progress={10}
               voteControl={20}
-              state="Ezenwa village"
+              village="Ezenwa"
               slug="/Ezenwa"
             />
             <Card type="contributor" />
@@ -134,9 +138,32 @@ const State = ({ id }) => {
           </div>
         </div>
         <div className={styles.btn_missing}>
-          <button>Add a missing village</button>
+          <button onClick={() => setShowModal(true)}>
+            Add a missing village
+          </button>
         </div>
 
+        {/**** Modal *****/}
+        {showModal && (
+          <Modal show={showModal} onClose={() => setShowModal(false)}>
+            <div className={styles.modal}>
+              <div className={styles.modal__heading}>
+                <h2>
+                  Add a missing <br />
+                  <span>Village</span>
+                </h2>
+              </div>
+              <div className={styles.modal__body}>
+                <p>Kindly add a missing village</p>
+                <form>
+                  <input type="text" placeholder="Enter village name" />
+                  <button>Complete</button>
+                </form>
+              </div>
+            </div>
+          </Modal>
+        )}
+        {/**** End Modal *****/}
         {/* Social Media Images */}
         <div className={styles.social_media_image}>
           <div className={styles.social_media_image__head}>
