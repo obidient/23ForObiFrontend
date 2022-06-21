@@ -1,0 +1,18 @@
+.dashboardnav {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .profile {
+        display: flex;
+        align-items: center;
+        column-gap: 2rem;
+        &__user_img {
+            span {
+                height: 4rem !important;
+                width: 4rem !important;
+            }
+        }
+    }
+}

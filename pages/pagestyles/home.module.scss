@@ -117,3 +117,34 @@
     }
   }
 }
+
+// /////////////////////// DASHBOARD ///////////////////////////
+
+.dashboard {
+  margin-top: 6.4rem;
+  margin-bottom: 2.5rem;
+
+  &__body {
+    display: grid;
+    grid-template-columns: 67% auto;
+    column-gap: 2rem;
+    margin-top: 4rem;
+
+    .main {
+
+      border: 1px solid var(--text-color-8);
+      box-shadow: 0px 4px 13px rgba(2, 106, 32, 0.05);
+      border-radius: 16px;
+
+      height: 100vh;
+      padding: 2.5rem 3rem 3rem;
+    }
+
+    .aside {
+      background: #F2F6FF;
+
+      border: 1px solid #D8E2FA;
+      border-radius: 16px;
+    }
+  }
+}
