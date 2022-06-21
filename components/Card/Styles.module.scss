@@ -73,6 +73,11 @@
 
         }
     }
+
+    .contributors_img {
+        display: flex !important;
+        justify-content: space-between;
+    }
 }
 
 .cards {
