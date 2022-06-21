@@ -161,6 +161,7 @@
     }
 }
 
+// ////////////// MODAL ////////////////////
 .modal {
     padding: 3rem 3.5rem;
     &__heading {
@@ -293,5 +294,78 @@
 
                     }
                 }
-    }
+
+                ////// DETAILS FORM ///////
+                .details_form {
+                    margin-top: 3rem;
+                    form {
+                        input  {
+                            width: 100%;
+                            background: #FFFFFF;
+                            padding: 1rem;
+                            margin-bottom: 2rem;
+                            outline: none;
+                            border: 1px solid #2F3733;
+                            border-radius: 48px;
+                        }
+
+                        .btn_submit {
+                            input {
+                                background: var(--primary-color);
+                                color: var(--tertiary-color);
+                                border: none;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                }
+
+                //HAVE PVC//
+                .have_pvc, .will_vote {
+                    p {
+                        padding-bottom: 2rem;
+                    }
+
+                    .radios {
+                        display: flex;
+                        justify-content: space-between;
+                        column-gap: 1.6rem;
+                        padding-bottom: 4rem;
+
+                        .radio__container {
+                            width: 100%;
+                            padding: 2.5rem 2rem;
+                            display: flex;
+                            justify-content: space-between;
+                            border: 1px solid #F1F1F1;
+                            box-shadow: 0px 4px 13px rgba(2, 106, 32, 0.05);
+                            border-radius: 16px;
+
+                            label {
+                                font-weight: 700;
+                                font-size: 2.5rem;
+                                line-height: 130%;
+                                color: var(--text-color-1);
+
+                            }
+
+                            input {
+                                accent-color: var(--primary-color);
+                                cursor: pointer;
+                            }
+                        }
+
+                    }
+                }
+                button {
+                    margin-top: 3rem;
+                    background: #018226;
+                    border-radius: 48px;
+                    outline: none;
+                    border: none;
+                    width: 100%;
+                    padding: 1.2rem 0;
+                    color: var(--tertiary-color);
+                }
+            }
 }

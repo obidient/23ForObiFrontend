@@ -7,7 +7,8 @@
 .single_state_progress {
 	background-color: #FAF1E4;
 	height: 2.7rem;
-	.percent_all {
+
+	.percent_all{
 		position: relative;
 		bottom: 2rem;
 		display: flex;
@@ -91,6 +92,12 @@
 .single_state_progress_done {
 	background: #CE9E56;
 	height: 2.7rem;
+
+	.percent {
+		p {
+			padding-left: 1rem;
+		}
+	}
 }
 
 .state_progress {
@@ -108,5 +115,75 @@
 		height: 2rem !important;
 	}
 
+	}
+}
+
+.check_form {
+
+	&__input {
+
+		.inputs {
+			margin-bottom: 5.6rem;
+			display: flex;
+			column-gap: 2rem;
+			
+			.container {
+				background: var(--tertiary-color);
+				border: 1px solid var(--text-color-8);
+				
+				box-shadow: 0px 4px 13px rgba(2, 106, 32, 0.05);
+				border-radius: 16px;
+				padding: 2rem 1.5rem;
+				display: flex;
+				justify-content: space-between;
+				height: 17.8rem;
+			
+			label {
+				// position: relative;
+				h5 {
+					font-weight: 700;
+					font-size: 2rem;
+					width: 21.9rem;
+					margin-bottom: 1rem;
+					line-height: 130%;					
+				}
+				
+				p {
+					font-size: var(--font-p-text-2);
+					line-height: 130%;
+					width: 24rem;
+					color: var(--text-color-3);
+				}
+			}
+			
+				input[type="checkbox"] {
+					order: 1;
+					// -webkit-appearance: none;
+					// position: absolute;
+					// width: 27rem;
+					top: 0;
+					right: 0;
+					cursor: pointer;
+					accent-color: var(--primary-color);
+					padding: 2rem;
+					height: 1.8rem;
+					width: 1.8rem;
+				}
+			}
+		}
+
+		.input_btn {
+			button {
+				background: var(--primary-color);
+				border-radius: 48px;
+				border: none;
+				outline: none;
+				padding: 1.2rem 8.85rem;
+				font-size: var(--font-p-text-1);
+				line-height: 130%;
+				color: var(--tertiary-color);
+
+			}
+		}
 	}
 }

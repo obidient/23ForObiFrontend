@@ -68,3 +68,52 @@
 .states {
   margin: 6rem 0;
 }
+
+.contribute {
+  margin: 6.1rem 0 5rem;
+
+  .logo {
+    margin-bottom: 7.2rem;
+  }
+
+  h1 {
+    font-weight: 300;
+    font-size: 2.5rem;
+    line-height: 130%;
+    margin-bottom: 4rem;
+    
+    span {
+      font-weight: 700;
+    }
+  }
+
+  .footer {
+    margin-top: 16.1rem;
+    width: 25.2rem;
+
+    h5 {
+      font-weight: 700;
+      font-size: var(--font-p-text-1);
+      line-height: 130%;
+      position: relative;
+      margin-bottom: 1rem;
+      
+      &::after {
+        content: "";
+        position: absolute;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        width: 4.2rem;
+        background-color: #D60602;
+      }
+    }
+
+    p {
+      font-weight: 400;
+      font-size: var(--font-p-text-2);
+      line-height: 130%;
+      color: var(--text-color-3);
+    }
+  }
+}

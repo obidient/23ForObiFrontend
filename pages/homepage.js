@@ -6,6 +6,8 @@ import States from '../components/States/Index';
 import SupportGroups from '../components/SupportGroups/Index';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import NavBar from '../components/NavBar/Index';
+import Footer from '../components/Footer/Index';
 
 const homepage = () => {
   const done = 13;
@@ -15,6 +17,7 @@ const homepage = () => {
 
   return (
     <div className={styles.homepage}>
+      <NavBar />
       <div className={styles.hero}>
         <div className="container">
           <div className={styles.hero__top}>
@@ -48,6 +51,7 @@ const homepage = () => {
       <div className={styles.support_groups}>
         <SupportGroups />
       </div>
+      <Footer />
     </div>
   );
 };

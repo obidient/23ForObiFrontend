@@ -13,7 +13,6 @@ import village_img_2 from '../../assets/village_img_2.png';
 import village_img_3 from '../../assets/village_img_3.png';
 import village_img_4 from '../../assets/village_img_4.png';
 import village_img_5 from '../../assets/village_img_5.png';
-import add_img from '../../assets/add_img.png';
 
 import google from '../../assets/google.png';
 import facebook from '../../assets/facebook.png';
@@ -22,17 +21,7 @@ import apple from '../../assets/google.png';
 
 const Village = () => {
   const [showModal, setShowModal] = useState(false);
-  const [selectedImages, setSelectedImages] = useState([]);
-  const onSelectFile = (event) => {
-    const selectedFiles = event.target.files;
-    const selectedFilesArray = Array.from(selectedFiles);
 
-    const imageArray = selectedFilesArray.map((file) => {
-      return URL.createObjectURL(file);
-    });
-
-    setSelectedImages((previousImages) => previousImages.concat(imageArray));
-  };
   return (
     <div className={styles.state}>
       <div className="container">
@@ -44,73 +33,6 @@ const Village = () => {
                 Contribute here
               </button>
             </div>
-            {/* CONTRIBUTE MODAL */}
-            {showModal && (
-              <Modal show={showModal} onClose={() => setShowModal(false)}>
-                <div className={styles.modal}>
-                  <div className={styles.modal__heading}>
-                    <h2>
-                      Contribute <br />
-                      <span>Your image</span>
-                    </h2>
-                  </div>
-                  <div className={styles.modal__body}>
-                    <p>
-                      You can add new images from activities around your states
-                      and village. File should be in .pdf, .jpeg, .jpg, .png
-                      formats with less than 10 MB size
-                    </p>
-                    <div className={styles.file_input}>
-                      <form>
-                        <div className={styles.images_prev_container}>
-                          {selectedImages &&
-                            selectedImages.map((image, index) => {
-                              return (
-                                <div
-                                  key={image}
-                                  className={styles.image_preview}
-                                >
-                                  <Image src={image} width={100} height={100} />
-                                  <button
-                                    onClick={() =>
-                                      setSelectedImages(
-                                        selectedImages.filter(
-                                          (e) => e !== image
-                                        )
-                                      )
-                                    }
-                                    className={styles.cancel}
-                                  >
-                                    <FaTimes />
-                                  </button>
-                                </div>
-                              );
-                            })}
-                        </div>
-                        <div className={styles.upload}>
-                          <button type="button" className={styles.btn_upload}>
-                            <Image src={add_img} />
-                            <p>Add a new image</p>
-                            <input
-                              type="file"
-                              name=""
-                              id=""
-                              onChange={onSelectFile}
-                              multiple
-                              accept="image/png, image/jpeg, image/webp"
-                            />
-                          </button>
-                        </div>
-                        <p className={styles.input_text}>
-                          You can upload upto 3 pdf or 10 image files
-                        </p>
-                        <button className={styles.btn_submit}>Complete</button>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </Modal>
-            )}
 
             {/* SIGN IN MODAL  */}
 
@@ -147,6 +69,105 @@ const Village = () => {
                 </div>
               </Modal>
             )} */}
+
+            {/* DETAILS FORM */}
+            {/* {showModal && (
+              <Modal>
+                <div className={styles.modal}>
+                  <div className={styles.modal__heading}>
+                    <h2>
+                      Enter your <br />
+                      <span>Details</span>
+                    </h2>
+                  </div>
+                  <div className={styles.modal__body}>
+                    <p>Kindly fill our your personal details</p>
+                    <div className={styles.details_form}>
+                      <form action="">
+                        <input type="text" placeholder="First name" />
+                        <input type="text" placeholder="Last Name" />
+                        <input type="text" placeholder="Email address" />
+                        <div className={styles.select}>
+                          <input
+                            type="text"
+                            name=""
+                            id=""
+                            placeholder="Select your state"
+                          />
+                          <select name="" id=""></select>
+                        </div>
+                        <div className={styles.select}>
+                          <input
+                            type="text"
+                            name=""
+                            id=""
+                            placeholder="Select your village"
+                            />
+                          <select name="" id=""></select>
+                        </div>
+                        <div className={styles.btn_submit}>
+                          <input type="button" value="Continue" />
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </Modal>
+            )} */}
+            {/* DETAILS MODAL END */}
+
+            {/* HAVE PVC MODAL */}
+            {showModal && (
+              <Modal show={showModal} onClose={() => setShowModal(false)}>
+                <div className={styles.modal}>
+                  <div className={styles.modal__heading}>
+                    <h2>
+                      Help us complete <br />
+                      <span>This Details</span>
+                    </h2>
+                  </div>
+                  <div className={styles.modal__body}>
+                    <div className={styles.have_pvc}>
+                      <p>
+                        Do you have a <span>PVC</span>
+                      </p>
+                      <div className={styles.radios}>
+                        <div className={styles.radio__container}>
+                          <label for="html">YES</label>
+                          <input type="radio" id="no" name="pvc" value="YES" />
+                        </div>
+                        <div className={styles.radio__container}>
+                          <label for="html">NO</label>
+                          <input type="radio" id="no" name="pvc" value="NO" />
+                        </div>
+                      </div>
+                    </div>
+                    <div className={styles.will_vote}>
+                      <p>
+                        Will you be <span>VOTING</span>
+                      </p>
+                      <div className={styles.radios}>
+                        <div className={styles.radio__container}>
+                          <label for="html">YES</label>
+                          <input
+                            type="radio"
+                            id="yes"
+                            name="vote"
+                            value="YES"
+                          />
+                        </div>
+                        <div className={styles.radio__container}>
+                          <label for="html">NO</label>
+                          <input type="radio" id="no" name="vote" value="NO" />
+                        </div>
+                      </div>
+                    </div>
+                    <button>Next</button>
+                  </div>
+                </div>
+              </Modal>
+            )}
+            {/* HAVE PVC MODAL END */}
           </div>
           <div className={styles.state_heading__contribution_progress}>
             <div className={styles.text}>

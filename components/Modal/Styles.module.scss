@@ -3,6 +3,8 @@
   height: 100%;
   background-color: #01822680;
   position: fixed;
+  display: flex;
+  align-items: center;
   top: 0;
   bottom: 0;
   left: 0;
@@ -10,11 +12,10 @@
   z-index: 1;
 
 .modal {
-    width: 50.4rem;
-    position: fixed;
-    top: 10rem;
-    left: 0;
-    right: 0;
+    width: 54.4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 0 auto;
     background-color: #fff;
     border: none;
@@ -35,7 +36,7 @@
         border-radius: 50%;
         position: absolute;
         top: 2.5rem;
-        right: 10px;
+        right: 3.5rem;
         cursor: pointer;
       }
     }
