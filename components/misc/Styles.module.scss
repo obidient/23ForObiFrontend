@@ -187,3 +187,45 @@
 		}
 	}
 }
+
+
+////////SELECT INPUT ////////////
+.input {
+    margin-bottom: 2rem;
+    position: relative;
+    select {
+        padding: 1.15rem;
+        width: 100%;
+        border: none;
+        -webkit-appearance: button;
+        appearance: button;
+        outline: none;
+        cursor: pointer;
+
+        border: 1px solid var(--text-color-1);
+        border-radius: 48px;
+
+        line-height: 130%;
+        color: var(--text-color-4);
+
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        text-indent: 1px;
+        text-overflow: '';
+
+        option {
+            padding: 40px !important;
+            background: var(--tertiary-color);
+            color: var(--text-color-1);
+            // text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+            padding: 1rem;
+            border:0px;
+            outline:0px;
+        }
+    }
+    .img {
+        position: absolute;
+        top: 1.8rem;
+        right: 1rem;
+    }
+}

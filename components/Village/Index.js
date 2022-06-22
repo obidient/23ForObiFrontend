@@ -18,6 +18,7 @@ import google from '../../assets/google.png';
 import facebook from '../../assets/facebook.png';
 import twitter from '../../assets/twitter.png';
 import apple from '../../assets/google.png';
+import SelectInput from '../misc/SelectInput';
 
 const Village = () => {
   const [showModal, setShowModal] = useState(false);
@@ -71,8 +72,8 @@ const Village = () => {
             )} */}
 
             {/* DETAILS FORM */}
-            {/* {showModal && (
-              <Modal>
+            {showModal && (
+              <Modal show={showModal} onClose={() => setShowModal(false)}>
                 <div className={styles.modal}>
                   <div className={styles.modal__heading}>
                     <h2>
@@ -88,22 +89,10 @@ const Village = () => {
                         <input type="text" placeholder="Last Name" />
                         <input type="text" placeholder="Email address" />
                         <div className={styles.select}>
-                          <input
-                            type="text"
-                            name=""
-                            id=""
-                            placeholder="Select your state"
-                          />
-                          <select name="" id=""></select>
+                          <SelectInput option="Select your state" />
                         </div>
                         <div className={styles.select}>
-                          <input
-                            type="text"
-                            name=""
-                            id=""
-                            placeholder="Select your village"
-                            />
-                          <select name="" id=""></select>
+                          <SelectInput option="Select your village" />
                         </div>
                         <div className={styles.btn_submit}>
                           <input type="button" value="Continue" />
@@ -113,11 +102,11 @@ const Village = () => {
                   </div>
                 </div>
               </Modal>
-            )} */}
+            )}
             {/* DETAILS MODAL END */}
 
             {/* HAVE PVC MODAL */}
-            {showModal && (
+            {/* {showModal && (
               <Modal show={showModal} onClose={() => setShowModal(false)}>
                 <div className={styles.modal}>
                   <div className={styles.modal__heading}>
@@ -166,7 +155,7 @@ const Village = () => {
                   </div>
                 </div>
               </Modal>
-            )}
+            )} */}
             {/* HAVE PVC MODAL END */}
           </div>
           <div className={styles.state_heading__contribution_progress}>

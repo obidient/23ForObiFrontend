@@ -1,6 +1,8 @@
 import styles from './Styles.module.scss';
-import status_check from '../../assets/status_check.png';
 import Image from 'next/image';
+
+import status_check from '../../assets/status_check.png';
+import caret_down from '../../assets/caret_down.png';
 
 const DashboardMain = () => {
   return (
@@ -11,8 +13,19 @@ const DashboardMain = () => {
         <div className={styles.village_control__input}>
           <h3>VIllages you have control in</h3>
           <p>Add the villages you have control over within your state.</p>
-          <div className={styles.input}>
-            <input type="text" placeholder="Select your village" />
+          <div class={styles.input}>
+            <select>
+              <option selected disabled hidden>
+                Select your village
+              </option>
+              <option>Option 2</option>
+              <option>Option 3</option>
+              <option>Option 4</option>
+              <option>Option 5</option>
+            </select>
+            <div className={styles.img}>
+              <Image src={caret_down} />
+            </div>
           </div>
         </div>
         <div className={styles.village_control__outputs}>
