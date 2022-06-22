@@ -1,5 +1,6 @@
-import React from 'react';
 import styles from './Styles.module.scss';
+import status_check from '../../assets/status_check.png';
+import Image from 'next/image';
 
 const DashboardMain = () => {
   return (
@@ -40,15 +41,65 @@ const DashboardMain = () => {
             <p>
               Specify your key contact information we can always reach you on.
             </p>
-            <input type="text" placeholder="Full name" />
-            <input type="text" placeholder="Phone number" />
-            <input type="text" placeholder="Whatsapp number" />
+            <div className={styles.input_field}>
+              <input type="text" placeholder="Full name" />
+              <input type="text" placeholder="Phone number" />
+              <input type="text" placeholder="Whatsapp number" />
+            </div>
+            <button>Save</button>
           </form>
         </div>
         <div className={styles.main_bottom__contributors}>
-          <h5>Contributors</h5>
-          <p>Add a new contributor</p>
-          <div className={styles.contributors_table}></div>
+          <div className={styles.heading}>
+            <h5>Contributors</h5>
+            <p>Add a new contributor</p>
+          </div>
+          <div className={styles.contributors_table}>
+            <table>
+              <tbody>
+                <tr>
+                  <th>Name</th>
+                  <th>Mobile number</th>
+                  <th>Status</th>
+                </tr>
+                <tr>
+                  <td>Okolie Festus</td>
+                  <td>07085128680</td>
+                  <td>
+                    <Image src={status_check} />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Okolie Festus</td>
+                  <td>07085128680</td>
+                  <td>
+                    <Image src={status_check} />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Okolie Festus</td>
+                  <td>07085128680</td>
+                  <td>
+                    <Image src={status_check} />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Okolie Festus</td>
+                  <td>07085128680</td>
+                  <td>
+                    <Image src={status_check} />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Okolie Festus</td>
+                  <td>07085128680</td>
+                  <td>
+                    <Image src={status_check} />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
