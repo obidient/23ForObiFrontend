@@ -2,11 +2,11 @@ import styles from './Styles.module.scss';
 import caret_down from '../../assets/caret_down.png';
 import Image from 'next/image';
 
-const SelectInput = ({ option }) => {
+const SelectInput = ({ option, name, value, onChange }) => {
   return (
     <div>
       <div class={styles.input}>
-        <select>
+        <select name={name} value={value} onChange={onChange}>
           <option selected disabled>
             {option}
           </option>

@@ -1,8 +1,9 @@
 import React from 'react';
-import DashboardMain from '../components/Dashboard/DashboardMain';
-import DeliverVotes from '../components/Dashboard/DeliverVotes';
-import DashboardNav from '../components/DashboardNav/Index';
-import styles from './pagestyles/home.module.scss';
+import DashboardMain from '../../components/Dashboard/DashboardMain';
+import DeliverVotes from '../../components/Dashboard/DeliverVotes';
+import DashboardNav from '../../components/DashboardNav/Index';
+// import styles from './pagestyles/home.module.scss';
+import styles from '../pagestyles/home.module.scss';
 
 const dashboard = () => {
   return (

@@ -73,7 +73,8 @@
                 border: 1px solid #02B836;
                 border-radius: 61px;
                 padding: 0.45rem 1.6rem;
-                width: 15.4rem;
+                min-width: 15.4rem;
+                height: 3rem;
                 
                 display: flex;
                 align-items: center;
@@ -307,5 +308,101 @@
         position: absolute;
         top: 1.8rem;
         right: 1rem;
+    }
+}
+
+//////// MODAL ////////////////
+.modal {
+    padding: 3rem 3.5rem;
+    &__heading {
+        padding-bottom: 1.5rem;
+        margin-bottom: 2.5rem;
+        h2 {
+            font-weight: 300;
+            font-size: var(--font-header-3);
+            line-height: 115%;
+            color: var(--text-color-1);
+            
+            span {
+                font-weight: 700;
+                
+            }
+        }
+
+        border-bottom: 1px solid #E1E1E1;
+
+    }
+
+    &__body {
+        p {
+            line-height: 130%;
+            color: var(--text-color-3);
+        }
+    }
+
+    form {
+            margin-top: 2.5rem;
+
+            input {
+                width: 100%;
+                border-radius: 48px;
+                padding: 1rem;
+                border: 1px solid #2F3733;
+                margin-bottom: 2rem;
+            }
+
+            .btn_submit {
+                input {
+                    margin-top: 2rem;
+                    background: #018226;
+                    border-radius: 48px;
+                    outline: none;
+                    border: none;
+                    width: 100%;
+                    padding: 1.2rem 0;
+                    color: var(--tertiary-color);
+
+                }
+            }
+        }
+        
+}
+
+.profile {
+    display: flex;
+    padding-top: 4rem;
+    column-gap: 10rem;
+
+    .avatar {
+        font-size: var(--font-p-text-1);
+        line-height: 130%;
+        text-align: center;
+        text-decoration-line: underline;
+        color: #5678CE;
+    }
+
+    .form {
+        width: 34.6rem;
+        form{
+            display: flex;
+            flex-direction: column;
+            row-gap: 2rem;
+            
+            input {
+                border: 1px solid var(--text-color-1);
+                border-radius: 48px;
+                padding: 1rem;
+                background: #FFFFFF;
+            }
+        }
+
+        button {
+            background: #018226;
+            border-radius: 48px;
+            padding: 1.2rem;
+            outline: none;
+            border: none;
+            color: var(--tertiary-color);
+        }
     }
 }

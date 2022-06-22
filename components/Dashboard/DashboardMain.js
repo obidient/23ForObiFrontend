@@ -3,8 +3,55 @@ import Image from 'next/image';
 
 import status_check from '../../assets/status_check.png';
 import caret_down from '../../assets/caret_down.png';
+import { useState } from 'react';
+import Modal from './../Modal/Index';
+import SelectInput from './../misc/SelectInput';
 
 const DashboardMain = () => {
+  ////// Modal State
+  const [showModal, setShowModal] = useState(false);
+
+  ////// Add Village Function
+  // Village State
+  const [selectedVillages, setSelectedVillages] = useState([]);
+
+  const handleChange = (e) => {
+    let currentVillages = [];
+    const selectedVillages = e.target.value;
+    const selectedVillagesArray = currentVillages.push(selectedVillages);
+
+    setSelectedVillages((previousVillages) =>
+      previousVillages.concat(currentVillages)
+    );
+  };
+
+  /////// Add Contributor Function
+
+  const initialValues = {
+    first_name: '',
+    last_name: '',
+    phone_number: '',
+    village: '',
+  };
+
+  // Contributor state
+  const [contributor, setContributor] = useState({ initialValues });
+
+  const contributeChange = (e) => {
+    const { name, value } = e.target;
+    setContributor({
+      ...contributor,
+      [name]: value,
+    });
+  };
+
+  const contributeSubmit = (e) => {
+    e.preventDefault();
+    console.log(contributor);
+    setContributor(initialValues);
+    setShowModal(false);
+  };
+
   return (
     <div className={styles.dashboardmain}>
       <h2>Welcome Sandra</h2>
@@ -14,14 +61,14 @@ const DashboardMain = () => {
           <h3>VIllages you have control in</h3>
           <p>Add the villages you have control over within your state.</p>
           <div class={styles.input}>
-            <select>
-              <option selected disabled hidden>
+            <select value={selectedVillages[-1]} onChange={handleChange}>
+              <option selected disabled>
                 Select your village
               </option>
               <option>Option 2</option>
               <option>Option 3</option>
               <option>Option 4</option>
-              <option>Option 5</option>
+              <option>Umuola-Edgelu village</option>
             </select>
             <div className={styles.img}>
               <Image src={caret_down} />
@@ -29,21 +76,23 @@ const DashboardMain = () => {
           </div>
         </div>
         <div className={styles.village_control__outputs}>
-          <div className={styles.output}>
-            <p>Eziama village</p> <span>x</span>
-          </div>
-          <div className={styles.output}>
-            <p>Eziama village</p> <span>x</span>
-          </div>
-          <div className={styles.output}>
-            <p>Eziama village</p> <span>x</span>
-          </div>
-          <div className={styles.output}>
-            <p>Eziama village</p> <span>x</span>
-          </div>
-          <div className={styles.output}>
-            <p>Eziama village</p> <span>x</span>
-          </div>
+          {selectedVillages.map((village, index) => {
+            return (
+              <div key={index} className={styles.output}>
+                <p>{village}</p>{' '}
+                <span
+                  onClick={() =>
+                    setSelectedVillages(
+                      selectedVillages.filter((e) => e !== village)
+                    )
+                  }
+                  className={styles.cancel}
+                >
+                  x
+                </span>
+              </div>
+            );
+          })}
         </div>
       </div>
       <hr />
@@ -65,8 +114,68 @@ const DashboardMain = () => {
         <div className={styles.main_bottom__contributors}>
           <div className={styles.heading}>
             <h5>Contributors</h5>
-            <p>Add a new contributor</p>
+            <p onClick={() => setShowModal(true)}>Add a new contributor</p>
           </div>
+
+          {/* CONTRIBUTOR MODAL */}
+          {showModal && (
+            <Modal show={showModal} onClose={() => setShowModal(false)}>
+              <div className={styles.modal}>
+                <div className={styles.modal__heading}>
+                  <h2>
+                    Add a new <br />
+                    <span>Contributor</span>
+                  </h2>
+                </div>
+                <div className={styles.modal__body}>
+                  <p>Kindly enter the details of a contributor</p>
+                  <div className={styles.details_form}>
+                    <form action="">
+                      <input
+                        type="text"
+                        name="first_name"
+                        placeholder="First name"
+                        value={contributor.first_name}
+                        onChange={contributeChange}
+                      />
+                      <input
+                        type="text"
+                        name="last_name"
+                        placeholder="Last Name"
+                        value={contributor.last_name}
+                        onChange={contributeChange}
+                      />
+                      <div className={styles.select}>
+                        <SelectInput
+                          option="Phone Number"
+                          name="number"
+                          value={contributor.name}
+                          onChange={contributeChange}
+                        />
+                      </div>
+                      <div className={styles.select}>
+                        <SelectInput
+                          option="Select a village"
+                          name="village"
+                          value={contributor.name}
+                          onChange={contributeChange}
+                        />
+                      </div>
+                      <div className={styles.btn_submit}>
+                        <input
+                          type="button"
+                          value="Continue"
+                          onClick={contributeSubmit}
+                        />
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </Modal>
+          )}
+          {/* CONTRIBUTOR MODAL END */}
+
           <div className={styles.contributors_table}>
             <table>
               <tbody>
