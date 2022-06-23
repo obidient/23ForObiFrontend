@@ -1,3 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 :root {
   /* Colors */
   --primary-color: #018226;
@@ -52,11 +57,11 @@ html {
       }
 
     @media (max-width: 35.25em) {
-        font-size: 40%;
+        font-size: 45%;
       }    
 
     @media (max-width: 26.43em) {
-        font-size: 35.25%;
+        font-size: 36.25%;
       }
 
       
@@ -81,12 +86,18 @@ h5 {
   font-size: var(--font-header-3);
 }
 
-p {
+p, ::placeholder, button, .btn {
   font-size: var(--font-p-text-1);
+    font-size: clamp(1.6rem, 10%, 1.6rem);
+
      @media (max-width: 26.43em) {
         font-size: 2rem;
       }
 }
+
+// ::placeholder {
+//         font-size: 1.6rem;
+// }
 
 button {
   font-family: var(--font-face);

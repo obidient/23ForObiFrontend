@@ -2,8 +2,10 @@ import styles from './Styles.module.scss';
 import caret_down from '../../assets/caret_down.png';
 import Image from 'next/image';
 import { useState } from 'react';
+import village_img_1 from '../../assets/village_img_1.png';
+import Link from 'next/link';
 
-const SelectInput = ({ option, name, value, onChange }) => {
+const DashboardLink = ({ option, name, value, onChange }) => {
   const [isDropDownVisible, setIsDropDownVisible] = useState(false);
 
   //dropdown items
@@ -40,30 +42,21 @@ const SelectInput = ({ option, name, value, onChange }) => {
             setIsDropDownVisible(!isDropDownVisible);
           }}
         >
-          {' '}
-          <p>
-            {selectedItemIndex !== null
-              ? itemsList[selectedItemIndex].name
-              : 'Select'}
-          </p>
+          <div className={styles.profile__user_img}>
+            <Image src={village_img_1} />
+          </div>
         </div>
         {isDropDownVisible ? (
           <div className={styles.dropdown__item_holder}>
-            {itemsList.map((item, index) => {
-              return (
-                <div
-                  className={styles.dropdown_item}
-                  key={item.value}
-                  onClick={(e) => {
-                    setSelectedItemsIndex(index);
-
-                    setIsDropDownVisible(false);
-                  }}
-                >
-                  <p>{item.name}</p>
-                </div>
-              );
-            })}
+            <div className={styles.dropdown_item}>
+              <Link href="/dashboard">Dashboard</Link>
+            </div>
+            <div className={styles.dropdown_item}>
+              <Link href="/dashboard/profile">Profile</Link>
+            </div>
+            <div className={styles.dropdown_item}>
+              <Link href="logout">Log-out</Link>
+            </div>
           </div>
         ) : (
           <></>
@@ -73,4 +66,4 @@ const SelectInput = ({ option, name, value, onChange }) => {
   );
 };
 
-export default SelectInput;
+export default DashboardLink;

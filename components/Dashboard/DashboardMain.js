@@ -52,6 +52,29 @@ const DashboardMain = () => {
     setShowModal(false);
   };
 
+  //dropdown items
+  const [itemsList, setItemsList] = useState([
+    {
+      name: 'Ezeani Village',
+      value: 'Ezeani Village 1',
+    },
+    {
+      name: 'Ezeani Village',
+      value: 'Ezeani Village 2',
+    },
+    {
+      name: 'Ezeani Village',
+      value: 'Ezeani Village 3',
+    },
+    // {
+    //   name: 'Ezeani Village',
+    //   value: 'Ezeani Village',
+    // },
+  ]);
+
+  const [selectedItemIndex, setSelectedItemIndex] = useState(null);
+  // const [selectedItem, setSelectedItems] = useState(null);
+
   return (
     <div className={styles.dashboardmain}>
       <h2>Welcome Sandra</h2>
@@ -74,6 +97,7 @@ const DashboardMain = () => {
               <Image src={caret_down} />
             </div>
           </div>
+          {/* <SelectInput default="Select your village" itemsList={itemsList} /> */}
         </div>
         <div className={styles.village_control__outputs}>
           {selectedVillages.map((village, index) => {
@@ -146,20 +170,10 @@ const DashboardMain = () => {
                         onChange={contributeChange}
                       />
                       <div className={styles.select}>
-                        <SelectInput
-                          option="Phone Number"
-                          name="number"
-                          value={contributor.name}
-                          onChange={contributeChange}
-                        />
+                        <SelectInput option="Phone Number" name="number" />
                       </div>
                       <div className={styles.select}>
-                        <SelectInput
-                          option="Select a village"
-                          name="village"
-                          value={contributor.name}
-                          onChange={contributeChange}
-                        />
+                        <SelectInput option="Select a village" name="village" />
                       </div>
                       <div className={styles.btn_submit}>
                         <input
@@ -175,7 +189,6 @@ const DashboardMain = () => {
             </Modal>
           )}
           {/* CONTRIBUTOR MODAL END */}
-
           <div className={styles.contributors_table}>
             <table>
               <tbody>

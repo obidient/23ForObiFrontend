@@ -3,7 +3,7 @@ import styles from './Styles.module.scss';
 const DeliverVotes = () => {
   return (
     <div className={styles.delivervotes}>
-      <h2>Deliver Votes</h2>
+      <h2>How to deliver Votes</h2>
       <hr />
       <p>These are instructions on how to deliver votes</p>
       <div className={styles.instruction_cards}>

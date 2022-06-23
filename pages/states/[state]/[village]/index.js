@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import Footer from '../../../../components/Footer/Index';
-import Navbar from '../../../../components/Navbar/Index';
 import Village from '../../../../components/Village/Index';
+import Navbar from './../../../../components/NavBar/Index';
 
 const village = () => {
   const router = useRouter();

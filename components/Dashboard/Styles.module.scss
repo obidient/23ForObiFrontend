@@ -248,18 +248,19 @@
             background: #D8E2FA;
             border: 1px solid #C0CFF5;
             border-radius: 16px;
-            padding: 1.5rem 2rem;
+            padding: 1.5rem 2rem 0;
             margin-bottom: 1rem;
 
             h3 {
                 font-weight: 700;
                 font-size: var(--font-p-text-1);
                 line-height: 130%;
-                margin-bottom: .5rem;
+                // margin-bottom: .5rem;
             }
     
             p {
-    
+                margin-bottom: 1.5rem;
+                margin-top: .5rem;
             }
 
 
@@ -340,6 +341,9 @@
         }
     }
 
+    .select {
+            margin-bottom: 2rem;
+        }
     form {
             margin-top: 2.5rem;
 

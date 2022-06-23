@@ -94,7 +94,7 @@ const Village = () => {
                         <div className={styles.select}>
                           <SelectInput option="Select your village" />
                         </div>
-                        <div className={styles.btn_submit}>
+                        <div className={`${styles.btn_submit} ${styles.btn}`}>
                           <input type="button" value="Continue" />
                         </div>
                       </form>

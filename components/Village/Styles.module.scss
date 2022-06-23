@@ -24,7 +24,7 @@
                 background: none;
 
                 padding: 1rem 2rem;
-                font-size: var(--font-p-text-1);
+                // font-size: var(--font-p-text-1);
                 line-height: 130%;
                 color: var(--primary-color);
             }
@@ -189,6 +189,10 @@
             color: var(--text-color-3);
         }
 
+        .select {
+            margin-bottom: 2rem;
+        }
+        
         .social_login {
             display: flex;
             justify-content: center;
@@ -209,7 +213,7 @@
                 width: 25.3rem;
                 column-gap: 1.2rem;
                 
-                font-size: var(--font-p-text-1);
+                // font-size: var(--font-p-text-1);
                 color: var(--text-color-1);
             }
         }
@@ -315,6 +319,7 @@
                                 color: var(--tertiary-color);
                                 border: none;
                                 cursor: pointer;
+                                font-size: var(--font-p-text-1);
                             }
                         }
                     }
