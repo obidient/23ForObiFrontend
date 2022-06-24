@@ -6,6 +6,7 @@ import check from '../../assets/check.png';
 import Modal from '../Modal/Index';
 import { useState } from 'react';
 import { FaTimes } from 'react-icons/fa';
+import Breadcrumbs from '../misc/Breadcrumbs';
 
 /* Images Import */
 import village_img_1 from '../../assets/village_img_1.png';
@@ -27,6 +28,9 @@ const Village = () => {
     <div className={styles.state}>
       <div className="container">
         <div className={styles.state_heading}>
+          <div className={styles.breadcrumb}>
+            <Breadcrumbs />
+          </div>
           <div className={styles.state_heading__title}>
             <h1>Eziama village</h1>
             <div className={styles.title_btn}>

@@ -26,10 +26,37 @@
             }
         }
         
+        // &__search_icon {
+        //     position: absolute;
+        //     top: .7rem;
+        //     left: 2rem;
+        // }
+
         &__search_icon {
             position: absolute;
-            top: .7rem;
+            top: 1.5rem;
             left: 2rem;
+
+            @media (max-width: 56.25em) {
+                top: .8rem;
+            }
+
+            span {
+
+                    @media (max-width: 56.25em) {
+                        width: 90% !important; 
+                        height: 90% !important; 
+                    }
+                   
+                    @media (max-width: 26.43em) {
+                        width: 80% !important; 
+                        height: 80% !important; 
+                
+                    }
+            }
+            
+
+
         }
     }
 

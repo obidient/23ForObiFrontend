@@ -1,13 +1,13 @@
 import Image from 'next/image';
-import styles from './pagestyles/home.module.scss';
-import labourparty from '../assets/labourparty.png';
-import ProgressBar from './../components/misc/Progress';
-import States from '../components/States/Index';
-import SupportGroups from '../components/SupportGroups/Index';
+import styles from '../pagestyles/home.module.scss';
+import labourparty from '../../assets/labourparty.png';
+import ProgressBar from '../../components/misc/Progress';
+import States from '../../components/States/Index';
+import SupportGroups from '../../components/SupportGroups/Index';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import NavBar from '../components/NavBar/Index';
-import Footer from '../components/Footer/Index';
+import NavBar from '../../components/NavBar/Index';
+import Footer from '../../components/Footer/Index';
 
 const homepage = () => {
   const done = 13;
@@ -18,6 +18,7 @@ const homepage = () => {
   return (
     <div className={styles.homepage}>
       <NavBar />
+
       <div className={styles.hero}>
         <div className="container">
           <div className={styles.hero__top}>

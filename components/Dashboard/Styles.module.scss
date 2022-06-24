@@ -40,6 +40,11 @@
 
         &__input {
             width: 25rem;
+            
+            @media (max-width: 35.25em) {
+                width: 100%;
+                text-align: center;
+            } 
                 .input {
                     margin-top: 2rem;
 
@@ -51,6 +56,15 @@
                     padding: 1.15rem 1rem;
                     outline: none;
                     width: 100%;
+                }
+
+                .img {
+                    position: absolute;
+                    top: 2rem;
+                    
+                    @media (max-width: 35.25em) {
+                        top: 2.5rem;
+                    } 
                 }
             }
         }

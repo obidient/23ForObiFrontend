@@ -5,6 +5,7 @@ import SingleStateProgress from './../misc/SingleStateProgress';
 import Card from '../Card/Card';
 import Modal from '../Modal/Index';
 import { FaTimes } from 'react-icons/fa';
+import Breadcrumbs from '../misc/Breadcrumbs';
 
 //Images
 import search from '../../assets/search.png';
@@ -50,6 +51,7 @@ const State = ({ id }) => {
     <div className={styles.state}>
       <div className="container">
         <div className={styles.state_heading}>
+          <Breadcrumbs />
           <div className={styles.state_heading__title}>
             <h1>Abia State Villages</h1>
             <div className={styles.vill_control}>
@@ -107,29 +109,163 @@ const State = ({ id }) => {
               village="Ezenwa"
               slug="/Ezenwa"
             />
-            <Card type="contributor" />
-            <Card type="contributor" />
-            <Card type="contributor" />
-            <Card type="contributor" />
-            <Card type="contributor" />
-            <Card type="contributor" />
-            <Card type="contributor" />
-            <Card type="contributor" />
-            <Card type="contributor" />
-            <Card type="contributor" />
-            <Card type="contributor" />
-            <Card type="contributor" />
-            <Card type="contributor" />
-            <Card type="contributor" />
-            <Card type="contributor" />
-            <Card type="contributor" />
-            <Card type="contributor" />
-            <Card type="contributor" />
-            <Card type="contributor" />
-            <Card type="contributor" />
-            <Card type="contributor" />
-            <Card type="contributor" />
-            <Card type="contributor" />
+            <Card
+              type="contributor"
+              progress={10}
+              voteControl={20}
+              village="Osusu"
+            />
+            <Card
+              type="contributor"
+              progress={10}
+              voteControl={20}
+              village="Osusu"
+            />
+            <Card
+              type="contributor"
+              progress={10}
+              voteControl={20}
+              village="Uratta"
+            />
+            <Card
+              type="contributor"
+              progress={10}
+              voteControl={20}
+              village="Ariara"
+            />
+            <Card
+              type="contributor"
+              progress={10}
+              voteControl={20}
+              village="Ezenwa"
+              slug="/Ezenwa"
+            />
+            <Card
+              type="contributor"
+              progress={10}
+              voteControl={20}
+              village="Ezenwa"
+              slug="/Ezenwa"
+            />
+            <Card
+              type="contributor"
+              progress={10}
+              voteControl={20}
+              village="Ezenwa"
+              slug="/Ezenwa"
+            />
+            <Card
+              type="contributor"
+              progress={10}
+              voteControl={20}
+              village="Ezenwa"
+              slug="/Ezenwa"
+            />
+            <Card
+              type="contributor"
+              progress={10}
+              voteControl={20}
+              village="Ezenwa"
+              slug="/Ezenwa"
+            />
+            <Card
+              type="contributor"
+              progress={10}
+              voteControl={20}
+              village="Ezenwa"
+              slug="/Ezenwa"
+            />
+            <Card
+              type="contributor"
+              progress={10}
+              voteControl={20}
+              village="Ezenwa"
+              slug="/Ezenwa"
+            />
+            <Card
+              type="contributor"
+              progress={10}
+              voteControl={20}
+              village="Ezenwa"
+              slug="/Ezenwa"
+            />
+            <Card
+              type="contributor"
+              progress={10}
+              voteControl={20}
+              village="Ezenwa"
+              slug="/Ezenwa"
+            />
+            <Card
+              type="contributor"
+              progress={10}
+              voteControl={20}
+              village="Ezenwa"
+              slug="/Ezenwa"
+            />
+            <Card
+              type="contributor"
+              progress={10}
+              voteControl={20}
+              village="Ezenwa"
+              slug="/Ezenwa"
+            />
+            <Card
+              type="contributor"
+              progress={10}
+              voteControl={20}
+              village="Ezenwa"
+              slug="/Ezenwa"
+            />
+            <Card
+              type="contributor"
+              progress={10}
+              voteControl={20}
+              village="Ezenwa"
+              slug="/Ezenwa"
+            />
+            <Card
+              type="contributor"
+              progress={10}
+              voteControl={20}
+              village="Ezenwa"
+              slug="/Ezenwa"
+            />
+            <Card
+              type="contributor"
+              progress={10}
+              voteControl={20}
+              village="Ezenwa"
+              slug="/Ezenwa"
+            />
+            <Card
+              type="contributor"
+              progress={10}
+              voteControl={20}
+              village="Ezenwa"
+              slug="/Ezenwa"
+            />
+            <Card
+              type="contributor"
+              progress={10}
+              voteControl={20}
+              village="Ezenwa"
+              slug="/Ezenwa"
+            />
+            <Card
+              type="contributor"
+              progress={10}
+              voteControl={20}
+              village="Ezenwa"
+              slug="/Ezenwa"
+            />
+            <Card
+              type="contributor"
+              progress={10}
+              voteControl={20}
+              village="Ezenwa"
+              slug="/Ezenwa"
+            />
           </div>
         </div>
         <div className={styles.state_vilage_not_controlled}>
@@ -143,14 +279,54 @@ const State = ({ id }) => {
             </div>
           </div>
           <div className={styles.state_body_cards}>
-            <Card type="contributor" />
-            <Card type="contributor" />
-            <Card type="contributor" />
-            <Card type="contributor" />
-            <Card type="contributor" />
-            <Card type="contributor" />
-            <Card type="contributor" />
-            <Card type="contributor" />
+            <Card
+              type="contributor"
+              progress={10}
+              voteControl={20}
+              village="Osusu"
+            />
+            <Card
+              type="contributor"
+              progress={10}
+              voteControl={20}
+              village="Osusu"
+            />
+            <Card
+              type="contributor"
+              progress={10}
+              voteControl={20}
+              village="Osusu"
+            />
+            <Card
+              type="contributor"
+              progress={10}
+              voteControl={20}
+              village="Osusu"
+            />
+            <Card
+              type="contributor"
+              progress={10}
+              voteControl={20}
+              village="Osusu"
+            />
+            <Card
+              type="contributor"
+              progress={10}
+              voteControl={20}
+              village="Osusu"
+            />
+            <Card
+              type="contributor"
+              progress={10}
+              voteControl={20}
+              village="Osusu"
+            />
+            <Card
+              type="contributor"
+              progress={10}
+              voteControl={20}
+              village="Osusu"
+            />
           </div>
         </div>
         <div className={styles.btn_missing}>

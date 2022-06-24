@@ -4,6 +4,7 @@ import logo from '../../assets/logo.png';
 import styles from './Styles.module.scss';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const NavBar = () => {
   const navRef = useRef();
@@ -18,18 +19,22 @@ const NavBar = () => {
     <div className="container">
       <div className={styles.nav}>
         <nav className={styles.navbar}>
-          <div className={styles.navbar__logo}>
-            <Image src={logo} />
-          </div>
+            <div className={styles.navbar__logo}>
+          <Link href="/">
+              <Image src={logo} />
+          </Link>
+            </div>
           <div ref={navRef} className={styles.navbar__menu}>
             <ul>
               <li className={styles.big_screens}>
-                <a
-                  className={router.pathname == '/' ? styles.active : ''}
-                  href="#"
-                >
-                  Home
-                </a>
+                <Link href="/">
+                  <a
+                    className={router.pathname == '/' ? styles.active : ''}
+                    href="#"
+                  >
+                    Home
+                  </a>
+                </Link>
               </li>
               <li>
                 <a href="#">About Us</a>

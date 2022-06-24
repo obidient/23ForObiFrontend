@@ -85,7 +85,7 @@ const DashboardMain = () => {
           <p>Add the villages you have control over within your state.</p>
           <div class={styles.input}>
             <select value={selectedVillages[-1]} onChange={handleChange}>
-              <option selected disabled>
+              <option selected disabled={true} hidden>
                 Select your village
               </option>
               <option>Option 2</option>

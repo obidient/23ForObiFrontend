@@ -144,11 +144,16 @@
         align-items: center;
         padding-bottom: 6.1rem;
 
+        @media (max-width: 35.25em) {
+            flex-direction: column;
+            row-gap: 2rem; 
+        }  
+
         h5 {
             font-size: var(--font-header-3);
             line-height: 130%;
             color: var(--text-color-3);
-
+            
         }
 
         .head_input {
@@ -160,7 +165,9 @@
                 outline: none;
                 padding: 1.1rem;
                 width: 27rem;
-                padding-left: 5rem;
+                padding-left: 5.5rem;
+                font-size: 1.6rem;
+                color: var(--text-color-3);
 
                 &::placeholder {
                     @media only screen and (max-width: 56rem) {
@@ -173,8 +180,21 @@
         
         .search_icon {
             position: absolute;
-            top: .7rem;
+            top: 1.5rem;
             left: 2rem;
+
+            @media (max-width: 56.25em) {
+                top: 1.4rem;
+                span {
+                    width: 90% !important; 
+                    height: 90% !important; 
+                }
+            }
+
+             @media (max-width: 26.43em) {
+                top: 1rem;
+            }
+
         }
     }
 
@@ -214,6 +234,13 @@
         align-items: flex-start;
         padding-bottom: 3rem;
 
+         @media (max-width: 56.25em) {
+            flex-direction: column;
+            text-align: center;
+            align-items: center;
+            row-gap: 1rem;
+	    }
+
         .head_text {
 
             h5 {
@@ -238,6 +265,7 @@
                 outline: none;
                 background: var(--tertiary-color);
                 padding: 1rem 2rem;
+
             }
         }
     }
