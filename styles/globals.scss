@@ -86,13 +86,13 @@ h5 {
   font-size: var(--font-header-3);
 }
 
-p, ::placeholder, button, .btn {
+p, ::placeholder, button, .btn, input {
   font-size: var(--font-p-text-1);
-    font-size: clamp(1.6rem, 10%, 1.6rem);
+    font-size: clamp(14px, 10%, 1.6rem);
 
-     @media (max-width: 26.43em) {
-        font-size: 2rem;
-      }
+    //  @media (max-width: 26.43em) {
+    //     font-size: 2rem;
+    //   }
 }
 
 // ::placeholder {

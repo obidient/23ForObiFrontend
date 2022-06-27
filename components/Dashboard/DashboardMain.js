@@ -3,9 +3,11 @@ import Image from 'next/image';
 
 import status_check from '../../assets/status_check.png';
 import caret_down from '../../assets/caret_down.png';
-import { useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import Modal from './../Modal/Index';
 import SelectInput from './../misc/SelectInput';
+import VillageContext from '../../Context/villageContext';
+import useVillage from '../../Context/villageContext';
 
 const DashboardMain = () => {
   ////// Modal State
@@ -52,28 +54,11 @@ const DashboardMain = () => {
     setShowModal(false);
   };
 
-  //dropdown items
-  const [itemsList, setItemsList] = useState([
-    {
-      name: 'Ezeani Village',
-      value: 'Ezeani Village 1',
-    },
-    {
-      name: 'Ezeani Village',
-      value: 'Ezeani Village 2',
-    },
-    {
-      name: 'Ezeani Village',
-      value: 'Ezeani Village 3',
-    },
-    // {
-    //   name: 'Ezeani Village',
-    //   value: 'Ezeani Village',
-    // },
-  ]);
+  const { villages, removeVillage } = useVillage();
 
-  const [selectedItemIndex, setSelectedItemIndex] = useState(null);
-  // const [selectedItem, setSelectedItems] = useState(null);
+  useEffect(() => {
+    console.log(villages);
+  }, [villages]);
 
   return (
     <div className={styles.dashboardmain}>
@@ -83,35 +68,16 @@ const DashboardMain = () => {
         <div className={styles.village_control__input}>
           <h3>VIllages you have control in</h3>
           <p>Add the villages you have control over within your state.</p>
-          <div class={styles.input}>
-            <select value={selectedVillages[-1]} onChange={handleChange}>
-              <option selected disabled={true} hidden>
-                Select your village
-              </option>
-              <option>Option 2</option>
-              <option>Option 3</option>
-              <option>Option 4</option>
-              <option>Umuola-Edgelu village</option>
-            </select>
-            <div className={styles.img}>
-              <Image src={caret_down} />
-            </div>
+          <div className={styles.input}>
+            <SelectInput default="Select your village" />
           </div>
-          {/* <SelectInput default="Select your village" itemsList={itemsList} /> */}
         </div>
         <div className={styles.village_control__outputs}>
-          {selectedVillages.map((village, index) => {
+          {villages.map((village, index) => {
             return (
               <div key={index} className={styles.output}>
                 <p>{village}</p>{' '}
-                <span
-                  onClick={() =>
-                    setSelectedVillages(
-                      selectedVillages.filter((e) => e !== village)
-                    )
-                  }
-                  className={styles.cancel}
-                >
+                <span onClick={removeVillage} className={styles.cancel}>
                   x
                 </span>
               </div>
