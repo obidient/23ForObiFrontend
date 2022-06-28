@@ -19,12 +19,14 @@ git remote add upstream https://github.com/obidient/23ForObi.git
 
 - Pull from upstream
 
-```git pull upstream dev
+```
+git pull upstream dev
 ```
 
 - Switch to a new branch with your {feature-name}
 
-```git checkout -b <feature-name>
+```
+git checkout -b <feature-name>
 ```
 
 - Add your work/code
