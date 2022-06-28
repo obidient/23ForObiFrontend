@@ -28,7 +28,7 @@ export const VillageContextProvider = ({ children }) => {
 
   const removeVillage = (village) => {
     const updatedVillage = state.villages.filter(
-      (currentVillage) => currentVillage.name !== village.name
+      (currentVillage) => currentVillage !== village
     );
     dispatch({
       type: 'REMOVE_VILLAGE',

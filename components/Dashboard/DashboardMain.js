@@ -56,10 +56,6 @@ const DashboardMain = () => {
 
   const { villages, removeVillage } = useVillage();
 
-  useEffect(() => {
-    console.log(villages);
-  }, [villages]);
-
   return (
     <div className={styles.dashboardmain}>
       <h2>Welcome Sandra</h2>
@@ -77,7 +73,10 @@ const DashboardMain = () => {
             return (
               <div key={index} className={styles.output}>
                 <p>{village}</p>{' '}
-                <span onClick={removeVillage} className={styles.cancel}>
+                <span
+                  onClick={() => removeVillage(village)}
+                  className={styles.cancel}
+                >
                   x
                 </span>
               </div>
