@@ -13,7 +13,8 @@ npm install or yarn install
 
 - Add the main repo remote to your project upstream
 
-```git remote add upstream https://github.com/obidient/23ForObi.git
+```
+git remote add upstream https://github.com/obidient/23ForObi.git
 ```
 
 - Pull from upstream
@@ -33,5 +34,5 @@ npm install or yarn install
   ```git add .
   git commit -m 'your commit message'
   git push origin <feature-name>
-Create a Pull Request to dev branch
-```
+  ```
+- Create a Pull Request to main branch
