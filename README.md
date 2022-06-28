@@ -4,18 +4,24 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 Fork The repo. Then Clone the repo.
 
+#
 - switch to the frontend directory and install all dependencies
 ```cd frontend
-npm install   or   yarn install```
+npm install   or   yarn install
+```
 
 - Add the main repo remote to your project upstream
-```git remote add upstream https://github.com/obidient/23ForObi.git```
+
+```git remote add upstream https://github.com/obidient/23ForObi.git
+```
 
 - Pull from upstream
-```git pull upstream dev```
+```git pull upstream dev
+```
 
 - Switch to a new branch with your {feature-name}
-```git checkout -b <feature-name>```
+```git checkout -b <feature-name>
+```
 
 - Add your work/code
 
@@ -24,4 +30,5 @@ npm install   or   yarn install```
   ```git add .
   git commit -m 'your commit message'
   git push origin <feature-name>
-Create a Pull Request to dev branch```
+Create a Pull Request to dev branch
+```
