@@ -2,17 +2,39 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-Make sure you are in the front-end directory. (cd frontend)
+Fork The repo. Then Clone the repo.
 
-Run 'yarn add' to install dependencies. 
+#
+- switch to the frontend directory and install all dependencies
 
-Then run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
+```cd frontend
+npm install or yarn install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Add the main repo remote to your project upstream
 
+```
+git remote add upstream https://github.com/obidient/23ForObi.git
+```
+
+- Pull from upstream
+
+```
+git pull upstream dev
+```
+
+- Switch to a new branch with your {feature-name}
+
+```
+git checkout -b <feature-name>
+```
+
+- Add your work/code
+
+- When done making your changes, run
+
+  ```git add .
+  git commit -m 'your commit message'
+  git push origin <feature-name>
+  ```
+- Create a Pull Request to main branch
