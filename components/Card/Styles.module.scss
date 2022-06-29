@@ -48,10 +48,6 @@
                 line-height: 130%;
                 color: var(--text-color-1);
 
-                @media (max-width: 26.43em) {
-                    font-size: 1.7rem;
-                }
-
                 &:last-child {
                     color: var(--text-color-5);
                 }

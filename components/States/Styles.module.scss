@@ -16,30 +16,23 @@
                 padding: 1.1rem;
                 width: 27rem;
                 padding-left: 5rem;
-
+                color: var(--text-color-3);
+                
+                @media (max-width: 26.43em) {
+                    padding-left: 6rem;
+                }
                 &::placeholder {
                     @media only screen and (max-width: 56rem) {
                         font-size: 2rem;
-                        padding-left: 2rem;
                     }
                 }
             }
         }
-        
-        // &__search_icon {
-        //     position: absolute;
-        //     top: .7rem;
-        //     left: 2rem;
-        // }
 
         &__search_icon {
             position: absolute;
-            top: 1.5rem;
+            top: 1.2rem;
             left: 2rem;
-
-            @media (max-width: 56.25em) {
-                top: .8rem;
-            }
 
             span {
 
@@ -47,12 +40,7 @@
                         width: 90% !important; 
                         height: 90% !important; 
                     }
-                   
-                    @media (max-width: 26.43em) {
-                        width: 80% !important; 
-                        height: 80% !important; 
-                
-                    }
+
             }
             
 
