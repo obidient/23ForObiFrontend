@@ -97,6 +97,26 @@ p, ::placeholder, button, .btn, input {
 button {
   font-family: var(--font-face);
   cursor: pointer;
+  transition: all 0.1s ease-in-out;
+
+}
+.btn_light {
+          color: var(--primary-color);
+          background: var(--tertiary-color);
+
+  &:hover {
+    color: var(--tertiary-color) !important;
+     transform: translateY(-3px);
+     background-color: #018226e7 !important;
+  }
+}
+.btn_dark {
+  background: var(--primary-color);
+  color: var(--tertiary-color);
+  &:hover {
+     transform: translateY(-3px);
+     background-color: #018226e7;
+  }
 }
 
 .container {

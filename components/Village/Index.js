@@ -34,7 +34,7 @@ const Village = () => {
           <div className={styles.state_heading__title}>
             <h1>Eziama village</h1>
             <div className={styles.title_btn}>
-              <button onClick={() => setShowModal(true)}>
+              <button onClick={() => setShowModal(true)} className="btn_light">
                 Contribute here
               </button>
             </div>
@@ -99,7 +99,7 @@ const Village = () => {
                           <SelectInput option="Select your village" />
                         </div>
                         <div className={`${styles.btn_submit} ${styles.btn}`}>
-                          <input type="button" value="Continue" />
+                          <button className="btn_dark">Continue</button>
                         </div>
                       </form>
                     </div>
@@ -155,7 +155,7 @@ const Village = () => {
                         </div>
                       </div>
                     </div>
-                    <button>Next</button>
+                    <button className="btn_dark">Next</button>
                   </div>
                 </div>
               </Modal>

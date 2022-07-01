@@ -25,12 +25,8 @@
             button {
                 border: 1px solid #018226;
                 border-radius: 48px;
-                background: none;
-
                 padding: 1rem 2rem;
-                // font-size: var(--font-p-text-1);
                 line-height: 130%;
-                color: var(--primary-color);
             }
         }
     }
@@ -319,8 +315,6 @@
 
                         .btn_submit {
                             input {
-                                background: var(--primary-color);
-                                color: var(--tertiary-color);
                                 border: none;
                                 cursor: pointer;
                                 font-size: var(--font-p-text-1);
@@ -368,13 +362,11 @@
                 }
                 button {
                     margin-top: 3rem;
-                    background: #018226;
                     border-radius: 48px;
                     outline: none;
                     border: none;
                     width: 100%;
                     padding: 1.2rem 0;
-                    color: var(--tertiary-color);
                 }
             }
 }

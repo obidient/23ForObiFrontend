@@ -40,7 +40,7 @@ const ContributeMethod = () => {
             </div>
           </div>
           <div className={styles.input_btn}>
-            <button>Complete</button>
+            <button className="btn_dark">Complete</button>
           </div>
         </div>
       </div>

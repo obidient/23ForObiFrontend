@@ -330,7 +330,7 @@ const State = ({ id }) => {
           </div>
         </div>
         <div className={styles.btn_missing}>
-          <button onClick={() => setShowModal(true)}>
+          <button onClick={() => setShowModal(true)} className="btn_dark">
             Add a missing village
           </button>
         </div>
@@ -349,7 +349,7 @@ const State = ({ id }) => {
                 <p>Kindly add a missing village</p>
                 <form>
                   <input type="text" placeholder="Enter village name" />
-                  <button>Complete</button>
+                  <button className="btn_dark">Complete</button>
                 </form>
               </div>
             </div>
@@ -367,8 +367,8 @@ const State = ({ id }) => {
               </p>
             </div>
             <div className={styles.head_btn}>
-              <button onClick={() => setShowModal2(true)}>
-                Contrubute images
+              <button onClick={() => setShowModal2(true)} className="btn_light">
+                Contribute images
               </button>
               {/* CONTRIBUTE MODAL */}
               {showModal2 && (
@@ -434,7 +434,7 @@ const State = ({ id }) => {
                           <p className={styles.input_text}>
                             You can upload upto 3 pdf or 10 image files
                           </p>
-                          <button className={styles.btn_submit}>
+                          <button className={`${styles.btn_submit} btn_dark`}>
                             Complete
                           </button>
                         </form>

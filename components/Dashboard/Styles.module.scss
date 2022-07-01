@@ -157,12 +157,10 @@
                 }
 
                 button {
-                    background: #018226;
                     border-radius: 48px;
                     outline: none;
                     border: none;
                     width: 100%;
-                    color: var(--tertiary-color);
                     padding-top: 1rem;
                     padding-bottom: 1rem;
                 }
@@ -372,14 +370,12 @@
             .btn_submit {
                 input {
                     margin-top: 2rem;
-                    background: #018226;
                     border-radius: 48px;
                     outline: none;
                     border: none;
                     width: 100%;
                     padding: 1.2rem 0;
-                    color: var(--tertiary-color);
-
+                    cursor: pointer;
                 }
             }
         }
@@ -415,12 +411,10 @@
         }
 
         button {
-            background: #018226;
             border-radius: 48px;
             padding: 1.2rem;
             outline: none;
             border: none;
-            color: var(--tertiary-color);
         }
     }
 }

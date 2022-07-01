@@ -27,7 +27,7 @@ const ProfileDisplay = () => {
             value
             onChange
           />
-          <button>Update</button>
+          <button className="btn_dark">Update</button>
         </form>
       </div>
     </div>

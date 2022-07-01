@@ -97,7 +97,7 @@ const DashboardMain = () => {
               <input type="text" placeholder="Phone number" />
               <input type="text" placeholder="Whatsapp number" />
             </div>
-            <button>Save</button>
+            <button className="btn_dark">Save</button>
           </form>
         </div>
         <div className={styles.main_bottom__contributors}>
@@ -140,11 +140,12 @@ const DashboardMain = () => {
                       <div className={styles.select}>
                         <SelectInput option="Select a village" name="village" />
                       </div>
-                      <div className={styles.btn_submit}>
+                      <div className={`${styles.btn_submit}`}>
                         <input
                           type="button"
                           value="Continue"
                           onClick={contributeSubmit}
+                          className="btn_dark"
                         />
                       </div>
                     </form>
