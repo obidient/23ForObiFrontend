@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import styles from './Styles.module.scss';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
+
 import SingleStateProgress from './../misc/SingleStateProgress';
 import Card from '../Card/Card';
 import Modal from '../Modal/Index';
@@ -30,9 +32,12 @@ import sm_image_15 from '../../assets/sm_image_15.png';
 import sm_image_16 from '../../assets/sm_image_16.png';
 import add_img from '../../assets/add_img.png';
 
-const State = ({ id }) => {
+const State = ({ stateName }) => {
   const [showModal, setShowModal] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
+  const [searchVillage, setSearchVillage] = useState('');
+  const [searchParam] = useState(['village']);
+  const [villages, setVillages] = useState([])
 
   // FUNCTION FOR PREVIEWING IMAGES
   const [selectedImages, setSelectedImages] = useState([]);
@@ -47,13 +52,21 @@ const State = ({ id }) => {
     setSelectedImages((previousImages) => previousImages.concat(imageArray));
   };
 
+  // Handle Change
+  const handleChange = (e) => {
+    e.preventDefault();
+    setSearchVillage(e.target.value);
+  };
+  // Filter Village
+
+
   return (
     <div className={styles.state}>
       <div className="container">
         <div className={styles.state_heading}>
           <Breadcrumbs />
           <div className={styles.state_heading__title}>
-            <h1>Abia State Villages</h1>
+            <h1 className="capitalize">{stateName} State Villages</h1>
             <div className={styles.vill_control}>
               <div className={styles.vill_control__text}>
                 <h5>Villages in control</h5>
@@ -95,13 +108,18 @@ const State = ({ id }) => {
           <div className={styles.state_vilage_controlled__head}>
             <h5>Villages in control</h5>
             <div className={styles.head_input}>
-              <input type="text" placeholder="Search state here" />
+              <input
+                type="text"
+                placeholder="Search village here"
+                value={searchVillage}
+                onChange={handleChange}
+              />
               <div className={styles.search_icon}>
                 <Image src={search} alt="search" />
               </div>
             </div>
           </div>
-          <div className={styles.state_body_cards}>
+          <div className="cards">
             <Card
               type="contributor"
               progress={10}
