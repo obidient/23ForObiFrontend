@@ -12,7 +12,7 @@ const state = () => {
     <div>
       <Navbar />
 
-      <State stateName={state} />
+      <State id={state} />
       <Footer />
     </div>
   );

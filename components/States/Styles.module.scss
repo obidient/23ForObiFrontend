@@ -4,13 +4,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 6.1rem;
-        padding-top: 2rem;
-        padding-bottom: 2rem;
-        position: sticky;
-        top: 0;
-        background-color: var(--tertiary-color);
-        z-index: 100;
+        padding-bottom: 6.1rem;
 
         &__input {
             position: relative;
@@ -20,7 +14,7 @@
                 border-radius: 48px;
                 outline: none;
                 padding: 1.1rem;
-                width: 40rem;
+                width: 27rem;
                 padding-left: 5rem;
                 color: var(--text-color-3);
                 

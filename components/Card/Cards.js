@@ -1,23 +1,12 @@
 import styles from './Styles.module.scss';
 import Card from './Card';
 import Link from 'next/link';
-import STATES from '../../data/stateDetails';
 
 const Cards = ({ slug }) => {
-  // const state = 'Abia State';
-
+  const state = 'Abia State';
   return (
     <div className={styles.cards}>
-      {STATES.map((item) => (
-        <Card
-          key={item.id}
-          state={item.name}
-          voteControl={item.voteControl}
-          type={item.type}
-          progress={item.progress}
-        />
-      ))}
-      {/* <Link href={`/${state}`}>}
+      {/* <Link href={`/${state}`}> */}
       <Card
         progress={10}
         voteControl={20}
@@ -27,7 +16,7 @@ const Cards = ({ slug }) => {
       />
       {/* </Link> */}
 
-      {/*<Card
+      <Card
         state={'Adamawa State'}
         progress={60}
         voteControl={20}
@@ -216,7 +205,7 @@ const Cards = ({ slug }) => {
         voteControl={20}
         type="control"
       />
-  <Card state={'FCT Abuja'} progress={10} voteControl={20} type="control" />*/}
+      <Card state={'FCT Abuja'} progress={10} voteControl={20} type="control" />
     </div>
   );
 };
