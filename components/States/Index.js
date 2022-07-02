@@ -16,9 +16,7 @@ const States = () => {
     setSearchQuery(e.target.value);
   };
 
-  useEffect(() => {
-    setStates(STATES);
-  }, []);
+ 
 
   const filter = (states) => {
     return states.filter((state) => {
@@ -63,7 +61,7 @@ const States = () => {
               />
             ))
           ) : (
-            <h2>No results found</h2>
+            <h2 className='text-lg'>No State exists</h2>
           )}
         </div>
       </div>
