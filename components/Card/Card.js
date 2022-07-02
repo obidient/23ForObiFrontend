@@ -21,12 +21,12 @@ const Card = ({ state, progress, voteControl, type, village }) => {
   return (
     <div className={styles.card}>
       <div className={styles.state}>
-        <h5>{type === 'control' ? state : village}</h5>
         <Link
           href={
             type === 'control' ? `states/${stateSlug}` : `${path}/${village}`
           }
         >
+          <h5>{type === 'control' ? state : village}</h5>
           <div className={styles.chevron}>
             <BsChevronRight />
           </div>
