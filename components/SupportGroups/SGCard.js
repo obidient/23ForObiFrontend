@@ -10,7 +10,7 @@ const SGCard = ({ groupname, nvotes }) => {
       <div className={styles.number_votes}>
         <p>Number of votes brought in</p>
         <div className={styles.nvotes}>
-          <h5>{nvotes}</h5>
+          <h5 className='text-white'>{nvotes}</h5>
         </div>
       </div>
     </div>

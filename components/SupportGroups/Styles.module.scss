@@ -54,7 +54,8 @@
         color: var(--text-color-1);
     }
     .group_name {
-
+        display: flex;
+        flex-direction: column;
     }
 
     .number_votes {
@@ -64,6 +65,9 @@
             padding: .6rem 2.43rem;
             width: 7.3rem;
             border-radius: 6.8rem;
+            h5 {
+                color: #ffffff;
+            }
         }
     }
 }
