@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import styles from './Styles.module.scss';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 import SingleStateProgress from './../misc/SingleStateProgress';
@@ -37,7 +37,7 @@ const State = ({ stateName }) => {
   const [showModal2, setShowModal2] = useState(false);
   const [searchVillage, setSearchVillage] = useState('');
   const [searchParam] = useState(['village']);
-  const [villages, setVillages] = useState([])
+  const [villages, setVillages] = useState([]);
 
   // FUNCTION FOR PREVIEWING IMAGES
   const [selectedImages, setSelectedImages] = useState([]);
@@ -59,6 +59,11 @@ const State = ({ stateName }) => {
   };
   // Filter Village
 
+  //Effect to hide scroll
+  useEffect(() => {
+    const body = document.querySelector('body');
+    body.style.overflow = showModal || showModal2 ? 'hidden' : 'auto';
+  }, [showModal, showModal2]);
 
   return (
     <div className={styles.state}>

@@ -14,11 +14,13 @@ const Modal = ({
   useEffect(() => {
     //  add when mounted
     document.addEventListener('mousedown', handleClick);
+
     //  clean on unmount
     return () => {
       document.removeEventListener('mousedown', handleClick);
     };
   }, []);
+
   const handleClick = useCallback((e) => {
     // clicked inside the modal
     if (modalRef?.current?.contains(e.target)) {

@@ -56,6 +56,12 @@ const DashboardMain = () => {
 
   const { villages, removeVillage } = useVillage();
 
+  //Effect to hide scroll
+  useEffect(() => {
+    const body = document.querySelector('body');
+    body.style.overflow = showModal ? 'hidden' : 'auto';
+  }, [showModal]);
+
   return (
     <div className={styles.dashboardmain}>
       <h2>Welcome Sandra</h2>
