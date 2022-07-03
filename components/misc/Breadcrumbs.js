@@ -20,7 +20,7 @@ const Breadcrumbs = () => {
     return item.breadcrumb !== 'states';
   });
 
-  console.log(newBread);
+  // console.log(newBread);
 
   useEffect(() => {
     if (router) {
@@ -42,7 +42,7 @@ const Breadcrumbs = () => {
     return null;
   }
 
-  console.log(breadcrumbs);
+  // console.log(breadcrumbs);
   return (
     <nav aria-label="breadcrumbs" className={styles.breadcrumb}>
       <ol>
