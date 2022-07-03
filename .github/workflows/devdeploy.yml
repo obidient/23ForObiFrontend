@@ -8,7 +8,7 @@ name: 234obi Frontend Autodeploy
 
 on:
   push:
-    branches: [ "dev" ]
+    branches: [ "main" ]
 
 jobs:
   build:
