@@ -46,6 +46,8 @@ const Card = ({ state, progress, voteControl, type, village }) => {
           <p>{voteControl}%</p>
         </div>
       ) : (
+        <>
+        <p className='my-3 font-medium'>Top 5 Contributors</p>
         <div className={styles.contributors_img}>
           <Image src={village_img_1} />
           <Image src={village_img_2} />
@@ -53,6 +55,7 @@ const Card = ({ state, progress, voteControl, type, village }) => {
           <Image src={village_img_4} />
           <Image src={village_img_5} />
         </div>
+        </>
       )}
     </div>
   );
