@@ -21,7 +21,7 @@ const SupportGroups = () => {
           <SGCard groupname={'Lagos group'} nvotes={25} />
         </div>
         <div className={styles.btn_div}>
-          <button className={styles.btn}>Add a group</button>
+          <button className={`${styles.btn} btn_dark`}>Add a group</button>
         </div>
       </div>
     </div>

@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import styles from './Styles.module.scss';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+
 import SingleStateProgress from './../misc/SingleStateProgress';
 import Card from '../Card/Card';
 import Modal from '../Modal/Index';
@@ -33,6 +35,12 @@ import add_img from '../../assets/add_img.png';
 const State = ({ id }) => {
   const [showModal, setShowModal] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
+<<<<<<< HEAD
+=======
+  const [searchVillage, setSearchVillage] = useState('');
+  const [searchParam] = useState(['village']);
+  const [villages, setVillages] = useState([]);
+>>>>>>> e77b2d437e1f481abe67d4f57344939611e333a3
 
   // FUNCTION FOR PREVIEWING IMAGES
   const [selectedImages, setSelectedImages] = useState([]);
@@ -47,6 +55,22 @@ const State = ({ id }) => {
     setSelectedImages((previousImages) => previousImages.concat(imageArray));
   };
 
+<<<<<<< HEAD
+=======
+  // Handle Change
+  const handleChange = (e) => {
+    e.preventDefault();
+    setSearchVillage(e.target.value);
+  };
+  // Filter Village
+
+  //Effect to hide scroll
+  useEffect(() => {
+    const body = document.querySelector('body');
+    body.style.overflow = showModal || showModal2 ? 'hidden' : 'auto';
+  }, [showModal, showModal2]);
+
+>>>>>>> e77b2d437e1f481abe67d4f57344939611e333a3
   return (
     <div className={styles.state}>
       <div className="container">
@@ -330,7 +354,7 @@ const State = ({ id }) => {
           </div>
         </div>
         <div className={styles.btn_missing}>
-          <button onClick={() => setShowModal(true)}>
+          <button onClick={() => setShowModal(true)} className="btn_dark">
             Add a missing village
           </button>
         </div>
@@ -349,7 +373,7 @@ const State = ({ id }) => {
                 <p>Kindly add a missing village</p>
                 <form>
                   <input type="text" placeholder="Enter village name" />
-                  <button>Complete</button>
+                  <button className="btn_dark">Complete</button>
                 </form>
               </div>
             </div>
@@ -367,8 +391,8 @@ const State = ({ id }) => {
               </p>
             </div>
             <div className={styles.head_btn}>
-              <button onClick={() => setShowModal2(true)}>
-                Contrubute images
+              <button onClick={() => setShowModal2(true)} className="btn_light">
+                Contribute images
               </button>
               {/* CONTRIBUTE MODAL */}
               {showModal2 && (
@@ -434,7 +458,7 @@ const State = ({ id }) => {
                           <p className={styles.input_text}>
                             You can upload upto 3 pdf or 10 image files
                           </p>
-                          <button className={styles.btn_submit}>
+                          <button className={`${styles.btn_submit} btn_dark`}>
                             Complete
                           </button>
                         </form>

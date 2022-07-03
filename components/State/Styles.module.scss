@@ -208,13 +208,10 @@
         justify-content: center;
         button {
             padding: 2.5rem 12.5rem;
-            background: var(--primary-color);
-            // font-size: 1.6rem;
             border-radius: 48px;
             outline: none;
             border: none;
             margin-bottom: 12rem;
-            color: var(--tertiary-color);
             cursor: pointer;
         }
 }
@@ -253,10 +250,8 @@
 
             button {
                 border: 1px solid var(--primary-color);
-                color: var(--primary-color);
                 border-radius: 48px;
                 outline: none;
-                background: var(--tertiary-color);
                 padding: 1rem 2rem;
 
             }
@@ -315,13 +310,11 @@
 
             button {
                 margin-top: 10rem;
-                background: #018226;
                 border-radius: 48px;
                 outline: none;
                 border: none;
                 width: 100%;
                 padding: 1.2rem 0;
-                color: var(--tertiary-color);
             }
         }
         
@@ -362,13 +355,11 @@
 
 
                         .btn_submit {
-                            background: #018226;
                             border-radius: 48px;
                             outline: none;
                             border: none;
                             width: 100%;
                             padding: 1.2rem 0;
-                            color: var(--tertiary-color);
                             margin-top: 8rem;
 
                         }

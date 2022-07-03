@@ -4,7 +4,7 @@ import Contributor from './Contributor';
 import Image from 'next/image';
 import check from '../../assets/check.png';
 import Modal from '../Modal/Index';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import Breadcrumbs from '../misc/Breadcrumbs';
 
@@ -24,6 +24,12 @@ import SelectInput from '../misc/SelectInput';
 const Village = () => {
   const [showModal, setShowModal] = useState(false);
 
+  //Effect to hide scroll
+  useEffect(() => {
+    const body = document.querySelector('body');
+    body.style.overflow = showModal ? 'hidden' : 'auto';
+  }, [showModal]);
+
   return (
     <div className={styles.state}>
       <div className="container">
@@ -34,7 +40,7 @@ const Village = () => {
           <div className={styles.state_heading__title}>
             <h1>Eziama village</h1>
             <div className={styles.title_btn}>
-              <button onClick={() => setShowModal(true)}>
+              <button onClick={() => setShowModal(true)} className="btn_light">
                 Contribute here
               </button>
             </div>
@@ -99,7 +105,7 @@ const Village = () => {
                           <SelectInput option="Select your village" />
                         </div>
                         <div className={`${styles.btn_submit} ${styles.btn}`}>
-                          <input type="button" value="Continue" />
+                          <button className="btn_dark">Continue</button>
                         </div>
                       </form>
                     </div>
@@ -155,7 +161,7 @@ const Village = () => {
                         </div>
                       </div>
                     </div>
-                    <button>Next</button>
+                    <button className="btn_dark">Next</button>
                   </div>
                 </div>
               </Modal>

@@ -17,7 +17,7 @@ const Footer = () => {
               back our Nigeria
             </p>
             <div className={styles.btn_div}>
-              <button>Deliver votes</button>
+              <button className="btn_dark">Deliver votes</button>
             </div>
           </div>
           <div>{/* <p>Game</p> */}</div>

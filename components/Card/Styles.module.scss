@@ -5,15 +5,23 @@
     border: 1px solid #F1F1F1;
 
     .state {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+        
+        .card_top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            
+            &:hover {
+                text-decoration: underline var(--text-color-2);
+            }
+        }
         
         h5 {
             font-weight: 700;
             font-size: var(--font-header-3);
             line-height: 130%;
             color: var(--text-color-1);
+
         }
 
         .chevron {

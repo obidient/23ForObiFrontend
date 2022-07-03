@@ -91,8 +91,13 @@
 	height: 2.7rem;
 
 	.percent {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
 		p {
-			padding-left: 1rem;
+			padding: 0.5rem;
+			font-size: 1.2rem;
 		}
 	}
 }
@@ -155,9 +160,6 @@
 			
 				input[type="checkbox"] {
 					order: 1;
-					// -webkit-appearance: none;
-					// position: absolute;
-					// width: 27rem;
 					top: 0;
 					right: 0;
 					cursor: pointer;
@@ -171,15 +173,11 @@
 
 		.input_btn {
 			button {
-				background: var(--primary-color);
 				border-radius: 48px;
 				border: none;
 				outline: none;
 				padding: 1.2rem 8.85rem;
-				// font-size: var(--font-p-text-1);
 				line-height: 130%;
-				color: var(--tertiary-color);
-
 			}
 		}
 	}

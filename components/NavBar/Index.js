@@ -19,11 +19,11 @@ const NavBar = () => {
     <div className="container">
       <div className={styles.nav}>
         <nav className={styles.navbar}>
-            <div className={styles.navbar__logo}>
-          <Link href="/">
+          <div className={styles.navbar__logo}>
+            <Link href="/">
               <Image src={logo} />
-          </Link>
-            </div>
+            </Link>
+          </div>
           <div ref={navRef} className={styles.navbar__menu}>
             <ul>
               <li className={styles.big_screens}>
@@ -45,7 +45,7 @@ const NavBar = () => {
               <li>
                 <a href="#">FAQ</a>
               </li>
-              <button className={`${styles.btn_vote_mobile}`}>
+              <button className={`${styles.btn_vote_mobile} btn_light`}>
                 Deliver Votes
               </button>
             </ul>
@@ -56,7 +56,9 @@ const NavBar = () => {
               <FaTimes />
             </div>
           </div>
-          <button className={styles.btn_vote}>Deliver Votes</button>
+          <button className={`${styles.btn_vote} btn_dark`}>
+            Deliver Votes
+          </button>
           <div
             onClick={showNavbar}
             className={`${styles.hamburger} ${styles.nav_open}`}
