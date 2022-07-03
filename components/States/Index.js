@@ -2,6 +2,9 @@ import styles from './Styles.module.scss';
 import search from '../../assets/search.png';
 import Image from 'next/image';
 import Cards from '../Card/Cards';
+import STATES from '../../data/stateDetails';
+import { useEffect, useState } from 'react';
+import Card from '../Card/Card';
 
 const States = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -32,7 +35,12 @@ const States = () => {
         <div className={styles.heading}>
           <h2>States</h2>
           <div className={styles.heading__input}>
-            <input type="text" placeholder="Search state here" />
+            <input
+              type="text"
+              placeholder="Search state here"
+              value={searchQuery}
+              onChange={handleChange}
+            />
             <div className={styles.heading__search_icon}>
               <Image src={search} alt="search" />
             </div>
