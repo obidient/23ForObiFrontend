@@ -13,8 +13,6 @@ const States = () => {
     setSearchQuery(e.target.value);
   };
 
- 
-
   const filter = (states) => {
     return states.filter((state) => {
       return searchParam.some((newState) => {
@@ -40,11 +38,7 @@ const States = () => {
             </div>
           </div>
         </div>
-<<<<<<< HEAD
-        <div className={styles.cards}>
-          <Cards />
-=======
-        <div className='cards'>
+        <div className="cards">
           {states && states.length > 0 ? (
             filter(states).map((item) => (
               <Card
@@ -57,9 +51,8 @@ const States = () => {
               />
             ))
           ) : (
-            <h2 className='text-lg'>No State exists</h2>
+            <h2 className="text-lg">No State exists</h2>
           )}
->>>>>>> e77b2d437e1f481abe67d4f57344939611e333a3
         </div>
       </div>
     </div>

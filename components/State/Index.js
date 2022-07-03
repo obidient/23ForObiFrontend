@@ -35,12 +35,9 @@ import add_img from '../../assets/add_img.png';
 const State = ({ id }) => {
   const [showModal, setShowModal] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
-<<<<<<< HEAD
-=======
   const [searchVillage, setSearchVillage] = useState('');
   const [searchParam] = useState(['village']);
   const [villages, setVillages] = useState([]);
->>>>>>> e77b2d437e1f481abe67d4f57344939611e333a3
 
   // FUNCTION FOR PREVIEWING IMAGES
   const [selectedImages, setSelectedImages] = useState([]);
@@ -55,8 +52,6 @@ const State = ({ id }) => {
     setSelectedImages((previousImages) => previousImages.concat(imageArray));
   };
 
-<<<<<<< HEAD
-=======
   // Handle Change
   const handleChange = (e) => {
     e.preventDefault();
@@ -70,7 +65,6 @@ const State = ({ id }) => {
     body.style.overflow = showModal || showModal2 ? 'hidden' : 'auto';
   }, [showModal, showModal2]);
 
->>>>>>> e77b2d437e1f481abe67d4f57344939611e333a3
   return (
     <div className={styles.state}>
       <div className="container">
