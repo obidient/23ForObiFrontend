@@ -11,12 +11,12 @@ import village_img_3 from '../../assets/village_img_3.png';
 import village_img_4 from '../../assets/village_img_4.png';
 import village_img_5 from '../../assets/village_img_5.png';
 
-const Card = ({ state, progress, voteControl, type, village, slug }) => {
-  // const stateSlug = state?.split(' ').slice(0, -1).join(' ').toLowerCase();
+const Card = ({ state, progress, voteControl, type, village }) => {
+  const stateSlug = state?.split(' ').slice(0, -1).join(' ').toLowerCase();
 
   const router = useRouter();
   const path = router.asPath;
-  // console.log(router);
+  console.log(router);
 
   return (
     <div className={styles.card}>

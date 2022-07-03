@@ -135,7 +135,6 @@
 .state_vilage_controlled, .state_vilage_not_controlled {
     margin: 1rem 0 10rem;
     
-   
     .state_vilage_controlled__head, .state_vilage_not_controlled__head {
         display: flex;
         justify-content: space-between;
@@ -162,7 +161,7 @@
                 border-radius: 48px;
                 outline: none;
                 padding: 1.1rem;
-                width: 40rem;
+                width: 27rem;
                 padding-left: 5rem;
                 color: var(--text-color-3);
 
@@ -191,14 +190,7 @@
             }
         }
     }
-    .state_vilage_controlled__head {
-        position: sticky;
-        top: 0;
-        background-color: var(--tertiary-color);
-        z-index: 100;
-        margin-bottom: 1rem;
-        padding: 1rem;
-    }
+
     .state_body_cards {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
