@@ -24,6 +24,6 @@ jobs:
             git fetch --all 
             git reset --hard origin/main
             git stash
-            git pull upstream main
+            git pull
             npm install
             pm2 restart front
