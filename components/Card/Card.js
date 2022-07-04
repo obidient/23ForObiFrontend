@@ -22,7 +22,11 @@ const Card = ({ state, progress, voteControl, type, village, slug }) => {
     <div className={styles.card}>
       <div className={styles.state}>
         <Link
-          href={type === 'control' ? `states/${slug}` : `${path}/${village}`}
+          href={
+            type === 'control'
+              ? `states/${slug}`
+              : `${path}/${village.toLowerCase()}`
+          }
         >
           <div className={styles.card_top}>
             <h5>{type === 'control' ? `${state} State` : village}</h5>

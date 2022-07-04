@@ -31,6 +31,9 @@ const homepage = () => {
                 within each state and with your help and the help of your loved
                 ones, we can do this
               </p>
+              <button className={`${styles.btn_vote} btn_dark`}>
+                Yes, I can
+              </button>
             </div>
             <div className={styles.hero__img}>
               <Image src={labourparty} />

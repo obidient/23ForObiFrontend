@@ -5,6 +5,7 @@
 .hero {
   background-image: url('/hero_bg.png');
   margin-top: -104px;
+  padding-bottom: 9.9rem;
 
   &__top {
     display: flex;
@@ -38,6 +39,7 @@
     h2 {
         font-size: 4.5rem;
         margin: 0;
+        color: var(--secondary-color);
         font-weight: 300;
         width: 40rem;
     }
@@ -52,6 +54,12 @@
             color: var(--primary-color);
             font-weight: 700;
         }
+    }
+
+    button {
+      padding: 1rem 3.8rem;
+      border-radius: 48px;
+      margin-top: 2.5rem;
     }
   }
 
