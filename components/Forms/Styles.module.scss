@@ -1,0 +1,41 @@
+.error {
+  width: max-content;
+  position: relative;
+  bottom: 15px;
+  left: 15px;
+
+  color: red;
+  font-size: 12px;
+}
+
+.form {
+  position: relative;
+}
+
+.submit {
+  cursor: pointer;
+
+  &:disabled {
+    background: gray;
+  }
+}
+
+.input {
+  font-size: 14px;
+  padding: 3rem;
+}
+
+.select {
+  margin-bottom: 2rem;
+  position: relative;
+
+  &:nth-last-of-type(1) {
+    margin-bottom: 1rem;
+  }
+
+  .error {
+    position: relative;
+    bottom: 0;
+    color: red;
+  }
+}

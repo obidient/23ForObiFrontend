@@ -1,14 +1,11 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-
 name: 234obi Frontend Autodeploy
 
 on:
   push:
-    branches: [ "dev" ]
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -23,10 +20,11 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           script: |
-            cd /var/www/peterobi/frontend
+            cd /var/www/peterobi/front
             git fetch --all 
-            git reset --hard origin/dev
+            git reset --hard origin/main
             git stash
             git pull
             npm install
-            pm2 restart peterobi
+            npm build
+            pm2 restart front
