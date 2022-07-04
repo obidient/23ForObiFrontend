@@ -20,10 +20,11 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           script: |
-            cd /var/www/peterobi/frontend
+            cd /var/www/peterobi/front
             git fetch --all 
             git reset --hard origin/main
             git stash
             git pull
             npm install
-            pm2 restart peterobi
+            npm build
+            pm2 restart front
