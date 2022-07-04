@@ -5,6 +5,9 @@ import { useRouter } from 'next/router';
 
 import SingleStateProgress from './../misc/SingleStateProgress';
 import Card from '../Card/Card';
+import { VillageCards } from '../Card/Cards';
+import VILLAGESINCONTROL from '../../data/villageDetails';
+import { villageNotInDetails } from '../../data/villageDetails';
 import Modal from '../Modal/Index';
 import { FaTimes } from 'react-icons/fa';
 import Breadcrumbs from '../misc/Breadcrumbs';
@@ -36,8 +39,35 @@ const State = ({ stateName }) => {
   const [showModal, setShowModal] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
   const [searchVillage, setSearchVillage] = useState('');
-  const [searchParam] = useState(['village']);
-  const [villages, setVillages] = useState([]);
+
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchNotInQuery, setSearchNotInQuery] = useState('');
+  const [searchParam] = useState(['name']);
+  const [villagesIn, setVillagesIn] = useState(VILLAGESINCONTROL);
+  const [villagesNotIn, setVillagesNotIn] = useState(villageNotInDetails);
+
+  //SEARCH VILLAGES
+  const handleNotInVillageChange = (e) => {
+    e.preventDefault();
+    setSearchNotInQuery(e.target.value);
+  };
+  const handleInVillageChange = (e) => {
+    e.preventDefault();
+    setSearchQuery(e.target.value);
+  };
+
+  const filter = (villages, query) => {
+    return villages.filter((village) => {
+      return searchParam.some((newVillage) => {
+        return (
+          village[newVillage]
+            .toString()
+            .toLowerCase()
+            .indexOf(query) > -1
+        );
+      });
+    });
+  };
 
   // FUNCTION FOR PREVIEWING IMAGES
   const [selectedImages, setSelectedImages] = useState([]);
@@ -116,8 +146,8 @@ const State = ({ stateName }) => {
               <input
                 type="text"
                 placeholder="Search village here"
-                value={searchVillage}
-                onChange={handleChange}
+                value={searchQuery}
+                onChange={handleInVillageChange}
               />
               <div className={styles.search_icon}>
                 <Image src={search} alt="search" />
@@ -125,231 +155,50 @@ const State = ({ stateName }) => {
             </div>
           </div>
           <div className="cards">
-            <Card
-              type="contributor"
-              progress={10}
-              voteControl={20}
-              village="Ezenwa"
-              slug="/Ezenwa"
-            />
-            <Card
-              type="contributor"
-              progress={10}
-              voteControl={20}
-              village="Osusu"
-            />
-            <Card
-              type="contributor"
-              progress={10}
-              voteControl={20}
-              village="Osusu"
-            />
-            <Card
-              type="contributor"
-              progress={10}
-              voteControl={20}
-              village="Uratta"
-            />
-            <Card
-              type="contributor"
-              progress={10}
-              voteControl={20}
-              village="Ariara"
-            />
-            <Card
-              type="contributor"
-              progress={10}
-              voteControl={20}
-              village="Ezenwa"
-              slug="/Ezenwa"
-            />
-            <Card
-              type="contributor"
-              progress={10}
-              voteControl={20}
-              village="Ezenwa"
-              slug="/Ezenwa"
-            />
-            <Card
-              type="contributor"
-              progress={10}
-              voteControl={20}
-              village="Ezenwa"
-              slug="/Ezenwa"
-            />
-            <Card
-              type="contributor"
-              progress={10}
-              voteControl={20}
-              village="Ezenwa"
-              slug="/Ezenwa"
-            />
-            <Card
-              type="contributor"
-              progress={10}
-              voteControl={20}
-              village="Ezenwa"
-              slug="/Ezenwa"
-            />
-            <Card
-              type="contributor"
-              progress={10}
-              voteControl={20}
-              village="Ezenwa"
-              slug="/Ezenwa"
-            />
-            <Card
-              type="contributor"
-              progress={10}
-              voteControl={20}
-              village="Ezenwa"
-              slug="/Ezenwa"
-            />
-            <Card
-              type="contributor"
-              progress={10}
-              voteControl={20}
-              village="Ezenwa"
-              slug="/Ezenwa"
-            />
-            <Card
-              type="contributor"
-              progress={10}
-              voteControl={20}
-              village="Ezenwa"
-              slug="/Ezenwa"
-            />
-            <Card
-              type="contributor"
-              progress={10}
-              voteControl={20}
-              village="Ezenwa"
-              slug="/Ezenwa"
-            />
-            <Card
-              type="contributor"
-              progress={10}
-              voteControl={20}
-              village="Ezenwa"
-              slug="/Ezenwa"
-            />
-            <Card
-              type="contributor"
-              progress={10}
-              voteControl={20}
-              village="Ezenwa"
-              slug="/Ezenwa"
-            />
-            <Card
-              type="contributor"
-              progress={10}
-              voteControl={20}
-              village="Ezenwa"
-              slug="/Ezenwa"
-            />
-            <Card
-              type="contributor"
-              progress={10}
-              voteControl={20}
-              village="Ezenwa"
-              slug="/Ezenwa"
-            />
-            <Card
-              type="contributor"
-              progress={10}
-              voteControl={20}
-              village="Ezenwa"
-              slug="/Ezenwa"
-            />
-            <Card
-              type="contributor"
-              progress={10}
-              voteControl={20}
-              village="Ezenwa"
-              slug="/Ezenwa"
-            />
-            <Card
-              type="contributor"
-              progress={10}
-              voteControl={20}
-              village="Ezenwa"
-              slug="/Ezenwa"
-            />
-            <Card
-              type="contributor"
-              progress={10}
-              voteControl={20}
-              village="Ezenwa"
-              slug="/Ezenwa"
-            />
-            <Card
-              type="contributor"
-              progress={10}
-              voteControl={20}
-              village="Ezenwa"
-              slug="/Ezenwa"
-            />
+            {villagesIn && villagesIn.length > 0 ? (
+              filter(villagesIn, searchQuery.toLowerCase()).map((item) => (
+                <Card
+                  key={item.id}
+                  village={item.name}
+                  type={item.type}
+                  progress={item.progress}
+                  slug={item.slug}
+                />
+              ))
+            ) : (
+              <h2 className="text-lg">No Village exists</h2>
+            )}
           </div>
         </div>
         <div className={styles.state_vilage_not_controlled}>
           <div className={styles.state_vilage_not_controlled__head}>
             <h5>Villages not in control</h5>
             <div className={styles.head_input}>
-              <input type="text" placeholder="Search state here" />
+              <input
+                type="text"
+                placeholder="Search state here"
+                value={searchNotInQuery}
+                onChange={handleNotInVillageChange}
+              />
               <div className={styles.search_icon}>
                 <Image src={search} alt="search" />
               </div>
             </div>
           </div>
           <div className={styles.state_body_cards}>
-            <Card
-              type="contributor"
-              progress={10}
-              voteControl={20}
-              village="Osusu"
-            />
-            <Card
-              type="contributor"
-              progress={10}
-              voteControl={20}
-              village="Osusu"
-            />
-            <Card
-              type="contributor"
-              progress={10}
-              voteControl={20}
-              village="Osusu"
-            />
-            <Card
-              type="contributor"
-              progress={10}
-              voteControl={20}
-              village="Osusu"
-            />
-            <Card
-              type="contributor"
-              progress={10}
-              voteControl={20}
-              village="Osusu"
-            />
-            <Card
-              type="contributor"
-              progress={10}
-              voteControl={20}
-              village="Osusu"
-            />
-            <Card
-              type="contributor"
-              progress={10}
-              voteControl={20}
-              village="Osusu"
-            />
-            <Card
-              type="contributor"
-              progress={10}
-              voteControl={20}
-              village="Osusu"
-            />
+            {villagesNotIn && villagesNotIn.length > 0 ? (
+              filter(villagesNotIn, searchNotInQuery.toLowerCase()).map((item) => (
+                <Card
+                  key={item.id}
+                  village={item.name}
+                  type={item.type}
+                  progress={item.progress}
+                  slug={item.slug}
+                />
+              ))
+            ) : (
+              <h2 className="text-lg">No Village exists</h2>
+            )}
           </div>
         </div>
         <div className={styles.btn_missing}>

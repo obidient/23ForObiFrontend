@@ -191,7 +191,7 @@
             }
         }
     }
-    .state_vilage_controlled__head {
+    .state_vilage_controlled__head, .state_vilage_not_controlled__head {
         position: sticky;
         top: 0;
         background-color: var(--tertiary-color);
