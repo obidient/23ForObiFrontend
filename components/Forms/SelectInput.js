@@ -16,10 +16,11 @@ const SelectInput = ({ options, label, formik, name }) => {
         placeholder={label}
         value={defaultValue(options, value)}
         name={name}
-        onChange={(val) => formik.setFieldValue(name, val.label)}
+        onBlur={formik.handleBlur}
+        onChange={(val) => formik.setFieldValue(name, val.value)}
         options={options}
       />
-      {formik.errors[name] ? (
+      {formik.touched[name] && formik.errors[name] ? (
         <div className={styles.error}>{formik.errors[name]}</div>
       ) : null}
     </div>
