@@ -26,5 +26,4 @@ jobs:
             git stash
             git pull
             npm install
-            npm build
             pm2 restart front

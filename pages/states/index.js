@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import NavBar from '../../components/NavBar/Index';
 import Footer from '../../components/Footer/Index';
+import { FetchEvent } from 'next/dist/server/web/spec-compliant/fetch-event';
 
 const homepage = () => {
   const done = 13;
@@ -61,3 +62,7 @@ const homepage = () => {
 };
 
 export default homepage;
+
+export async function getStaticProps(){
+  
+}

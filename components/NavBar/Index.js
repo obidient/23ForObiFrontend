@@ -43,7 +43,14 @@ const NavBar = () => {
                 <a href="#">How it works</a>
               </li>
               <li>
-                <a href="#">FAQ</a>
+                <Link href="/faq">
+                    <a 
+                      className={router.pathname == '/faq' ? styles.active : ''}
+                      href="#"
+                    >
+                      FAQ
+                    </a>
+                  </Link>
               </li>
               <button className={`${styles.btn_vote_mobile} btn_light`}>
                 Deliver Votes
