@@ -1,6 +1,20 @@
+import React from 'react';
+import Head from 'next/head';
+import NavBar from './NavBar';
 import Footer from './Footer/Index';
-import NavBar from './NavBar/Index';
 
-export default function Page({ children }) {
-  return <div>{children}</div>;
-}
+const Page = ({ title, description, children }) => {
+  return (
+    <>
+      <Head>
+        <title>{title ? `${title}` : '23Forobi'}</title>
+        {description && <meta name="description" content={description} />}
+      </Head>
+      <NavBar />
+      {children}
+      <Footer />
+    </>
+  );
+};
+
+export default Page;

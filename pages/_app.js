@@ -8,9 +8,7 @@ import { AppWrapper } from './../Context/villageContextProvider';
 function MyApp({ Component, pageProps }) {
   return (
     <VillageContextProvider>
-      <Page>
-        <Component {...pageProps} />
-      </Page>
+      <Component {...pageProps} />
     </VillageContextProvider>
   );
 }
