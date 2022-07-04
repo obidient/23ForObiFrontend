@@ -70,17 +70,24 @@ const contents = [
   {
     text1: 'Sensitize people around you',
     text2: 'to get their PVC',
+    text3: 'Other things you can do',
+    details2:
+      'You can do this other things in order to help yourself and the people around you get ready for 2023',
     details:
-      'You can always call the people close to you and sensitize them on the importance of getting their Personal Voters Card (PVC).',
+      'You can always call the people close to you and sensitize them on the importance of getting their Personal Voters Card',
+    pvc: '(PVC).',
     img: '/images/how_it_works_img8.png',
     width: '592.3px',
     height: '285.66px',
   },
   {
     text1: 'Come out and vote',
-    text2: 'VOTE THE LABOUR PARTY',
-    details:
-      'Come out and vote en masse for the Labour Party presidential candidate by the name Peter Obi and let’s make Nigeria great again.',
+    text2: 'VOTE THE',
+    text4: 'LABOUR PARTY',
+    text5: 'Peter Obi',
+    details1:
+      'Come out and vote en masse for the Labour Party presidential candidate by the name  ',
+    details3: 'and let’s make Nigeria great again.',
     img: '/images/how_it_works_img9.png',
     width: '679.5px',
     height: '525px',
@@ -91,28 +98,49 @@ const howItWorks = () => {
   return (
     <Page title="How It Works">
       <div className="container bg-[#FDFFFE]">
-        <div className="grid grid-cols-1 my-24">
-          <h2 className="font-light my-6">This is how #23forObi</h2>
-          <h1 className="text-8xl font-black">Work</h1>
-          <p className="font-extralight my-6">
+        <div className="flex flex-col justify-center my-24 ml-24">
+          <h2 className="font-light my-6 text-7xl">This is how #23forObi</h2>
+          <h1 className="font-black text-9xl">Work</h1>
+          <p className="font-light my-6 text-3xl text-[#5F6160]">
             Step by step of how #23forObi works to help achieve a unified goal
           </p>
         </div>
         {contents.map((content, index) => (
           <div
-            className="flex flex-col-2 justify-between p-5 my-28 ml-auto odd:flex-row-reverse"
+            className="flex flex-col-2 justify-between p-5 sm:my-1 lg:my-28  ml-auto odd:flex-row-reverse"
             key={index}
           >
             <div className="content flex flex-col justify-center w-1/2">
-              <h2 className="font-light my-3">{content.text1}</h2>
-              <h5 className="font-bold text-4xl">{content.text2}</h5>
-              <p className="text-2xl my-2 flex-wrap pr-4">{content.details}</p>
+              <h2 className="font-light lg:my-3">
+                {content.text1 ? content.text1 : ''}
+              </h2>
+              <h5 className="font-bold text-4xl">
+                {content.text2 ? content.text2 : ''}{' '}
+                <span className="text-[#D60602]">
+                  {content.text4 ? content.text4 : ''}
+                </span>
+              </h5>
+              <p className="text-2xl lg:my-2 flex-wrap pr-4">
+                {content.details1 ? content.details1 : content.details}{' '}
+                <span className="text-[#018226] font-bold">
+                  {content.text5}
+                </span>{' '}
+                {content.details3}{' '}
+                <span className="font-bold">{content.pvc}</span>
+              </p>
             </div>
-            <div className='flex w-1/2'>
+            <div className="flex flex-col w-1/2">
+              <h2 className="lg:my-3 font-bold">
+                {content.text3 ? content.text3 : ''}
+              </h2>
+              <p className="text-2xl lg:my-4 pb-20">
+                {content.details2 ? content.details2 : ''}
+              </p>
               <Image
-                src={content.img}
+                src={content.img ? content.img : ''}
                 width={content.width}
                 height={content.height}
+                className="lg:my-10"
               />
             </div>
           </div>
