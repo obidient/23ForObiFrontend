@@ -49,7 +49,7 @@ const DashboardMain = () => {
 
   const contributeSubmit = (e) => {
     e.preventDefault();
-    console.log(contributor);
+    // console.log(contributor);
     setContributor(initialValues);
     setShowModal(false);
   };

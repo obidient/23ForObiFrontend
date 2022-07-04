@@ -75,7 +75,7 @@ const Village = () => {
   };
 
   const onSubmit = (values, { resetForm }) => {
-    console.log('Form Data', values);
+    // console.log('Form Data', values);
 
     resetForm();
   };

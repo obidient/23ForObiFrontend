@@ -24,7 +24,7 @@ const Card = ({
 
   const router = useRouter();
   const path = router.asPath;
-  console.log(slug);
+  // console.log(slug);
 
   return (
     <div className={styles.card}>
@@ -60,24 +60,20 @@ const Card = ({
       ) : (
         <>
           <p className="my-3 font-medium">Top 5 Contributors</p>
-          {
-            (type === 'contributor' && (
-              <div className={styles.contributors_img}>
-                <Image src={village_img_1} />
-                <Image src={village_img_2} />
-                <Image src={village_img_3} />
-                <Image src={village_img_4} />
-                <Image src={village_img_5} />
-              </div>
-            ))
-          }
-          {
-             (type === 'contributorNotIn' && (
-              <div className={styles.no_contributor}>
+          {type === 'contributor' && (
+            <div className={styles.contributors_img}>
+              <Image src={village_img_1} />
+              <Image src={village_img_2} />
+              <Image src={village_img_3} />
+              <Image src={village_img_4} />
+              <Image src={village_img_5} />
+            </div>
+          )}
+          {type === 'contributorNotIn' && (
+            <div className={styles.no_contributor}>
               <p> NIL </p>
-              </div>
-            ))
-          }
+            </div>
+          )}
         </>
       )}
     </div>

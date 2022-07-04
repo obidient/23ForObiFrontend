@@ -5,7 +5,7 @@ import TextError from './TextError';
 import styles from './Styles.module.scss';
 
 const Input = ({ name, label, formik, ...rest }) => {
-  console.log(formik.touched);
+  // console.log(formik.touched);
 
   return (
     <div>

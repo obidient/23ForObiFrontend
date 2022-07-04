@@ -28,7 +28,7 @@ const DashboardLink = ({ option, name, value, onChange }) => {
     // },
   ]);
 
-  console.log(itemsList);
+  // console.log(itemsList);
   const [selectedItemIndex, setSelectedItemsIndex] = useState(null);
 
   return (
