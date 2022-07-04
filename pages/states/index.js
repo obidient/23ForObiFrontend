@@ -23,7 +23,7 @@ const homepage = () => {
         <div className="container">
           <div className={styles.hero__top}>
             <div className={styles.hero__details}>
-              <h2>23 votes for</h2>
+              <h2>Can you bring in 23 votes for</h2>
               <h1>Peter Obi</h1>
               <p>
                 The goal is to deliver at least{' '}
