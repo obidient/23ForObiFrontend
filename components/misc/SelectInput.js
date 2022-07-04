@@ -24,7 +24,7 @@ const SelectInput = () => {
     },
   ]);
 
-  console.log(itemsList);
+  // console.log(itemsList);
   const [selectedItemIndex, setSelectedItemsIndex] = useState(null);
 
   // const { villages, setVillages } = useContext(VillageContext);
@@ -47,7 +47,7 @@ const SelectInput = () => {
       setIsInVillages(true);
     }
 
-    console.log(villageState);
+    // console.log(villageState);
   }, [selectedItemIndex]);
 
   const handleClick = (index) => {
