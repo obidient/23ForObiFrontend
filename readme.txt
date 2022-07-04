@@ -1,1 +1,1 @@
-A React(Next.Js) appp
+A React(Next.Js) app
