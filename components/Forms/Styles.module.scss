@@ -1,7 +1,7 @@
 .error {
   width: max-content;
   position: relative;
-  bottom: 15px;
+  bottom: 10px;
   left: 15px;
 
   color: red;
@@ -15,8 +15,12 @@
 .submit {
   cursor: pointer;
 
-  &:disabled {
+  &:disabled,
+  &[disabled] {
     background: gray;
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
   }
 }
 
