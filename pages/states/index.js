@@ -67,5 +67,3 @@ const homepage = () => {
 };
 
 export default homepage;
-
-export async function getStaticProps() {}
