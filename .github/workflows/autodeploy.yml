@@ -21,6 +21,5 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           script: |
             cd /var/www/peterobi/front
-            git pull origin main
             npm install
             pm2 restart front
