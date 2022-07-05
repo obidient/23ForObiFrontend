@@ -21,9 +21,10 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           script: |
             cd /var/www/peterobi/front
-            git fetch origin main
-            git reset --hard origin/main
+            git fetch upstream
+            git merge upstream/main
+            git reset --hard upstream/main
             git stash
-            git pull
+            git pull upstream/main
             npm install
             pm2 restart front
