@@ -1,7 +1,7 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Api Documentation
-this
+This is Link for the api [docs](https://api.23forobi.com/docs)
 ## Getting Started
 
 Fork The repo. Then Clone the repo.
