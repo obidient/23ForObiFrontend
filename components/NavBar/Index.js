@@ -39,8 +39,17 @@ const NavBar = () => {
               <li>
                 <a href="#">About Us</a>
               </li>
-              <li>
-                <a href="#">How it works</a>
+              <li className={styles.big_screens}>
+                <Link href="/how-it-works">
+                  <a
+                    href="#"
+                    className={
+                      router.pathname == '/how-it-works' ? styles.active : ''
+                    }
+                  >
+                    How it works
+                  </a>
+                </Link>
               </li>
               <li>
                 <a href="#">FAQ</a>
