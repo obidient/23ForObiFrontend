@@ -22,7 +22,14 @@ const ProgressBar = ({ done, bgColor, pgColor, type }) => {
 
   return (
     <div className={styles.progress} style={bgStyle}>
-      <div className={styles.progress_done} style={style}>
+      <div
+        className={
+          type === 'state'
+            ? `${styles.progress_done} ${styles.progress_done_state}`
+            : `${styles.progress_done}`
+        }
+        style={style}
+      >
         <div className={styles.img}>
           {type === 'village' ? '' : <Image src={peterobi} />}
         </div>

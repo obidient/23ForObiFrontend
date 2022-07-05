@@ -42,7 +42,12 @@ const homepage = () => {
           </div>
           <div className={styles.hero__bottom}>
             <h5>OUR PROGRESS SO FAR</h5>
-            <ProgressBar done={done} bgColor="#E4FFEC" pgColor="#018226" />
+            <ProgressBar
+              done={done}
+              bgColor="#E4FFEC"
+              pgColor="rgba(1, 130, 38, 1)"
+              type="state"
+            />
             <div className={styles.percent}>
               <h5>{done}%</h5>
               <h5>100%</h5>
@@ -63,6 +68,4 @@ const homepage = () => {
 
 export default homepage;
 
-export async function getStaticProps(){
-  
-}
+export async function getStaticProps() {}
