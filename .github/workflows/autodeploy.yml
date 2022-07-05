@@ -22,6 +22,6 @@ jobs:
           script: |
             cd /var/www/peterobi/front
             git stash
-            git pull
+            git pull origin main
             npm install
             pm2 restart front
