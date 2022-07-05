@@ -7,6 +7,12 @@ This is Link for the api [docs](https://api.23forobi.com/docs)
 Fork The repo. Then Clone the repo.
 
 #
+- Change Directory to 23ForObiFrontend
+
+```
+cd 23ForObiFrontend
+```
+
 - Install all dependencies
 
 ```
@@ -23,6 +29,12 @@ git remote add upstream https://github.com/obidient/23ForObiFrontend.git
 
 ```
 git pull upstream main
+```
+
+- Run locally
+
+```
+npm run dev
 ```
 
 - Switch to a new branch with your {feature-name}
