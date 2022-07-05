@@ -21,7 +21,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           script: |
             cd /var/www/peterobi/front
-            git fetch --all 
+            git fetch origin main
             git reset --hard origin/main
             git stash
             git pull
