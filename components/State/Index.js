@@ -185,7 +185,7 @@ const State = ({ stateName }) => {
               </div>
             </div>
           </div>
-          <div className={styles.state_body_cards}>
+          <div className='cards'>
             {villagesNotIn && villagesNotIn.length > 0 ? (
               filter(villagesNotIn, searchNotInQuery.toLowerCase()).map((item) => (
                 <Card
