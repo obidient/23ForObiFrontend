@@ -98,7 +98,7 @@ const howItWorks = () => {
   return (
     <Page title="How It Works">
       <div className="container bg-[#FDFFFE]">
-        <div className="flex flex-col justify-center my-24 ml-24">
+        <div className="flex flex-col justify-center my-24">
           <h2 className="font-light my-6 text-7xl">This is how #23forObi</h2>
           <h1 className="font-black text-9xl">Work</h1>
           <p className="font-light my-6 text-3xl text-[#5F6160]">
