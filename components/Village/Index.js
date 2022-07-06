@@ -24,7 +24,6 @@ import SelectInput from '../misc/SelectInput';
 //Form Imports
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import formStyles from '../Forms/Styles.module.scss';
 import FormikControl from '../Forms/FormikControl';
 
 const Village = () => {
@@ -36,7 +35,7 @@ const Village = () => {
     body.style.overflow = showModal ? 'hidden' : 'auto';
   }, [showModal]);
 
-  //Formik Controls
+  //Initialize select options
   const stateOptions = [
     {
       label: 'Rivers',
@@ -66,6 +65,7 @@ const Village = () => {
     },
   ];
 
+  // Initial form values
   const initialValues = {
     firstName: '',
     lastName: '',
@@ -74,10 +74,7 @@ const Village = () => {
     village: '',
   };
 
-  const onSubmit = (values) => {
-    console.log('Form Data', values);
-  };
-
+  // Form validation schema using Yup
   const validationSchema = Yup.object({
     firstName: Yup.string().required('Required'),
     lastName: Yup.string().required('Required'),
@@ -85,6 +82,10 @@ const Village = () => {
     state: Yup.string().required('Required'),
     village: Yup.string().required('Required'),
   });
+
+  const onSubmit = (values) => {
+    console.log('Form Data', values);
+  };
 
   return (
     <div className={styles.state}>
@@ -155,8 +156,8 @@ const Village = () => {
                         validationSchema={validationSchema}
                         onSubmit={onSubmit}
                       >
-                        {({ values, isSubmitting, errors }) => (
-                          <Form>
+                        {({ values }) => (
+                          <Form autoComplete="off">
                             <FormikControl
                               values={values}
                               control="input"
@@ -192,15 +193,9 @@ const Village = () => {
                               name="village"
                               options={villageOptions}
                             />
-                            <button
-                              className={`btn_dark ${formStyles.submit}`}
-                              type="submit"
-                              disabled={isSubmitting}
-                            >
+                            <button className="btn_dark" type="submit">
                               Continue
                             </button>
-                            <pre>{JSON.stringify(values, null, 2)}</pre>
-                            <pre>{JSON.stringify(errors, null, 2)}</pre>
                           </Form>
                         )}
                       </Formik>
