@@ -12,6 +12,15 @@ import Modal from '../Modal/Index';
 import { FaTimes } from 'react-icons/fa';
 import Breadcrumbs from '../misc/Breadcrumbs';
 
+// Forms Import
+import { Form, Formik } from 'formik';
+import * as Yup from 'yup';
+// Prevent serverside redering on the FormikControl Component
+import dynamic from 'next/dynamic';
+const FormikControl = dynamic(() => import('../Forms/FormikControl'), {
+  ssr: false,
+});
+
 //Images
 import search from '../../assets/search.png';
 import pdp from '../../assets/pdp.png';
@@ -59,12 +68,7 @@ const State = ({ stateName }) => {
   const filter = (villages, query) => {
     return villages.filter((village) => {
       return searchParam.some((newVillage) => {
-        return (
-          village[newVillage]
-            .toString()
-            .toLowerCase()
-            .indexOf(query) > -1
-        );
+        return village[newVillage].toString().toLowerCase().indexOf(query) > -1;
       });
     });
   };
@@ -187,15 +191,17 @@ const State = ({ stateName }) => {
           </div>
           <div className={styles.state_body_cards}>
             {villagesNotIn && villagesNotIn.length > 0 ? (
-              filter(villagesNotIn, searchNotInQuery.toLowerCase()).map((item) => (
-                <Card
-                  key={item.id}
-                  village={item.name}
-                  type={item.type}
-                  progress={item.progress}
-                  slug={item.slug}
-                />
-              ))
+              filter(villagesNotIn, searchNotInQuery.toLowerCase()).map(
+                (item) => (
+                  <Card
+                    key={item.id}
+                    village={item.name}
+                    type={item.type}
+                    progress={item.progress}
+                    slug={item.slug}
+                  />
+                )
+              )
             ) : (
               <h2 className="text-lg">No Village exists</h2>
             )}
@@ -219,10 +225,27 @@ const State = ({ stateName }) => {
               </div>
               <div className={styles.modal__body}>
                 <p>Kindly add a missing village</p>
-                <form>
-                  <input type="text" placeholder="Enter village name" />
-                  <button className="btn_dark">Complete</button>
-                </form>
+                <Formik
+                  initialValues={{ village: '' }}
+                  validationSchema={Yup.object({
+                    village: Yup.string().required('Required'),
+                  })}
+                  onSubmit={(values) => console.log('Form data', values)}
+                >
+                  {({ values }) => (
+                    <Form autoComplete="off">
+                      <FormikControl
+                        values={values}
+                        control="input"
+                        placeholder="Enter village name"
+                        name="village"
+                      />
+                      <button className="btn_dark" type="submit">
+                        Continue
+                      </button>
+                    </Form>
+                  )}
+                </Formik>
               </div>
             </div>
           </Modal>
