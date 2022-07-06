@@ -1,7 +1,7 @@
 .error {
   width: max-content;
   position: relative;
-  bottom: 10px;
+  bottom: 7px;
   left: 15px;
 
   color: red;
@@ -26,7 +26,13 @@
 
 .input {
   font-size: 14px;
-  padding: 3rem;
+  width: 100%;
+  background: #ffffff;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  outline: none;
+  border: 1px solid #2f3733;
+  border-radius: 48px;
 }
 
 .select {
