@@ -22,9 +22,8 @@ import apple from '../../assets/google.png';
 import SelectInput from '../misc/SelectInput';
 
 //Form Imports
-import { useFormik } from 'formik';
+import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import formStyles from '../Forms/Styles.module.scss';
 import FormikControl from '../Forms/FormikControl';
 
 const Village = () => {
@@ -36,7 +35,7 @@ const Village = () => {
     body.style.overflow = showModal ? 'hidden' : 'auto';
   }, [showModal]);
 
-  //Formik Controls
+  //Initialize select options
   const stateOptions = [
     {
       label: 'Rivers',
@@ -66,6 +65,7 @@ const Village = () => {
     },
   ];
 
+  // Initial form values
   const initialValues = {
     firstName: '',
     lastName: '',
@@ -74,12 +74,7 @@ const Village = () => {
     village: '',
   };
 
-  const onSubmit = (values, { resetForm }) => {
-    // console.log('Form Data', values);
-
-    resetForm();
-  };
-
+  // Form validation schema using Yup
   const validationSchema = Yup.object({
     firstName: Yup.string().required('Required'),
     lastName: Yup.string().required('Required'),
@@ -88,11 +83,9 @@ const Village = () => {
     village: Yup.string().required('Required'),
   });
 
-  const formik = useFormik({
-    initialValues,
-    validationSchema,
-    onSubmit,
-  });
+  const onSubmit = (values) => {
+    console.log('Form Data', values);
+  };
 
   return (
     <div className={styles.state}>
@@ -158,51 +151,54 @@ const Village = () => {
                   <div className={styles.modal__body}>
                     <p>Kindly fill our your personal details</p>
                     <div className={styles.details_form}>
-                      <form onSubmit={formik.handleSubmit}>
-                        <>
-                          <FormikControl
-                            formik={formik}
-                            label="First Name"
-                            name="firstName"
-                            control="input"
-                            type="text"
-                          />
-                          <FormikControl
-                            formik={formik}
-                            label="Last Name"
-                            name="lastName"
-                            control="input"
-                            type="text"
-                          />
-                          <FormikControl
-                            formik={formik}
-                            label="Enter your email"
-                            name="email"
-                            control="input"
-                            type="email"
-                          />
-                          <FormikControl
-                            formik={formik}
-                            control="select"
-                            label="Select your state"
-                            name="state"
-                            options={stateOptions}
-                          />
-                          <FormikControl
-                            formik={formik}
-                            control="select"
-                            label="Select your village"
-                            name="village"
-                            options={villageOptions}
-                          />
-                          <button
-                            className={`btn_dark ${formStyles.submit}`}
-                            type="submit"
-                          >
-                            Continue
-                          </button>
-                        </>
-                      </form>
+                      <Formik
+                        initialValues={initialValues}
+                        validationSchema={validationSchema}
+                        onSubmit={onSubmit}
+                      >
+                        {({ values }) => (
+                          <Form autoComplete="off">
+                            <FormikControl
+                              values={values}
+                              control="input"
+                              placeholder="First Name"
+                              name="firstName"
+                              type="text"
+                            />
+                            <FormikControl
+                              values={values}
+                              control="input"
+                              placeholder="Last Name"
+                              name="lastName"
+                              type="text"
+                            />
+                            <FormikControl
+                              values={values}
+                              control="input"
+                              placeholder="Enter your email"
+                              name="email"
+                              type="email"
+                            />
+                            <FormikControl
+                              values={values}
+                              control="select"
+                              placeholder="Select your state"
+                              name="state"
+                              options={stateOptions}
+                            />
+                            <FormikControl
+                              values={values}
+                              control="select"
+                              placeholder="Select your village"
+                              name="village"
+                              options={villageOptions}
+                            />
+                            <button className="btn_dark" type="submit">
+                              Continue
+                            </button>
+                          </Form>
+                        )}
+                      </Formik>
                     </div>
                   </div>
                 </div>
