@@ -27,56 +27,56 @@ const Card = ({
   // console.log(slug);
 
   return (
-    <div className={styles.card}>
-      <div className={styles.state}>
-        <Link
-          href={
-            type === 'control'
-              ? `states/${slug}`
-              : `${path}/${village.toLowerCase()}`
-          }
-        >
+    <Link
+      href={
+        type === 'control'
+          ? `states/${slug}`
+          : `${path}/${village.toLowerCase()}`
+      }
+    >
+      <div className={styles.card}>
+        <div className={styles.state}>
           <div className={styles.card_top}>
             <h5>{type === 'control' ? `${state} State` : village}</h5>
             <div className={styles.chevron}>
               <BsChevronRight />
             </div>
           </div>
-        </Link>
-      </div>
-      <div className={styles.progress}>
-        <p>Progress</p>
-        <StateProgress progress={progress} />
-        <div className={styles.percent}>
-          <p>{progress}%</p>
-          <p>100%</p>
         </div>
-      </div>
-      {type === 'control' ? (
-        <div className={styles.control}>
-          <p>Vote control: </p>
-          <p>{voteControl}%</p>
+        <div className={styles.progress}>
+          <p>Progress</p>
+          <StateProgress progress={progress} />
+          <div className={styles.percent}>
+            <p>{progress}%</p>
+            <p>100%</p>
+          </div>
         </div>
-      ) : (
-        <>
-          <p className="my-3 font-medium">Top 5 Contributors</p>
-          {type === 'contributor' && (
-            <div className={styles.contributors_img}>
-              <Image src={village_img_1} />
-              <Image src={village_img_2} />
-              <Image src={village_img_3} />
-              <Image src={village_img_4} />
-              <Image src={village_img_5} />
-            </div>
-          )}
-          {type === 'contributorNotIn' && (
-            <div className={styles.no_contributor}>
-              <p> NIL </p>
-            </div>
-          )}
-        </>
-      )}
-    </div>
+        {type === 'control' ? (
+          <div className={styles.control}>
+            <p>Vote control: </p>
+            <p>{voteControl}%</p>
+          </div>
+        ) : (
+          <>
+            <p className="my-3 font-medium">Top 5 Contributors</p>
+            {type === 'contributor' && (
+              <div className={styles.contributors_img}>
+                <Image src={village_img_1} />
+                <Image src={village_img_2} />
+                <Image src={village_img_3} />
+                <Image src={village_img_4} />
+                <Image src={village_img_5} />
+              </div>
+            )}
+            {type === 'contributorNotIn' && (
+              <div className={styles.no_contributor}>
+                <p> NIL </p>
+              </div>
+            )}
+          </>
+        )}
+      </div>
+    </Link>
   );
 };
 
