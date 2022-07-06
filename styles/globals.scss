@@ -88,6 +88,10 @@ input {
   font-size: var(--font-p-text-1);
 }
 
+input {
+  padding-left: 20px !important;
+}
+
 // ::placeholder {
 //         font-size: 1.6rem;
 // }
