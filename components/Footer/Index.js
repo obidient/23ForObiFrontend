@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import styles from './Styles.module.scss';
 import logo from '../../assets/logo.png';
+import Link from 'next/link';
 
 const Footer = () => {
   return (
@@ -17,7 +18,9 @@ const Footer = () => {
               back our Nigeria
             </p>
             <div className={styles.btn_div}>
-              <button className="btn_dark">Deliver votes</button>
+              <Link href="/how-it-works">
+                <button className="btn_dark">Deliver votes</button>
+              </Link>
             </div>
           </div>
           <div>{/* <p>Game</p> */}</div>

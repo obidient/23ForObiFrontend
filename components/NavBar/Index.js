@@ -42,7 +42,6 @@ const NavBar = () => {
               <li className={styles.big_screens}>
                 <Link href="/how-it-works">
                   <a
-                    href="#"
                     className={
                       router.pathname == '/how-it-works' ? styles.active : ''
                     }
@@ -53,13 +52,10 @@ const NavBar = () => {
               </li>
               <li>
                 <Link href="/faq">
-                    <a 
-                      className={router.pathname == '/faq' ? styles.active : ''}
-                      href="#"
-                    >
-                      FAQ
-                    </a>
-                  </Link>
+                  <a className={router.pathname == '/faq' ? styles.active : ''}>
+                    FAQ
+                  </a>
+                </Link>
               </li>
               <button className={`${styles.btn_vote_mobile} btn_light`}>
                 Deliver Votes
@@ -72,9 +68,11 @@ const NavBar = () => {
               <FaTimes />
             </div>
           </div>
-          <button className={`${styles.btn_vote} btn_dark`}>
-            Deliver Votes
-          </button>
+          <Link href="/how-it-works">
+            <button className={`${styles.btn_vote} btn_dark`}>
+              Deliver Votes
+            </button>
+          </Link>
           <div
             onClick={showNavbar}
             className={`${styles.hamburger} ${styles.nav_open}`}
