@@ -10,11 +10,21 @@ import VillageContext from '../../Context/villageContext';
 import useVillage from '../../Context/villageContext';
 
 import { Form, Formik } from 'formik';
+// import { CustomSelectInput } from '../Forms/SelectInput';
 import * as Yup from 'yup';
 import dynamic from 'next/dynamic';
+import TextError from '../Forms/TextError';
+// Prevent serverside redering on the FormikControl Component
 const FormikControl = dynamic(() => import('../Forms/FormikControl'), {
   ssr: false,
 });
+// Prevent serverside redering on the CustomSelectInput Component
+const CustomSelectInput = dynamic(
+  () => import('../Forms/SelectInput').then((mod) => mod.CustomSelectInput),
+  {
+    ssr: false,
+  }
+);
 
 const DashboardMain = () => {
   ////// Modal State
@@ -23,6 +33,8 @@ const DashboardMain = () => {
   ////// Add Village Function
   // Village State
   const [selectedVillages, setSelectedVillages] = useState([]);
+  const { villages, removeVillage, addVillage } = useVillage();
+  const [villageError, setVillageError] = useState(false);
 
   const handleChange = (e) => {
     let currentVillages = [];
@@ -32,6 +44,12 @@ const DashboardMain = () => {
     setSelectedVillages((previousVillages) =>
       previousVillages.concat(currentVillages)
     );
+  };
+
+  const addVillageHandler = (village) => {
+    setVillageError(false);
+    const villageIsInVillages = villages.find((vil) => vil === village.value);
+    !villageIsInVillages ? addVillage(village.value) : setVillageError(true);
   };
 
   /////// Add Contributor Function
@@ -60,8 +78,6 @@ const DashboardMain = () => {
     setContributor(initialValues);
     setShowModal(false);
   };
-
-  const { villages, removeVillage } = useVillage();
 
   //Initialize select options
   const stateOptions = [
@@ -121,17 +137,21 @@ const DashboardMain = () => {
               validationSchema={Yup.object({
                 village: Yup.string().required('Required'),
               })}
-              onSubmit={(values) => console.log('Form data', values)}
+              onSubmit={() => {
+                console.log('Submitting');
+              }}
             >
-              {({ values }) => (
+              {(props) => (
                 <Form>
-                  <FormikControl
-                    values={values}
-                    control="select"
+                  <CustomSelectInput
                     placeholder="Select your village"
                     name="village"
                     options={villageOptions}
+                    addVillageHandler={addVillageHandler}
                   />
+                  {villageError && (
+                    <TextError>Village already exists</TextError>
+                  )}
                 </Form>
               )}
             </Formik>
