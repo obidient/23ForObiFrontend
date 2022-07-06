@@ -268,7 +268,7 @@ const stateDetails = [
     name: 'Yobe',
     progress: 30,
     voteControl: 20,
-    slug: '',
+    slug: 'yobe',
     type: 'control',
   },
   {
@@ -276,7 +276,7 @@ const stateDetails = [
     name: 'Zamfara',
     progress: 100,
     voteControl: 20,
-    slug: '',
+    slug: 'zamfara',
     type: 'control',
   },
   {
