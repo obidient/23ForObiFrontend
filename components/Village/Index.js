@@ -281,8 +281,9 @@ const Village = () => {
           </div>
         </div>
         <div className={styles.top_contributor}>
-          <h2>Top Contributor</h2>
+          <h2>Top Contributors</h2>
           <p>These are the top contributors in this village</p>
+          <p className={styles.onground}>Our man on ground</p>
           <div className={styles.contributors}>
             <Contributor
               name="Ejima Benson"
@@ -290,6 +291,7 @@ const Village = () => {
               img={village_img_1}
               type="top_contributor"
             />
+
             <Contributor
               name="Ejima Benson"
               votes={50}

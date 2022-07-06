@@ -7,6 +7,7 @@ import check from '../../assets/check.png';
 const Contributor = ({ name, votes, img, type }) => {
   return (
     <div className={styles.contributor}>
+
       <Image src={img} />
       <h5>{name}</h5>
 
