@@ -25,10 +25,6 @@ interface SelectInputProps {
 export default function SelectInput({ ...props }: SelectInputProps) {
   const [field, meta, helpers] = useField(props);
 
-  console.log('helpers=========', helpers);
-  console.log('meta=========', meta);
-  console.log('field=======', field);
-
   return (
     <div className={styles.select}>
       <Select
