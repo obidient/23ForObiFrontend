@@ -172,7 +172,7 @@ const stateDetails = [
     name: 'Kwara',
     progress: 10,
     voteControl: 20,
-    slug: '',
+    slug: 'kwara',
     type: 'control',
   },
   {
@@ -188,7 +188,7 @@ const stateDetails = [
     name: 'Nasarawa',
     progress: 25,
     voteControl: 20,
-    slug: '',
+    slug: 'nasarawa',
     type: 'control',
   },
   {
