@@ -134,6 +134,7 @@ button {
 
 .select {
   &__control {
+    padding: 1px 0;
     padding-left: 1rem;
     border: 1px solid !important;
     border-radius: 48px !important;
@@ -145,5 +146,16 @@ button {
 
   &-container {
     font-size: 14px;
+  }
+  &__control {
+    svg {
+      transition: all 0.3s ease-in-out;
+    }
+    &--menu-is-open {
+      svg {
+        transition: all 0.3s ease-in-out;
+        transform: rotate(180deg);
+      }
+    }
   }
 }
