@@ -6,7 +6,7 @@ const Modal = ({
   show,
   onClose,
   backdropStyles,
-  modalStyles,
+  width,
   children,
   innerClose,
 }) => {
@@ -32,7 +32,7 @@ const Modal = ({
 
   return (
     <div className={styles.backdrop} style={{ ...backdropStyles }}>
-      <div className={styles.modal} ref={modalRef} style={{ ...modalStyles }}>
+      <div className={styles.modal} ref={modalRef} style={{ width: width }}>
         <div className={styles.modalContent}>
           <button className={`${styles.closeBtn}`} onClick={onClose}>
             &times;

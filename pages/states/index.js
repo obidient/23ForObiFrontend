@@ -9,10 +9,14 @@ import Link from 'next/link';
 import NavBar from '../../components/NavBar/Index';
 import Footer from '../../components/Footer/Index';
 import { FetchEvent } from 'next/dist/server/web/spec-compliant/fetch-event';
+import { countryContext } from './../../Context/countryContext';
+import { useContext } from 'react';
 
-const homepage = () => {
+const homepage = (props) => {
   const done = 13;
 
+  const { data, setData } = useContext(countryContext);
+  console.log('home', data);
   const router = useRouter();
   const query = router.query;
 
@@ -65,5 +69,15 @@ const homepage = () => {
     </div>
   );
 };
+
+export function getServerSideProps() {
+  const data = `Data from server: ${Date.now()}`;
+
+  return {
+    props: {
+      initialData: data,
+    },
+  };
+}
 
 export default homepage;

@@ -105,7 +105,11 @@ const Village = () => {
             {/* SIGN IN MODAL  */}
 
             {/* {showModal && (
-              <Modal show={showModal} onClose={() => setShowModal(false)}>
+              <Modal show={showModal} 
+              onClose={() => setShowModal(false)}               
+              width="54.4rem"
+
+              >
                 <div className={styles.modal}>
                   <div className={styles.modal__heading}>
                     <h2>
@@ -140,7 +144,11 @@ const Village = () => {
 
             {/* DETAILS FORM */}
             {showModal && (
-              <Modal show={showModal} onClose={() => setShowModal(false)}>
+              <Modal
+                show={showModal}
+                onClose={() => setShowModal(false)}
+                width="54.4rem"
+              >
                 <div className={styles.modal}>
                   <div className={styles.modal__heading}>
                     <h2>
@@ -208,7 +216,10 @@ const Village = () => {
 
             {/* HAVE PVC MODAL */}
             {/* {showModal && (
-              <Modal show={showModal} onClose={() => setShowModal(false)}>
+              <Modal show={showModal} 
+              onClose={() => setShowModal(false)}               
+              width="54.4rem"
+              >
                 <div className={styles.modal}>
                   <div className={styles.modal__heading}>
                     <h2>

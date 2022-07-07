@@ -4,12 +4,15 @@ import '../styles/globals.scss';
 import { useState } from 'react';
 import { VillageContextProvider } from '../Context/villageContext';
 import { AppWrapper } from './../Context/villageContextProvider';
+import { CountryContextProvider } from './../Context/countryContext';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <VillageContextProvider>
-      <Component {...pageProps} />
-    </VillageContextProvider>
+    <CountryContextProvider initialData={pageProps?.initialData}>
+      <VillageContextProvider>
+        <Component {...pageProps} />
+      </VillageContextProvider>
+    </CountryContextProvider>
   );
 }
 

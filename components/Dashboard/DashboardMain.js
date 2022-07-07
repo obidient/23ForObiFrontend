@@ -232,7 +232,11 @@ const DashboardMain = () => {
 
           {/* CONTRIBUTOR MODAL */}
           {showModal && (
-            <Modal show={showModal} onClose={() => setShowModal(false)}>
+            <Modal
+              show={showModal}
+              onClose={() => setShowModal(false)}
+              width="54.4rem"
+            >
               <div className={styles.modal}>
                 <div className={styles.modal__heading}>
                   <h2>

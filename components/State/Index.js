@@ -189,7 +189,7 @@ const State = ({ stateName }) => {
               </div>
             </div>
           </div>
-          <div className='cards'>
+          <div className="cards">
             {villagesNotIn && villagesNotIn.length > 0 ? (
               filter(villagesNotIn, searchNotInQuery.toLowerCase()).map(
                 (item) => (
@@ -215,7 +215,11 @@ const State = ({ stateName }) => {
 
         {/**** Modal *****/}
         {showModal && (
-          <Modal show={showModal} onClose={() => setShowModal(false)}>
+          <Modal
+            show={showModal}
+            onClose={() => setShowModal(false)}
+            width="54.4rem"
+          >
             <div className={styles.modal}>
               <div className={styles.modal__heading}>
                 <h2>
@@ -267,7 +271,11 @@ const State = ({ stateName }) => {
               </button>
               {/* CONTRIBUTE MODAL */}
               {showModal2 && (
-                <Modal show={showModal2} onClose={() => setShowModal2(false)}>
+                <Modal
+                  show={showModal2}
+                  onClose={() => setShowModal2(false)}
+                  width="54.4rem"
+                >
                   <div className={styles.modal}>
                     <div className={styles.modal__heading}>
                       <h2>
