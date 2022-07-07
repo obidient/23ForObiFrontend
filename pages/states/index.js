@@ -11,11 +11,12 @@ import Footer from '../../components/Footer/Index';
 import { FetchEvent } from 'next/dist/server/web/spec-compliant/fetch-event';
 import { countryContext } from './../../Context/countryContext';
 import { useContext } from 'react';
+import SGCard from '../../components/SupportGroups/SGCard';
 
 const homepage = (props) => {
   const done = 13;
 
-  const { data, setData } = useContext(countryContext);
+  const { data } = useContext(countryContext);
   console.log('home', data);
   const router = useRouter();
   const query = router.query;
@@ -63,7 +64,32 @@ const homepage = (props) => {
         <States />
       </div>
       <div className={styles.support_groups}>
-        <SupportGroups />
+        <div className={styles.support_groups}>
+          <div className={styles.support}>
+            <div className="container">
+              <h2>Support groups</h2>
+              <div className={styles.cards}>
+                {data && data.length > 0 ? (
+                  data.map((item, index) => (
+                    <SGCard
+                      key={index}
+                      /**Lagos Group is just a placeholder */ 
+                      groupname={item.name && 'Lagos Group'}
+                      nvotes={item.votes_delivered}
+                    />
+                  ))
+                ) : (
+                  <h2>No Support Group Found</h2>
+                )}
+              </div>
+              <div className={styles.btn_div}>
+                <button className={`${styles.btn} btn_dark`}>
+                  Add a group
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <Footer />
     </div>
