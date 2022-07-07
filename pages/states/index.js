@@ -17,7 +17,7 @@ const homepage = (props) => {
   const done = 13;
 
   const { data } = useContext(countryContext);
-  console.log('home', data);
+  // console.log('home', data);
   const router = useRouter();
   const query = router.query;
 
