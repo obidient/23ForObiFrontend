@@ -101,7 +101,7 @@ const howItWorks = () => {
         <div className="flex flex-col justify-center my-24">
           <h2 className="font-light my-6 text-7xl">This is how #23forObi</h2>
           <h1 className="font-black text-9xl">Work</h1>
-          <p className="font-light my-6 text-3xl text-[#5F6160]">
+          <p className="font-light my-6 lg:text-3xl text-[#5F6160] text-4xl">
             Step by step of how #23forObi works to help achieve a unified goal
           </p>
         </div>
@@ -110,7 +110,7 @@ const howItWorks = () => {
             className="flex flex-col-2 justify-between p-5 sm:my-1 lg:my-28  ml-auto odd:flex-row-reverse"
             key={index}
           >
-            <div className="content flex flex-col justify-center w-1/2">
+            <div className="content flex flex-col justify-center w-1/2 p-5">
               <h2 className="font-light lg:my-3">
                 {content.text1 ? content.text1 : ''}
               </h2>
@@ -133,7 +133,7 @@ const howItWorks = () => {
               <h2 className="lg:my-3 font-bold">
                 {content.text3 ? content.text3 : ''}
               </h2>
-              <p className="text-2xl lg:my-4 pb-20">
+              <p className="text-2xl lg:my-4 lg:pb-20">
                 {content.details2 ? content.details2 : ''}
               </p>
               <Image
