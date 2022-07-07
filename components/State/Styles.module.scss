@@ -42,7 +42,7 @@
             }
 
             &__progress {
-                
+                width: 100%;
             }
         }
     }
@@ -156,10 +156,15 @@
 
         .head_input {
             position: relative;
+            width: 45rem;
+            border-radius: 48px;
+            border: 1px solid var(--text-color-4);
+            @media (max-width: 26.43em) {
+                width: 50rem;
+            }
             input {
                 /* Text_colour/4 */
-                border: 1px solid var(--text-color-4);
-                border-radius: 48px;
+                margin-left: 3rem;
                 outline: none;
                 padding: 1.1rem;
                 width: 40rem;

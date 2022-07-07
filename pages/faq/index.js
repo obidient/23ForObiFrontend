@@ -1,17 +1,13 @@
-import React from "react";
-import NavBar from "../../components/NavBar/Index";
-import Faq from "../../components/Faq"
-import Footer from "../../components/Footer/Index";
-
+import React from 'react';
+import Faq from '../../components/Faq';
+import Page from '../../components/Page';
 
 const faq = () => {
-    return (
-        <div>
-            <NavBar />
-            <Faq />
-            <Footer />
-        </div>
-    )
-}
+  return (
+    <Page title="Frequently Asked Questions">
+      <Faq />
+    </Page>
+  );
+};
 
-export default faq
+export default faq;
