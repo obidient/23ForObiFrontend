@@ -19,7 +19,7 @@ const Footer = () => {
             </p>
             <div className={styles.btn_div}>
               <Link href="/how-it-works">
-                <button className="btn_dark">Deliver votes</button>
+                <button className="btn_dark">Deliver votes updated</button>
               </Link>
             </div>
           </div>
