@@ -304,7 +304,7 @@ const State = ({ stateName }) => {
                                       width={100}
                                       height={100}
                                     />
-                                    <button
+                                    <div
                                       onClick={() =>
                                         setSelectedImages(
                                           selectedImages.filter(
@@ -315,7 +315,7 @@ const State = ({ stateName }) => {
                                       className={styles.cancel}
                                     >
                                       <FaTimes />
-                                    </button>
+                                    </div>
                                   </div>
                                 );
                               })}
