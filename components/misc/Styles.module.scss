@@ -5,12 +5,17 @@
 }
 
 .single_state_progress {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 	background-color: #FAF1E4;
-	height: 2.7rem;
+	height: 2.9rem;
+
+	
 
 	.percent_all{
 		position: relative;
-		bottom: 2rem;
+		//bottom: 2rem;
 		display: flex;
 		justify-content: flex-end;
 		padding-right: 1rem;
