@@ -201,44 +201,7 @@ const NavBar = () => {
                         );
                       })}
                     </div>
-                    {/* <div className={styles.details}>
-                      <div className={styles.text}>
-                        <h3>
-                          Create an account <br />
-                          <span>by clicking on deliver votes</span>
-                        </h3>
-                        <p>
-                          Create an account in a few easy steps by using your
-                          favourite social media account.
-                        </p>
-                      </div>
-                      <div className={styles.img}>
-                        <Image src={img1} />
-                      </div>
-                      <div className={styles.text}>
-                        <h3>
-                          Create an account <br />
-                          <span>by clicking on deliver votes</span>
-                        </h3>
-                        <p>
-                          Create an account in a few easy steps by using your
-                          favourite social media account.
-                        </p>
-                      </div>
-                    </div> */}
-                    {/* <div className={styles.img}>
-                      <Image src={img1} />
-                    </div> */}
-                    <div className={styles.carousel_indicators}>
-                      {slides.map((_, index) => (
-                        <button
-                          className={`${styles.carousel_indicator_item} ${
-                            currentSlide === index ? styles.active : ''
-                          }`}
-                          onClick={() => switchIndex(index)}
-                        ></button>
-                      ))}
-                    </div>
+
                     <div
                       className={`${styles.carousel__control} ${styles.left}`}
                       onClick={prev}
@@ -253,7 +216,16 @@ const NavBar = () => {
                     </div>
                   </div>
                   <div className={styles.second_layer}>
-                    <div></div>
+                    <div className={styles.carousel_indicators}>
+                      {slides.map((_, index) => (
+                        <button
+                          className={`${styles.carousel_indicator_item} ${
+                            currentSlide === index ? styles.active : ''
+                          }`}
+                          onClick={() => switchIndex(index)}
+                        ></button>
+                      ))}
+                    </div>
                     <Link href="/how-it-works">Learn More</Link>
                   </div>
                   <button type="submit" className="btn_dark rounded-full">

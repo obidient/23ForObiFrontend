@@ -23,10 +23,11 @@ const homepage = (props) => {
   const query = router.query;
 
   return (
-    <Page title="Homepage">
+    <Page
+      description="deliver 23 votes per village for peter obi"
+      title="Homepage"
+    >
       <div className={styles.homepage}>
-        {/* <NavBar /> */}
-
         <div className={styles.hero}>
           <div className="container">
             <div className={styles.hero__top}>
@@ -98,6 +99,5 @@ const homepage = (props) => {
     </Page>
   );
 };
-
 
 export default homepage;
