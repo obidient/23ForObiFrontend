@@ -37,7 +37,7 @@ const Faq = () => {
             res: "#23forObi is a movement that connects people in the grass root, we aim to educate people about PVC, good governance and how we can use this power to change our nation for the better.With your help and the help of everyone around you, we can better make this country a reliable, sustainable and relevant institution for ourselves and our kids."
         },
         {
-            ques: "What is #23forObi about?",
+            ques: "How do I contribute to #23forObi?",
             res: "#23forObi is a movement that connects people in the grass root, we aim to educate people about PVC, good governance and how we can use this power to change our nation for the better.With your help and the help of everyone around you, we can better make this country a reliable, sustainable and relevant institution for ourselves and our kids."
         },
         {
