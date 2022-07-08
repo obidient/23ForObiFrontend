@@ -12,6 +12,7 @@ import { FetchEvent } from 'next/dist/server/web/spec-compliant/fetch-event';
 import { countryContext } from './../../Context/countryContext';
 import { useContext } from 'react';
 import SGCard from '../../components/SupportGroups/SGCard';
+import Page from '../../components/Page';
 
 const homepage = (props) => {
   const done = 13;
@@ -22,77 +23,76 @@ const homepage = (props) => {
   const query = router.query;
 
   return (
-    <div className={styles.homepage}>
-      <NavBar />
-
-      <div className={styles.hero}>
-        <div className="container">
-          <div className={styles.hero__top}>
-            <div className={styles.hero__details}>
-              <h2>Can you bring in 23 votes for</h2>
-              <h1>Peter Obi</h1>
-              <p>
-                The goal is to deliver at least{' '}
-                <span>23 votes per village </span>
-                within each state and with your help and the help of your loved
-                ones, we can do this
-              </p>
-              <button className={`${styles.btn_vote} btn_dark`}>
-                Yes, I can
-              </button>
-            </div>
-            <div className={styles.hero__img}>
-              <Image src={labourparty} />
-            </div>
-          </div>
-          <div className={styles.hero__bottom}>
-            <h5>OUR PROGRESS SO FAR</h5>
-            <ProgressBar
-              done={done}
-              bgColor="#E4FFEC"
-              pgColor="rgba(1, 130, 38, 1)"
-              type="state"
-            />
-            <div className={styles.percent}>
-              <h5>{done}%</h5>
-              <h5>100%</h5>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className={styles.states}>
-        <States />
-      </div>
-      <div className={styles.support_groups}>
-        <div className={styles.support_groups}>
-          <div className={styles.support}>
-            <div className="container">
-              <h2>Support groups</h2>
-              <div className={styles.cards}>
-                {data && data.length > 0 ? (
-                  data.map((item, index) => (
-                    <SGCard
-                      key={index}
-                      /**Lagos Group is just a placeholder */ 
-                      groupname={item.name && 'Lagos Group'}
-                      nvotes={item.votes_delivered}
-                    />
-                  ))
-                ) : (
-                  <h2>No Support Group Found</h2>
-                )}
-              </div>
-              <div className={styles.btn_div}>
-                <button className={`${styles.btn} btn_dark`}>
-                  Add a group
+    <Page description='deliver 23 votes per village for peter obi'>
+      <div className={styles.homepage}>
+        <div className={styles.hero}>
+          <div className="container">
+            <div className={styles.hero__top}>
+              <div className={styles.hero__details}>
+                <h2>Can you bring in 23 votes for</h2>
+                <h1>Peter Obi</h1>
+                <p>
+                  The goal is to deliver at least{' '}
+                  <span>23 votes per village </span>
+                  within each state and with your help and the help of your
+                  loved ones, we can do this
+                </p>
+                <button className={`${styles.btn_vote} btn_dark`}>
+                  Yes, I can
                 </button>
               </div>
+              <div className={styles.hero__img}>
+                <Image src={labourparty} />
+              </div>
+            </div>
+            <div className={styles.hero__bottom}>
+              <h5>OUR PROGRESS SO FAR</h5>
+              <ProgressBar
+                done={done}
+                bgColor="#E4FFEC"
+                pgColor="rgba(1, 130, 38, 1)"
+                type="state"
+              />
+              <div className={styles.percent}>
+                <h5>{done}%</h5>
+                <h5>100%</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className={styles.states}>
+          <States />
+        </div>
+        <div className={styles.support_groups}>
+          <div className={styles.support_groups}>
+            <div className={styles.support}>
+              <div className="container">
+                <h2>Support groups</h2>
+                <div className={styles.cards}>
+                  {data && data.length > 0 ? (
+                    data.map((item, index) => (
+                      <SGCard
+                        key={index}
+                        /**Lagos Group is just a placeholder */
+                        groupname={item.name && 'Lagos Group'}
+                        nvotes={item.votes_delivered}
+                      />
+                    ))
+                  ) : (
+                    <h2>No Support Group Found</h2>
+                  )}
+                </div>
+                <div className={styles.btn_div}>
+                  <button className={`${styles.btn} btn_dark`}>
+                    Add a group
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <Footer />
-    </div>
+    </Page>
   );
 };
 
