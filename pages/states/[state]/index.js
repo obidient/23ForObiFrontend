@@ -3,6 +3,7 @@ import Breadcrumbs from '../../../components/misc/Breadcrumbs';
 import Footer from '../../../components/Footer/Index';
 import Navbar from '../../../components/NavBar/Index';
 import State from '../../../components/State/Index';
+import Page from './../../../components/Page';
 
 const state = () => {
   const router = useRouter();
@@ -10,10 +11,12 @@ const state = () => {
 
   return (
     <div>
-      <Navbar />
+      <Page title={`State || ${state}`}>
+        {/* <Navbar /> */}
 
-      <State stateName={state} />
-      <Footer />
+        <State stateName={state} />
+        {/* <Footer /> */}
+      </Page>
     </div>
   );
 };

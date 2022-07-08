@@ -4,10 +4,11 @@ import NavBar from './NavBar/Index';
 import Footer from './Footer/Index';
 
 const Page = ({ title, description, children }) => {
+  const editTitle = title.includes(undefined) ? 'loading...' : title;
   return (
     <>
       <Head>
-        <title>{title ? `${title}` : '23Forobi'}</title>
+        <title>{editTitle ? `${editTitle.toUpperCase()}` : '23Forobi'}</title>
         {description && <meta name="description" content={description} />}
       </Head>
       <NavBar />

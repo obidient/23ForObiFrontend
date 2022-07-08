@@ -11,6 +11,7 @@ import Footer from '../../components/Footer/Index';
 import { FetchEvent } from 'next/dist/server/web/spec-compliant/fetch-event';
 import { countryContext } from './../../Context/countryContext';
 import { useContext } from 'react';
+import Page from './../../components/Page';
 
 const homepage = (props) => {
   const done = 13;
@@ -21,52 +22,54 @@ const homepage = (props) => {
   const query = router.query;
 
   return (
-    <div className={styles.homepage}>
-      <NavBar />
+    <Page title="Homepage">
+      <div className={styles.homepage}>
+        {/* <NavBar /> */}
 
-      <div className={styles.hero}>
-        <div className="container">
-          <div className={styles.hero__top}>
-            <div className={styles.hero__details}>
-              <h2>Can you bring in 23 votes for</h2>
-              <h1>Peter Obi</h1>
-              <p>
-                The goal is to deliver at least{' '}
-                <span>23 votes per village </span>
-                within each state and with your help and the help of your loved
-                ones, we can do this
-              </p>
-              <button className={`${styles.btn_vote} btn_dark`}>
-                Yes, I can
-              </button>
+        <div className={styles.hero}>
+          <div className="container">
+            <div className={styles.hero__top}>
+              <div className={styles.hero__details}>
+                <h2>Can you bring in 23 votes for</h2>
+                <h1>Peter Obi</h1>
+                <p>
+                  The goal is to deliver at least{' '}
+                  <span>23 votes per village </span>
+                  within each state and with your help and the help of your
+                  loved ones, we can do this
+                </p>
+                <button className={`${styles.btn_vote} btn_dark`}>
+                  Yes, I can
+                </button>
+              </div>
+              <div className={styles.hero__img}>
+                <Image src={labourparty} />
+              </div>
             </div>
-            <div className={styles.hero__img}>
-              <Image src={labourparty} />
-            </div>
-          </div>
-          <div className={styles.hero__bottom}>
-            <h5>OUR PROGRESS SO FAR</h5>
-            <ProgressBar
-              done={done}
-              bgColor="#E4FFEC"
-              pgColor="rgba(1, 130, 38, 1)"
-              type="state"
-            />
-            <div className={styles.percent}>
-              <h5>{done}%</h5>
-              <h5>100%</h5>
+            <div className={styles.hero__bottom}>
+              <h5>OUR PROGRESS SO FAR</h5>
+              <ProgressBar
+                done={done}
+                bgColor="#E4FFEC"
+                pgColor="rgba(1, 130, 38, 1)"
+                type="state"
+              />
+              <div className={styles.percent}>
+                <h5>{done}%</h5>
+                <h5>100%</h5>
+              </div>
             </div>
           </div>
         </div>
+        <div className={styles.states}>
+          <States />
+        </div>
+        <div className={styles.support_groups}>
+          <SupportGroups />
+        </div>
+        {/* <Footer /> */}
       </div>
-      <div className={styles.states}>
-        <States />
-      </div>
-      <div className={styles.support_groups}>
-        <SupportGroups />
-      </div>
-      <Footer />
-    </div>
+    </Page>
   );
 };
 
