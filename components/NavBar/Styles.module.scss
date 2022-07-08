@@ -161,39 +161,86 @@
 
     &__body {
 
-        .details {
-            display: flex;
-            column-gap: 3rem;
-            align-items: center;
+        .carousel {
             overflow: hidden;
+            max-width: 900px;
 
-            .img {
-                span {
-                    width: 17rem !important;
+            &__inner {
+                // white-space: nowrap;
+                transition: ease 1s;
+            }
+
+            &__item {
+                display: inline-block;
+                width: 100%;
+
+                .details {
+                    display: flex;
+                    column-gap: 3rem;
+                    align-items: center;
+                    overflow: hidden;
+
+                    .img {
+                        span {
+                            width: 17rem !important;
+                        }
+                    }
+
+                    .text {
+                        h3 {
+                            font-weight: 300;
+                            line-height: 130%;
+                            color: var(--text-color-1);
+                            margin-bottom: 1rem;
+                            font-size: var(--font-p-text-1);
+                            
+                            
+                            span {
+                                font-weight: 700;
+                                
+                            }
+                        }
+
+                        p {
+                            // width: 20rem;
+                            font-size: var(--font-p-text-2);
+                            line-height: 130%;
+                            color: var(--text-color-3);
+                            width: 20.5rem;
+                        }
+                    }
                 }
             }
 
-            .text {
-                h3 {
-                    font-weight: 300;
-                    line-height: 130%;
-                    color: var(--text-color-1);
-                    margin-bottom: 1rem;
-                    font-size: var(--font-p-text-1);
-                    
-                    
-                    span {
-                        font-weight: 700;
-                        
-                    }
-                }
-
-                p {
-                    width: 20rem;
-                    font-size: var(--font-p-text-2);
-                    line-height: 130%;
-                    color: var(--text-color-3);
-                }
+            &__control {
+                background-color: rgba(0, 0, 0, 0.5);
+                border: none;
+                display: flex;
+                align-items: center;
+                position: absolute;
+                height: 5rem;
+                width: 5rem;
+                top: calc(50% - 25px);
+                color: #f3f3f3;
+                background: #FFFFFF;
+                border: 1px solid #F1F1F1;
+                box-shadow: 0px 4px 13px rgba(58, 58, 58, 0.3);
+                cursor: pointer;
+                border-radius: 70px;
+                padding: .7rem 1.1rem
+                
+            }
+            
+            .left {
+                // margin: .7rem 1.1rem;
+                left: 0;
+                color: #2F3733;
+                font-size: 2.5rem;
+            }
+            .right {
+            right: 0;
+            color: #2F3733;
+            font-size: 2.5rem;
             }
         }
 
@@ -201,6 +248,27 @@
             padding: 5.5rem 0;
             display: flex;
             justify-content: space-between;
+            .carousel_indicators {
+                //   position: absolute;
+                //   transform: translateX(-50%);
+                //   left: 50%;
+                bottom: 1.5em;
+                z-index: 2;
+                }
+                .carousel_indicator_item {
+                width: 12px;
+                height: 12px;
+                padding: 0 !important;
+                border: none;
+                background-color: #F1F1F1;
+                margin: 0.2em;
+                border-radius: 50%;
+                cursor: pointer;
+                }
+                .active {
+                opacity: 1;
+                background-color: var(--primary-color);
+                }
 
             a {
                 font-size: var(--font-p-text-1);
@@ -221,108 +289,3 @@
 
 
                 
-.carousel {
-    overflow: hidden;
-    max-width: 900px;
-
-    &__inner {
-        // white-space: nowrap;
-        transition: ease 1s;
-    }
-
-    &__item {
-        display: inline-block;
-        width: 100%;
-
-         .details {
-            display: flex;
-            column-gap: 3rem;
-            align-items: center;
-            overflow: hidden;
-
-            .img {
-                span {
-                    width: 17rem !important;
-                }
-            }
-
-            .text {
-                h3 {
-                    font-weight: 300;
-                    line-height: 130%;
-                    color: var(--text-color-1);
-                    margin-bottom: 1rem;
-                    font-size: var(--font-p-text-1);
-                    
-                    
-                    span {
-                        font-weight: 700;
-                        
-                    }
-                }
-
-                p {
-                    // width: 20rem;
-                    font-size: var(--font-p-text-2);
-                    line-height: 130%;
-                    color: var(--text-color-3);
-                    width: 20.5rem;
-                }
-            }
-        }
-    }
-
-    &__control {
-        background-color: rgba(0, 0, 0, 0.5);
-        border: none;
-        display: flex;
-        align-items: center;
-        position: absolute;
-        height: 5rem;
-        width: 5rem;
-        top: calc(50% - 25px);
-        color: #f3f3f3;
-        background: #FFFFFF;
-        border: 1px solid #F1F1F1;
-        box-shadow: 0px 4px 13px rgba(58, 58, 58, 0.3);
-        cursor: pointer;
-        border-radius: 70px;
-        padding: .7rem 1.1rem
-        
-    }
-    
-    .left {
-        // margin: .7rem 1.1rem;
-        left: 0;
-        color: #2F3733;
-        font-size: 2.5rem;
-    }
-    .right {
-    right: 0;
-    color: #2F3733;
-    font-size: 2.5rem;
-    }
-}
-
-/* ... */
-.carousel_indicators {
-//   position: absolute;
-//   transform: translateX(-50%);
-//   left: 50%;
-  bottom: 1.5em;
-  z-index: 2;
-}
-.carousel_indicator_item {
-  width: 12px;
-  height: 12px;
-  padding: 0 !important;
-  border: none;
-  background-color: #F1F1F1;
-  margin: 0.2em;
-  border-radius: 50%;
-  cursor: pointer;
-}
-.active {
-  background: var(--primary-color);
-  opacity: 1;
-}
