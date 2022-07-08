@@ -7,13 +7,12 @@ import Page from './../../../../components/Page';
 const village = () => {
   const router = useRouter();
   const { village } = router.query;
-  const villageTitle = village?.toLowerCase();
 
   return (
     <div>
       <Page
         title={
-          village === 'undefinded' ? 'loading...' : `State || ${villageTitle}`
+          village === 'undefinded' ? 'loading...' : `Village || ${village}`
         }
       >
         {/* <Navbar /> */}
