@@ -11,6 +11,7 @@ import { villageNotInDetails } from '../../data/villageDetails';
 import Modal from '../Modal/Index';
 import { FaTimes } from 'react-icons/fa';
 import Breadcrumbs from '../misc/Breadcrumbs';
+import SOCIALMEDIAIMAGES from '../../data/smImages';
 
 // Forms Import
 import { Form, Formik } from 'formik';
@@ -26,23 +27,8 @@ import search from '../../assets/search.png';
 import pdp from '../../assets/pdp.png';
 import ikpeazu from '../../assets/ikpeazu.png';
 
-import sm_image_1 from '../../assets/sm_image_1.png';
-import sm_image_2 from '../../assets/sm_image_2.png';
-import sm_image_3 from '../../assets/sm_image_3.png';
-import sm_image_4 from '../../assets/sm_image_4.png';
-import sm_image_5 from '../../assets/sm_image_5.png';
-import sm_image_6 from '../../assets/sm_image_6.png';
-import sm_image_7 from '../../assets/sm_image_7.png';
-import sm_image_8 from '../../assets/sm_image_8.png';
-import sm_image_9 from '../../assets/sm_image_9.png';
-import sm_image_10 from '../../assets/sm_image_10.png';
-import sm_image_11 from '../../assets/sm_image_11.png';
-import sm_image_12 from '../../assets/sm_image_12.png';
-import sm_image_13 from '../../assets/sm_image_13.png';
-import sm_image_14 from '../../assets/sm_image_14.png';
-import sm_image_15 from '../../assets/sm_image_15.png';
-import sm_image_16 from '../../assets/sm_image_16.png';
 import add_img from '../../assets/add_img.png';
+import ImgCard from '../ImgCard/ImgCard';
 
 const State = ({ stateName }) => {
   const [showModal, setShowModal] = useState(false);
@@ -349,22 +335,9 @@ const State = ({ stateName }) => {
             </div>
           </div>
           <div className={styles.state_body_cards}>
-            <Image src={sm_image_1} />
-            <Image src={sm_image_2} />
-            <Image src={sm_image_3} />
-            <Image src={sm_image_4} />
-            <Image src={sm_image_5} />
-            <Image src={sm_image_6} />
-            <Image src={sm_image_7} />
-            <Image src={sm_image_8} />
-            <Image src={sm_image_9} />
-            <Image src={sm_image_10} />
-            <Image src={sm_image_11} />
-            <Image src={sm_image_12} />
-            <Image src={sm_image_13} />
-            <Image src={sm_image_14} />
-            <Image src={sm_image_15} />
-            <Image src={sm_image_16} />
+            {SOCIALMEDIAIMAGES.map((item, index) => (
+              <ImgCard src={item.src} key={index} title={item.title} />
+            ))}
           </div>
         </div>
       </div>
