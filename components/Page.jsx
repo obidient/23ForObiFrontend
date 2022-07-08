@@ -8,7 +8,7 @@ const Page = ({ title, description, children }) => {
   return (
     <>
       <Head>
-        <title>{editTitle ? `${editTitle.toUpperCase()}` : '23Forobi'}</title>
+        <title>{editTitle ? `${editTitle}` : '23Forobi'}</title>
         {description && <meta name="description" content={description} />}
       </Head>
       <NavBar />

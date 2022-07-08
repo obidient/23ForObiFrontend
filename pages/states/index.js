@@ -25,7 +25,7 @@ const homepage = (props) => {
   return (
     <Page
       description="deliver 23 votes per village for peter obi"
-      title="Homepage"
+      title="23forobi"
     >
       <div className={styles.homepage}>
         <div className={styles.hero}>
