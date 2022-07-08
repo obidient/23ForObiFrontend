@@ -4,7 +4,7 @@ import Page from '../../components/Page';
 
 const faq = () => {
   return (
-    <Page title="Frequently Asked Questions updated">
+    <Page title="Frequently Asked Questions">
       <Faq />
     </Page>
   );
