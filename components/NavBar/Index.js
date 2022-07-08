@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 import logo from '../../assets/logo.png';
 import styles from './Styles.module.scss';
@@ -6,6 +6,9 @@ import { FaBars, FaTimes } from 'react-icons/fa';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Modal from '../Modal/Index';
+
+import { MdOutlineArrowBackIosNew } from 'react-icons/md';
+import { MdOutlineArrowForwardIos } from 'react-icons/md';
 
 import img1 from '../../assets/how_it_works_img1.png';
 
@@ -19,6 +22,73 @@ const NavBar = () => {
   //Show Modal
   const [showModal, setShowModal] = useState(false);
 
+  //Carousel
+  const slides = [
+    {
+      textOne: {
+        heading: 'Create an account',
+        span: 'by clicking on deliver votes',
+        body: 'Create an account in a few easy steps by using your favourite social media account.',
+      },
+      textTwo: {
+        heading: 'Provide your',
+        span: 'details',
+        body: 'Create an account in a few easy steps by using your favourite social media account.',
+      },
+      image: img1,
+    },
+    // {
+    //   name: 'SlideTwo',
+    // },
+    // {
+    //   name: 'SlideThree',
+    // },
+  ];
+
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const slideInterval = useRef();
+
+  // const startSlideTimer = () => {
+  //   stopSlideTimer();
+  //   slideInterval.current = setInterval(() => {
+  //     setCurrentSlide((currentSlide) =>
+  //       currentSlide < slides.length - 1 ? currentSlide + 1 : 0
+  //     );
+  //   });
+  // };
+
+  // const stopSlideTimer = () => {
+  //   if (slideInterval.current) {
+  //     clearInterval(slideInterval.current);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   // startSlideTimer();
+
+  //   return () => stopSlideTimer();
+  // }, []);
+
+  const prev = () => {
+    // startSlideTimer();
+
+    const index = currentSlide > 0 ? currentSlide - 1 : slides.length - 1;
+    setCurrentSlide(index);
+  };
+
+  const next = () => {
+    // startSlideTimer();
+
+    const index = currentSlide < slides.length - 1 ? currentSlide + 1 : 0;
+    setCurrentSlide(index);
+  };
+
+  const switchIndex = (index) => {
+    // startSlideTimer();
+    setCurrentSlide(index);
+  };
+  //Router
   const router = useRouter();
 
   return (
@@ -97,32 +167,89 @@ const NavBar = () => {
                   </h2>
                 </div>
                 <div className={styles.modal__body}>
-                  <div className={styles.details}>
-                    <div className={styles.text}>
-                      <h3>
-                        Create an account <br />
-                        <span>by clicking on deliver votes</span>
-                      </h3>
-                      <p>
-                        Create an account in a few easy steps by using your
-                        favourite social media account.
-                      </p>
+                  <div className={styles.carousel}>
+                    <div
+                      className={styles.carousel__inner}
+                      style={{
+                        transform: `translate(${-currentSlide * 100}%)`,
+                      }}
+                    >
+                      {slides.map((slide) => {
+                        return (
+                          <div className={styles.carousel__item}>
+                            <div className={styles.details}>
+                              <div className={styles.text}>
+                                <h3>
+                                  {slide.textOne.heading} <br />
+                                  <span>{slide.textOne.span}</span>
+                                </h3>
+                                <p>{slide.textOne.body}</p>
+                              </div>
+                              <div className={styles.img}>
+                                <Image src={slide.image} />
+                              </div>
+                              <div className={styles.text}>
+                                <h3>
+                                  {slide.textTwo.heading}
+                                  <br />
+                                  <span>{slide.textTwo.span}</span>
+                                </h3>
+                                <p>{slide.textTwo.body}</p>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
                     </div>
-                    <div className={styles.img}>
+                    {/* <div className={styles.details}>
+                      <div className={styles.text}>
+                        <h3>
+                          Create an account <br />
+                          <span>by clicking on deliver votes</span>
+                        </h3>
+                        <p>
+                          Create an account in a few easy steps by using your
+                          favourite social media account.
+                        </p>
+                      </div>
+                      <div className={styles.img}>
+                        <Image src={img1} />
+                      </div>
+                      <div className={styles.text}>
+                        <h3>
+                          Create an account <br />
+                          <span>by clicking on deliver votes</span>
+                        </h3>
+                        <p>
+                          Create an account in a few easy steps by using your
+                          favourite social media account.
+                        </p>
+                      </div>
+                    </div> */}
+                    {/* <div className={styles.img}>
                       <Image src={img1} />
+                    </div> */}
+                    <div className={styles.carousel_indicators}>
+                      {slides.map((_, index) => (
+                        <button
+                          className={`${styles.carousel_indicator_item} ${
+                            currentSlide === index ? styles.active : ''
+                          }`}
+                          onClick={() => switchIndex(index)}
+                        ></button>
+                      ))}
                     </div>
-                    <div className={styles.text}>
-                      <h3>
-                        Create an account <br />
-                        <span>by clicking on deliver votes</span>
-                      </h3>
-                      <p>
-                        Create an account in a few easy steps by using your
-                        favourite social media account.
-                      </p>
+                    <div
+                      className={`${styles.carousel__control} ${styles.left}`}
+                      onClick={prev}
+                    >
+                      <MdOutlineArrowBackIosNew />
                     </div>
-                    <div className={styles.img}>
-                      <Image src={img1} />
+                    <div
+                      className={`${styles.carousel__control} ${styles.right}`}
+                      onClick={next}
+                    >
+                      <MdOutlineArrowForwardIos />
                     </div>
                   </div>
                   <div className={styles.second_layer}>
