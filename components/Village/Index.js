@@ -111,11 +111,17 @@ const Village = () => {
 
               >
                 <div className={styles.modal}>
-                  <div className={styles.modal__heading}>
+                  <div className={`${styles.modal__heading} modal_heading`}>
                     <h2>
                       Welcome to <br />
                       <span>Peter Obi Campaign</span>
                     </h2>
+                    <button
+                    className={`closeBtn`}
+                    onClick={() => setShowModal(false)}
+                  >
+                    &times;
+                  </button>
                   </div>
                   <div className={styles.modal__body}>
                     <p>Sign-up with social media</p>
@@ -150,11 +156,17 @@ const Village = () => {
                 width="54.4rem"
               >
                 <div className={styles.modal}>
-                  <div className={styles.modal__heading}>
+                  <div className={`${styles.modal__heading} modal_heading`}>
                     <h2>
                       Enter your <br />
                       <span>Details</span>
                     </h2>
+                    <button
+                      className={`closeBtn`}
+                      onClick={() => setShowModal(false)}
+                    >
+                      &times;
+                    </button>
                   </div>
                   <div className={styles.modal__body}>
                     <p>Kindly fill our your personal details</p>
@@ -221,11 +233,17 @@ const Village = () => {
               width="54.4rem"
               >
                 <div className={styles.modal}>
-                  <div className={styles.modal__heading}>
+                  <div className={`${styles.modal__heading} modal_heading`}>
                     <h2>
                       Help us complete <br />
                       <span>This Details</span>
                     </h2>
+                    <button
+                    className={`closeBtn`}
+                    onClick={() => setShowModal(false)}
+                  >
+                    &times;
+                  </button>
                   </div>
                   <div className={styles.modal__body}>
                     <div className={styles.have_pvc}>

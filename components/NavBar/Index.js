@@ -146,11 +146,17 @@ const NavBar = () => {
               width="79.4rem"
             >
               <div className={styles.modal}>
-                <div className={styles.modal__heading}>
+                <div className={`${styles.modal__heading} modal_heading`}>
                   <h2>
                     Learn more <br />
                     <span>About the campaign</span>
                   </h2>
+                  <button
+                    className={`closeBtn`}
+                    onClick={() => setShowModal(false)}
+                  >
+                    &times;
+                  </button>
                 </div>
                 <div className={styles.modal__body}>
                   <div className={styles.carousel}>
