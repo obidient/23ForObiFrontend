@@ -1,6 +1,5 @@
 import Image from 'next/image';
-import React, { useState } from 'react';
-import Modal from '../Modal/Index';
+import React from 'react';
 import styles from './Styles.module.scss';
 
 const ImgCard = ({ src, title, onClick }) => {

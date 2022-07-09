@@ -31,6 +31,7 @@ import ikpeazu from '../../assets/ikpeazu.png';
 import add_img from '../../assets/add_img.png';
 import download_img from '../../assets/download.png';
 import ImgCard from '../ImgCard/ImgCard';
+import Link from 'next/link';
 
 const State = ({ stateName }) => {
   const [showModal, setShowModal] = useState(false);
@@ -367,7 +368,7 @@ const State = ({ stateName }) => {
                   <h5 className="font-light">Uploaded</h5>
                   <p className="font-bold">Images</p>
                 </div>
-                <div className='rounded-2xl'>
+                <div className="rounded-2xl">
                   {lightBox ? (
                     <div className={styles.lightbox}>
                       <Image
@@ -391,9 +392,15 @@ const State = ({ stateName }) => {
                       <BsShare />
                       <h5 className="text-4xl lg:text-2xl ml-3">Share</h5>
                     </div>
-                    <div className="flex items-center justify-between">
-                      <BsDownload className="text-2xl" />
-                      <h5 className="text-4xl lg:text-2xl ml-3 ">Download</h5>
+                    <div>
+                      <a
+                        href={`${activeImage}`}
+                        download
+                        className="flex items-center justify-between"
+                      >
+                        <BsDownload className="text-2xl" />
+                        <h5 className="text-4xl lg:text-2xl ml-3 ">Download</h5>
+                      </a>
                     </div>
                   </div>
                 </div>
