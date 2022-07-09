@@ -473,6 +473,12 @@
     }
 }
 
-
+.lightbox {
+    border-radius: 1.2rem;
+    img {
+        object-fit: cover;
+        object-position: 80% 20%;
+    }
+}
 
                 
