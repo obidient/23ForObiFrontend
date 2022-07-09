@@ -1,13 +1,32 @@
 import React from 'react';
+import {
+  FacebookShareButton,
+  FacebookIcon,
+  TwitterShareButton,
+  TwitterIcon,
+  WhatsappShareButton,
+  WhatsappIcon,
+  TelegramShareButton,
+  TelegramIcon,
+} from 'react-share';
 import styles from './Styles.module.scss';
 
-const ShareCard = ({ image }) => {
+const ShareCard = ({ image, title }) => {
   return (
     <div className={styles.container}>
       <div className={styles.links}>
-        <a href={`https://twitter.com${image}`}>Twitter</a>
-        <a href={`https://facebook.com${image}`}>Facebook</a>
-        <a href={`https://whatsapp.com${image}`}>Whatsapp</a>
+        <FacebookShareButton url={`https://facebook.com${image}`} title={title}>
+          <FacebookIcon size={24} round={true} />
+        </FacebookShareButton>
+        <TwitterShareButton url={`https://twitter.com${image}`} title={title}>
+          <TwitterIcon size={24} round={true} />
+        </TwitterShareButton>
+        <WhatsappShareButton url={`https://whatsapp.com${image}`} title={title}>
+          <WhatsappIcon size={24} round={true} />
+        </WhatsappShareButton>
+        <TelegramShareButton url={`https://telegram.com${image}`} title={title}>
+          <TelegramIcon size={24} round={true} />
+        </TelegramShareButton>
       </div>
     </div>
   );

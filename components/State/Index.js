@@ -389,6 +389,7 @@ const State = ({ stateName }) => {
                   <h5 className="font-light">Uploaded</h5>
                   <p className="font-bold">Images</p>
                 </div>
+                <hr className="border-[#E1E1E1] border-1 mb-5" />
                 <div className="rounded-2xl">
                   {lightBox ? (
                     <div className={styles.lightbox}>
@@ -410,18 +411,20 @@ const State = ({ stateName }) => {
                   </h5>
                   <div className="flex justify-between w-1/3 text-[#5678CE] py-6">
                     <div
-                      className="flex items-center justify-between text-2xl mr-10"
+                      className="flex items-center justify-between text-2xl mr-10 hover:text-black"
                       onClick={() => shareSocial(shareImg)}
                     >
                       <BsShare />
                       <h5 className="text-4xl lg:text-2xl ml-3">Share</h5>
-                      {shareImg && <ShareCard image={activeImage} />}
+                      {shareImg && (
+                        <ShareCard image={activeImage} title={activeTitle} />
+                      )}
                     </div>
                     <div>
                       <a
                         href={`${activeImage}`}
                         download
-                        className="flex items-center justify-between"
+                        className="flex items-center justify-between hover:text-black"
                       >
                         <BsDownload className="text-2xl" />
                         <h5 className="text-4xl lg:text-2xl ml-3 ">Download</h5>
