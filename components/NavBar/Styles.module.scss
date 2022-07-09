@@ -112,6 +112,7 @@
             flex-direction: column;
             padding: 5rem;
 
+
             li{
                 font-family: var(--font-face);
                 color: var(--tertiary-color);
@@ -167,22 +168,26 @@
 
             &__inner {
                 // white-space: nowrap;
+                display: flex;
+                column-gap: 3.5rem;
                 transition: ease 1s;
             }
 
             &__item {
                 display: inline-block;
-                width: 100%;
+                width: 1000vh;
 
                 .details {
                     display: flex;
                     column-gap: 3rem;
                     align-items: center;
                     overflow: hidden;
+                    width: 100%;
 
                     .img {
                         span {
-                            width: 17rem !important;
+                            width: 18rem !important;
+                            // height: 17.5rem !important;
                         }
                     }
 
@@ -218,9 +223,9 @@
                 display: flex;
                 align-items: center;
                 position: absolute;
-                height: 5rem;
-                width: 5rem;
-                top: calc(50% - 25px);
+                height: 4rem;
+                width: 4rem;
+                top: calc(50% - 70px);
                 color: #f3f3f3;
                 background: #FFFFFF;
                 border: 1px solid #F1F1F1;
@@ -231,6 +236,9 @@
                 
             }
             
+            .slideNone {
+                display: none;
+            }
             .left {
                 // margin: .7rem 1.1rem;
                 left: 0;

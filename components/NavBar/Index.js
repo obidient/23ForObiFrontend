@@ -11,6 +11,8 @@ import { MdOutlineArrowBackIosNew } from 'react-icons/md';
 import { MdOutlineArrowForwardIos } from 'react-icons/md';
 
 import img1 from '../../assets/how_it_works_img1.png';
+import img2 from '../../assets/how_it_works_img2.png';
+import img3 from '../../assets/how_it_works_img3.png';
 
 const NavBar = () => {
   const navRef = useRef();
@@ -25,50 +27,34 @@ const NavBar = () => {
   //Carousel
   const slides = [
     {
-      textOne: {
+      text: {
         heading: 'Create an account',
         span: 'by clicking on deliver votes',
         body: 'Create an account in a few easy steps by using your favourite social media account.',
       },
-      textTwo: {
-        heading: 'Provide your',
-        span: 'details',
-        body: 'Create an account in a few easy steps by using your favourite social media account.',
-      },
       image: img1,
     },
-    // {
-    //   name: 'SlideTwo',
-    // },
-    // {
-    //   name: 'SlideThree',
-    // },
+    {
+      text: {
+        heading: 'Provide your',
+        span: 'details',
+        body: 'Provide your details in few simple steps, all you have to do is login with your social media account.',
+      },
+      image: img2,
+    },
+    {
+      text: {
+        heading: 'Answer a',
+        span: 'few questions',
+        body: 'Provide a few answers about your PVC status in order to get the neccessary information needed.',
+      },
+      image: img3,
+    },
   ];
 
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slideInterval = useRef();
-
-  // const startSlideTimer = () => {
-  //   stopSlideTimer();
-  //   slideInterval.current = setInterval(() => {
-  //     setCurrentSlide((currentSlide) =>
-  //       currentSlide < slides.length - 1 ? currentSlide + 1 : 0
-  //     );
-  //   });
-  // };
-
-  // const stopSlideTimer = () => {
-  //   if (slideInterval.current) {
-  //     clearInterval(slideInterval.current);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   // startSlideTimer();
-
-  //   return () => stopSlideTimer();
-  // }, []);
 
   const prev = () => {
     // startSlideTimer();
@@ -174,28 +160,42 @@ const NavBar = () => {
                         transform: `translate(${-currentSlide * 100}%)`,
                       }}
                     >
-                      {slides.map((slide) => {
+                      {slides.map((slide, index) => {
                         return (
                           <div className={styles.carousel__item}>
                             <div className={styles.details}>
                               <div className={styles.text}>
                                 <h3>
-                                  {slide.textOne.heading} <br />
-                                  <span>{slide.textOne.span}</span>
+                                  {slide.text.heading} <br />
+                                  <span>{slide.text.span}</span>
                                 </h3>
-                                <p>{slide.textOne.body}</p>
+                                <p>{slide.text.body}</p>
                               </div>
                               <div className={styles.img}>
                                 <Image src={slide.image} />
                               </div>
                               <div className={styles.text}>
                                 <h3>
-                                  {slide.textTwo.heading}
+                                  {slides[index + 1]?.text.heading}
                                   <br />
-                                  <span>{slide.textTwo.span}</span>
+                                  <span>{slides[index + 1]?.text.span}</span>
                                 </h3>
-                                <p>{slide.textTwo.body}</p>
+                                <p>{slides[index + 1]?.text.body}</p>
                               </div>
+                              <div className={styles.img}>
+                                <Image src={slides[1].image} />
+                              </div>
+                              {/* <div className={styles.text}>
+                                <h3>
+                                  {slides[2].textOne.heading}
+                                  <br />
+                                  <span>{slides[2].textOne.span}</span>
+                                </h3>
+                                <p>{slides[2].textOne.body}</p>
+                              </div>
+                              <div className={styles.img}>
+                                <Image src={slides[2].image} />
+                              </div> */}
                             </div>
                           </div>
                         );
@@ -203,13 +203,19 @@ const NavBar = () => {
                     </div>
 
                     <div
-                      className={`${styles.carousel__control} ${styles.left}`}
+                      className={`${styles.carousel__control} ${
+                        currentSlide === 0 ? styles.slideNone : styles.left
+                      }`}
                       onClick={prev}
                     >
                       <MdOutlineArrowBackIosNew />
                     </div>
                     <div
-                      className={`${styles.carousel__control} ${styles.right}`}
+                      className={`${styles.carousel__control} ${
+                        currentSlide === slides.length - 1
+                          ? styles.slideNone
+                          : styles.right
+                      }`}
                       onClick={next}
                     >
                       <MdOutlineArrowForwardIos />
