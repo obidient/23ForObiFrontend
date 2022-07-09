@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { BsShare, BsDownload } from 'react-icons/bs';
 import styles from './Styles.module.scss';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
@@ -28,11 +29,16 @@ import pdp from '../../assets/pdp.png';
 import ikpeazu from '../../assets/ikpeazu.png';
 
 import add_img from '../../assets/add_img.png';
+import download_img from '../../assets/download.png';
 import ImgCard from '../ImgCard/ImgCard';
 
 const State = ({ stateName }) => {
   const [showModal, setShowModal] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
+  const [showModal3, setShowModal3] = useState(false);
+  const [lightBox, setLightBox] = useState(false);
+  const [activeImage, setActiveImage] = useState('');
+  const [activeTitle, setActiveTitle] = useState('');
   const [searchVillage, setSearchVillage] = useState('');
 
   const [searchQuery, setSearchQuery] = useState('');
@@ -41,6 +47,12 @@ const State = ({ stateName }) => {
   const [villagesIn, setVillagesIn] = useState(VILLAGESINCONTROL);
   const [villagesNotIn, setVillagesNotIn] = useState(villageNotInDetails);
 
+  // LightBox
+  const showImage = (image, text) => {
+    setActiveImage(image);
+    setActiveTitle(text);
+    setLightBox(true);
+  };
   //SEARCH VILLAGES
   const handleNotInVillageChange = (e) => {
     e.preventDefault();
@@ -336,8 +348,57 @@ const State = ({ stateName }) => {
           </div>
           <div className={styles.state_body_cards}>
             {SOCIALMEDIAIMAGES.map((item, index) => (
-              <ImgCard src={item.src} key={index} title={item.title} />
+              <ImgCard
+                src={item.src}
+                key={index}
+                title={item.title}
+                onClick={() => {
+                  showImage(item.src, item.title), setShowModal3(true);
+                }}
+              />
             ))}
+            {showModal3 && (
+              <Modal
+                show={showModal}
+                onClose={() => setShowModal3(false)}
+                width="54.4rem"
+              >
+                <div className="py-4 text-[##2F3733]">
+                  <h5 className="font-light">Uploaded</h5>
+                  <p className="font-bold">Images</p>
+                </div>
+                <div className='rounded-2xl'>
+                  {lightBox ? (
+                    <div className={styles.lightbox}>
+                      <Image
+                        src={activeImage}
+                        width="612px"
+                        height="278px"
+                        alt=""
+                      />
+                    </div>
+                  ) : (
+                    ''
+                  )}
+                </div>
+
+                <div className="pt-6">
+                  <h5 className="text-4xl lg:text-2xl font-bold text-[#2F3733]">
+                    {activeTitle.toUpperCase()}
+                  </h5>
+                  <div className="flex justify-between w-1/3 text-[#5678CE] py-6">
+                    <div className="flex items-center justify-between text-2xl mr-10">
+                      <BsShare />
+                      <h5 className="text-4xl lg:text-2xl ml-3">Share</h5>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <BsDownload className="text-2xl" />
+                      <h5 className="text-4xl lg:text-2xl ml-3 ">Download</h5>
+                    </div>
+                  </div>
+                </div>
+              </Modal>
+            )}
           </div>
         </div>
       </div>
