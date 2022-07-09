@@ -32,27 +32,36 @@ import add_img from '../../assets/add_img.png';
 import download_img from '../../assets/download.png';
 import ImgCard from '../ImgCard/ImgCard';
 import Link from 'next/link';
+import ShareCard from '../ImgCard/ShareCard';
 
 const State = ({ stateName }) => {
+  // Modals
   const [showModal, setShowModal] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
   const [showModal3, setShowModal3] = useState(false);
+  // LightBox
   const [lightBox, setLightBox] = useState(false);
   const [activeImage, setActiveImage] = useState('');
   const [activeTitle, setActiveTitle] = useState('');
+  const [shareImg, setShareImg] = useState(false);
+  // Filter
   const [searchVillage, setSearchVillage] = useState('');
-
   const [searchQuery, setSearchQuery] = useState('');
   const [searchNotInQuery, setSearchNotInQuery] = useState('');
   const [searchParam] = useState(['name']);
   const [villagesIn, setVillagesIn] = useState(VILLAGESINCONTROL);
   const [villagesNotIn, setVillagesNotIn] = useState(villageNotInDetails);
 
-  // LightBox
+  // Show LightBox Images
   const showImage = (image, text) => {
     setActiveImage(image);
     setActiveTitle(text);
     setLightBox(true);
+  };
+
+  // Share Images
+  const shareSocial = (image) => {
+    setShareImg(!shareImg);
   };
   //SEARCH VILLAGES
   const handleNotInVillageChange = (e) => {
@@ -400,9 +409,13 @@ const State = ({ stateName }) => {
                     {activeTitle.toUpperCase()}
                   </h5>
                   <div className="flex justify-between w-1/3 text-[#5678CE] py-6">
-                    <div className="flex items-center justify-between text-2xl mr-10">
+                    <div
+                      className="flex items-center justify-between text-2xl mr-10"
+                      onClick={() => shareSocial(shareImg)}
+                    >
                       <BsShare />
                       <h5 className="text-4xl lg:text-2xl ml-3">Share</h5>
+                      {shareImg && <ShareCard image={activeImage} />}
                     </div>
                     <div>
                       <a
