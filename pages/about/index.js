@@ -3,6 +3,8 @@ import Page from '../../components/Page';
 import aboutStyles from '../../styles/About.module.scss';
 import poonworldmap from '../../public/svg/poonworldmap.svg';
 import poparty from '../../public/svg/poparty.svg';
+import footprints from '../../assets/t-shirt-hiking-boot-footprint-clip-art-footprint-1e19238d33f89455b11c65ed08cc5031 1.png';
+import map from '../../assets/NigeriaMap.png';
 import Image from 'next/image';
 
 const about = () => {
@@ -43,12 +45,15 @@ const about = () => {
               ></Image>
             </div>
             <div className={aboutStyles.about__aim}>
-              <div className={aboutStyles.about__heading}>774 LGAs</div>
-              <p>
-                With footprints across every villages, we will take back Nigeria
-                one village at a time.
-                <br /> Join us!
-              </p>
+              <Image src={footprints} width="47.36px" height="75px" alt="" />
+              <div className={aboutStyles.about__heading}>
+                <h5 className="text-[#2F3733] font-bold text-5xl">774 LGAs</h5>
+                <p className="text-[#000000] font-normal py-2 text-justify">
+                  With footprints across every villages, we will take back
+                  Nigeria one village at a time.
+                  <br /> Join us!
+                </p>
+              </div>
             </div>
           </div>
           {/* /About */}
@@ -66,11 +71,14 @@ const about = () => {
               <Image src={poparty.src} layout="fill" alt="labor party"></Image>
             </div>
             <div className={aboutStyles.about__aim}>
-              <div className={aboutStyles.about__heading}>36 states</div>
-              <p>
-                Across the 36 States and Abuja, join us and deliver 23 votes for
-                Peter Obi.
-              </p>
+              <Image src={map} alt="" />
+              <div className={aboutStyles.about__heading}>
+                <h5 className="text-[#2F3733] font-bold text-5xl">36 states</h5>
+                <p className="text-[#000000] font-normal py-2 text-justify">
+                  Across the 36 States and Abuja, join us and deliver 23 votes
+                  for Peter Obi.
+                </p>
+              </div>
             </div>
           </div>
           {/* /Goals */}
