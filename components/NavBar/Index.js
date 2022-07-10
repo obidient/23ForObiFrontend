@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 import logo from '../../assets/logo.png';
 import styles from './Styles.module.scss';
@@ -7,7 +7,13 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Modal from '../Modal/Index';
 
+import { MdOutlineArrowBackIosNew } from 'react-icons/md';
+import { MdOutlineArrowForwardIos } from 'react-icons/md';
+
 import img1 from '../../assets/how_it_works_img1.png';
+import img2 from '../../assets/how_it_works_img2.png';
+import img3 from '../../assets/how_it_works_img3.png';
+import DeliverModal from './../Modal/DeliverModal';
 
 const NavBar = () => {
   const navRef = useRef();
@@ -19,6 +25,7 @@ const NavBar = () => {
   //Show Modal
   const [showModal, setShowModal] = useState(false);
 
+  //Router
   const router = useRouter();
 
   return (
@@ -88,61 +95,14 @@ const NavBar = () => {
             Deliver Votes
           </button>
           {/* </Link> */}
-          {/* CONTRIBUTE MODAL */}
+          {/* DELIVER VOTES MODAL */}
           {showModal && (
-            <Modal
+            <DeliverModal
               show={showModal}
               onClose={() => setShowModal(false)}
-              width="79.4rem"
-            >
-              <div className={styles.modal}>
-                <div className={styles.modal__heading}>
-                  <h2>
-                    Learn more <br />
-                    <span>About the campaign</span>
-                  </h2>
-                </div>
-                <div className={styles.modal__body}>
-                  <div className={styles.details}>
-                    <div className={styles.text}>
-                      <h3>
-                        Create an account <br />
-                        <span>by clicking on deliver votes</span>
-                      </h3>
-                      <p>
-                        Create an account in a few easy steps by using your
-                        favourite social media account.
-                      </p>
-                    </div>
-                    <div className={styles.img}>
-                      <Image src={img1} />
-                    </div>
-                    <div className={styles.text}>
-                      <h3>
-                        Create an account <br />
-                        <span>by clicking on deliver votes</span>
-                      </h3>
-                      <p>
-                        Create an account in a few easy steps by using your
-                        favourite social media account.
-                      </p>
-                    </div>
-                    <div className={styles.img}>
-                      <Image src={img1} />
-                    </div>
-                  </div>
-                  <div className={styles.second_layer}>
-                    <div></div>
-                    <Link href="/how-it-works">Learn More</Link>
-                  </div>
-                  <button type="submit" className="btn_dark rounded-full">
-                    Create an account
-                  </button>
-                </div>
-              </div>
-            </Modal>
+            />
           )}
-          {/* END CONTRIBUTE MODAL */}
+          {/* END DELIVER VOTES MODAL */}
           <div
             onClick={showNavbar}
             className={`${styles.hamburger} ${styles.nav_open}`}

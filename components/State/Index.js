@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { BsShare, BsDownload } from 'react-icons/bs';
 import styles from './Styles.module.scss';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
@@ -11,6 +12,7 @@ import { villageNotInDetails } from '../../data/villageDetails';
 import Modal from '../Modal/Index';
 import { FaTimes } from 'react-icons/fa';
 import Breadcrumbs from '../misc/Breadcrumbs';
+import SOCIALMEDIAIMAGES from '../../data/smImages';
 
 // Forms Import
 import { Form, Formik } from 'formik';
@@ -26,35 +28,41 @@ import search from '../../assets/search.png';
 import pdp from '../../assets/pdp.png';
 import ikpeazu from '../../assets/ikpeazu.png';
 
-import sm_image_1 from '../../assets/sm_image_1.png';
-import sm_image_2 from '../../assets/sm_image_2.png';
-import sm_image_3 from '../../assets/sm_image_3.png';
-import sm_image_4 from '../../assets/sm_image_4.png';
-import sm_image_5 from '../../assets/sm_image_5.png';
-import sm_image_6 from '../../assets/sm_image_6.png';
-import sm_image_7 from '../../assets/sm_image_7.png';
-import sm_image_8 from '../../assets/sm_image_8.png';
-import sm_image_9 from '../../assets/sm_image_9.png';
-import sm_image_10 from '../../assets/sm_image_10.png';
-import sm_image_11 from '../../assets/sm_image_11.png';
-import sm_image_12 from '../../assets/sm_image_12.png';
-import sm_image_13 from '../../assets/sm_image_13.png';
-import sm_image_14 from '../../assets/sm_image_14.png';
-import sm_image_15 from '../../assets/sm_image_15.png';
-import sm_image_16 from '../../assets/sm_image_16.png';
 import add_img from '../../assets/add_img.png';
+import download_img from '../../assets/download.png';
+import ImgCard from '../ImgCard/ImgCard';
+import Link from 'next/link';
+import ShareCard from '../ImgCard/ShareCard';
 
 const State = ({ stateName }) => {
+  // Modals
   const [showModal, setShowModal] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
+  const [showModal3, setShowModal3] = useState(false);
+  // LightBox
+  const [lightBox, setLightBox] = useState(false);
+  const [activeImage, setActiveImage] = useState('');
+  const [activeTitle, setActiveTitle] = useState('');
+  const [shareImg, setShareImg] = useState(false);
+  // Filter
   const [searchVillage, setSearchVillage] = useState('');
-
   const [searchQuery, setSearchQuery] = useState('');
   const [searchNotInQuery, setSearchNotInQuery] = useState('');
   const [searchParam] = useState(['name']);
   const [villagesIn, setVillagesIn] = useState(VILLAGESINCONTROL);
   const [villagesNotIn, setVillagesNotIn] = useState(villageNotInDetails);
 
+  // Show LightBox Images
+  const showImage = (image, text) => {
+    setActiveImage(image);
+    setActiveTitle(text);
+    setLightBox(true);
+  };
+
+  // Share Images
+  const shareSocial = (image) => {
+    setShareImg(!shareImg);
+  };
   //SEARCH VILLAGES
   const handleNotInVillageChange = (e) => {
     e.preventDefault();
@@ -221,11 +229,17 @@ const State = ({ stateName }) => {
             width="54.4rem"
           >
             <div className={styles.modal}>
-              <div className={styles.modal__heading}>
+              <div className={`${styles.modal__heading} modal_heading`}>
                 <h2>
                   Add a missing <br />
                   <span>Village</span>
                 </h2>
+                <button
+                  className={`closeBtn`}
+                  onClick={() => setShowModal(false)}
+                >
+                  &times;
+                </button>
               </div>
               <div className={styles.modal__body}>
                 <p>Kindly add a missing village</p>
@@ -277,11 +291,17 @@ const State = ({ stateName }) => {
                   width="54.4rem"
                 >
                   <div className={styles.modal}>
-                    <div className={styles.modal__heading}>
+                    <div className={`${styles.modal__heading} modal_heading`}>
                       <h2>
                         Contribute <br />
                         <span>Your image</span>
                       </h2>
+                      <button
+                        className={`closeBtn`}
+                        onClick={() => setShowModal2(false)}
+                      >
+                        &times;
+                      </button>
                     </div>
                     <div className={styles.modal__body}>
                       <p>
@@ -304,7 +324,7 @@ const State = ({ stateName }) => {
                                       width={100}
                                       height={100}
                                     />
-                                    <button
+                                    <div
                                       onClick={() =>
                                         setSelectedImages(
                                           selectedImages.filter(
@@ -315,7 +335,7 @@ const State = ({ stateName }) => {
                                       className={styles.cancel}
                                     >
                                       <FaTimes />
-                                    </button>
+                                    </div>
                                   </div>
                                 );
                               })}
@@ -349,22 +369,71 @@ const State = ({ stateName }) => {
             </div>
           </div>
           <div className={styles.state_body_cards}>
-            <Image src={sm_image_1} />
-            <Image src={sm_image_2} />
-            <Image src={sm_image_3} />
-            <Image src={sm_image_4} />
-            <Image src={sm_image_5} />
-            <Image src={sm_image_6} />
-            <Image src={sm_image_7} />
-            <Image src={sm_image_8} />
-            <Image src={sm_image_9} />
-            <Image src={sm_image_10} />
-            <Image src={sm_image_11} />
-            <Image src={sm_image_12} />
-            <Image src={sm_image_13} />
-            <Image src={sm_image_14} />
-            <Image src={sm_image_15} />
-            <Image src={sm_image_16} />
+            {SOCIALMEDIAIMAGES.map((item, index) => (
+              <ImgCard
+                src={item.src}
+                key={index}
+                title={item.title}
+                onClick={() => {
+                  showImage(item.src, item.title), setShowModal3(true);
+                }}
+              />
+            ))}
+            {showModal3 && (
+              <Modal
+                show={showModal}
+                onClose={() => setShowModal3(false)}
+                width="54.4rem"
+              >
+                <div className="py-4 text-[##2F3733]">
+                  <h5 className="font-light">Uploaded</h5>
+                  <p className="font-bold">Images</p>
+                </div>
+                <hr className="border-[#E1E1E1] border-1 mb-5" />
+                <div className="rounded-2xl">
+                  {lightBox ? (
+                    <div className={styles.lightbox}>
+                      <Image
+                        src={activeImage}
+                        width="612px"
+                        height="278px"
+                        alt=""
+                      />
+                    </div>
+                  ) : (
+                    ''
+                  )}
+                </div>
+
+                <div className="pt-6">
+                  <h5 className="text-4xl lg:text-2xl font-bold text-[#2F3733]">
+                    {activeTitle.toUpperCase()}
+                  </h5>
+                  <div className="flex justify-between w-1/3 text-[#5678CE] py-6">
+                    <div
+                      className="flex items-center justify-between text-2xl mr-10 hover:text-black"
+                      onClick={() => shareSocial(shareImg)}
+                    >
+                      <BsShare />
+                      <h5 className="text-4xl lg:text-2xl ml-3">Share</h5>
+                      {shareImg && (
+                        <ShareCard image={activeImage} title={activeTitle} />
+                      )}
+                    </div>
+                    <div>
+                      <a
+                        href={`${activeImage}`}
+                        download
+                        className="flex items-center justify-between hover:text-black"
+                      >
+                        <BsDownload className="text-2xl" />
+                        <h5 className="text-4xl lg:text-2xl ml-3 ">Download</h5>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </Modal>
+            )}
           </div>
         </div>
       </div>

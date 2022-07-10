@@ -1,0 +1,57 @@
+ .img_card {
+    position: relative;
+    transition: all 0.3s ease-in-out;
+    filter: brightness(100%);
+    -webkit-filter: brightness(100%);
+    img {
+        border-radius: 1.1875rem;
+    }
+    .title {
+        position: absolute;
+        bottom: 5%;
+        left: 5%;
+        color: white;
+        background-color: rgba(0, 0, 0, 0.9);
+        padding: 0.1rem;
+        transition: all 0.3s linear;
+        transform: scale(0);  
+        z-index: 100;
+        font-size: small;
+    }
+    &:hover{
+        filter: brightness(80%);
+        -webkit-filter: brightness(80%);
+        transform: scale(1.025);
+        .title {
+            transform: scale(1);
+        }
+    } 
+    img {
+        object-fit: cover;
+    }
+   }
+
+/**Share Card**/
+
+.container {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+    .links {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: absolute;
+        margin: 1.5rem auto;
+        top: 1rem;
+        left: -6rem;
+        width: 21rem;
+        background-color: white;
+        z-index: 100;
+        padding: 0 0.1rem;
+        font-weight: 400;
+        color: black;
+    }
+}

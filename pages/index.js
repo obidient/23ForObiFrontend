@@ -12,7 +12,6 @@ export default function Home() {
 }
 
 export async function getServerSideProps() {
-  // const data = `Data from server: ${Date.now()}`;
   const { data } = await axios.get('https://api.23forobi.com/support-group/');
 
   return {

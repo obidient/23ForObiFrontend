@@ -238,11 +238,17 @@ const DashboardMain = () => {
               width="54.4rem"
             >
               <div className={styles.modal}>
-                <div className={styles.modal__heading}>
+                <div className={`${styles.modal__heading} modal_heading`}>
                   <h2>
                     Add a new <br />
                     <span>Contributor</span>
                   </h2>
+                  <button
+                    className={`closeBtn`}
+                    onClick={() => setShowModal(false)}
+                  >
+                    &times;
+                  </button>
                 </div>
                 <div className={styles.modal__body}>
                   <p>Kindly enter the details of a contributor</p>

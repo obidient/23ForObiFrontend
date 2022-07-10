@@ -159,3 +159,31 @@ button {
     }
   }
 }
+
+//Modal Heading Style
+.modal_heading {
+        padding-bottom: 1.5rem;
+        margin-bottom: 2.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        border-bottom: 1px solid #E1E1E1;
+
+        .closeBtn {
+            padding: 0 !important;
+            color: var(--text-color-1);
+            font-weight: 500;
+            font-size: 3rem;
+            border: none !important;
+        }
+
+        h2 {
+            font-weight: 300;
+            font-size: var(--font-header-3);
+            line-height: 115%;
+            color: var(--text-color-1);
+            
+        }
+
+
+    }
