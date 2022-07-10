@@ -53,5 +53,11 @@
         padding: 0 0.1rem;
         font-weight: 400;
         color: black;
+        @media screen and (max-width: 26rem){
+            margin: 0;
+            svg {
+                width: 18px;
+            }
+        }
     }
 }
