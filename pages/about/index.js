@@ -96,7 +96,7 @@ const about = () => {
                     <path
                       d="M578.94 298L36 284.426L110.037 273.938H768.969L578.94 298Z"
                       fill="#9E9E9E"
-                      fill-opacity="0.9"
+                      floodOpacity="0.9"
                     />
                   </g>
                   <path
@@ -115,7 +115,7 @@ const about = () => {
                     d="M168.82 86.23C170.459 81.516 174.902 78.3562 179.893 78.3562H267.638C271.207 78.3562 273.849 81.675 273.049 85.1534L250.017 185.316C249.051 189.519 245.31 192.497 240.998 192.497H139.691C135.871 192.497 133.192 188.729 134.446 185.121L168.82 86.23Z"
                     fill="#F3FFF7"
                     stroke="#CDFFDB"
-                    stroke-width="1.23395"
+                    strokeWidth="1.23395"
                   />
                   <path
                     d="M247.891 27.7935C248.456 25.2529 250.709 23.4453 253.312 23.4453H600.149C603.581 23.4453 606.191 26.5264 605.627 29.911C605.18 32.5885 602.864 34.5509 600.149 34.5509H253.312C249.759 34.5509 247.12 31.2613 247.891 27.7935Z"
@@ -185,9 +185,9 @@ const about = () => {
                       width="804.538"
                       height="95.6319"
                       filterUnits="userSpaceOnUse"
-                      color-interpolation-filters="sRGB"
+                      colorInterpolationFilters="sRGB"
                     >
-                      <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                      <feFlood floodOpacity="0" result="BackgroundImageFix" />
                       <feBlend
                         mode="normal"
                         in="SourceGraphic"
@@ -240,7 +240,7 @@ const about = () => {
                     <path
                       d="M338.958 430.602L36 310.598L61.3157 292.743L514.093 299.387H600L338.958 430.602Z"
                       fill="#9E9E9E"
-                      fill-opacity="0.5"
+                      floodOpacity="0.5"
                     />
                   </g>
                   <path
@@ -263,7 +263,7 @@ const about = () => {
                     d="M275.173 14.5414L246.231 47.6957L242.306 52.1848L324.186 79.6803L356.104 36.1745C359.413 31.6638 357.268 25.2361 351.913 23.6172L299.128 7.65903C290.484 5.04587 281.111 7.73876 275.173 14.5414Z"
                     fill="white"
                     stroke="#F1F1F1"
-                    stroke-width="1.35135"
+                    strokeWidth="1.35135"
                   />
                   <path
                     d="M266.173 55.4118L257.534 52.2686C256.665 51.9525 256.363 50.8769 256.94 50.1548L263.56 41.8749C264.268 40.9902 265.452 40.6405 266.526 40.9989L274.78 43.7517C275.643 44.0392 275.981 45.079 275.453 45.8188L269.296 54.4423C268.591 55.4303 267.313 55.8268 266.173 55.4118Z"
@@ -321,9 +321,9 @@ const about = () => {
                       width="635.56"
                       height="209.419"
                       filterUnits="userSpaceOnUse"
-                      color-interpolation-filters="sRGB"
+                      colorInterpolationFilters="sRGB"
                     >
-                      <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                      <feFlood floodOpacity="0" result="BackgroundImageFix" />
                       <feBlend
                         mode="normal"
                         in="SourceGraphic"
