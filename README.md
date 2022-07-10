@@ -16,7 +16,7 @@ cd 23ForObiFrontend
 - Install all dependencies
 
 ```
-npm install or yarn install
+run "yarn"
 ```
 
 - Add the main repo remote to your project upstream
