@@ -51,7 +51,7 @@ const ContributeModal = ({
         <button
           className="btn_dark"
           type="submit"
-          onClick={() => setRegisterFormIsVisible(true)}
+          // onClick={() => setRegisterFormIsVisible(true)}
         >
           Register
         </button>
