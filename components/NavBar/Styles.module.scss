@@ -22,10 +22,14 @@
             display: flex;
             list-style-type: none;
             column-gap: 3rem;
+            transition: all 0.3s ease-in-out;
 
             li {
                 font-size: var(--font-p-text-1);
                 font-weight: 400;
+                &:hover {
+                    transform: scale(1.1);
+                }
                 
                 .active {
                     font-weight: 700;
@@ -72,7 +76,8 @@
         padding: 4rem, 2rem, 4rem, 2rem;
         border: none;
         background: var(--primary-color);
-        color: var(--tertiary-color);       
+        color: var(--tertiary-color);    
+        z-index: 200;   
 
     }
     
@@ -118,6 +123,7 @@
                 color: var(--tertiary-color);
                 padding-bottom: 3rem;
                 font-size: 2.5rem;
+                
             }
         }
 
@@ -145,20 +151,7 @@
         font-weight: 700;  
         color: var(--text-color-1);
     }
-    &__heading {
-        padding-bottom: 1.5rem;
-        margin-bottom: 2.5rem;
-        h2 {
-            font-weight: 300;
-            font-size: var(--font-header-3);
-            line-height: 115%;
-            color: var(--text-color-1);
-            
-        }
-
-        border-bottom: 1px solid #E1E1E1;
-
-    }
+    
 
     &__body {
 
@@ -262,21 +255,25 @@
                 //   left: 50%;
                 bottom: 1.5em;
                 z-index: 2;
+                display: flex;
+                align-items: center;
                 }
                 .carousel_indicator_item {
-                width: 12px;
-                height: 12px;
-                padding: 0 !important;
-                border: none;
-                background-color: #F1F1F1;
-                margin: 0.2em;
-                border-radius: 50%;
-                cursor: pointer;
+                    width: .8rem;
+                    height: .8rem;
+                    padding: 0 !important;
+                    border: none;
+                    background-color: #F1F1F1;
+                    margin: 0.2em;
+                    border-radius: 50%;
+                    cursor: pointer;
                 }
                 .active {
-                opacity: 1;
-                background-color: var(--primary-color);
-                }
+                    opacity: 1;
+                    width: 1.2rem;
+                    height: 1.2rem;
+                    background-color: var(--primary-color);
+                    }
 
             a {
                 font-size: var(--font-p-text-1);

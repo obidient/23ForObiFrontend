@@ -21,71 +21,17 @@ import twitter from '../../assets/twitter.png';
 import apple from '../../assets/google.png';
 import SelectInput from '../misc/SelectInput';
 
-//Form Imports
-import { Form, Formik } from 'formik';
-import * as Yup from 'yup';
-import FormikControl from '../Forms/FormikControl';
+import ContributeModal from './ContributeModal';
 
 const Village = () => {
   const [showModal, setShowModal] = useState(false);
+  const [registerFormIsVisible, setRegisterFormIsVisible] = useState(false);
 
   //Effect to hide scroll
   useEffect(() => {
     const body = document.querySelector('body');
     body.style.overflow = showModal ? 'hidden' : 'auto';
   }, [showModal]);
-
-  //Initialize select options
-  const stateOptions = [
-    {
-      label: 'Rivers',
-      value: 'Rivers State',
-    },
-    {
-      label: 'Lagos',
-      value: 'Lagos State',
-    },
-    {
-      label: 'Ogun',
-      value: 'Ogun State',
-    },
-  ];
-  const villageOptions = [
-    {
-      label: 'Ezeani Village 1',
-      value: 'Ezeani Village',
-    },
-    {
-      label: 'Osusus Village 2',
-      value: 'Osusu Village',
-    },
-    {
-      label: 'Ariara Village 3',
-      value: 'Ariara Village',
-    },
-  ];
-
-  // Initial form values
-  const initialValues = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    state: '',
-    village: '',
-  };
-
-  // Form validation schema using Yup
-  const validationSchema = Yup.object({
-    firstName: Yup.string().required('Required'),
-    lastName: Yup.string().required('Required'),
-    email: Yup.string().email('Invalid email format').required('Required'),
-    state: Yup.string().required('Required'),
-    village: Yup.string().required('Required'),
-  });
-
-  const onSubmit = (values) => {
-    console.log('Form Data', values);
-  };
 
   return (
     <div className={styles.state}>
@@ -111,11 +57,17 @@ const Village = () => {
 
               >
                 <div className={styles.modal}>
-                  <div className={styles.modal__heading}>
+                  <div className={`${styles.modal__heading} modal_heading`}>
                     <h2>
                       Welcome to <br />
                       <span>Peter Obi Campaign</span>
                     </h2>
+                    <button
+                    className={`closeBtn`}
+                    onClick={() => setShowModal(false)}
+                  >
+                    &times;
+                  </button>
                   </div>
                   <div className={styles.modal__body}>
                     <p>Sign-up with social media</p>
@@ -147,69 +99,13 @@ const Village = () => {
               <Modal
                 show={showModal}
                 onClose={() => setShowModal(false)}
-                width="54.4rem"
+                width={registerFormIsVisible ? '54.4rem' : '50rem'}
               >
-                <div className={styles.modal}>
-                  <div className={styles.modal__heading}>
-                    <h2>
-                      Enter your <br />
-                      <span>Details</span>
-                    </h2>
-                  </div>
-                  <div className={styles.modal__body}>
-                    <p>Kindly fill our your personal details</p>
-                    <div className={styles.details_form}>
-                      <Formik
-                        initialValues={initialValues}
-                        validationSchema={validationSchema}
-                        onSubmit={onSubmit}
-                      >
-                        {({ values }) => (
-                          <Form autoComplete="off">
-                            <FormikControl
-                              values={values}
-                              control="input"
-                              placeholder="First Name"
-                              name="firstName"
-                              type="text"
-                            />
-                            <FormikControl
-                              values={values}
-                              control="input"
-                              placeholder="Last Name"
-                              name="lastName"
-                              type="text"
-                            />
-                            <FormikControl
-                              values={values}
-                              control="input"
-                              placeholder="Enter your email"
-                              name="email"
-                              type="email"
-                            />
-                            <FormikControl
-                              values={values}
-                              control="select"
-                              placeholder="Select your state"
-                              name="state"
-                              options={stateOptions}
-                            />
-                            <FormikControl
-                              values={values}
-                              control="select"
-                              placeholder="Select your village"
-                              name="village"
-                              options={villageOptions}
-                            />
-                            <button className="btn_dark" type="submit">
-                              Continue
-                            </button>
-                          </Form>
-                        )}
-                      </Formik>
-                    </div>
-                  </div>
-                </div>
+                <ContributeModal
+                  setShowModal={setShowModal}
+                  registerFormIsVisible={registerFormIsVisible}
+                  setRegisterFormIsVisible={setRegisterFormIsVisible}
+                />
               </Modal>
             )}
             {/* DETAILS MODAL END */}
@@ -221,11 +117,17 @@ const Village = () => {
               width="54.4rem"
               >
                 <div className={styles.modal}>
-                  <div className={styles.modal__heading}>
+                  <div className={`${styles.modal__heading} modal_heading`}>
                     <h2>
                       Help us complete <br />
                       <span>This Details</span>
                     </h2>
+                    <button
+                    className={`closeBtn`}
+                    onClick={() => setShowModal(false)}
+                  >
+                    &times;
+                  </button>
                   </div>
                   <div className={styles.modal__body}>
                     <div className={styles.have_pvc}>
