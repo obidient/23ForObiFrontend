@@ -8,19 +8,115 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import NavBar from '../../components/NavBar/Index';
 import Footer from '../../components/Footer/Index';
+import Modal from '../../components/Modal/Index';
+import Loader from '../../components/Loader'
 import { FetchEvent } from 'next/dist/server/web/spec-compliant/fetch-event';
 import { countryContext } from './../../Context/countryContext';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import Page from './../../components/Page';
 import SGCard from '../../components/SupportGroups/SGCard';
 
+//images
+import google from '../../assets/google.png'
+import facebook from '../../assets/facebook.png'
+import apple from '../../assets/apple.png'
+import twitter from '../../assets/twitter.png'
+
+//axios
+import axios from 'axios';
+
+//Form Imports
+import { Form, Formik } from 'formik';
+import * as Yup from 'yup';
+import FormikControl from '../../components/Forms/FormikControl';
+
+
+
 const homepage = (props) => {
+  const [ showModal, setShowModal ] = useState(false)
+  const [ showLoader, setShowLoader ] = useState(false)
+  const [ showLogin, setShowLogin ] = useState(false)
+
   const done = 13;
 
   const { data } = useContext(countryContext);
   // console.log('home', data);
   const router = useRouter();
   const query = router.query;
+
+
+  const initialValues = {
+    groupName: '',
+    state: '',
+    village: '',
+  }
+  // Form validation schema using Yup
+  const validationSchema = Yup.object({
+    groupName: Yup.string().required('Required'),
+    state: Yup.string().required('Required'),
+    village: Yup.string().required('Required'),
+  });
+
+  
+  
+  const onSubmit = (values) => {
+    console.log('Form Data', values)
+    setShowModal(false)
+    setShowLogin(true)
+    // setShowLoader(true)
+
+    //Api call
+    // const headers = {
+    //   'Content-Type': 'application/json',
+      
+    // }
+    
+    // const callAPI = async () => {
+    //   try {
+    //     const res = await axios.post(`api.23forobi.com/support-group`, values, {
+    //       headers: headers
+    //     }).then(res => {
+    //       console.log(res)
+    //     })
+        
+    //     // console.log(data);
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
+    // };
+    // callAPI()
+  }
+
+    //Initialize select options
+    const stateOptions = [
+      {
+        label: 'Rivers',
+        value: 'Rivers State',
+      },
+      {
+        label: 'Lagos',
+        value: 'Lagos State',
+      },
+      {
+        label: 'Ogun',
+        value: 'Ogun State',
+      },
+    ];
+    const villageOptions = [
+      {
+        label: 'Ezeani Village 1',
+        value: 'Ezeani Village',
+      },
+      {
+        label: 'Osusus Village 2',
+        value: 'Osusu Village',
+      },
+      {
+        label: 'Ariara Village 3',
+        value: 'Ariara Village',
+      },
+    ];
+  
 
   return (
     <Page
@@ -86,11 +182,112 @@ const homepage = (props) => {
                   )}
                 </div>
                 <div className={styles.btn_div}>
-                  <button className={`${styles.btn} btn_dark`}>
+                  <button className={`${styles.btn} btn_dark`} onClick={() => setShowModal(true)}>
                     Add a group
                   </button>
                 </div>
               </div>
+              {showModal && (
+                <Modal 
+                  show={showModal}
+                  onClose={() => setShowModal(false)}
+                  width="51.5rem"
+                >
+                  <div className={styles.modal}>
+                    <h2>Add a <br />
+                      <span>New Group</span>
+                    </h2>
+                    <div className={styles.modal__body}>
+                      <p>Kindly add a new group</p>
+                    <Formik
+                        initialValues={initialValues}
+                        validationSchema={validationSchema}
+                        onSubmit={onSubmit}
+                      >
+                        {({ values }) => (
+                          <Form autoComplete="off">
+                            <FormikControl
+                              values={values}
+                              control="input"
+                              placeholder="Group Name"
+                              name="groupName"
+                              type="text"
+                            />
+                          
+                           
+                            <FormikControl
+                              values={values}
+                              control="select"
+                              placeholder="Select your state"
+                              name="state"
+                              options={stateOptions}
+                            />
+                            <FormikControl
+                              values={values}
+                              control="select"
+                              placeholder="Select your village"
+                              name="village"
+                              options={villageOptions}
+                            />
+                            <button 
+                              className="btn_dark" 
+                              type="submit" 
+                              onSubmit={onSubmit}>
+                              Continue
+                            </button>
+                          </Form>
+                        )}
+                      </Formik>
+                    </div>
+                 
+                  </div>
+                </Modal>
+              )}
+              {/* {showLoader && (
+                  <Loader
+                  showLoader={showLoader}
+                  onClose={() => setShowLoader(false)}
+                  >
+                  </Loader>
+                )} */}
+
+                {showLogin && (
+                  <Modal
+                    show={showLogin}
+                    onClose={() => setShowLogin(false)}
+                    width="51.1rem"
+                  >
+                    <div className={styles.login_modal}>
+                      <h2>Welcome to <br /> <span>Peter Obi Campaign</span></h2>
+                      <div className={styles.login_modal__body}>
+                        <p>Sign-up with social media</p>
+                        <div className={styles.login_modal__body__container}>
+
+                        <div className={styles.login_modal__body__container__content} >
+                            <div style={{display: "grid", placeItems: "end"}}  className={styles.login_modal__body__container__content__image}><Image src={google} alt="google icon" /></div>
+                            <div className={styles.login_modal__body__container__content__para} ><p>Join with Google</p></div>
+                          </div>
+
+                          <div className={styles.login_modal__body__container__content} >
+                            <div style={{display: "grid", placeItems: "end"}}  className={styles.login_modal__body__container__content__image}><Image src={facebook} alt="google icon" /></div>
+                            <div className={styles.login_modal__body__container__content__para} ><p>Join with Facebook</p></div>
+                          </div>
+
+                          <div className={styles.login_modal__body__container__content} >
+                            <div style={{display: "grid", placeItems: "end"}}  className={styles.login_modal__body__container__content__image}><Image src={twitter} alt="google icon" /></div>
+                            <div className={styles.login_modal__body__container__content__para} ><p>Join with Twitter</p></div>
+                          </div>
+
+                          <div className={styles.login_modal__body__container__content} >
+                            <div style={{display: "grid", placeItems: "end"}}  className={styles.login_modal__body__container__content__image}><Image src={apple} alt="google icon" /></div>
+                            <div className={styles.login_modal__body__container__content__para} ><p>Join with Apple</p></div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </Modal>
+                )}
             </div>
           </div>
         </div>

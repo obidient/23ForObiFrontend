@@ -267,3 +267,127 @@
         }
     }
 }
+
+//////////// MODAL ///////////////////
+
+.modal {
+  
+  width: 100%;
+  padding-bottom: 1.5rem;
+  margin-bottom: 2.5rem;
+  h2 {
+    font-weight: 300;
+    font-size: var(--font-header-3);
+    line-height: 115%;
+    color: var(--text-color-1);
+    border-bottom: 1px solid #e1e1e1;
+    padding-bottom: 20px;
+
+    span {
+      font-weight: 700;
+    }
+    
+  }
+
+  &__body {
+    margin-top: -20px;
+    p {
+      line-height: 130%;
+      color: var(--text-color-3);
+      padding-bottom: 20px;
+    }
+    button {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px 20px;
+      gap: 10px;
+      border-radius: 3rem;
+      margin-top: 30px;
+
+    }
+  }
+}
+
+.login_modal {
+  width: 100%;
+  padding-bottom: 1.5rem;
+  margin-bottom: 2.5rem;
+  h2 {
+    font-weight: 300;
+    font-size: var(--font-header-3);
+    line-height: 115%;
+    color: var(--text-color-1);
+    border-bottom: 1px solid #e1e1e1;
+    padding-bottom: 20px;
+
+    span {
+      font-weight: 700;
+    }
+    
+  }
+&__body {
+  margin-top: -20px;
+  p {
+    line-height: 130%;
+    color: var(--text-color-3);
+    padding-bottom: 20px;
+  }
+  &__container {
+    display: flex;
+    flex-direction: column;
+
+
+    &__content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 70%;
+      margin: 0 auto;
+      border: 1px solid #2F3733;
+      border-radius: 3rem;
+      padding-bottom: 10px;
+      cursor: pointer;
+     margin-top: 20px;
+
+      &__image {
+        position: relative;
+        top: 5px;
+      }
+
+      p{
+       position: relative;
+       top: 15px;
+       left: 5px;
+       font-size: 2rem;
+      }
+    }
+
+   
+    
+    // div {
+    //   margin-top: 20px;
+    //   border: 1px solid #2F3733;
+     
+    //   border-radius: 3rem;
+    //   display: flex;
+    //   justify-content: center;
+    //   align-items: center;
+    //   div {
+    //     display: flex;
+    //   justify-content: center;
+    //   align-items: center;
+        
+    //     // border: 1px solid red;
+       
+    //   }
+    //   p{
+    //     border: 1px solid red;
+    //     min-width: 20px;
+    //   }
+    // }
+  }
+}
+  
+}
