@@ -4,7 +4,7 @@ import NavBar from './NavBar/Index';
 import Footer from './Footer/Index';
 
 const Page = ({ title, description, children }) => {
-  const editTitle = title.includes(undefined) ? 'loading...' : title;
+  const editTitle = title?.includes(undefined) ? 'loading...' : title;
   return (
     <>
       <Head>
