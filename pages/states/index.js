@@ -9,7 +9,7 @@ import Link from 'next/link';
 import NavBar from '../../components/NavBar/Index';
 import Footer from '../../components/Footer/Index';
 import Modal from '../../components/Modal/Index';
-import Loader from '../../components/Loader'
+import Loader from '../../components/Loader';
 import { FetchEvent } from 'next/dist/server/web/spec-compliant/fetch-event';
 import { countryContext } from './../../Context/countryContext';
 import { useContext, useState } from 'react';
@@ -17,10 +17,10 @@ import Page from './../../components/Page';
 import SGCard from '../../components/SupportGroups/SGCard';
 
 //images
-import google from '../../assets/google.png'
-import facebook from '../../assets/facebook.png'
-import apple from '../../assets/apple.png'
-import twitter from '../../assets/twitter.png'
+import google from '../../assets/google.png';
+import facebook from '../../assets/facebook.png';
+import apple from '../../assets/apple.png';
+import twitter from '../../assets/twitter.png';
 
 //axios
 import axios from 'axios';
@@ -30,12 +30,10 @@ import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import FormikControl from '../../components/Forms/FormikControl';
 
-
-
 const homepage = (props) => {
-  const [ showModal, setShowModal ] = useState(false)
-  const [ showLoader, setShowLoader ] = useState(false)
-  const [ showLogin, setShowLogin ] = useState(false)
+  const [showModal, setShowModal] = useState(false);
+  const [showLoader, setShowLoader] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
 
   const done = 13;
 
@@ -44,79 +42,77 @@ const homepage = (props) => {
   const router = useRouter();
   const query = router.query;
 
-
   const initialValues = {
-    groupName: '',
-    state: '',
-    village: '',
-  }
+    name: '',
+    // state: '',
+    // village: '',
+    votes_delivered: 0,
+  };
   // Form validation schema using Yup
   const validationSchema = Yup.object({
-    groupName: Yup.string().required('Required'),
-    state: Yup.string().required('Required'),
-    village: Yup.string().required('Required'),
+    name: Yup.string().required('Required'),
+    //state: Yup.string().required('Required'),
+    //village: Yup.string().required('Required'),
+    votes_delivered: Yup.number().required('Required'),
   });
 
-  
-  
   const onSubmit = (values) => {
-    console.log('Form Data', values)
-    setShowModal(false)
-    setShowLogin(true)
+    // console.log('Form Data', values);
+    setShowModal(false);
+    setShowLogin(true);
     // setShowLoader(true)
 
     //Api call
-    // const headers = {
-    //   'Content-Type': 'application/json',
-      
-    // }
-    
-    // const callAPI = async () => {
-    //   try {
-    //     const res = await axios.post(`api.23forobi.com/support-group`, values, {
-    //       headers: headers
-    //     }).then(res => {
-    //       console.log(res)
-    //     })
-        
-    //     // console.log(data);
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // };
-    // callAPI()
-  }
+    const headers = {
+      'accept': 'application/json',
+      'Content-Type': 'application/json',
+    };
+    const callAPI = async () => {
+      try {
+        const res = await axios
+          .post(`https://api.23forobi.com/support-group/`, values, {
+            headers: headers,
+          })
+          .then((res) => {
+            console.log(res);
+          });
 
-    //Initialize select options
-    const stateOptions = [
-      {
-        label: 'Rivers',
-        value: 'Rivers State',
-      },
-      {
-        label: 'Lagos',
-        value: 'Lagos State',
-      },
-      {
-        label: 'Ogun',
-        value: 'Ogun State',
-      },
-    ];
-    const villageOptions = [
-      {
-        label: 'Ezeani Village 1',
-        value: 'Ezeani Village',
-      },
-      {
-        label: 'Osusus Village 2',
-        value: 'Osusu Village',
-      },
-      {
-        label: 'Ariara Village 3',
-        value: 'Ariara Village',
-      },
-    ];
-  
+        // console.log(data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    callAPI();
+  };
+  //Initialize select options
+  const stateOptions = [
+    {
+      label: 'Rivers',
+      value: 'Rivers State',
+    },
+    {
+      label: 'Lagos',
+      value: 'Lagos State',
+    },
+    {
+      label: 'Ogun',
+      value: 'Ogun State',
+    },
+  ];
+  const villageOptions = [
+    {
+      label: 'Ezeani Village 1',
+      value: 'Ezeani Village',
+    },
+    {
+      label: 'Osusus Village 2',
+      value: 'Osusu Village',
+    },
+    {
+      label: 'Ariara Village 3',
+      value: 'Ariara Village',
+    },
+  ];
 
   return (
     <Page
@@ -173,7 +169,7 @@ const homepage = (props) => {
                       <SGCard
                         key={index}
                         /**Lagos Group is just a placeholder */
-                        groupname={item.name && 'Lagos Group'}
+                        groupname={item.name !== 'string' ? `${item.name} Group` : 'Lagos Group'}
                         nvotes={item.votes_delivered}
                       />
                     ))
@@ -182,24 +178,28 @@ const homepage = (props) => {
                   )}
                 </div>
                 <div className={styles.btn_div}>
-                  <button className={`${styles.btn} btn_dark`} onClick={() => setShowModal(true)}>
+                  <button
+                    className={`${styles.btn} btn_dark`}
+                    onClick={() => setShowModal(true)}
+                  >
                     Add a group
                   </button>
                 </div>
               </div>
               {showModal && (
-                <Modal 
+                <Modal
                   show={showModal}
                   onClose={() => setShowModal(false)}
                   width="51.5rem"
                 >
                   <div className={styles.modal}>
-                    <h2>Add a <br />
+                    <h2>
+                      Add a <br />
                       <span>New Group</span>
                     </h2>
                     <div className={styles.modal__body}>
                       <p>Kindly add a new group</p>
-                    <Formik
+                      <Formik
                         initialValues={initialValues}
                         validationSchema={validationSchema}
                         onSubmit={onSubmit}
@@ -210,12 +210,18 @@ const homepage = (props) => {
                               values={values}
                               control="input"
                               placeholder="Group Name"
-                              name="groupName"
+                              name="name"
                               type="text"
                             />
-                          
-                           
                             <FormikControl
+                              values={values}
+                              control="input"
+                              placeholder="Group Name"
+                              name="votes_delivered"
+                              type="number"
+                            />
+
+                            {/*<FormikControl
                               values={values}
                               control="select"
                               placeholder="Select your state"
@@ -228,18 +234,18 @@ const homepage = (props) => {
                               placeholder="Select your village"
                               name="village"
                               options={villageOptions}
-                            />
-                            <button 
-                              className="btn_dark" 
-                              type="submit" 
-                              onSubmit={onSubmit}>
+                              />*/}
+                            <button
+                              className="btn_dark"
+                              type="submit"
+                              onSubmit={onSubmit}
+                            >
                               Continue
                             </button>
                           </Form>
                         )}
                       </Formik>
                     </div>
-                 
                   </div>
                 </Modal>
               )}
@@ -251,43 +257,111 @@ const homepage = (props) => {
                   </Loader>
                 )} */}
 
-                {showLogin && (
-                  <Modal
-                    show={showLogin}
-                    onClose={() => setShowLogin(false)}
-                    width="51.1rem"
-                  >
-                    <div className={styles.login_modal}>
-                      <h2>Welcome to <br /> <span>Peter Obi Campaign</span></h2>
-                      <div className={styles.login_modal__body}>
-                        <p>Sign-up with social media</p>
-                        <div className={styles.login_modal__body__container}>
-
-                        <div className={styles.login_modal__body__container__content} >
-                            <div style={{display: "grid", placeItems: "end"}}  className={styles.login_modal__body__container__content__image}><Image src={google} alt="google icon" /></div>
-                            <div className={styles.login_modal__body__container__content__para} ><p>Join with Google</p></div>
+              {showLogin && (
+                <Modal
+                  show={showLogin}
+                  onClose={() => setShowLogin(false)}
+                  width="51.1rem"
+                >
+                  <div className={styles.login_modal}>
+                    <h2>
+                      Welcome to <br /> <span>Peter Obi Campaign</span>
+                    </h2>
+                    <div className={styles.login_modal__body}>
+                      <p>Sign-up with social media</p>
+                      <div className={styles.login_modal__body__container}>
+                        <div
+                          className={
+                            styles.login_modal__body__container__content
+                          }
+                        >
+                          <div
+                            style={{ display: 'grid', placeItems: 'end' }}
+                            className={
+                              styles.login_modal__body__container__content__image
+                            }
+                          >
+                            <Image src={google} alt="google icon" />
                           </div>
-
-                          <div className={styles.login_modal__body__container__content} >
-                            <div style={{display: "grid", placeItems: "end"}}  className={styles.login_modal__body__container__content__image}><Image src={facebook} alt="google icon" /></div>
-                            <div className={styles.login_modal__body__container__content__para} ><p>Join with Facebook</p></div>
+                          <div
+                            className={
+                              styles.login_modal__body__container__content__para
+                            }
+                          >
+                            <p>Join with Google</p>
                           </div>
+                        </div>
 
-                          <div className={styles.login_modal__body__container__content} >
-                            <div style={{display: "grid", placeItems: "end"}}  className={styles.login_modal__body__container__content__image}><Image src={twitter} alt="google icon" /></div>
-                            <div className={styles.login_modal__body__container__content__para} ><p>Join with Twitter</p></div>
+                        <div
+                          className={
+                            styles.login_modal__body__container__content
+                          }
+                        >
+                          <div
+                            style={{ display: 'grid', placeItems: 'end' }}
+                            className={
+                              styles.login_modal__body__container__content__image
+                            }
+                          >
+                            <Image src={facebook} alt="google icon" />
                           </div>
-
-                          <div className={styles.login_modal__body__container__content} >
-                            <div style={{display: "grid", placeItems: "end"}}  className={styles.login_modal__body__container__content__image}><Image src={apple} alt="google icon" /></div>
-                            <div className={styles.login_modal__body__container__content__para} ><p>Join with Apple</p></div>
+                          <div
+                            className={
+                              styles.login_modal__body__container__content__para
+                            }
+                          >
+                            <p>Join with Facebook</p>
                           </div>
+                        </div>
 
+                        <div
+                          className={
+                            styles.login_modal__body__container__content
+                          }
+                        >
+                          <div
+                            style={{ display: 'grid', placeItems: 'end' }}
+                            className={
+                              styles.login_modal__body__container__content__image
+                            }
+                          >
+                            <Image src={twitter} alt="google icon" />
+                          </div>
+                          <div
+                            className={
+                              styles.login_modal__body__container__content__para
+                            }
+                          >
+                            <p>Join with Twitter</p>
+                          </div>
+                        </div>
+
+                        <div
+                          className={
+                            styles.login_modal__body__container__content
+                          }
+                        >
+                          <div
+                            style={{ display: 'grid', placeItems: 'end' }}
+                            className={
+                              styles.login_modal__body__container__content__image
+                            }
+                          >
+                            <Image src={apple} alt="google icon" />
+                          </div>
+                          <div
+                            className={
+                              styles.login_modal__body__container__content__para
+                            }
+                          >
+                            <p>Join with Apple</p>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </Modal>
-                )}
+                  </div>
+                </Modal>
+              )}
             </div>
           </div>
         </div>
