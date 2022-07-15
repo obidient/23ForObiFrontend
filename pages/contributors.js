@@ -5,15 +5,13 @@ import Page from '../components/Page';
 import Team from '../data/teamImages';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-// import 'react-tabs/style/react-tabs.css';
 
 const roles = ['Engineering', 'Design', 'Data Entry', 'Copywriting'];
 
 const pages = [1, 2, 3, 4, 5];
 
 const contributors = () => {
-  const [activeTab, setActiveTab] = useState(roles[0]);
-  const [tabIndex, setTabIndex] = useState(1);
+  const [tabIndex, setTabIndex] = useState(0);
 
   return (
     <Page title="Contributors" description="contributors for peter obi">
@@ -81,7 +79,14 @@ const contributors = () => {
                 <ul className="flex justify-around items-center mx-4">
                   {pages.map((item) => (
                     <div className="flex mx-3 items-center justify-center w-14 h-14 bg-[#F1F1F1] text-[#5F6160] font-light border-2 border-[#C4C4C4] text-center rounded-full hover:text-[#ffffff] hover:bg-[#018226] cursor-pointer">
-                      <li key={item} className="text-xl ">
+                      <li
+                        key={item}
+                        className={
+                          pages === item[0]
+                            ? 'text-[#ffffff] bg-[#018226] text-xl'
+                            : 'text-xl '
+                        }
+                      >
                         {item}
                       </li>
                     </div>
