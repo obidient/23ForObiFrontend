@@ -36,7 +36,7 @@ const contributors = () => {
               {roles.map((item) => (
                 <Tab
                   key={item}
-                  className="font-bold px-8 py-3 text-3xl lg:text-2xl  w-[200px] cursor-pointer hover:border-[#018226] hover:text-[#018226] hover:border-b-2 "
+                  className="font-bold lg:px-8 py-3 text-3xl lg:text-2xl  w-[200px] cursor-pointer hover:border-[#018226] hover:text-[#018226] hover:border-b-2 "
                 >
                   {item}
                 </Tab>
