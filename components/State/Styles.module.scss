@@ -361,7 +361,8 @@
                 width: 100%;
                 border-radius: 48px;
                 padding: 1rem;
-                border: 1px solid #2F3733;
+                border: 1px solid #018226;
+                background-color: #F3FFF7;
             }
 
             button {
@@ -439,6 +440,7 @@
 
                             img {
                                 border-radius: 15px;
+                                object-fit: cover;
                             }
                         }
 
