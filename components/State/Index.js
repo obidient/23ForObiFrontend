@@ -52,6 +52,7 @@ const State = ({ stateName }) => {
   const [villagesIn, setVillagesIn] = useState(VILLAGESINCONTROL);
   const [villagesNotIn, setVillagesNotIn] = useState(villageNotInDetails);
 
+  const [imgTitle, setImgTitle] = useState('');
   // Show LightBox Images
   const showImage = (image, text) => {
     setActiveImage(image);
@@ -353,6 +354,21 @@ const State = ({ stateName }) => {
                                 accept="image/png, image/jpeg, image/webp"
                               />
                             </button>
+                          </div>
+                          <div className="flex flex-col my-4">
+                            <label
+                              className="text-3xl text-left my-2"
+                              htmlFor="title"
+                            >
+                              Add Title
+                            </label>
+                            <input
+                              name="title"
+                              type="text"
+                              className="outline-none"
+                              value={imgTitle}
+                              onChange={(e) => setImgTitle(e.target.value)}
+                            />
                           </div>
                           <p className={styles.input_text}>
                             You can upload upto 3 pdf or 10 image files
