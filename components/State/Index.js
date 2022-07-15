@@ -358,12 +358,12 @@ const State = ({ stateName }) => {
                           <div className="flex flex-col my-4">
                             <label
                               className="text-3xl text-left my-2"
-                              htmlFor="title"
+                              htmlFor="img_title"
                             >
                               Add Title
                             </label>
                             <input
-                              name="title"
+                              name="img_title"
                               type="text"
                               className="outline-none"
                               value={imgTitle}
