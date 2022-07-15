@@ -43,6 +43,7 @@ const Card = ({
             </div>
           </div>
         </div>
+
         <div className={styles.progress}>
           <p>Progress</p>
           <StateProgress progress={progress} />

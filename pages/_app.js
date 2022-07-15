@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <CountryContextProvider initialData={pageProps?.initialData}>
       <VillageContextProvider>
-        <Component {...pageProps} />
+          <Component {...pageProps} />
       </VillageContextProvider>
     </CountryContextProvider>
   );
