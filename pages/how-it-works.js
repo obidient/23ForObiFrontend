@@ -136,12 +136,14 @@ const howItWorks = () => {
               <p className="text-2xl lg:my-4 lg:pb-20">
                 {content.details2 ? content.details2 : ''}
               </p>
-              <Image
-                src={content.img ? content.img : ''}
-                width={content.width}
-                height={content.height}
-                className="lg:my-10"
-              />
+              <div className="flex">
+                <Image
+                  src={content.img ? content.img : ''}
+                  width={content.width}
+                  height={content.height}
+                  className="lg:my-2"
+                />
+              </div>
             </div>
           </div>
         ))}
