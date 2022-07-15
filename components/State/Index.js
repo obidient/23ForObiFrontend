@@ -357,18 +357,20 @@ const State = ({ stateName }) => {
                           </div>
                           <div className="flex flex-col my-4">
                             <label
-                              className="text-3xl text-left my-2"
+                              className="text-2xl text-left mt-2 mb-7 font-bold"
                               htmlFor="img_title"
                             >
-                              Add Title
+                              Name your image
                             </label>
                             <input
                               name="img_title"
                               type="text"
-                              className="outline-none"
+                              className="outline-none border-[#018226]"
                               value={imgTitle}
                               onChange={(e) => setImgTitle(e.target.value)}
+                              maxLength={30}
                             />
+                            <p className='text-right py-1 font-semibold'>{imgTitle.length}{' '}/ 30</p>
                           </div>
                           <p className={styles.input_text}>
                             You can upload upto 3 pdf or 10 image files
