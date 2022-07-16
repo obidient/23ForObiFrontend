@@ -245,9 +245,10 @@ const State = ({ stateName }) => {
               <div className={styles.modal__body}>
                 <p>Kindly add a missing village</p>
                 <Formik
-                  initialValues={{ village: '' }}
+                  initialValues={{ village: '', location: '' }}
                   validationSchema={Yup.object({
                     village: Yup.string().required('Required'),
+                    location: Yup.string().required('Required'),
                   })}
                   onSubmit={(values) => console.log('Form data', values)}
                 >
@@ -258,6 +259,14 @@ const State = ({ stateName }) => {
                         control="input"
                         placeholder="Enter village name"
                         name="village"
+                        type='text'
+                      />
+                      <FormikControl
+                        values={values}
+                        control="input"
+                        placeholder="Enter a Location"
+                        name="location"
+                        type='text'
                       />
                       <button className="btn_dark" type="submit">
                         Continue
@@ -370,7 +379,9 @@ const State = ({ stateName }) => {
                               onChange={(e) => setImgTitle(e.target.value)}
                               maxLength={30}
                             />
-                            <p className='text-right py-1 font-semibold'>{imgTitle.length}{' '}/ 30</p>
+                            <p className="text-right py-1 font-semibold">
+                              {imgTitle.length} / 30
+                            </p>
                           </div>
                           <p className={styles.input_text}>
                             You can upload upto 3 pdf or 10 image files
