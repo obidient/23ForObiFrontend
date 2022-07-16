@@ -5,7 +5,7 @@ const SGCard = ({ groupname, nvotes }) => {
     <div className={styles.sgcard}>
       <div className={styles.group_name}>
         <p>Group name</p>
-        <h5>{groupname}</h5>
+        <h5 className='capitalize'>{groupname}</h5>
       </div>
       <div className={styles.number_votes}>
         <p>Number of votes brought in</p>

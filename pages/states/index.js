@@ -43,45 +43,47 @@ const homepage = (props) => {
   const query = router.query;
 
   const initialValues = {
-    groupName: '',
-    state: '',
-    village: '',
+    name: '',
+    // state: '',
+    // village: '',
+    votes_delivered: 0,
   };
   // Form validation schema using Yup
   const validationSchema = Yup.object({
-    groupName: Yup.string().required('Required'),
-    state: Yup.string().required('Required'),
-    village: Yup.string().required('Required'),
+    name: Yup.string().required('Required'),
+    //state: Yup.string().required('Required'),
+    //village: Yup.string().required('Required'),
+    votes_delivered: Yup.number().required('Required'),
   });
 
   const onSubmit = (values) => {
-    console.log('Form Data', values);
+    // console.log('Form Data', values);
     setShowModal(false);
     setShowLogin(true);
     // setShowLoader(true)
 
     //Api call
-    // const headers = {
-    //   'Content-Type': 'application/json',
+    const headers = {
+      'accept': 'application/json',
+      'Content-Type': 'application/json',
+    };
+    const callAPI = async () => {
+      try {
+        const res = await axios
+          .post(`https://api.23forobi.com/support-group/`, values, {
+            headers: headers,
+          })
+          .then((res) => {
+            console.log(res);
+          });
 
-    // }
-
-    // const callAPI = async () => {
-    //   try {
-    //     const res = await axios.post(`api.23forobi.com/support-group`, values, {
-    //       headers: headers
-    //     }).then(res => {
-    //       console.log(res)
-    //     })
-
-    //     // console.log(data);
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // };
-    // callAPI()
+        // console.log(data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    callAPI();
   };
-
   //Initialize select options
   const stateOptions = [
     {
@@ -167,7 +169,7 @@ const homepage = (props) => {
                       <SGCard
                         key={index}
                         /**Lagos Group is just a placeholder */
-                        groupname={item.name && 'Lagos Group'}
+                        groupname={item.name !== 'string' ? `${item.name} Group` : 'Lagos Group'}
                         nvotes={item.votes_delivered}
                       />
                     ))
@@ -208,11 +210,18 @@ const homepage = (props) => {
                               values={values}
                               control="input"
                               placeholder="Group Name"
-                              name="groupName"
+                              name="name"
                               type="text"
                             />
-
                             <FormikControl
+                              values={values}
+                              control="input"
+                              placeholder="Group Name"
+                              name="votes_delivered"
+                              type="number"
+                            />
+
+                            {/*<FormikControl
                               values={values}
                               control="select"
                               placeholder="Select your state"
@@ -225,7 +234,7 @@ const homepage = (props) => {
                               placeholder="Select your village"
                               name="village"
                               options={villageOptions}
-                            />
+                              />*/}
                             <button
                               className="btn_dark"
                               type="submit"
