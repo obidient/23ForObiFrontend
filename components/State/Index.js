@@ -34,7 +34,8 @@ import ImgCard from '../ImgCard/ImgCard';
 import Link from 'next/link';
 import ShareCard from '../ImgCard/ShareCard';
 
-const State = ({ stateName }) => {
+const State = ({ stateName, detail }) => {
+  console.log(detail);
   // Modals
   const [showModal, setShowModal] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
@@ -132,7 +133,7 @@ const State = ({ stateName }) => {
                 <div className={styles.current_gov__details}>
                   <Image src={ikpeazu} />
                   <div className={styles.text}>
-                    <h5>Okezie Ikpeazu</h5>
+                    <h5>{detail?.current_governor}</h5>
                     <p>Since: May 29, 2015</p>
                     <p>Terms: 2(Two)</p>
                   </div>

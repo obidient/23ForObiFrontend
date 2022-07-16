@@ -5,13 +5,17 @@ import { useState } from 'react';
 import { VillageContextProvider } from '../Context/villageContext';
 import { AppWrapper } from './../Context/villageContextProvider';
 import { CountryContextProvider } from './../Context/countryContext';
+import StateContext from '../Context/StateContext';
 
 function MyApp({ Component, pageProps }) {
+  const { states, ...rest } = pageProps;
   return (
     <CountryContextProvider initialData={pageProps?.initialData}>
-      <VillageContextProvider>
+      <StateContext.Provider value={{ states }}>
+        <VillageContextProvider>
           <Component {...pageProps} />
-      </VillageContextProvider>
+        </VillageContextProvider>
+      </StateContext.Provider>
     </CountryContextProvider>
   );
 }
