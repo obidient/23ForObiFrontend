@@ -26,13 +26,17 @@
     }
 
     .footer__details {
-
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
         h2 {
             text-align: center;
             font-weight: 700;
             font-size: 4.5rem;
             color: var(--primary-color);
-            width: 34.7rem;
+            width: 75%;
+            margin: 0 auto;
         }
 
         p {

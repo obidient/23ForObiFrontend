@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import styles from '../pagestyles/home.module.scss';
-import labourparty from '../../assets/labourparty.png';
+import labourparty from '../../public/images/labour_party.png';
 import ProgressBar from '../../components/misc/Progress';
 import States from '../../components/States/Index';
 import SupportGroups from '../../components/SupportGroups/Index';
@@ -59,16 +59,17 @@ const homepage = (props) => {
   const onSubmit = (values) => {
     // console.log('Form Data', values);
     setShowModal(false);
+    setShowLoader(true)
     setShowLogin(true);
-    // setShowLoader(true)
 
     //Api call
     const headers = {
-      'accept': 'application/json',
+      accept: 'application/json',
       'Content-Type': 'application/json',
     };
     const callAPI = async () => {
       try {
+        setShowLoader(true);
         const res = await axios
           .post(`https://api.23forobi.com/support-group/`, values, {
             headers: headers,
@@ -76,7 +77,7 @@ const homepage = (props) => {
           .then((res) => {
             console.log(res);
           });
-
+        setShowLoader(false);
         // console.log(data);
       } catch (err) {
         console.log(err);
@@ -169,7 +170,11 @@ const homepage = (props) => {
                       <SGCard
                         key={index}
                         /**Lagos Group is just a placeholder */
-                        groupname={item.name !== 'string' ? `${item.name} Group` : 'Lagos Group'}
+                        groupname={
+                          item.name !== 'string'
+                            ? `${item.name} Group`
+                            : 'Lagos Group'
+                        }
                         nvotes={item.votes_delivered}
                       />
                     ))
@@ -249,13 +254,12 @@ const homepage = (props) => {
                   </div>
                 </Modal>
               )}
-              {/* {showLoader && (
-                  <Loader
+              {showLoader && (
+                <Loader
                   showLoader={showLoader}
                   onClose={() => setShowLoader(false)}
-                  >
-                  </Loader>
-                )} */}
+                ></Loader>
+              )}
 
               {showLogin && (
                 <Modal
