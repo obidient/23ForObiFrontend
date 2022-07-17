@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import styles from '../pagestyles/home.module.scss';
-import labourparty from '../../assets/labourparty.png';
+import labourparty from '../../public/images/labour_party.png';
 import ProgressBar from '../../components/misc/Progress';
 import States from '../../components/States/Index';
 import SupportGroups from '../../components/SupportGroups/Index';
