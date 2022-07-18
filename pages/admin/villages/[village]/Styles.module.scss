@@ -1,8 +1,8 @@
 .user {
     display: grid;
-    grid-template-columns: 15% auto;
     background: #F1F1F1;
     align-items: center;
+    height: 100vh;
     
     &__sidebar {
         background-color: var(--tertiary-color);

@@ -1,3 +1,4 @@
+//Sidebar
 .sidebar {
     padding: 3rem 1rem;
     
@@ -57,6 +58,12 @@
         column-gap: 2rem;
         justify-content: space-between;
         margin-bottom: 2rem;
+
+        @media (max-width: 75em) {
+            flex-wrap: wrap;
+            row-gap: 2rem;
+        }
+        
     }
 }
 
@@ -98,5 +105,65 @@
         cursor: pointer;
         font-size: 2rem; 
         margin-left: 1rem;
+    }
+}
+
+//ADMINPAGE
+.admin_page {
+    display: grid;
+    grid-template-columns: 15% auto;
+    background: #F1F1F1;
+    
+    // position: relative;
+
+    @media (max-width: 75em) {
+        grid-template-columns: 100%;
+    }
+
+    &__sidebar {
+        background-color: var(--tertiary-color);
+        filter: drop-shadow(0px 4px 13px rgba(2, 106, 32, 0.05));
+        height: 100vh;
+
+        @media (max-width: 56.25em) {
+            width: 50%;
+        }
+    }
+
+    .close {
+
+        @media (max-width: 75em) {
+            position: absolute;
+            z-index: 100;
+            transform: translateX(-100%);
+            transition: all .2s ease-in-out;
+        }
+    }
+    .open {
+        
+        @media (max-width: 75em) {
+            
+            position: absolute;
+            z-index: 100;
+            transform: translateX(0%);
+            transition: all .2s ease-in-out;
+        }
+    }
+
+    .toggle {
+        position: absolute;
+        left: 2rem;
+        top: .5rem;
+        z-index: 100;
+
+        @media (min-width: 75em) {
+            display: none;            
+        }
+    }
+
+    &__dashboard {
+        .list {
+            margin: 1rem 2rem;
+        }
     }
 }

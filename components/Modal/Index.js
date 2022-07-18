@@ -9,6 +9,7 @@ const Modal = ({
   width,
   children,
   innerClose,
+  delModRes,
 }) => {
   const modalRef = useRef();
   useEffect(() => {
@@ -21,6 +22,14 @@ const Modal = ({
     };
   }, []);
 
+  const style = {
+    width: width,
+
+    '@media (max-width: 500px)': {
+      width: delModRes,
+    },
+  };
+
   const handleClick = useCallback((e) => {
     // clicked inside the modal
     if (modalRef?.current?.contains(e.target)) {
@@ -32,10 +41,8 @@ const Modal = ({
 
   return (
     <div className={styles.backdrop} style={{ ...backdropStyles }}>
-      <div className={styles.modal} ref={modalRef} style={{ width: width }}>
-        <div className={styles.modalContent}>
-          {children}
-        </div>
+      <div className={styles.modal} ref={modalRef} style={style}>
+        <div className={styles.modalContent}>{children}</div>
       </div>
     </div>
   );
