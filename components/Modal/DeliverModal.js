@@ -1,5 +1,5 @@
 import styles from './Styles.module.scss';
-import React, { useEffect, useRef, useCallback } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Modal from './Index';
 import Image from 'next/image';
 
@@ -58,9 +58,26 @@ const DeliverModal = ({ show, onClose }) => {
   const switchIndex = (index) => {
     setCurrentSlide(index);
   };
+
+  const mediaMatch = window.matchMedia('(max-width: 1000px)');
+  const [matches, setMatches] = useState(mediaMatch.matches);
+
+  useEffect(() => {
+    const handler = (e) => setMatches(e.matches);
+    mediaMatch.addListener(handler);
+    return () => mediaMatch.removeListener(handler);
+  });
+
+  const width = {
+    container: (bigScreen) => ({
+      flexDirection: bigScreen ? '79.4rem' : '60rem',
+    }),
+  };
+
+
   return (
     <div className={styles.backdrop}>
-      <Modal show={show} onClose={onClose} width="79.4rem">
+      <Modal show={show} onClose={onClose} width={width.container(matches)} delModRes="60rem">
         <div className={styles.deliver_modal}>
           <div className={`${styles.deliver_modal__heading} modal_heading`}>
             <h2>

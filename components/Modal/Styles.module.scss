@@ -43,8 +43,8 @@
 
 // ////////////// DELIVER MODAL ////////////////////
 .deliver_modal {
-    // padding: 3rem 3.5rem;
-    // width: 79.4rem;
+    z-index: 220;
+
     span {
         font-weight: 700;  
         color: var(--text-color-1);

@@ -9,6 +9,8 @@ const state = ({ data }) => {
   const router = useRouter();
   const { state } = router.query;
 
+  console.log(data)
+
   return (
     <div>
       <Page title={`State || ${state}`}>
