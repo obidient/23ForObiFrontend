@@ -5,7 +5,7 @@ import Navbar from '../../../components/NavBar/Index';
 import State from '../../../components/State/Index';
 import Page from './../../../components/Page';
 
-const state = () => {
+const state = ({ data }) => {
   const router = useRouter();
   const { state } = router.query;
 
@@ -14,11 +14,29 @@ const state = () => {
       <Page title={`State || ${state}`}>
         {/* <Navbar /> */}
 
-        <State stateName={state} />
+        <State stateName={state} detail={data} />
         {/* <Footer /> */}
       </Page>
     </div>
   );
+};
+
+export const getServerSideProps = async ({ params, res }) => {
+  try {
+    const { state } = params;
+    const { data } = await axios.get(
+      `https://api.23forobi.com/state-details/${state}`
+    );
+
+    return {
+      props: { data },
+    };
+  } catch {
+    res.statusCode = 404;
+    return {
+      props: {},
+    };
+  }
 };
 
 export default state;

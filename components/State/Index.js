@@ -34,7 +34,8 @@ import ImgCard from '../ImgCard/ImgCard';
 import Link from 'next/link';
 import ShareCard from '../ImgCard/ShareCard';
 
-const State = ({ stateName }) => {
+const State = ({ stateName, detail }) => {
+  console.log(detail);
   // Modals
   const [showModal, setShowModal] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
@@ -52,6 +53,7 @@ const State = ({ stateName }) => {
   const [villagesIn, setVillagesIn] = useState(VILLAGESINCONTROL);
   const [villagesNotIn, setVillagesNotIn] = useState(villageNotInDetails);
 
+  const [imgTitle, setImgTitle] = useState('');
   // Show LightBox Images
   const showImage = (image, text) => {
     setActiveImage(image);
@@ -131,7 +133,7 @@ const State = ({ stateName }) => {
                 <div className={styles.current_gov__details}>
                   <Image src={ikpeazu} />
                   <div className={styles.text}>
-                    <h5>Okezie Ikpeazu</h5>
+                    <h5>{detail?.current_governor}</h5>
                     <p>Since: May 29, 2015</p>
                     <p>Terms: 2(Two)</p>
                   </div>
@@ -244,9 +246,10 @@ const State = ({ stateName }) => {
               <div className={styles.modal__body}>
                 <p>Kindly add a missing village</p>
                 <Formik
-                  initialValues={{ village: '' }}
+                  initialValues={{ village: '', location: '' }}
                   validationSchema={Yup.object({
                     village: Yup.string().required('Required'),
+                    location: Yup.string().required('Required'),
                   })}
                   onSubmit={(values) => console.log('Form data', values)}
                 >
@@ -257,6 +260,14 @@ const State = ({ stateName }) => {
                         control="input"
                         placeholder="Enter village name"
                         name="village"
+                        type='text'
+                      />
+                      <FormikControl
+                        values={values}
+                        control="input"
+                        placeholder="Enter a Location"
+                        name="location"
+                        type='text'
                       />
                       <button className="btn_dark" type="submit">
                         Continue
@@ -353,6 +364,25 @@ const State = ({ stateName }) => {
                                 accept="image/png, image/jpeg, image/webp"
                               />
                             </button>
+                          </div>
+                          <div className="flex flex-col my-4">
+                            <label
+                              className="text-2xl text-left mt-2 mb-7 font-bold"
+                              htmlFor="img_title"
+                            >
+                              Name your image
+                            </label>
+                            <input
+                              name="img_title"
+                              type="text"
+                              className="outline-none border-[#018226]"
+                              value={imgTitle}
+                              onChange={(e) => setImgTitle(e.target.value)}
+                              maxLength={30}
+                            />
+                            <p className="text-right py-1 font-semibold">
+                              {imgTitle.length} / 30
+                            </p>
                           </div>
                           <p className={styles.input_text}>
                             You can upload upto 3 pdf or 10 image files

@@ -1,0 +1,85 @@
+.user {
+    display: grid;
+    grid-template-columns: 15% auto;
+    background: #F1F1F1;
+    align-items: center;
+    
+    &__sidebar {
+        background-color: var(--tertiary-color);
+        filter: drop-shadow(0px 4px 13px rgba(2, 106, 32, 0.05));
+        height: 100vh;
+    }
+    
+    &__main {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        justify-content: center;
+        margin: 0 10rem;
+        // align-items: center;
+        column-gap: 2rem;
+        // align-items: flex-start;
+        // margin: 0 4rem;
+        
+        .user_info {
+            background-color: var(--tertiary-color);
+            padding: 2rem;
+            border-radius: 10px;
+            filter: drop-shadow(0px 4px 13px rgba(2, 106, 32, 0.05));
+
+            h3 {
+                font-size: var(--font-header-3);
+                font-weight: 600;
+                margin-bottom: 1rem;
+            }
+            
+            h4 {
+                font-size: var(--font-p-text-1);
+                font-weight: 600;
+                text-decoration: underline;
+            }
+
+            .username {
+                display: flex;
+                align-items: flex-end;
+                column-gap: 2rem;
+
+                span {
+                    width: 20% !important;
+                    height: 10rem !important;
+                }
+
+                p {
+                    font-size: var(--font-header-3);
+                }
+            }
+            .location, .date_reg {
+                margin-top: 3rem;                
+            }
+        }
+        
+        .edit {
+            form {
+                border-radius: 10px;
+                filter: drop-shadow(0px 4px 13px rgba(2, 106, 32, 0.05));
+                display: flex;
+                flex-direction: column;
+                // width: 60%;
+                background-color: var(--tertiary-color);
+                padding: 3rem;
+
+                input {
+                    outline: none;
+                    border: 1px solid #F1F1F1;
+                    margin-bottom: 1rem;
+                    padding: 1rem 2rem;
+                }
+                button {
+                    background-color: var(--primary-color);
+                    padding: 1rem;
+                    border-radius: 48px;
+                    color: var(--tertiary-color);
+                }
+            }
+        }
+    }
+}

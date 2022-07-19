@@ -46,21 +46,16 @@ const DeliverModal = ({ show, onClose }) => {
   const slideInterval = useRef();
 
   const prev = () => {
-    // startSlideTimer();
-
     const index = currentSlide > 0 ? currentSlide - 1 : slides.length - 1;
     setCurrentSlide(index);
   };
 
   const next = () => {
-    // startSlideTimer();
-
     const index = currentSlide < slides.length - 1 ? currentSlide + 1 : 0;
     setCurrentSlide(index);
   };
 
   const switchIndex = (index) => {
-    // startSlideTimer();
     setCurrentSlide(index);
   };
   return (

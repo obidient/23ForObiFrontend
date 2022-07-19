@@ -237,6 +237,7 @@ const DashboardMain = () => {
               onClose={() => setShowModal(false)}
               width="54.4rem"
             >
+            
               <div className={styles.modal}>
                 <div className={`${styles.modal__heading} modal_heading`}>
                   <h2>
