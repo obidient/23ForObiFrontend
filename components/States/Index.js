@@ -3,12 +3,15 @@ import search from '../../assets/search.png';
 import Image from 'next/image';
 import Cards from '../Card/Cards';
 import STATES from '../../data/stateDetails';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Card from '../Card/Card';
+import StateContext from '../../Context/StateContext';
 
 const States = () => {
+  const { states } = React.useContext(StateContext);
+  // console.log(JSON.stringify(states, null, 2));
   const [searchQuery, setSearchQuery] = useState('');
-  const [states, setStates] = useState(STATES);
+  // const [states, setStates] = useState(STATES);
   const [searchParam] = useState(['name']);
 
   const handleChange = (e) => {
@@ -50,16 +53,16 @@ const States = () => {
           {states && states.length > 0 ? (
             filter(states).map((item) => (
               <Card
-                key={item.id}
-                state={item.name}
-                voteControl={item.voteControl}
-                type={item.type}
+                key={item.state_code}
+                state={item}
+                voteControl={item.vote_control}
+                type={'control'}
                 progress={item.progress}
-                slug={item.slug}
+                slug={item.state_code}
               />
             ))
           ) : (
-            <h2 className="text-lg">No State exists</h2>
+            <h2 className="text-4xl font-bold">No State exists</h2>
           )}
         </div>
       </div>

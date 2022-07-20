@@ -25,6 +25,12 @@ const NavBar = () => {
   //Show Modal
   const [showModal, setShowModal] = useState(false);
 
+  //Effect to hide scroll
+  useEffect(() => {
+    const body = document.querySelector('body');
+    body.style.overflow = showModal ? 'hidden' : 'auto';
+  }, [showModal]);
+
   //Router
   const router = useRouter();
 
@@ -78,7 +84,11 @@ const NavBar = () => {
               </li>
               <li>
                 <Link href="/contributors">
-                  <a className={router.pathname == '/contributors' ? styles.active : ''}>
+                  <a
+                    className={
+                      router.pathname == '/contributors' ? styles.active : ''
+                    }
+                  >
                     Contributors
                   </a>
                 </Link>

@@ -31,13 +31,13 @@ const Card = ({
       href={
         type === 'control'
           ? `states/${slug}`
-          : `${path}/${village.toLowerCase()}`
+          : `${path}/${village?.toLowerCase()}`
       }
     >
       <div className={styles.card}>
         <div className={styles.state}>
           <div className={styles.card_top}>
-            <h5>{type === 'control' ? `${state} State` : village}</h5>
+            <h5>{type === 'control' ? `${state.name}` : village}</h5>
             <div className={styles.chevron}>
               <BsChevronRight />
             </div>

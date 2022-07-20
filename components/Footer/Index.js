@@ -2,12 +2,19 @@ import Image from 'next/image';
 import styles from './Styles.module.scss';
 import logo from '../../assets/logo.png';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import DeliverModal from '../Modal/DeliverModal';
 
 const Footer = () => {
   //Show Modal
   const [showModal, setShowModal] = useState(false);
+
+  //Effect to hide scroll
+  useEffect(() => {
+    const body = document.querySelector('body');
+    body.style.overflow = showModal ? 'hidden' : 'auto';
+  }, [showModal]);
+
   return (
     <div className={styles.footer}>
       <div className="container">
