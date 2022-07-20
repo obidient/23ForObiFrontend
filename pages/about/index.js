@@ -6,13 +6,20 @@ import poparty from '../../public/svg/poparty.svg';
 import footprints from '../../assets/t-shirt-hiking-boot-footprint-clip-art-footprint-1e19238d33f89455b11c65ed08cc5031 1.png';
 import map from '../../assets/NigeriaMap.png';
 import Image from 'next/image';
+import Hero from '../../components/Hero';
 
 const about = () => {
   return (
     <Page title="About">
-      <main>
+      <main className="container">
+        <Hero
+          subtitle="About"
+          title="#23ForObi"
+          description="This is everything you need to know about the #23ForObi online
+              campaign"
+        />
         {/* Hero */}
-        <div className={aboutStyles.hero}>
+        {/*<div className={aboutStyles.hero}>
           <div className="container">
             <h1 className={aboutStyles.hero__title}>
               <span>About</span>
@@ -24,7 +31,7 @@ const about = () => {
               campaign
             </p>
           </div>
-        </div>
+        </div>*/}
         {/* /Hero */}
         <div className="container">
           {/* About */}
