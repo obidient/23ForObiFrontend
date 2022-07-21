@@ -35,11 +35,7 @@ import Link from 'next/link';
 import ShareCard from '../ImgCard/ShareCard';
 import axios from 'axios'
 
-<<<<<<< HEAD
-const State = ({ stateName, detail }) => {
-=======
 const State = ({ stateName, detail, images }) => {
->>>>>>> 479b380bfb22c1334e7a6300eff563e4c94264e7
   // console.log(detail);
   // Modals
   const [showModal, setShowModal] = useState(false);
@@ -465,6 +461,10 @@ const State = ({ stateName, detail, images }) => {
                   </div>
                 </Modal>
               )}
+              {/* END CONTRIBUT MODAL */}
+              <Modal>
+
+              </Modal>
             </div>
           </div>
           <div className={styles.state_body_cards}>
