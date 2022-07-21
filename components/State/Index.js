@@ -34,6 +34,7 @@ import ImgCard from '../ImgCard/ImgCard';
 import Link from 'next/link';
 import ShareCard from '../ImgCard/ShareCard';
 import axios from 'axios'
+import uploaded from '../../assets/uploaded.png';
 
 const State = ({ stateName, detail, images }) => {
   // console.log(detail);
@@ -397,25 +398,23 @@ const State = ({ stateName, detail, images }) => {
                       </p>
                       <div className={styles.file_input}>
                         <form>
-                            {imageUpload &&
-                              <div className={styles.images_prev_container}>
+                          {imageUpload && (
+                            <div className={styles.images_prev_container}>
+                              <div className={styles.image_preview}>
+                                <Image
+                                  src={imageUpload}
+                                  width={100}
+                                  height={100}
+                                />
                                 <div
-                                  className={styles.image_preview}
+                                  onClick={deleteImage}
+                                  className={styles.cancel}
                                 >
-                                  <Image
-                                    src={imageUpload}
-                                    width={100}
-                                    height={100}
-                                  />
-                                  <div
-                                    onClick={deleteImage}
-                                    className={styles.cancel}
-                                  >
-                                    <FaTimes />
-                                  </div>
-                                </div>                              
+                                  <FaTimes />
+                                </div>
                               </div>
-                            }
+                            </div>
+                          )}
                           <div className={styles.upload}>
                             <button type="button" className={styles.btn_upload}>
                               <Image src={add_img} />
@@ -452,7 +451,10 @@ const State = ({ stateName, detail, images }) => {
                           <p className={styles.input_text}>
                             You can upload upto 3 pdf or 10 image files
                           </p>
-                          <button className={`${styles.btn_submit} btn_dark`} onClick={onSubmit}>
+                          <button
+                            className={`${styles.btn_submit} btn_dark`}
+                            onClick={onSubmit}
+                          >
                             Complete
                           </button>
                         </form>
@@ -461,10 +463,43 @@ const State = ({ stateName, detail, images }) => {
                   </div>
                 </Modal>
               )}
-              {/* END CONTRIBUT MODAL */}
-              <Modal>
+              {/* END CONTRIBUTE MODAL */}
 
+              {/* COMPLETE MODAL */}
+
+              <Modal
+                show={showModal2}
+                onClose={() => setShowModal2(false)}
+                width="54.4rem"
+              >
+                <div className={`${styles.modal} ${styles.complete}`}>
+                  <div>
+                    {/* <h2>
+                      Contribute <br />
+                      <span>Your image</span>
+                    </h2> */}
+                    <button
+                      className={`closeBtn ${styles.complete_btn}`}
+                      onClick={() => setShowModal2(false)}
+                    >
+                      &times;
+                    </button>
+                  </div>
+                  <div className={styles.complete_body}>
+                    <Image src={uploaded} />
+                    <h2>Your image has been added successfully</h2>
+                    <p>Congratulations! Your image has been added successfully</p>
+                    <button
+                      className={`${styles.btn_submit} btn_dark`}
+                      onClick={onSubmit}
+                    >
+                      Complete
+                    </button>
+                  </div>
+                </div>
               </Modal>
+
+              {/* END COMPLETE MODAL */}
             </div>
           </div>
           <div className={styles.state_body_cards}>
@@ -480,7 +515,7 @@ const State = ({ stateName, detail, images }) => {
                 />
               ))
             ) : (
-              <h2 className='font-bold'>No Images </h2>
+              <h2 className="font-bold">No Images </h2>
             )}
             {showModal3 && (
               <Modal
