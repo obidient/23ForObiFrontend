@@ -35,7 +35,11 @@ import Link from 'next/link';
 import ShareCard from '../ImgCard/ShareCard';
 import axios from 'axios'
 
+<<<<<<< HEAD
 const State = ({ stateName, detail }) => {
+=======
+const State = ({ stateName, detail, images }) => {
+>>>>>>> 479b380bfb22c1334e7a6300eff563e4c94264e7
   // console.log(detail);
   // Modals
   const [showModal, setShowModal] = useState(false);
@@ -335,14 +339,14 @@ const State = ({ stateName, detail }) => {
                         control="input"
                         placeholder="Enter village name"
                         name="village"
-                        type='text'
+                        type="text"
                       />
                       <FormikControl
                         values={values}
                         control="input"
                         placeholder="Enter a Location"
                         name="location"
-                        type='text'
+                        type="text"
                       />
                       <button className="btn_dark" type="submit">
                         Continue
@@ -464,16 +468,20 @@ const State = ({ stateName, detail }) => {
             </div>
           </div>
           <div className={styles.state_body_cards}>
-            {SOCIALMEDIAIMAGES.map((item, index) => (
-              <ImgCard
-                src={item.src}
-                key={index}
-                title={item.title}
-                onClick={() => {
-                  showImage(item.src, item.title), setShowModal3(true);
-                }}
-              />
-            ))}
+            {images && images.length > 0 ? (
+              images.map((item, index) => (
+                <ImgCard
+                  src={item.url}
+                  key={index}
+                  title={item.title}
+                  onClick={() => {
+                    showImage(item.url, item.title), setShowModal3(true);
+                  }}
+                />
+              ))
+            ) : (
+              <h2 className='font-bold'>No Images </h2>
+            )}
             {showModal3 && (
               <Modal
                 show={showModal}
