@@ -34,7 +34,7 @@ export default function Home({}) {
 
   return (
     <div>
-      {!user && <div ref={googlebuttonref}>
+      {user && <div ref={googlebuttonref}>
         
       </div>}
       <Homepage />
