@@ -9,6 +9,8 @@ import StateContext from '../Context/StateContext';
 
 function MyApp({ Component, pageProps }) {
   const { states, ...rest } = pageProps;
+
+ 
   return (
     <CountryContextProvider initialData={pageProps?.initialData}>
       <StateContext.Provider value={{ states }}>
