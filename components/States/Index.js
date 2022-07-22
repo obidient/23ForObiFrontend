@@ -58,7 +58,7 @@ const States = () => {
                 voteControl={item.vote_control}
                 type={'control'}
                 progress={item.progress}
-                slug={item.state_name}
+                slug={item.id}
               />
             ))
           ) : (

@@ -18,7 +18,7 @@ const state = ({ data, images }) => {
       <Page title={`State || ${state}`}>
         {/* <Navbar /> */}
 
-        <State stateName={state} detail={data} images={images} />
+        <State stateName={data.state_name} detail={data} images={images} />
         {/* <Footer /> */}
       </Page>
     </div>
