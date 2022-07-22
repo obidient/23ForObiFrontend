@@ -191,7 +191,7 @@ const State = ({ stateName, detail, images }) => {
         <div className={styles.state_heading}>
           <Breadcrumbs />
           <div className={styles.state_heading__title}>
-            <h1 className="capitalize">{stateName} State Villages</h1>
+            <h1 className="capitalize">{stateName} Villages</h1>
             <div className={styles.vill_control}>
               <div className={styles.vill_control__text}>
                 <h5>Villages in control</h5>
@@ -467,17 +467,13 @@ const State = ({ stateName, detail, images }) => {
 
               {/* COMPLETE MODAL */}
 
-              <Modal
+              {/* <Modal
                 show={showModal2}
                 onClose={() => setShowModal2(false)}
                 width="54.4rem"
               >
                 <div className={`${styles.modal} ${styles.complete}`}>
-                  <div>
-                    {/* <h2>
-                      Contribute <br />
-                      <span>Your image</span>
-                    </h2> */}
+                  <div>                    
                     <button
                       className={`closeBtn ${styles.complete_btn}`}
                       onClick={() => setShowModal2(false)}
@@ -497,7 +493,7 @@ const State = ({ stateName, detail, images }) => {
                     </button>
                   </div>
                 </div>
-              </Modal>
+              </Modal> */}
 
               {/* END COMPLETE MODAL */}
             </div>

@@ -24,7 +24,7 @@ const States = () => {
       return searchParam.some((newState) => {
         return (
           state[newState]
-            .toString()
+            ?.toString()
             .toLowerCase()
             .indexOf(searchQuery.toLowerCase()) > -1
         );
@@ -51,14 +51,14 @@ const States = () => {
         </div>
         <div className="cards">
           {states && states.length > 0 ? (
-            filter(states).map((item) => (
+            (states).map((item) => (
               <Card
-                key={item.state_code}
+                key={item.id}
                 state={item}
                 voteControl={item.vote_control}
                 type={'control'}
                 progress={item.progress}
-                slug={item.state_code}
+                slug={item.state_name}
               />
             ))
           ) : (

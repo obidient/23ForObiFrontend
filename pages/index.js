@@ -8,8 +8,8 @@ import GoogleLogin from 'react-google-login'
 import {useScript} from '../hooks/useScript'
 import { useState, useRef } from 'react';
 
-export default function Home({}) {
-
+export default function Home(props) {
+console.log(props)
    const googlebuttonref = useRef();
    const [user, setuser] = useState(false);
    console.log(user)
@@ -22,7 +22,7 @@ export default function Home({}) {
 
    useScript('https://accounts.google.com/gsi/client', () => {
      window.google.accounts.id.initialize({
-       client_id: 'process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID', // here's your Google ID
+       client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID, // here's your Google ID
        callback: onGoogleSignIn,
        auto_select: false,
      });
@@ -34,25 +34,34 @@ export default function Home({}) {
 
   return (
     <div>
-      {user && <div ref={googlebuttonref}>
-        
-      </div>}
+      {/* {!user && <div ref={googlebuttonref} className="opacity: 0"></div>} */}
       <Homepage />
     </div>
   );
 }
 
-export async function getServerSideProps({ params, res }) {
+export async function getServerSideProps(ctx) {
   try {
-    const { data } = await axios.get('https://api.23forobi.com/support-group/');
-    const {
-      data: { states },
-    } = await axios.get('https://api.23forobi.com/ng/states/');
+    // const { data } = await axios.get('https://api.23forobi.com/support-group/');
+    // const states = await axios.get('https://api.23forobi.com/states/');
+    // const allStates = JSON.parse(JSON.stringify(states)) 
 
+    const supportGroupsReq = axios({
+      method: 'GET',
+      url: 'https://api.23forobi.com/support-group/',
+      headers: { cookie: ctx.req.headers.cookie },
+    });
+    const statesReq = axios({
+      method: 'GET',
+      url: 'https://api.23forobi.com/states/',
+      headers: { cookie: ctx.req.headers.cookie },
+    });
+    const [support, states] = await Promise.all([supportGroupsReq, statesReq]);
     return {
       props: {
-        initialData: data,
-        states,
+        // initialData: states,
+        initialData: support.data,
+        states: states.data,
       },
     };
   } catch {

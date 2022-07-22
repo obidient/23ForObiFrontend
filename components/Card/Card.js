@@ -24,20 +24,22 @@ const Card = ({
 
   const router = useRouter();
   const path = router.asPath;
+  const formattedSlug = slug.replace(/\ /g, '-')
+
   // console.log(slug);
 
   return (
     <Link
       href={
         type === 'control'
-          ? `states/${slug}`
+          ? `states/${formattedSlug}`
           : `${path}/${village?.toLowerCase()}`
       }
     >
       <div className={styles.card}>
         <div className={styles.state}>
           <div className={styles.card_top}>
-            <h5>{type === 'control' ? `${state.name}` : village}</h5>
+            <h5>{type === 'control' ? `${state.state_name}` : village}</h5>
             <div className={styles.chevron}>
               <BsChevronRight />
             </div>
