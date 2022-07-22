@@ -24,7 +24,6 @@ const Card = ({
 
   const router = useRouter();
   const path = router.asPath;
-  const formattedSlug = slug.replace(/\ /g, '-')
 
   // console.log(slug);
 
@@ -32,7 +31,7 @@ const Card = ({
     <Link
       href={
         type === 'control'
-          ? `states/${formattedSlug}`
+          ? `states/${slug}`
           : `${path}/${village?.toLowerCase()}`
       }
     >
