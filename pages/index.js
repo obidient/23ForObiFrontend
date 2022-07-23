@@ -40,8 +40,27 @@ export default function Home(props) {
   );
 }
 
-export async function getServerSideProps(ctx) {
+export async function getServerSideProps() {
   try {
+    const supportGroups = await axios.get('https://api.23forobi.com/support-group/');
+    const states = await axios.get('https://api.23forobi.com/states/');
+    return {
+      props: {
+        initailData : supportGroups?.data,
+        states: states.data
+      }
+    }
+  } catch (error) {
+    console.log(error);
+    return {
+      props: {
+        states : []
+      },
+    };
+  }
+  {
+    /**
+try {
     // const { data } = await axios.get('https://api.23forobi.com/support-group/');
     // const states = await axios.get('https://api.23forobi.com/states/');
     // const allStates = JSON.parse(JSON.stringify(states))
@@ -70,5 +89,8 @@ export async function getServerSideProps(ctx) {
     return {
       props: {},
     };
+  }
+
+*/
   }
 }
