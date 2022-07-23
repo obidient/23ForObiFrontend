@@ -30,14 +30,14 @@ import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import FormikControl from '../../components/Forms/FormikControl';
 
-const homepage = (props) => {
+const homepage = ({ data }) => {
   const [showModal, setShowModal] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
 
   const done = 13;
 
-  const { data } = useContext(countryContext);
+  // const { data } = useContext(countryContext);
   // console.log('home', data);
   const router = useRouter();
   const query = router.query;
@@ -59,7 +59,7 @@ const homepage = (props) => {
   const onSubmit = (values) => {
     // console.log('Form Data', values);
     setShowModal(false);
-    setShowLoader(true)
+    setShowLoader(true);
     setShowLogin(true);
 
     //Api call
