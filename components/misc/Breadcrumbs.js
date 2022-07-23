@@ -20,7 +20,7 @@ const Breadcrumbs = () => {
     return item.breadcrumb !== 'states';
   });
 
-  // console.log(newBread);
+  console.log(router.asPath);
 
   useEffect(() => {
     if (router) {
@@ -42,7 +42,6 @@ const Breadcrumbs = () => {
     return null;
   }
 
-  // console.log(breadcrumbs);
   return (
     <nav aria-label="breadcrumbs" className={styles.breadcrumb}>
       <ol>
@@ -52,8 +51,12 @@ const Breadcrumbs = () => {
         {newBread.map((breadcrumb, i) => {
           return (
             <li key={breadcrumb.href}>
-              <Link href={breadcrumb.href}>
-                <a>{convertBreadcrumb(breadcrumb.breadcrumb)}</a>
+              <Link href={breadcrumb.href.replace(/%20/g, ' ')}>
+                <a>
+                  {convertBreadcrumb(
+                    breadcrumb.breadcrumb.replace(/%20/g, ' ')
+                  )}
+                </a>
               </Link>
             </li>
           );

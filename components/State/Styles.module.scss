@@ -483,4 +483,49 @@
     }
 }
 
-                
+///////////// COMPLETE MODAL //////////////////
+.complete {
+    position: relative;
+
+    .complete_btn {
+        position: absolute;
+        right: 0;
+        padding: 0 !important;
+        color: var(--text-color-1);
+        font-weight: 500;
+        font-size: 3rem;
+        border: none !important;
+    }
+
+    .complete_body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        
+        h2 {
+            font-weight: 700;
+            font-size: var(--font-header-2);
+            line-height: 130%;
+            color: var(--text-color-1);
+            width: 43.4rem;
+            text-align: center;
+            margin-top: 3.89rem;
+        }
+        
+        p {
+            font-weight: 400;
+            font-size: var(--font-p-text-1);
+            line-height: 130%;
+            width: 43.4rem;
+            text-align: center;
+            color: var(--text-color-3);
+            margin-top: 1rem;        
+        }
+
+        .btn_submit {
+            width: 100%;
+            margin-top: 5rem;
+        }
+    }
+}

@@ -12,7 +12,7 @@ const States = () => {
   // console.log(JSON.stringify(states, null, 2));
   const [searchQuery, setSearchQuery] = useState('');
   // const [states, setStates] = useState(STATES);
-  const [searchParam] = useState(['name']);
+  const [searchParam] = useState(['state_name']);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -24,7 +24,7 @@ const States = () => {
       return searchParam.some((newState) => {
         return (
           state[newState]
-            .toString()
+            ?.toString()
             .toLowerCase()
             .indexOf(searchQuery.toLowerCase()) > -1
         );
@@ -53,12 +53,12 @@ const States = () => {
           {states && states.length > 0 ? (
             filter(states).map((item) => (
               <Card
-                key={item.state_code}
+                key={item.id}
                 state={item}
                 voteControl={item.vote_control}
                 type={'control'}
                 progress={item.progress}
-                slug={item.state_code}
+                slug={item.id}
               />
             ))
           ) : (

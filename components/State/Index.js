@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { BsShare, BsDownload } from 'react-icons/bs';
 import styles from './Styles.module.scss';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 
 import SingleStateProgress from './../misc/SingleStateProgress';
@@ -33,6 +33,8 @@ import download_img from '../../assets/download.png';
 import ImgCard from '../ImgCard/ImgCard';
 import Link from 'next/link';
 import ShareCard from '../ImgCard/ShareCard';
+import axios from 'axios'
+import uploaded from '../../assets/uploaded.png';
 
 const State = ({ stateName, detail, images }) => {
   // console.log(detail);
@@ -52,8 +54,94 @@ const State = ({ stateName, detail, images }) => {
   const [searchParam] = useState(['name']);
   const [villagesIn, setVillagesIn] = useState(VILLAGESINCONTROL);
   const [villagesNotIn, setVillagesNotIn] = useState(villageNotInDetails);
+  const [selectedImages, setSelectedImages] = useState([]);
+  
+  //IMAGE FOR STATE
+  const [imgForm, setImgForm] = useState({
+    title: '',
+    location: stateName,
+    contributed_by: '',
+  });
 
-  const [imgTitle, setImgTitle] = useState('');
+  //ONCHANGE FOR TITLE
+  const onImgChange = (e) => {
+    setImgForm((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+    console.log(imgForm)
+  };
+  
+  // FUNCTION FOR PREVIEWING IMAGES
+  
+  const [imageUpload, setImageUpload] = useState('')
+
+    //IMAGE ONCHANGE
+  const onSelectFile = useCallback(async(e) => {
+    const selectedFiles = e.target.files[0];
+    const base64 = await convertToBase64(selectedFiles)
+    setImageUpload(base64)
+    e.target.value = ""
+    setSelectedImages(selectedFiles);
+  }, []);
+  //CONVERT TO BASE64
+  const convertToBase64 = file => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader()
+      if(!file) {
+        alert('Please select an image')
+      } else {
+        fileReader.readAsDataURL(file)
+        fileReader.onload = () => {
+          resolve(fileReader.result)
+        }
+      }
+      fileReader.onerror = (error) => {
+        reject(error)
+      }
+    })
+  }
+    //DELETE IMAGE
+  const deleteImage = (e) => {
+    e.preventDefault()
+    setImageUpload(null)
+  }
+  
+  //PAYLOAD
+    //GET DATA AND ADD TO AN UP OBJECT TO POST
+  const url = imageUpload;
+  const {title, location, contributed_by} = imgForm
+
+  const imgPayload = {title, location, contributed_by, url}
+
+  
+  //POST DATA TO ENDPOINT
+  const onSubmit = (e) => {
+    e.preventDefault()
+    
+    //Api call
+    const headers = {
+      accept: 'application/json',
+      'Content-Type': 'application/json',
+    };
+    const callAPI = async () => {
+      try {
+        const res = await axios
+          .post(`https://api.23forobi.com/campaign_images/`, imgPayload, {
+            headers: headers,
+          })
+          .then((res) => {
+            console.log(res);
+          });
+
+          console.log(res);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    callAPI();
+  };
+
   // Show LightBox Images
   const showImage = (image, text) => {
     setActiveImage(image);
@@ -83,18 +171,6 @@ const State = ({ stateName, detail, images }) => {
     });
   };
 
-  // FUNCTION FOR PREVIEWING IMAGES
-  const [selectedImages, setSelectedImages] = useState([]);
-  const onSelectFile = (event) => {
-    const selectedFiles = event.target.files;
-    const selectedFilesArray = Array.from(selectedFiles);
-
-    const imageArray = selectedFilesArray.map((file) => {
-      return URL.createObjectURL(file);
-    });
-
-    setSelectedImages((previousImages) => previousImages.concat(imageArray));
-  };
 
   // Handle Change
   const handleChange = (e) => {
@@ -115,7 +191,7 @@ const State = ({ stateName, detail, images }) => {
         <div className={styles.state_heading}>
           <Breadcrumbs />
           <div className={styles.state_heading__title}>
-            <h1 className="capitalize">{stateName} State Villages</h1>
+            <h1 className="capitalize">{stateName} Villages</h1>
             <div className={styles.vill_control}>
               <div className={styles.vill_control__text}>
                 <h5>Villages in control</h5>
@@ -322,46 +398,34 @@ const State = ({ stateName, detail, images }) => {
                       </p>
                       <div className={styles.file_input}>
                         <form>
-                          <div className={styles.images_prev_container}>
-                            {selectedImages &&
-                              selectedImages.map((image, index) => {
-                                return (
-                                  <div
-                                    key={image}
-                                    className={styles.image_preview}
-                                  >
-                                    <Image
-                                      src={image}
-                                      width={100}
-                                      height={100}
-                                    />
-                                    <div
-                                      onClick={() =>
-                                        setSelectedImages(
-                                          selectedImages.filter(
-                                            (e) => e !== image
-                                          )
-                                        )
-                                      }
-                                      className={styles.cancel}
-                                    >
-                                      <FaTimes />
-                                    </div>
-                                  </div>
-                                );
-                              })}
-                          </div>
+                          {imageUpload && (
+                            <div className={styles.images_prev_container}>
+                              <div className={styles.image_preview}>
+                                <Image
+                                  src={imageUpload}
+                                  width={100}
+                                  height={100}
+                                />
+                                <div
+                                  onClick={deleteImage}
+                                  className={styles.cancel}
+                                >
+                                  <FaTimes />
+                                </div>
+                              </div>
+                            </div>
+                          )}
                           <div className={styles.upload}>
                             <button type="button" className={styles.btn_upload}>
                               <Image src={add_img} />
                               <p>Add a new image</p>
                               <input
                                 type="file"
-                                name=""
+                                name="imageUpload"
                                 id=""
                                 onChange={onSelectFile}
                                 multiple
-                                accept="image/png, image/jpeg, image/webp"
+                                accept="image/*, png, jpeg, jpg, image/jpeg, image/webp"
                               />
                             </button>
                           </div>
@@ -373,21 +437,24 @@ const State = ({ stateName, detail, images }) => {
                               Name your image
                             </label>
                             <input
-                              name="img_title"
+                              name="title"
                               type="text"
                               className="outline-none border-[#018226]"
-                              value={imgTitle}
-                              onChange={(e) => setImgTitle(e.target.value)}
+                              value={title}
+                              onChange={onImgChange}
                               maxLength={30}
                             />
                             <p className="text-right py-1 font-semibold">
-                              {imgTitle.length} / 30
+                              {imgForm.title.length} / 30
                             </p>
                           </div>
                           <p className={styles.input_text}>
                             You can upload upto 3 pdf or 10 image files
                           </p>
-                          <button className={`${styles.btn_submit} btn_dark`}>
+                          <button
+                            className={`${styles.btn_submit} btn_dark`}
+                            onClick={onSubmit}
+                          >
                             Complete
                           </button>
                         </form>
@@ -396,6 +463,39 @@ const State = ({ stateName, detail, images }) => {
                   </div>
                 </Modal>
               )}
+              {/* END CONTRIBUTE MODAL */}
+
+              {/* COMPLETE MODAL */}
+
+              {/* <Modal
+                show={showModal2}
+                onClose={() => setShowModal2(false)}
+                width="54.4rem"
+              >
+                <div className={`${styles.modal} ${styles.complete}`}>
+                  <div>                    
+                    <button
+                      className={`closeBtn ${styles.complete_btn}`}
+                      onClick={() => setShowModal2(false)}
+                    >
+                      &times;
+                    </button>
+                  </div>
+                  <div className={styles.complete_body}>
+                    <Image src={uploaded} />
+                    <h2>Your image has been added successfully</h2>
+                    <p>Congratulations! Your image has been added successfully</p>
+                    <button
+                      className={`${styles.btn_submit} btn_dark`}
+                      onClick={onSubmit}
+                    >
+                      Complete
+                    </button>
+                  </div>
+                </div>
+              </Modal> */}
+
+              {/* END COMPLETE MODAL */}
             </div>
           </div>
           <div className={styles.state_body_cards}>
@@ -411,7 +511,7 @@ const State = ({ stateName, detail, images }) => {
                 />
               ))
             ) : (
-              <h2 className='font-bold'>No Images </h2>
+              <h2 className="font-bold">No Images </h2>
             )}
             {showModal3 && (
               <Modal
