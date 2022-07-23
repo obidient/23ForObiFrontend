@@ -30,7 +30,7 @@ import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import FormikControl from '../../components/Forms/FormikControl';
 
-const homepage = ({ data }) => {
+const homepage = ({ data, progress }) => {
   const [showModal, setShowModal] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
@@ -144,13 +144,13 @@ const homepage = ({ data }) => {
             <div className={styles.hero__bottom}>
               <h5>OUR PROGRESS SO FAR</h5>
               <ProgressBar
-                done={done}
+                done={progress ? progress : 0}
                 bgColor="#E4FFEC"
                 pgColor="rgba(1, 130, 38, 1)"
                 type="state"
               />
               <div className={styles.percent}>
-                <h5>{done}%</h5>
+                <h5>{progress ? progress : 0}%</h5>
                 <h5>100%</h5>
               </div>
             </div>

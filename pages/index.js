@@ -9,7 +9,7 @@ import { useScript } from '../hooks/useScript';
 import { useState, useRef } from 'react';
 
 export default function Home(props) {
-  // console.log(props);
+  console.log(props);
   const googlebuttonref = useRef();
   const [user, setuser] = useState(false);
   console.log(user);
@@ -35,26 +35,32 @@ export default function Home(props) {
   return (
     <div>
       {/* {!user && <div ref={googlebuttonref} className="opacity: 0"></div>} */}
-      <Homepage data={props.initailData} />
+      <Homepage data={props.initailData} progress={props.progress} />
     </div>
   );
 }
 
 export async function getServerSideProps() {
   try {
-    const supportGroups = await axios.get('https://api.23forobi.com/support-group/');
+    const supportGroups = await axios.get(
+      'https://api.23forobi.com/support-group/'
+    );
     const states = await axios.get('https://api.23forobi.com/states/');
+    const progress = await axios.get(
+      'https://api.23forobi.com/overall-progress'
+    );
     return {
       props: {
-        initailData : supportGroups?.data,
-        states: states.data
-      }
-    }
+        initailData: supportGroups?.data,
+        states: states.data,
+        progress: progress.data.progress_percentage,
+      },
+    };
   } catch (error) {
     console.log(error);
     return {
       props: {
-        states : []
+        states: [],
       },
     };
   }
