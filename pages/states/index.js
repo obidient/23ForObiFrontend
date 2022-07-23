@@ -38,7 +38,7 @@ const homepage = (props) => {
   const done = 13;
 
   const { data } = useContext(countryContext);
-  // console.log('home', data);
+  console.log('home', data);
   const router = useRouter();
   const query = router.query;
 
@@ -70,8 +70,7 @@ const homepage = (props) => {
     const callAPI = async () => {
       try {
         setShowLoader(true);
-        const res = await axios
-          .post(`https://api.23forobi.com/support-group/`, values, {
+        const res = await axios.post(`https://api.23forobi.com/support-group/`, values, {
             headers: headers,
           })
           .then((res) => {
