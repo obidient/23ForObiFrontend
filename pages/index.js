@@ -9,7 +9,7 @@ import { useScript } from '../hooks/useScript';
 import { useState, useRef } from 'react';
 
 export default function Home(props) {
-  console.log(props);
+  // console.log(props);
   const googlebuttonref = useRef();
   const [user, setuser] = useState(false);
   console.log(user);
@@ -35,7 +35,7 @@ export default function Home(props) {
   return (
     <div>
       {/* {!user && <div ref={googlebuttonref} className="opacity: 0"></div>} */}
-      <Homepage />
+      <Homepage data={props.initailData} />
     </div>
   );
 }
