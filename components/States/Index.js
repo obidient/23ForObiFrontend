@@ -12,7 +12,7 @@ const States = () => {
   // console.log(JSON.stringify(states, null, 2));
   const [searchQuery, setSearchQuery] = useState('');
   // const [states, setStates] = useState(STATES);
-  const [searchParam] = useState(['name']);
+  const [searchParam] = useState(['state_name']);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -51,7 +51,7 @@ const States = () => {
         </div>
         <div className="cards">
           {states && states.length > 0 ? (
-            (states).map((item) => (
+            filter(states).map((item) => (
               <Card
                 key={item.id}
                 state={item}
