@@ -269,7 +269,7 @@ const State = ({ stateName, detail, images, villages }) => {
                 />
               ))
             ) : (
-              <h2>No Village</h2>
+              <h2>No Villages</h2>
             )}
           </div>
         </div>
