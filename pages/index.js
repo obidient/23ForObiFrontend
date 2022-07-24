@@ -11,18 +11,18 @@ import { useState, useRef } from 'react';
 export default function Home(props) {
   // console.log(props);
   const googlebuttonref = useRef();
-  const [user, setuser] = useState(false);
-  console.log(user);
+  const [token, setToken] = useState(false);
+  console.log(token);
   const onGoogleSignIn = (user) => {
     let token = user.credential;
     // let payload = jwt_deocde(userCred);
     // console.log(payload);
-    setuser(token);
+    setToken(token);
 
     //Api call
     const headers = {
-      accept: 'application/json',
-      'Content-Type': 'application/json',
+      // accept: 'application/json',
+      'Content-Type': 'text/plain',
     };
 
     const callAPI = async () => {
@@ -57,7 +57,7 @@ export default function Home(props) {
 
   return (
     <div>
-      {/* {!user && <div ref={googlebuttonref} className="opacity: 0"></div>} */}
+      {/* {token && <div ref={googlebuttonref} className="opacity: 0"></div>} */}
       <Homepage data={props.initailData} progress={props.progress} />
     </div>
   );
