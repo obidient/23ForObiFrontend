@@ -93,7 +93,10 @@ const NavBar = () => {
                   </a>
                 </Link>
               </li>
-              <button className={`${styles.btn_vote_mobile} btn_light`}>
+              <button
+                className={`${styles.btn_vote_mobile} btn_light`}
+                onClick={() => setShowModal(true)}
+              >
                 Deliver Votes
               </button>
             </ul>
