@@ -14,10 +14,33 @@ export default function Home(props) {
   const [user, setuser] = useState(false);
   console.log(user);
   const onGoogleSignIn = (user) => {
-    let userCred = user;
+    let token = user.credential;
     // let payload = jwt_deocde(userCred);
     // console.log(payload);
-    setuser(userCred);
+    setuser(token);
+
+    //Api call
+    const headers = {
+      accept: 'application/json',
+      'Content-Type': 'application/json',
+    };
+
+    const callAPI = async () => {
+      try {
+        const res = await axios
+          .post(`https://api.23forobi.com/google/token`, token, {
+            headers: headers,
+          })
+          .then((res) => {
+            console.log(res);
+          });
+
+        console.log(res);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    callAPI();
   };
 
   useScript('https://accounts.google.com/gsi/client', () => {

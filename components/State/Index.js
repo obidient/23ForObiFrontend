@@ -74,6 +74,7 @@ const State = ({ stateName, detail, images, villages }) => {
     contributed_by: '',
   });
 
+console.log(villages.list_of_villages)
   //ONCHANGE FOR TITLE
   const onImgChange = (e) => {
     setImgForm((prevState) => ({
@@ -173,10 +174,13 @@ const State = ({ stateName, detail, images, villages }) => {
     setSearchQuery(e.target.value);
   };
 
+  const villagesList = villages.list_of_villages 
+  console.log(villagesList)
+
   const filter = (villages, query) => {
     return villages.filter((village) => {
       return searchParam.some((newVillage) => {
-        return village[newVillage].toString().toLowerCase().indexOf(query) > -1;
+        return village[newVillage]?.toString().toLowerCase().indexOf(query) > -1;
       });
     });
   };
@@ -258,8 +262,8 @@ const State = ({ stateName, detail, images, villages }) => {
             </div>
           </div>
           <div className="cards">
-            {villages && villages.length > 0 ? (
-              filter(villages, searchQuery.toLowerCase()).map((item) => (
+            {villagesList && villagesList.length > 0 ? (
+              filter(villagesList, searchQuery.toLowerCase()).map((item) => (
                 <Card
                   key={item.id}
                   village={item.name}
