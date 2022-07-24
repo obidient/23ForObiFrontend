@@ -38,7 +38,7 @@ import ShareCard from '../ImgCard/ShareCard';
 import axios from 'axios';
 import uploaded from '../../assets/uploaded.png';
 
-const State = ({ stateName, detail, images }) => {
+const State = ({ stateName, detail, images, villages }) => {
   // console.log(detail);
   const {
     current_governor,
@@ -258,8 +258,8 @@ const State = ({ stateName, detail, images }) => {
             </div>
           </div>
           <div className="cards">
-            {villagesIn && villagesIn.length > 0 ? (
-              filter(villagesIn, searchQuery.toLowerCase()).map((item) => (
+            {villages && villages.length > 0 ? (
+              filter(villages, searchQuery.toLowerCase()).map((item) => (
                 <Card
                   key={item.id}
                   village={item.name}
@@ -269,7 +269,7 @@ const State = ({ stateName, detail, images }) => {
                 />
               ))
             ) : (
-              <h2 className="text-lg">No Village exists</h2>
+              <h2>No Village</h2>
             )}
           </div>
         </div>
@@ -289,8 +289,8 @@ const State = ({ stateName, detail, images }) => {
             </div>
           </div>
           <div className="cards">
-            {villagesNotIn && villagesNotIn.length > 0 ? (
-              filter(villagesNotIn, searchNotInQuery.toLowerCase()).map(
+            {villages && villages.length > 0 ? (
+              filter(villages, searchNotInQuery.toLowerCase()).map(
                 (item) => (
                   <Card
                     key={item.id}
@@ -302,7 +302,7 @@ const State = ({ stateName, detail, images }) => {
                 )
               )
             ) : (
-              <h2 className="text-lg">No Village exists</h2>
+              <h2>No Villages</h2>
             )}
           </div>
         </div>
