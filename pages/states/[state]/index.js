@@ -10,8 +10,8 @@ const state = ({ data, images }) => {
   const router = useRouter();
   const { state } = router.query;
 
-  console.log(data);
-  console.log(images);
+  // console.log(data);
+  // console.log(images);
 
   return (
     <div>

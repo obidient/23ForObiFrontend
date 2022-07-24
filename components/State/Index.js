@@ -39,7 +39,7 @@ import axios from 'axios';
 import uploaded from '../../assets/uploaded.png';
 
 const State = ({ stateName, detail, images }) => {
-  console.log(detail);
+  // console.log(detail);
   const {
     current_governor,
     progress,
@@ -235,7 +235,7 @@ const State = ({ stateName, detail, images }) => {
                   <Image src={last_vote_direction ? pdp : apc} />
                   <div className={styles.text}>
                     <h5>{last_vote_direction ? last_vote_direction : ''}</h5>
-                    <p>People Democratic Party</p>
+                    <p>{last_vote_direction ? 'People Democratic Party': 'All Progressive Congress'}</p>
                   </div>
                 </div>
               </div>
