@@ -20,17 +20,18 @@ export default function Home(props) {
     setToken(token);
 
     //Api call
-    const headers = {
-      // accept: 'application/json',
-      'Content-Type': 'text/plain',
+    const config = {
+      headers: {
+        accept: 'application/json',
+        // ' www-Authenticate': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
     };
 
     const callAPI = async () => {
       try {
         const res = await axios
-          .post(`https://api.23forobi.com/google/token`, token, {
-            headers: headers,
-          })
+          .post(`https://api.23forobi.com/google/token?token=${token}`, config)
           .then((res) => {
             console.log(res);
           });
@@ -57,7 +58,7 @@ export default function Home(props) {
 
   return (
     <div>
-      {/* {token && <div ref={googlebuttonref} className="opacity: 0"></div>} */}
+      {!token && <div ref={googlebuttonref} className="opacity: 0"></div>}
       <Homepage data={props.initailData} progress={props.progress} />
     </div>
   );
