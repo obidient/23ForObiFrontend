@@ -31,7 +31,7 @@ const Card = ({
     <Link
       href={
         type === 'control'
-          ? `states/${slug}`
+          ? `states/${slug.toLowerCase()}`
           : `${path}/${village?.toLowerCase()}`
       }
     >
