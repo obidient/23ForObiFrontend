@@ -6,19 +6,24 @@ import State from '../../../components/State/Index';
 import Page from './../../../components/Page';
 import axios from 'axios';
 
-const state = ({ data, images }) => {
+const state = ({ data, images, villages }) => {
   const router = useRouter();
   const { state } = router.query;
 
   // console.log(data);
-  // console.log(images);
+  // console.log(villages);
 
   return (
     <div>
       <Page title={`State || ${state}`}>
         {/* <Navbar /> */}
 
-        <State stateName={data.state_name} detail={data} images={images} />
+        <State
+          stateName={data.state_name}
+          detail={data}
+          images={images}
+          villages={villages}
+        />
         {/* <Footer /> */}
       </Page>
     </div>
@@ -35,8 +40,16 @@ export const getServerSideProps = async ({ params, res }) => {
       `https://api.23forobi.com/campaign-images/${state}`
     );
 
+    const villages = await axios.get(
+      `https://api.23forobi.com/villages/${state}`
+    );
+
     return {
-      props: { data, images: images.data },
+      props: {
+        data,
+        images: images.data,
+        villages: villages.data,
+      },
     };
   } catch {
     res.statusCode = 404;

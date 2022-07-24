@@ -1,5 +1,5 @@
 import styles from './Styles.module.scss';
-import styles_login from '../../pages/pagestyles/home.module.scss'
+import styles_login from '../../pages/pagestyles/home.module.scss';
 import React, { useEffect, useRef } from 'react';
 import Modal from './Index';
 import Image from 'next/image';
@@ -194,7 +194,9 @@ const DeliverModal = ({ show, onClose }) => {
             <div className={styles_login.login_modal__body}>
               <p>Sign-up with social media</p>
               <div className={styles_login.login_modal__body__container}>
-                <div className={styles_login.login_modal__body__container__content}>
+                <div
+                  className={styles_login.login_modal__body__container__content}
+                >
                   <div
                     style={{ display: 'grid', placeItems: 'end' }}
                     className={
@@ -203,7 +205,7 @@ const DeliverModal = ({ show, onClose }) => {
                   >
                     <Image src={google} alt="google icon" />
                   </div>
-                  <div
+                  <div onClick={() => console.log('clicked')}
                     className={
                       styles_login.login_modal__body__container__content__para
                     }
@@ -212,7 +214,9 @@ const DeliverModal = ({ show, onClose }) => {
                   </div>
                 </div>
 
-                <div className={styles_login.login_modal__body__container__content}>
+                <div
+                  className={styles_login.login_modal__body__container__content}
+                >
                   <div
                     style={{ display: 'grid', placeItems: 'end' }}
                     className={
@@ -230,7 +234,9 @@ const DeliverModal = ({ show, onClose }) => {
                   </div>
                 </div>
 
-                <div className={styles_login.login_modal__body__container__content}>
+                <div
+                  className={styles_login.login_modal__body__container__content}
+                >
                   <div
                     style={{ display: 'grid', placeItems: 'end' }}
                     className={
@@ -248,7 +254,9 @@ const DeliverModal = ({ show, onClose }) => {
                   </div>
                 </div>
 
-                <div className={styles_login.login_modal__body__container__content}>
+                <div
+                  className={styles_login.login_modal__body__container__content}
+                >
                   <div
                     style={{ display: 'grid', placeItems: 'end' }}
                     className={
