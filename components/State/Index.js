@@ -211,7 +211,7 @@ console.log(villages.list_of_villages)
                 <p>{vote_control ? `${vote_control} %` : `${0}%`} control</p>
               </div>
               <div className={styles.vill_control__progress}>
-                <SingleStateProgress done={progress ? progress : 0} />
+                <SingleStateProgress done={progress ? `${progress}` : `${0}`} />
               </div>
             </div>
           </div>
@@ -268,7 +268,7 @@ console.log(villages.list_of_villages)
                   key={item.id}
                   village={item.name}
                   type={item.type}
-                  progress={item.progress}
+                  progress={item.progress_percentage}
                   slug={item.slug}
                 />
               ))
