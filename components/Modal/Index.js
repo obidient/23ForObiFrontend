@@ -25,7 +25,7 @@ const Modal = ({
   const style = {
     width: width,
 
-    '@media (max-width: 500px)': {
+    '@media (maxWidth: 500px)': {
       width: delModRes,
     },
   };

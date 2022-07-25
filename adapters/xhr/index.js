@@ -1,5 +1,6 @@
 import Axios from 'axios';
 
+//CREATE AXIOS INSTANCE
 function returnAxiosInstance() {
   return Axios.create({
     baseURL: 'https://api.23forobi.com/',
@@ -13,6 +14,7 @@ function returnAxiosInstance() {
   });
 }
 
+//GET REQUEST
 export function get(url, requestData) {
   const axios = returnAxiosInstance();
   if (requestData) {
@@ -21,11 +23,13 @@ export function get(url, requestData) {
   return axios.get(url);
 }
 
+//POST REQUEST
 export function post(url, requestData) {
   const axios = returnAxiosInstance();
   return axios.post(url, requestData);
 }
 
+//PATCH REQUEST
 export function patch(url, requestData) {
   const axios = returnAxiosInstance();
   return axios.patch(url, requestData);

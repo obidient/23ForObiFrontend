@@ -8,7 +8,6 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import NavBar from '../../components/NavBar/Index';
 import Footer from '../../components/Footer/Index';
-import Modal from '../../components/Modal/Index';
 import Loader from '../../components/Loader';
 import { FetchEvent } from 'next/dist/server/web/spec-compliant/fetch-event';
 import { countryContext } from './../../Context/countryContext';
@@ -30,10 +29,18 @@ import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import FormikControl from '../../components/Forms/FormikControl';
 
+//Adapters
+import { addSupportGroup } from './../../adapters/requests/index';
+
+//Modals
+import DeliverModal from './../../components/Modal/DeliverModal';
+import Modal from '../../components/Modal/Index';
+
 const homepage = ({ data, progress }) => {
   const [showModal, setShowModal] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
+  const [showDeliverModal, setShowDeliverModal] = useState(false);
 
   // const done = 13;
 
@@ -70,11 +77,7 @@ const homepage = ({ data, progress }) => {
     const callAPI = async () => {
       try {
         setShowLoader(true);
-        const res = await axios
-          .post(`https://api.23forobi.com/support-group/`, values, {
-            headers: headers,
-          })
-          .then((res) => {
+        const res = await addSupportGroup(values)?.then((res) => {
             console.log(res);
           });
         setShowLoader(false);
@@ -133,9 +136,17 @@ const homepage = ({ data, progress }) => {
                   within each state and with your help and the help of your
                   loved ones, we can do this
                 </p>
-                <button className={`${styles.btn_vote} btn_dark`}>
+                <button className={`${styles.btn_vote} btn_dark`} onClick={() => setShowDeliverModal(true)}>
                   Yes, I can
                 </button>
+                {/* DELIVER VOTES MODAL */}
+                {showDeliverModal && (
+                  <DeliverModal
+                    show={showDeliverModal}
+                    onClose={() => setShowDeliverModal(false)}
+                  />
+                )}
+                {/* END DELIVER VOTES MODAL */}
               </div>
               <div className={styles.hero__img}>
                 <Image src={labourparty} />
