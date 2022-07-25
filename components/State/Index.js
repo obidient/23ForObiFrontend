@@ -40,6 +40,7 @@ import uploaded from '../../assets/uploaded.png';
 
 const State = ({ stateName, detail, images, villages }) => {
   // console.log(detail);
+  console.log(villages)
   const {
     current_governor,
     progress,
@@ -270,6 +271,7 @@ console.log(villages.list_of_villages)
                   type={item.type}
                   progress={item.progress_percentage}
                   slug={item.slug}
+                  contributors={item.top_contributors}
                 />
               ))
             ) : (
