@@ -2,16 +2,32 @@
 // import Homepage from './';homepage
 import Homepage from './states';
 import axios from 'axios';
+import Image from 'next/image';
 import StateContext from '../Context/StateContext';
 import React from 'react';
-import GoogleLogin from 'react-google-login';
 import { useScript } from '../hooks/useScript';
 import { useState, useRef } from 'react';
+import useAuthStore from '../store/authStore';
+import { GoogleLogin, googleLogout } from '@react-oauth/google';
 import { getStates, getSupportGroups, getOverallprogress } from './../adapters/requests/index';
 
 export default function Home(props) {
+  const { userProfile, removeUser } = useAuthStore();
+
+  const sendApi = async (res) => {
+    let payload = await axios.post(
+      `https://api.23forobi.com/google/token?token=${res}`,
+      {
+        headers: {
+          Accept: 'application/json',
+          "WWW-Authenticate": `Bearer ${res}`
+        },
+      }
+    );
+    console.log(payload);
+  };
   // console.log(props);
-  const googlebuttonref = useRef();
+  /*const googlebuttonref = useRef();
   const [token, setToken] = useState(false);
   console.log(token);
   const onGoogleSignIn = (user) => {
@@ -55,10 +71,39 @@ export default function Home(props) {
     window.google.accounts.id.renderButton(googlebuttonref.current, {
       size: 'medium',
     });
-  });
+  });*/
 
   return (
     <div>
+      {/*userProfile ? (
+        userProfile?.image && (
+          <>
+            <Link href={'/'}>
+              <>
+                <Image
+                  width={24}
+                  height={24}
+                  className="rounded-full"
+                  src={userProfile?.image}
+                  alt="profile photo"
+                />
+              </>
+            </Link>
+            <button
+              type="button"
+              onClick={() => {
+                googleLogout();
+                removeUser();
+              }}
+            >
+              Logout
+            </button>
+          </>
+        )
+      ) : (
+        <GoogleLogin onSuccess={(res) => sendApi(res)} />
+      )*/}
+      {/*!token && <div ref={googlebuttonref} className="opacity: 0"></div>*/}
       {/* {!token && <div ref={googlebuttonref} className="opacity: 0"></div>} */}
       <Homepage data={props.initailData} progress={props.progress} />
     </div>

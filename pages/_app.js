@@ -6,19 +6,21 @@ import { VillageContextProvider } from '../Context/villageContext';
 import { AppWrapper } from './../Context/villageContextProvider';
 import { CountryContextProvider } from './../Context/countryContext';
 import StateContext from '../Context/StateContext';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 function MyApp({ Component, pageProps }) {
   const { states, ...rest } = pageProps;
 
- 
   return (
-    <CountryContextProvider initialData={pageProps?.initialData}>
-      <StateContext.Provider value={{ states }}>
-        <VillageContextProvider>
-          <Component {...pageProps} />
-        </VillageContextProvider>
-      </StateContext.Provider>
-    </CountryContextProvider>
+    <GoogleOAuthProvider clientId={`${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}`}>
+      <CountryContextProvider initialData={pageProps?.initialData}>
+        <StateContext.Provider value={{ states }}>
+          <VillageContextProvider>
+            <Component {...pageProps} />
+          </VillageContextProvider>
+        </StateContext.Provider>
+      </CountryContextProvider>
+    </GoogleOAuthProvider>
   );
 }
 
