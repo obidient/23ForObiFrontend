@@ -6,10 +6,13 @@ import Image from 'next/image';
 const ProgressBar = ({ done, bgColor, pgColor, type }) => {
   const [style, setStyle] = useState({});
 
+  const progress = done < 11 ? 11 : done;
+  
   setTimeout(() => {
     const newStyle = {
       opacity: 1,
-      width: `${done}%`,
+      width: `${progress}%`,
+      // width: '12%',
       backgroundColor: pgColor,
     };
 
@@ -31,7 +34,7 @@ const ProgressBar = ({ done, bgColor, pgColor, type }) => {
         style={style}
       >
         <div className={styles.img}>
-          {type === 'village' ? '' : <Image src={peterobi} width={24} height={24} />}
+          {type === 'village' ? '' : <Image src={peterobi} />}
         </div>
       </div>
     </div>
