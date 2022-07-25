@@ -17,7 +17,7 @@ import village_img_5 from '../../assets/village_img_5.png';
 
 import ContributeModal from './ContributeModal';
 
-const Village = () => {
+const Village = ({ contributors, progress_percentage }) => {
   const [showModal, setShowModal] = useState(false);
   const [registerFormIsVisible, setRegisterFormIsVisible] = useState(false);
   const [signInIsVisible, setSignInIsVisible] = useState(false);
@@ -36,7 +36,14 @@ const Village = () => {
             <Breadcrumbs />
           </div>
           <div className={styles.state_heading__title}>
-            <h1>Eziama village</h1>
+            <div>
+              <h1>Eziama village</h1>
+              <p className={styles.red}>
+                {contributors > 0
+                  ? 'We have got 5 votes guarantedd in Eziama Village in Abia State.Robert Okonkwo is our man on ground.Calistus Okafor is coordinating activities in this village'
+                  : 'We do not have anyone on ground in Eziama village.Can you help?'}
+              </p>
+            </div>
             <div className={styles.title_btn}>
               <button onClick={() => setShowModal(true)} className="btn_light">
                 Contribute here
@@ -126,16 +133,16 @@ const Village = () => {
           <div className={styles.state_heading__contribution_progress}>
             <div className={styles.text}>
               <p>Contribution Progress</p>
-              <p>10% control of Eziama village</p>
+              <p>{progress_percentage ? `${progress_percentage}%` : '0%'} control of Eziama village</p>
             </div>
             <Progress
-              done={10}
+              done={progress_percentage}
               pgColor="#CE9E56"
               bgColor="#FAF1E4"
               type="village"
             />
             <div className={styles.prog_percent}>
-              <p>10%</p>
+              <p>{progress_percentage ? `${progress_percentage}%` : '0%'}</p>
               <p>100%</p>
             </div>
           </div>
