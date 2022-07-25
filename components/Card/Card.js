@@ -19,6 +19,7 @@ const Card = ({
   village,
   slug,
   contributors,
+  votes
 }) => {
   // const stateSlug = state?.split(' ').slice(0, -1).join(' ').toLowerCase();
 
@@ -56,11 +57,11 @@ const Card = ({
         {type === 'control' ? (
           <div className={styles.control}>
             <p>Vote control: </p>
-            <p>{voteControl}%</p>
+            <p>{voteControl}% {votes}</p>
           </div>
         ) : (
           <>
-            <p className="my-3 font-medium">Top 5 Contributors</p>
+            <p className="my-3 font-medium">{contributors > 0 ? 'Delivered By' : ''}</p>
             {type === 'contributor' && (
               <div className={styles.contributors_img}>
                 <Image src={village_img_1} />
