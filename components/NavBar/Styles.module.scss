@@ -12,6 +12,9 @@
 
     &__logo {
         cursor: pointer;
+        img {
+            object-fit: cover;
+        }
     }
     &__menu {
         display: flex;
