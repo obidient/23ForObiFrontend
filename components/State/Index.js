@@ -272,6 +272,7 @@ console.log(villages.list_of_villages)
                   progress={item.progress_percentage}
                   slug={item.slug}
                   contributors={item.top_contributors}
+                  voters={item.voters}
                 />
               ))
             ) : (
