@@ -29,6 +29,7 @@ import axios from 'axios';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import FormikControl from '../../components/Forms/FormikControl';
+import { addSupportGroup } from './../../adapters/requests/index';
 
 const homepage = ({ data, progress }) => {
   const [showModal, setShowModal] = useState(false);
@@ -70,11 +71,7 @@ const homepage = ({ data, progress }) => {
     const callAPI = async () => {
       try {
         setShowLoader(true);
-        const res = await axios
-          .post(`https://api.23forobi.com/support-group/`, values, {
-            headers: headers,
-          })
-          .then((res) => {
+        const res = await addSupportGroup(values)?.then((res) => {
             console.log(res);
           });
         setShowLoader(false);

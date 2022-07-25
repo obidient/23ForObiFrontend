@@ -5,6 +5,7 @@ import Navbar from '../../../components/NavBar/Index';
 import State from '../../../components/State/Index';
 import Page from './../../../components/Page';
 import axios from 'axios';
+import { getStateDetails, getCampaignImages, getVillages } from '../../../adapters/requests';
 
 const state = ({ data, images, villages }) => {
   const router = useRouter();
@@ -33,16 +34,10 @@ const state = ({ data, images, villages }) => {
 export const getServerSideProps = async ({ params, res }) => {
   try {
     const { state } = params;
-    const { data } = await axios.get(
-      `https://api.23forobi.com/state-details/${state}`
-    );
-    const images = await axios.get(
-      `https://api.23forobi.com/campaign-images/${state}`
-    );
+    const { data } = await getStateDetails(state);
+    const images = await getCampaignImages(state);
 
-    const villages = await axios.get(
-      `https://api.23forobi.com/villages/${state}`
-    );
+    const villages = await getVillages(state);
 
     return {
       props: {
