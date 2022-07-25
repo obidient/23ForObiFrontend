@@ -57,7 +57,7 @@ export default function Home(props) {
 
   return (
     <div>
-      {/* {token && <div ref={googlebuttonref} className="opacity: 0"></div>} */}
+    <div ref={googlebuttonref} className="opacity: 0"></div>
       <Homepage data={props.initailData} progress={props.progress} />
     </div>
   );

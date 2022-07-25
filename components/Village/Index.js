@@ -15,17 +15,12 @@ import village_img_3 from '../../assets/village_img_3.png';
 import village_img_4 from '../../assets/village_img_4.png';
 import village_img_5 from '../../assets/village_img_5.png';
 
-import google from '../../assets/google.png';
-import facebook from '../../assets/facebook.png';
-import twitter from '../../assets/twitter.png';
-import apple from '../../assets/google.png';
-import SelectInput from '../misc/SelectInput';
-
 import ContributeModal from './ContributeModal';
 
 const Village = () => {
   const [showModal, setShowModal] = useState(false);
   const [registerFormIsVisible, setRegisterFormIsVisible] = useState(false);
+  const [signInIsVisible, setSignInIsVisible] = useState(false);
 
   //Effect to hide scroll
   useEffect(() => {
@@ -48,52 +43,6 @@ const Village = () => {
               </button>
             </div>
 
-            {/* SIGN IN MODAL  */}
-
-            {/* {showModal && (
-              <Modal show={showModal} 
-              onClose={() => setShowModal(false)}               
-              width="54.4rem"
-
-              >
-                <div className={styles.modal}>
-                  <div className={`${styles.modal__heading} modal_heading`}>
-                    <h2>
-                      Welcome to <br />
-                      <span>Peter Obi Campaign</span>
-                    </h2>
-                    <button
-                    className={`closeBtn`}
-                    onClick={() => setShowModal(false)}
-                  >
-                    &times;
-                  </button>
-                  </div>
-                  <div className={styles.modal__body}>
-                    <p>Sign-up with social media</p>
-                    <div className={styles.social_login}>
-                      <button>
-                        <Image src={google} />
-                        Join with Google
-                      </button>
-                      <button>
-                        <Image src={facebook} />
-                        Join with Facebook
-                      </button>
-                      <button>
-                        <Image src={twitter} />
-                        Join with Twitter
-                      </button>
-                      <button>
-                        <Image src={apple} />
-                        Join with Apple
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </Modal>
-            )} */}
-
             {/* DETAILS FORM */}
             {showModal && (
               <Modal
@@ -105,6 +54,8 @@ const Village = () => {
                   setShowModal={setShowModal}
                   registerFormIsVisible={registerFormIsVisible}
                   setRegisterFormIsVisible={setRegisterFormIsVisible}
+                  setSignInIsVisible={setSignInIsVisible}
+                  signInIsVisible={signInIsVisible}
                 />
               </Modal>
             )}
