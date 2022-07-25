@@ -9,6 +9,7 @@ import { useScript } from '../hooks/useScript';
 import { useState, useRef } from 'react';
 import useAuthStore from '../store/authStore';
 import { GoogleLogin, googleLogout } from '@react-oauth/google';
+import { getStates, getSupportGroups, getOverallprogress } from './../adapters/requests/index';
 
 export default function Home(props) {
   const { userProfile, removeUser } = useAuthStore();
@@ -103,6 +104,7 @@ export default function Home(props) {
         <GoogleLogin onSuccess={(res) => sendApi(res)} />
       )*/}
       {/*!token && <div ref={googlebuttonref} className="opacity: 0"></div>*/}
+      {/* {!token && <div ref={googlebuttonref} className="opacity: 0"></div>} */}
       <Homepage data={props.initailData} progress={props.progress} />
     </div>
   );
@@ -110,13 +112,9 @@ export default function Home(props) {
 
 export async function getServerSideProps() {
   try {
-    const supportGroups = await axios.get(
-      'https://api.23forobi.com/support-group/'
-    );
-    const states = await axios.get('https://api.23forobi.com/states/');
-    const progress = await axios.get(
-      'https://api.23forobi.com/overall-progress'
-    );
+    const supportGroups = await getSupportGroups();
+    const states = await getStates();
+    const progress = await getOverallprogress();
     return {
       props: {
         initailData: supportGroups?.data,
