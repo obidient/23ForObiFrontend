@@ -19,7 +19,8 @@ const Card = ({
   village,
   slug,
   contributors,
-  votes
+  votes,
+  voters
 }) => {
   // const stateSlug = state?.split(' ').slice(0, -1).join(' ').toLowerCase();
 
@@ -51,6 +52,7 @@ const Card = ({
           <StateProgress progress={progress} />
           <div className={styles.percent}>
             <p>{progress}%</p>
+            <p>{voters ? `( ${voters} votes guaranteed )` : ''}</p>
             <p>100%</p>
           </div>
         </div>

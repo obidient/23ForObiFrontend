@@ -60,7 +60,10 @@
                 font-size: var(--font-p-text-2);
                 line-height: 130%;
                 color: var(--text-color-1);
-
+                &:nth-child(2){
+                    color: red;
+                    font-weight: 500;
+                }
                 &:last-child {
                     color: var(--text-color-5);
                 }
