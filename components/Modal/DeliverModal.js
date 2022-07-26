@@ -18,6 +18,7 @@ import google from '../../assets/google.png';
 import facebook from '../../assets/facebook.png';
 import apple from '../../assets/apple.png';
 import twitter from '../../assets/twitter.png';
+import GoogleAuth from './../../utils/googleLogin';
 
 const DeliverModal = ({ show, onClose }) => {
   const [showLogin, setShowLogin] = useState(false);
@@ -86,7 +87,8 @@ const DeliverModal = ({ show, onClose }) => {
     <div className={styles.backdrop}>
       <Modal
         show={show}
-        onClose={onClose}
+        // onClose={onClose}
+        type="deliver"
         width={width.container(matches)}
         delModRes="60rem"
       >
@@ -195,22 +197,24 @@ const DeliverModal = ({ show, onClose }) => {
               <p>Sign-up with social media</p>
               <div className={styles_login.login_modal__body__container}>
                 <div
-                  className={styles_login.login_modal__body__container__content}
+                  className={styles_login.login_modal__body__container__content2}
                 >
-                  <div
+                  {/* <div
                     style={{ display: 'grid', placeItems: 'end' }}
                     className={
                       styles_login.login_modal__body__container__content__image
                     }
                   >
                     <Image src={google} alt="google icon" />
-                  </div>
-                  <div onClick={() => console.log('clicked')}
+                  </div> */}
+                  <div
+                    onClick={() => console.log('clicked')}
                     className={
                       styles_login.login_modal__body__container__content__para
                     }
-                  >
-                    <p>Join with Google</p>
+                    >
+                    <GoogleAuth />
+                    {/* <p>Join with Google</p> */}
                   </div>
                 </div>
 
