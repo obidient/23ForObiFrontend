@@ -25,6 +25,10 @@ export function getVillages(state) {
   return get(`/villages/${state}/`);
 }
 
+export function getVillage(id) {
+  return get(`/village-details/${id}`)
+}
+
 //POST REQUESTS
 export function addSupportGroup(requestData) {
   post('/support-group/', requestData);

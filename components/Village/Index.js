@@ -37,7 +37,7 @@ const Village = ({ contributors, progress_percentage, village_name }) => {
           </div>
           <div className={styles.state_heading__title}>
             <div>
-              <h1>{village_name ? `${village_name} vilage` : ''}</h1>
+              <h1>{village_name ? `${village_name} village` : ''}</h1>
               <p className={styles.red}>
                 {contributors > 0
                   ? `We have got 5 votes guarantedd in ${
