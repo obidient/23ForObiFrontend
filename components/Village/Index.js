@@ -17,7 +17,7 @@ import village_img_5 from '../../assets/village_img_5.png';
 
 import ContributeModal from './ContributeModal';
 
-const Village = ({ contributors, progress_percentage, village_name }) => {
+const Village = ({ contributors, progress_percentage, village_name, village_id }) => {
   const [showModal, setShowModal] = useState(false);
   const [registerFormIsVisible, setRegisterFormIsVisible] = useState(false);
   const [signInIsVisible, setSignInIsVisible] = useState(false);
@@ -143,7 +143,7 @@ const Village = ({ contributors, progress_percentage, village_name }) => {
               </p>
             </div>
             <Progress
-              done={progress_percentage}
+              done={progress_percentage > 0 ? progress_percentage : 0}
               pgColor="#CE9E56"
               bgColor="#FAF1E4"
               type="village"

@@ -26,7 +26,7 @@ export function getVillages(state) {
 }
 
 export function getVillage(id) {
-  return get(`/village-details/${id}`)
+  return get(`village-details/${id}/`)
 }
 
 //POST REQUESTS

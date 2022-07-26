@@ -21,7 +21,7 @@ const Card = ({
   contributors,
   votes,
   voters,
-  id,
+  id
 }) => {
   // const stateSlug = state?.split(' ').slice(0, -1).join(' ').toLowerCase();
 
@@ -35,7 +35,7 @@ const Card = ({
       href={
         type === 'control'
           ? `states/${slug.toLowerCase()}`
-          : `${path}/${village}`
+          : `${path}/${id}`
       }
     >
       <div className={styles.card}>
