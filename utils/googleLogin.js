@@ -18,7 +18,7 @@ export default function GoogleAuth(props) {
                         token: res.credential,
                     };
                     axios.post(url, data, headers).then((res) => {
-                        // console.log(res);
+                        console.log(res);
                     });
                 }}
                 onError={console.log('Login Failed')}  
