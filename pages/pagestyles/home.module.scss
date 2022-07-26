@@ -81,6 +81,9 @@
     .percent {
         display: flex;
         justify-content: space-between;
+        :nth-child(2){
+          color: #D60602;
+        }
     }
   }
 }

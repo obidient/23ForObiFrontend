@@ -8,10 +8,19 @@ import React from 'react';
 import { useState, useRef } from 'react';
 import useAuthStore from '../store/authStore';
 import { GoogleLogin, googleLogout } from '@react-oauth/google';
-import { getStates, getSupportGroups, getOverallprogress } from './../adapters/requests/index';
+
+import {
+  getStates,
+  getSupportGroups,
+  getOverallprogress,
+} from './../adapters/requests/index';
 import GoogleAuth from './../utils/googleLogin';
 
-export default function Home(props) {
+export default function Home({
+  total_number_of_voters,
+  progress,
+  initailData,
+}) {
   const { userProfile, removeUser } = useAuthStore();
   
   const sendApi = async (res) => {
@@ -23,7 +32,7 @@ export default function Home(props) {
       {
         headers: {
           Accept: 'application/json',
-          // "WWW-Authenticate": `Bearer ${res}`
+          'WWW-Authenticate': `Bearer ${res}`,
         },
       }
     );
@@ -81,7 +90,11 @@ export default function Home(props) {
       {/* <GoogleAuth /> */}
       {/*!token && <div ref={googlebuttonref} className="opacity: 0"></div>*/}
       {/* {!token && <div ref={googlebuttonref} className="opacity: 0"></div>} */}
-      <Homepage data={props.initailData} progress={props.progress} />
+      <Homepage
+        data={initailData}
+        progress={progress}
+        total_number_of_voters={total_number_of_voters}
+      />
     </div>
   );
 }
@@ -94,8 +107,9 @@ export async function getServerSideProps() {
     return {
       props: {
         initailData: supportGroups?.data,
-        states: states.data,
-        progress: progress.data.progress_percentage,
+        states: states?.data,
+        progress: progress?.data?.progress_percentage,
+        total_number_of_voters: progress?.data?.total_number_of_voters,
       },
     };
   } catch (error) {
