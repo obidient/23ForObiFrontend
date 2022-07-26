@@ -12,7 +12,7 @@ function MyApp({ Component, pageProps }) {
   const { states, ...rest } = pageProps;
 
   return (
-    <GoogleOAuthProvider clientId={`${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}`}>
+    <GoogleOAuthProvider clientId="13432123400-796mshneb2iib97i6okqc6ti0u2o0vl7.apps.googleusercontent.com">
       <CountryContextProvider initialData={pageProps?.initialData}>
         <StateContext.Provider value={{ states }}>
           <VillageContextProvider>
