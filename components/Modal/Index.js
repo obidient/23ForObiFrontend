@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 const Modal = ({
   show,
+  type,
   onClose,
   backdropStyles,
   width,
@@ -36,7 +37,9 @@ const Modal = ({
       return;
     }
     // outside the modal
-    onClose();
+    if(type !== 'deliver') {
+      onClose();
+    }
   }, []);
 
   return (

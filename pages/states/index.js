@@ -125,6 +125,14 @@ const homepage = ({ data, progress }) => {
     >
       <div className={styles.homepage}>
         <div className={styles.hero}>
+          {/* DELIVER VOTES MODAL */}
+            {showDeliverModal && (
+              <DeliverModal
+                show={showDeliverModal}
+                onClose={() => setShowDeliverModal(false)}
+              />
+            )}
+          {/* END DELIVER VOTES MODAL */}
           <div className="container">
             <div className={styles.hero__top}>
               <div className={styles.hero__details}>
@@ -139,14 +147,6 @@ const homepage = ({ data, progress }) => {
                 <button className={`${styles.btn_vote} btn_dark`} onClick={() => setShowDeliverModal(true)}>
                   Yes, I can
                 </button>
-                {/* DELIVER VOTES MODAL */}
-                {showDeliverModal && (
-                  <DeliverModal
-                    show={showDeliverModal}
-                    onClose={() => setShowDeliverModal(false)}
-                  />
-                )}
-                {/* END DELIVER VOTES MODAL */}
               </div>
               <div className={styles.hero__img}>
                 <Image src={labourparty} />

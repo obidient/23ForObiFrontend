@@ -5,11 +5,11 @@ import axios from 'axios';
 import Image from 'next/image';
 import StateContext from '../Context/StateContext';
 import React from 'react';
-import { useScript } from '../hooks/useScript';
 import { useState, useRef } from 'react';
 import useAuthStore from '../store/authStore';
 import { GoogleLogin, googleLogout } from '@react-oauth/google';
 import { getStates, getSupportGroups, getOverallprogress } from './../adapters/requests/index';
+import GoogleAuth from './../utils/googleLogin';
 
 export default function Home(props) {
   const { userProfile, removeUser } = useAuthStore();
@@ -29,52 +29,7 @@ export default function Home(props) {
     );
     console.log(payload);
   };
-  // console.log(props);
-  /*const googlebuttonref = useRef();
-  const [token, setToken] = useState(false);
-  console.log(token);
-  const onGoogleSignIn = (user) => {
-    let token = user.credential;
-    // let payload = jwt_deocde(userCred);
-    // console.log(payload);
-    setToken(token);
 
-    //Api call
-    const config = {
-      headers: {
-        accept: 'application/json',
-        // ' www-Authenticate': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-    };
-
-    const callAPI = async () => {
-      try {
-        const res = await axios
-          .post(`https://api.23forobi.com/google/token?token=${token}`, config)
-          .then((res) => {
-            console.log(res);
-          });
-
-        console.log(res);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    callAPI();
-  };
-
-  useScript('https://accounts.google.com/gsi/client', () => {
-    window.google.accounts.id.initialize({
-      client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID, // here's your Google ID
-      callback: onGoogleSignIn,
-      auto_select: false,
-    });
-
-    window.google.accounts.id.renderButton(googlebuttonref.current, {
-      size: 'medium',
-    });
-  });*/
 
   return (
     <div>
@@ -105,7 +60,25 @@ export default function Home(props) {
         )
       ) : (
       )*/}
-      <GoogleLogin onSuccess={(res) => sendApi(res)} />
+      {/* <GoogleLogin onSuccess={(res) => sendApi(res)} /> */}
+      {/* <GoogleLogin onSuccess={(res) => {
+        console.log(res)
+        const url = 'https://api.23forobi.com/google/token';
+        const headers = {
+          "Content-Type": "application/json",
+          Accept: "application/json", 
+        };
+        const data = {
+          "token": res.credential,
+        }
+        axios.post(url, data, headers).then((res) => {
+          console.log(res)
+        }) 
+      }} 
+
+      onError={console.log("Login Failed")}
+      /> */}
+      {/* <GoogleAuth /> */}
       {/*!token && <div ref={googlebuttonref} className="opacity: 0"></div>*/}
       {/* {!token && <div ref={googlebuttonref} className="opacity: 0"></div>} */}
       <Homepage data={props.initailData} progress={props.progress} />
