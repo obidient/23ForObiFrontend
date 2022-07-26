@@ -13,14 +13,17 @@ import { getStates, getSupportGroups, getOverallprogress } from './../adapters/r
 
 export default function Home(props) {
   const { userProfile, removeUser } = useAuthStore();
-
+  
   const sendApi = async (res) => {
+    console.log(res.credential);
+
+    const token = res.credential
     let payload = await axios.post(
-      `https://api.23forobi.com/google/token?token=${res}`,
+      `https://api.23forobi.com/google/token?token=${token}`,
       {
         headers: {
           Accept: 'application/json',
-          "WWW-Authenticate": `Bearer ${res}`
+          // "WWW-Authenticate": `Bearer ${res}`
         },
       }
     );
@@ -101,8 +104,8 @@ export default function Home(props) {
           </>
         )
       ) : (
-        <GoogleLogin onSuccess={(res) => sendApi(res)} />
       )*/}
+      <GoogleLogin onSuccess={(res) => sendApi(res)} />
       {/*!token && <div ref={googlebuttonref} className="opacity: 0"></div>*/}
       {/* {!token && <div ref={googlebuttonref} className="opacity: 0"></div>} */}
       <Homepage data={props.initailData} progress={props.progress} />
