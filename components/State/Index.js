@@ -40,7 +40,7 @@ import uploaded from '../../assets/uploaded.png';
 
 const State = ({ stateName, detail, images, villages }) => {
   // console.log(detail);
-  console.log(villages)
+  // console.log(villages)
   const {
     current_governor,
     progress,
@@ -75,7 +75,7 @@ const State = ({ stateName, detail, images, villages }) => {
     contributed_by: '',
   });
 
-console.log(villages.list_of_villages)
+// console.log(villages.list_of_villages)
   //ONCHANGE FOR TITLE
   const onImgChange = (e) => {
     setImgForm((prevState) => ({
@@ -176,7 +176,7 @@ console.log(villages.list_of_villages)
   };
 
   const villagesList = villages.list_of_villages 
-  console.log(villagesList)
+  // console.log(villagesList)
 
   const filter = (villages, query) => {
     return villages.filter((village) => {
@@ -273,6 +273,7 @@ console.log(villages.list_of_villages)
                   slug={item.slug}
                   contributors={item.top_contributors}
                   voters={item.voters}
+                  id={item.id}
                 />
               ))
             ) : (

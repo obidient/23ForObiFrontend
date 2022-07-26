@@ -20,9 +20,9 @@ export default function Home({
   progress,
   initailData,
 }) {
-  const { userProfile, removeUser } = useAuthStore();
+  // const { userProfile, removeUser } = useAuthStore();
 
-  const sendApi = async (res) => {
+  {/*const sendApi = async (res) => {
     let payload = await axios.post(
       `https://api.23forobi.com/google/token?token=${res}`,
       {
@@ -33,7 +33,7 @@ export default function Home({
       }
     );
     console.log(payload);
-  };
+  };*/}
   // console.log(props);
   /*const googlebuttonref = useRef();
   const [token, setToken] = useState(false);
