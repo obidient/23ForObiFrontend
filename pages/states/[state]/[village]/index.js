@@ -1,8 +1,9 @@
 import { useRouter } from 'next/router';
 import Footer from '../../../../components/Footer/Index';
 import Village from '../../../../components/Village/Index';
-import Navbar from './../../../../components/NavBar/Index';
-import Page from './../../../../components/Page';
+import Navbar from '../../../../components/NavBar/Index';
+import Page from '../../../../components/Page';
+import { getVillage } from '../../../../adapters/requests';
 
 const village = () => {
   const router = useRouter();
@@ -16,7 +17,7 @@ const village = () => {
         }
       >
         {/* <Navbar /> */}
-        <Village id={village} />
+        <Village village_name={village} />
         {/* <Footer /> */}
       </Page>
     </div>
