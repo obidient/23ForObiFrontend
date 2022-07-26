@@ -36,7 +36,7 @@ import { addSupportGroup } from './../../adapters/requests/index';
 import DeliverModal from './../../components/Modal/DeliverModal';
 import Modal from '../../components/Modal/Index';
 
-const homepage = ({ data, progress }) => {
+const homepage = ({ data, progress, total_number_of_voters }) => {
   const [showModal, setShowModal] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
@@ -162,6 +162,7 @@ const homepage = ({ data, progress }) => {
               />
               <div className={styles.percent}>
                 <h5>{progress ? progress : 0}%</h5>
+                <h5>{total_number_of_voters ? `( ${total_number_of_voters} votes guaranteed so far )`: '( No votes guaranteed so far )'}</h5>
                 <h5>100%</h5>
               </div>
             </div>
