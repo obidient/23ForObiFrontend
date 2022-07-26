@@ -42,7 +42,7 @@ const homepage = ({ data, progress }) => {
   const [showLogin, setShowLogin] = useState(false);
   const [showDeliverModal, setShowDeliverModal] = useState(false);
 
-  const done = 13;
+  // const done = 13;
 
   // const { data } = useContext(countryContext);
   // console.log('home', data);
@@ -53,14 +53,14 @@ const homepage = ({ data, progress }) => {
     name: '',
     // state: '',
     // village: '',
-    votes_delivered: 0,
+    // votes_delivered: 0,
   };
   // Form validation schema using Yup
   const validationSchema = Yup.object({
     name: Yup.string().required('Required'),
     //state: Yup.string().required('Required'),
     //village: Yup.string().required('Required'),
-    votes_delivered: Yup.number().required('Required'),
+    // votes_delivered: Yup.number().required('Required'),
   });
 
   const onSubmit = (values) => {
@@ -229,7 +229,7 @@ const homepage = ({ data, progress }) => {
                               name="name"
                               type="text"
                             />
-                            <FormikControl
+                            {/* <FormikControl
                               values={values}
                               control="input"
                               placeholder="Group Name"
@@ -237,7 +237,7 @@ const homepage = ({ data, progress }) => {
                               type="number"
                             />
 
-                            {/*<FormikControl
+                           <FormikControl
                               values={values}
                               control="select"
                               placeholder="Select your state"

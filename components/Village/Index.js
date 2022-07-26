@@ -17,7 +17,7 @@ import village_img_5 from '../../assets/village_img_5.png';
 
 import ContributeModal from './ContributeModal';
 
-const Village = () => {
+const Village = ({ contributors, progress_percentage, village_name }) => {
   const [showModal, setShowModal] = useState(false);
   const [registerFormIsVisible, setRegisterFormIsVisible] = useState(false);
   const [signInIsVisible, setSignInIsVisible] = useState(false);
@@ -36,7 +36,18 @@ const Village = () => {
             <Breadcrumbs />
           </div>
           <div className={styles.state_heading__title}>
-            <h1>Eziama village</h1>
+            <div>
+              <h1>{village_name ? `${village_name} vilage` : ''}</h1>
+              <p className={styles.red}>
+                {contributors > 0
+                  ? `We have got 5 votes guarantedd in ${
+                      village_name ? village_name : ''
+                    } Village in Abia State.Robert Okonkwo is our man on ground.Calistus Okafor is coordinating activities in this village`
+                  : `We do not have anyone on ground in ${
+                      village_name ? village_name : ''
+                    } village.Can you help?`}
+              </p>
+            </div>
             <div className={styles.title_btn}>
               <button onClick={() => setShowModal(true)} className="btn_light">
                 Contribute here
@@ -126,24 +137,42 @@ const Village = () => {
           <div className={styles.state_heading__contribution_progress}>
             <div className={styles.text}>
               <p>Contribution Progress</p>
-              <p>10% control of Eziama village</p>
+              <p>
+                {progress_percentage ? `${progress_percentage}%` : '0%'} control
+                of {village_name ? village_name : ''} village
+              </p>
             </div>
             <Progress
-              done={10}
+              done={progress_percentage}
               pgColor="#CE9E56"
               bgColor="#FAF1E4"
               type="village"
             />
             <div className={styles.prog_percent}>
-              <p>10%</p>
+              <p>{progress_percentage ? `${progress_percentage}%` : '0%'}</p>
               <p>100%</p>
             </div>
           </div>
         </div>
         <div className={styles.top_contributor}>
-          <h2>Top Contributor</h2>
-          <p>These are the top contributors in this village</p>
-          <div className={styles.contributors}>
+          <h2>{contributors ? 'Top' : 'No'} Contributor</h2>
+
+          <p>
+            {contributors
+              ? 'These are the top contributors in this village'
+              : 'There are no contributors in this village'}
+          </p>
+          {contributors > 0 &&
+            contributors.map((item, index) => (
+              <Contributor
+                key={index}
+                name={item.name}
+                votes={item.votes}
+                type="vote"
+              />
+            ))}
+          {/**
+           <div className={styles.contributors}>
             <Contributor
               name="Ejima Benson"
               votes={50}
@@ -205,12 +234,26 @@ const Village = () => {
               type="top_contributor"
             />
           </div>
+           */}
         </div>
         <div className={styles.votes_guaranteed}>
-          <h2>Vote Guaranteed</h2>
-          <p>These are the votes quaranteed in this village</p>
+          <h2>{contributors ? 'Votes' : 'No Votes'} Guaranteed</h2>
+          <p>
+            {contributors
+              ? 'These are the votes quaranteed in this village'
+              : 'These are no votes quaranteed in this village'}
+          </p>
           <div className={styles.contributors}>
-            <Contributor
+            {contributors > 0 &&
+              contributors.map((item, index) => (
+                <Contributor
+                  key={index}
+                  name={item.name}
+                  votes={item.votes}
+                  type="vote"
+                />
+              ))}
+            {/*<Contributor
               name="Ejima Benson"
               votes={50}
               img={village_img_1}
@@ -341,7 +384,7 @@ const Village = () => {
               votes={50}
               img={village_img_1}
               type="vote"
-            />
+              />*/}
           </div>
         </div>
         {/* <div className={styles.votes_delivered}>
