@@ -14,7 +14,7 @@ const state = ({ data, images, villages }) => {
 
   return (
     <div>
-      <Page title={`State || ${state}`}>
+      <Page title={`State || ${data.state_name}`}>
         {/* <Navbar /> */}
 
         <State

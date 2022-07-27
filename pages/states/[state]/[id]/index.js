@@ -8,14 +8,14 @@ import { getVillage } from '../../../../adapters/requests';
 const village = ({ village }) => {
   const router = useRouter();
   const { id } = router.query;
-  // console.log(village);
+  console.log(village);
   const { name, progress_percentage, voters, top_contributors } = village;
 
   return (
     <div>
       <Page
         title={
-          village === 'undefinded' ? 'loading...' : `Village || ${village}`
+          village === 'undefinded' ? 'loading...' : `Village || ${name}`
         }
       >
         {/* <Navbar /> */}
@@ -23,6 +23,7 @@ const village = ({ village }) => {
           village_id={id}
           village_name={name}
           progress_percentage={progress_percentage}
+          voters={voters}
         />
         {/* <Footer /> */}
       </Page>

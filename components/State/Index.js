@@ -75,7 +75,7 @@ const State = ({ stateName, detail, images, villages }) => {
     contributed_by: '',
   });
 
-// console.log(villages.list_of_villages)
+console.log(last_vote_direction)
   //ONCHANGE FOR TITLE
   const onImgChange = (e) => {
     setImgForm((prevState) => ({
@@ -237,7 +237,7 @@ const State = ({ stateName, detail, images, villages }) => {
               <div className={styles.vote_dir}>
                 <p>Last vote direction</p>
                 <div className={styles.vote_dir__details}>
-                  <Image src={last_vote_direction ? pdp : apc} />
+                  {/* <Image src={last_vote_direction ? pdp : apc} /> */}
                   <div className={styles.text}>
                     <h5>{last_vote_direction ? last_vote_direction : ''}</h5>
                     <p>{last_vote_direction ? 'People Democratic Party': 'All Progressive Congress'}</p>
