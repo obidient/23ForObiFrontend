@@ -49,7 +49,7 @@ const NavBar = () => {
                 <Link href="/">
                   <a
                     className={router.pathname == '/' ? styles.active : ''}
-                    href="#"
+                    href="/"
                   >
                     Home
                   </a>

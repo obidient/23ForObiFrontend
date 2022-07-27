@@ -18,7 +18,13 @@ import village_img_5 from '../../assets/village_img_5.png';
 
 import ContributeModal from './ContributeModal';
 
-const Village = ({ contributors, progress_percentage, village_name, village_id, votersData }) => {
+const Village = ({
+  contributors,
+  progress_percentage,
+  village_name,
+  village_id,
+  votersData,
+}) => {
   const [showModal, setShowModal] = useState(false);
   const [registerFormIsVisible, setRegisterFormIsVisible] = useState(false);
   const [signInIsVisible, setSignInIsVisible] = useState(false);
@@ -41,7 +47,7 @@ const Village = ({ contributors, progress_percentage, village_name, village_id, 
               <h1>{village_name ? `${village_name} village` : ''}</h1>
               <p className={styles.red}>
                 {contributors > 0
-                  ? `We have got 5 votes guarantedd in ${
+                  ? `We have got 5 votes guaranteed in ${
                       village_name ? village_name : ''
                     } Village in Abia State.Robert Okonkwo is our man on ground.Calistus Okafor is coordinating activities in this village`
                   : `We do not have anyone on ground in ${
@@ -238,10 +244,10 @@ const Village = ({ contributors, progress_percentage, village_name, village_id, 
            */}
         </div>
         <div className={styles.votes_guaranteed}>
-          <h2>{votersData ? 'Votes' : 'No Votes'} Guaranteed</h2>
+          <h2>{votersData ? `${votersData.length} Votes` : 'No Votes'} Guaranteed</h2>
           <p>
             {votersData
-              ? 'These are the votes quaranteed in this village'
+              ? 'There are the votes quaranteed in this village'
               : 'These are no votes quaranteed in this village'}
           </p>
           <div className={styles.contributors}>
