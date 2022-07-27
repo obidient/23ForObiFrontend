@@ -8,11 +8,13 @@ import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 // Prevent serverside redering on the FormikControl Component
 import dynamic from 'next/dynamic';
+
 const FormikControl = dynamic(() => import('../Forms/FormikControl'), {
   ssr: false,
 });
 
 const ProfileDisplay = () => {
+ 
   //Initialize select options
   const stateOptions = [
     {

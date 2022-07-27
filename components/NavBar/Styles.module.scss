@@ -59,6 +59,7 @@
     .hamburger {
         display: none;
         font-size: 2.5rem;
+        cursor: pointer;
             @media only screen and (max-width: 56rem) {
                 display: block;
             }

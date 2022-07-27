@@ -1,9 +1,12 @@
 import { GoogleLogin, googleLogout } from '@react-oauth/google';
 import axios from 'axios';
-import {useRouter} from 'next/router'
+import { useRouter } from 'next/router';
+import useAuthStore from '../store/authStore';
 
 export default function GoogleAuth(props) {
-    const router = useRouter()
+  // Auth State
+  const { addUser } = useAuthStore();
+  const router = useRouter();
   return (
     <div>
       <GoogleLogin
@@ -18,14 +21,13 @@ export default function GoogleAuth(props) {
             token: res.credential,
           };
 
-          axios
-            .post(url, data, headers)
-            .then((res) => {
-                console.log(res.data)
-                if(res.data && res.data.access_token){
-                    router.push('/dashboard')
-                }
-            });
+          axios.post(url, data, headers).then((res) => {
+            // console.log(res.data);
+            if (res.data && res.data.access_token) {
+              addUser(res.data.user)
+              router.push('/dashboard');
+            }
+          });
         }}
         onError={console.log('Login Failed')}
         text="signup_with"

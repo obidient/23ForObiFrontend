@@ -13,9 +13,13 @@ import { MdOutlineArrowForwardIos } from 'react-icons/md';
 import img1 from '../../assets/how_it_works_img1.png';
 import img2 from '../../assets/how_it_works_img2.png';
 import img3 from '../../assets/how_it_works_img3.png';
+import avatar from '../../assets/avatar.png';
 import DeliverModal from './../Modal/DeliverModal';
+import useAuthStore from '../../store/authStore';
+import { googleLogout } from '@react-oauth/google';
 
 const NavBar = () => {
+  const { userProfile, removeUser } = useAuthStore();
   const navRef = useRef();
 
   const showNavbar = () => {
@@ -93,12 +97,20 @@ const NavBar = () => {
                   </a>
                 </Link>
               </li>
-              <button
-                className={`${styles.btn_vote_mobile} btn_light`}
-                onClick={() => setShowModal(true)}
-              >
-                Deliver Votes
-              </button>
+              {userProfile ? (
+                <div className='lg:hidden md:block cursor-pointer' >
+                  <Link href="/dashboard">
+                    <Image src={avatar} width={35} height={35}/>
+                  </Link>
+                </div>
+              ) : (
+                <button
+                  className={`${styles.btn_vote_mobile} btn_light`}
+                  onClick={() => setShowModal(true)}
+                >
+                  Deliver Votes
+                </button>
+              )}
             </ul>
             <div
               onClick={showNavbar}
@@ -108,12 +120,20 @@ const NavBar = () => {
             </div>
           </div>
           {/* <Link href="/how-it-works"> */}
-          <button
-            className={`${styles.btn_vote} btn_dark`}
-            onClick={() => setShowModal(true)}
-          >
-            Deliver Votes
-          </button>
+          {userProfile ? (
+            <div className='hidden lg:block cursor-pointer'>
+              <Link href="/dashboard">
+                <Image src={avatar} width={35} height={35} />
+              </Link>
+            </div>
+          ) : (
+            <button
+              className={`${styles.btn_vote} btn_dark`}
+              onClick={() => setShowModal(true)}
+            >
+              Deliver Votes
+            </button>
+          )}
           {/* </Link> */}
           {/* DELIVER VOTES MODAL */}
           {showModal && (

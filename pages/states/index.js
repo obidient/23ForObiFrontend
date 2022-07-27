@@ -35,8 +35,10 @@ import { addSupportGroup } from './../../adapters/requests/index';
 //Modals
 import DeliverModal from './../../components/Modal/DeliverModal';
 import Modal from '../../components/Modal/Index';
+import useAuthStore from '../../store/authStore';
 
 const homepage = ({ data, progress, total_number_of_voters }) => {
+  const { userProfile } = useAuthStore();
   const [showModal, setShowModal] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
@@ -78,8 +80,8 @@ const homepage = ({ data, progress, total_number_of_voters }) => {
       try {
         setShowLoader(true);
         const res = await addSupportGroup(values)?.then((res) => {
-            console.log(res);
-          });
+          console.log(res);
+        });
         setShowLoader(false);
         // console.log(data);
       } catch (err) {
@@ -126,12 +128,12 @@ const homepage = ({ data, progress, total_number_of_voters }) => {
       <div className={styles.homepage}>
         <div className={styles.hero}>
           {/* DELIVER VOTES MODAL */}
-            {showDeliverModal && (
-              <DeliverModal
-                show={showDeliverModal}
-                onClose={() => setShowDeliverModal(false)}
-              />
-            )}
+          {showDeliverModal && (
+            <DeliverModal
+              show={showDeliverModal}
+              onClose={() => setShowDeliverModal(false)}
+            />
+          )}
           {/* END DELIVER VOTES MODAL */}
           <div className="container">
             <div className={styles.hero__top}>
@@ -144,9 +146,14 @@ const homepage = ({ data, progress, total_number_of_voters }) => {
                   within each state and with your help and the help of your
                   loved ones, we can do this
                 </p>
-                <button className={`${styles.btn_vote} btn_dark`} onClick={() => setShowDeliverModal(true)}>
-                  Yes, I can
-                </button>
+                {!userProfile && (
+                  <button
+                    className={`${styles.btn_vote} btn_dark`}
+                    onClick={() => setShowDeliverModal(true)}
+                  >
+                    Yes, I can
+                  </button>
+                )}
               </div>
               <div className={styles.hero__img}>
                 <Image src={labourparty} />
@@ -162,7 +169,11 @@ const homepage = ({ data, progress, total_number_of_voters }) => {
               />
               <div className={styles.percent}>
                 <h5>{progress ? progress : 0}%</h5>
-                <h5>{total_number_of_voters ? `( ${total_number_of_voters} votes guaranteed so far )`: '( No votes guaranteed so far )'}</h5>
+                <h5>
+                  {total_number_of_voters
+                    ? `( ${total_number_of_voters} votes guaranteed so far )`
+                    : '( No votes guaranteed so far )'}
+                </h5>
                 <h5>100%</h5>
               </div>
             </div>
