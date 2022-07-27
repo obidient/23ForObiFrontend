@@ -10,7 +10,7 @@ const state = ({ data, images, villages }) => {
   const { state } = router.query;
 
   // console.log(data);
-  console.log(router.query);
+  // console.log(router.query);
 
   return (
     <div>
