@@ -40,9 +40,7 @@ const NavBar = () => {
         <nav className={styles.navbar}>
           <div className={styles.navbar__logo}>
             <Link href="/">
-              <>
                 <Image src={logo} width='130px' height='33px' />
-              </>
             </Link>
           </div>
           <div ref={navRef} className={styles.navbar__menu}>
@@ -51,7 +49,7 @@ const NavBar = () => {
                 <Link href="/">
                   <a
                     className={router.pathname == '/' ? styles.active : ''}
-                    href="#"
+                    href="/"
                   >
                     Home
                   </a>
