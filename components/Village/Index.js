@@ -7,6 +7,7 @@ import Modal from '../Modal/Index';
 import { useState, useEffect } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import Breadcrumbs from '../misc/Breadcrumbs';
+import avatar from '../../assets/avatar.png'
 
 /* Images Import */
 import village_img_1 from '../../assets/village_img_1.png';
@@ -17,7 +18,7 @@ import village_img_5 from '../../assets/village_img_5.png';
 
 import ContributeModal from './ContributeModal';
 
-const Village = ({ contributors, progress_percentage, village_name, village_id }) => {
+const Village = ({ contributors, progress_percentage, village_name, village_id, votersData }) => {
   const [showModal, setShowModal] = useState(false);
   const [registerFormIsVisible, setRegisterFormIsVisible] = useState(false);
   const [signInIsVisible, setSignInIsVisible] = useState(false);
@@ -237,20 +238,21 @@ const Village = ({ contributors, progress_percentage, village_name, village_id }
            */}
         </div>
         <div className={styles.votes_guaranteed}>
-          <h2>{contributors ? 'Votes' : 'No Votes'} Guaranteed</h2>
+          <h2>{votersData ? 'Votes' : 'No Votes'} Guaranteed</h2>
           <p>
-            {contributors
+            {votersData
               ? 'These are the votes quaranteed in this village'
               : 'These are no votes quaranteed in this village'}
           </p>
           <div className={styles.contributors}>
-            {contributors > 0 &&
-              contributors.map((item, index) => (
+            {votersData.length > 0 &&
+              votersData.map((item, index) => (
                 <Contributor
                   key={index}
                   name={item.name}
                   votes={item.votes}
                   type="vote"
+                  img={avatar}
                 />
               ))}
             {/*<Contributor
