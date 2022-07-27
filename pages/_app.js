@@ -10,7 +10,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 
 function MyApp({ Component, pageProps }) {
   const { states, ...rest } = pageProps;
-
+  
   return (
     <GoogleOAuthProvider clientId={`${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}`}>
       <CountryContextProvider initialData={pageProps?.initialData}>

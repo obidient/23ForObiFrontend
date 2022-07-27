@@ -112,7 +112,7 @@ const DeliverModal = ({ show, onClose }) => {
               >
                 {slides.map((slide, index) => {
                   return (
-                    <div className={styles.carousel__item}>
+                    <div className={styles.carousel__item} key={index}>
                       <div className={styles.details}>
                         <div className={styles.text}>
                           <h3>
