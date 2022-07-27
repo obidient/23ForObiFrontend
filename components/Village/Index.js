@@ -6,7 +6,7 @@ import check from '../../assets/check.png';
 import Modal from '../Modal/Index';
 import { useState, useEffect } from 'react';
 import { FaTimes } from 'react-icons/fa';
-import Breadcrumbs from '../misc/Breadcrumbs';
+import {VillageBreadcrumb} from '../misc/Breadcrumb';
 
 /* Images Import */
 import village_img_1 from '../../assets/village_img_1.png';
@@ -23,6 +23,8 @@ const Village = ({
   village_name,
   village_id,
   voters,
+  villageState,
+  state_id
 }) => {
   const [showModal, setShowModal] = useState(false);
   const [registerFormIsVisible, setRegisterFormIsVisible] = useState(false);
@@ -34,12 +36,13 @@ const Village = ({
     body.style.overflow = showModal ? 'hidden' : 'auto';
   }, [showModal]);
 
+
   return (
     <div className={styles.state}>
       <div className="container">
         <div className={styles.state_heading}>
           <div className={styles.breadcrumb}>
-            <Breadcrumbs />
+            <VillageBreadcrumb village={village_name} villageState={villageState} state_id={state_id}/>
           </div>
           <div className={styles.state_heading__title}>
             <div>

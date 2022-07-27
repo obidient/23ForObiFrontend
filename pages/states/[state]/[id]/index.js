@@ -8,9 +8,8 @@ import { getVillage } from '../../../../adapters/requests';
 const village = ({ village }) => {
   const router = useRouter();
   const { id } = router.query;
-  console.log(village);
-  const { name, progress_percentage, voters, top_contributors } = village;
-
+  const { name, progress_percentage, voters, top_contributors, state } = village;
+  
   return (
     <div>
       <Page
@@ -24,6 +23,8 @@ const village = ({ village }) => {
           village_name={name}
           progress_percentage={progress_percentage}
           voters={voters}
+          villageState={state?.state_name}
+          state_id={state?.id}
         />
         {/* <Footer /> */}
       </Page>
