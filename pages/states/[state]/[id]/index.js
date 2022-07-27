@@ -3,12 +3,12 @@ import Footer from '../../../../components/Footer/Index';
 import Village from '../../../../components/Village/Index';
 import Navbar from '../../../../components/NavBar/Index';
 import Page from '../../../../components/Page';
-import { getVillage } from '../../../../adapters/requests';
+import { getVillage, getVoters } from '../../../../adapters/requests';
 
-const village = ({ village }) => {
+const village = ({ village, votersData }) => {
   const router = useRouter();
   const { id } = router.query;
-  console.log(village);
+  // console.log(village);
   const { name, progress_percentage, voters, top_contributors } = village;
 
   return (
@@ -23,7 +23,7 @@ const village = ({ village }) => {
           village_id={id}
           village_name={name}
           progress_percentage={progress_percentage}
-          voters={voters}
+          votersData={votersData}
         />
         {/* <Footer /> */}
       </Page>
@@ -35,10 +35,11 @@ export const getServerSideProps = async ({ params }) => {
   try {
     const { id } = params;
     const village = await getVillage(id);
-    // console.log(village.data)
+    const votersData = await getVoters(id);
     return {
       props: {
         village: village.data,
+        votersData: votersData.data,
       },
     };
   } catch (error) {
