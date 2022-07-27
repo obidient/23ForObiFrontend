@@ -7,7 +7,7 @@ import Modal from '../Modal/Index';
 import { useState, useEffect } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import Breadcrumbs from '../misc/Breadcrumbs';
-import avatar from '../../assets/avatar.png'
+import avatar from '../../assets/avatar.png';
 
 /* Images Import */
 import village_img_1 from '../../assets/village_img_1.png';
@@ -169,85 +169,25 @@ const Village = ({
               ? 'These are the top contributors in this village'
               : 'There are no contributors in this village'}
           </p>
-          {contributors > 0 &&
-            contributors.map((item, index) => (
-              <Contributor
-                key={index}
-                name={item.name}
-                votes={item.votes}
-                type="vote"
-              />
-            ))}
-          {/**
-           <div className={styles.contributors}>
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_1}
-              type="top_contributor"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_2}
-              type="top_contributor"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_3}
-              type="top_contributor"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_4}
-              type="top_contributor"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_5}
-              type="top_contributor"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_4}
-              type="top_contributor"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_5}
-              type="top_contributor"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_2}
-              type="top_contributor"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_3}
-              type="top_contributor"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_1}
-              type="top_contributor"
-            />
+          <div className={styles.contributors}>
+            {contributors > 0 &&
+              contributors.map((item, index) => (
+                <Contributor
+                  key={index}
+                  name={item.name}
+                  votes={item.votes}
+                  type="vote"
+                />
+              ))}
           </div>
-           */}
         </div>
         <div className={styles.votes_guaranteed}>
-          <h2>{votersData ? `${votersData.length} Votes` : 'No Votes'} Guaranteed</h2>
+          <h2>
+            {votersData ? `${votersData.length} Votes` : 'No Votes'} Guaranteed
+          </h2>
           <p>
             {votersData
-              ? 'There are the votes quaranteed in this village'
+              ? 'These are the votes quaranteed in this village'
               : 'These are no votes quaranteed in this village'}
           </p>
           <div className={styles.contributors}>
@@ -261,138 +201,6 @@ const Village = ({
                   img={avatar}
                 />
               ))}
-            {/*<Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_1}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_2}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_3}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_4}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_5}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_4}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_5}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_2}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_3}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_1}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_5}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_2}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_3}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_1}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_5}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_2}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_3}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_1}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_5}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_2}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_3}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_1}
-              type="vote"
-              />*/}
           </div>
         </div>
         {/* <div className={styles.votes_delivered}>
