@@ -3,7 +3,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-
+	padding-top: 6.1rem;
+	.logo {
+		cursor: pointer;
+	}
     .profile {
         display: flex;
         align-items: center;
@@ -72,11 +75,12 @@
 		
 		
 		
-		.dropdown_item {
+		.dropdown_item, button {
 			display: flex;
 			flex-direction: column;
 			font-size: 16px;
 			line-height: 130%;
+			text-align: justify;
 			padding: 1.5rem 1rem;
 			cursor: pointer;
 			color: var(--text-color-4);
@@ -91,7 +95,7 @@
 			}
 
 			&:last-child {
-    
+					
 				&:hover {
 					background-color: #F3FFF7;
 					border-bottom-left-radius: 16px;

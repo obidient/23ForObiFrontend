@@ -3,6 +3,7 @@ import caret_down from '../../assets/caret_down.png';
 import Image from 'next/image';
 import { useState } from 'react';
 import village_img_1 from '../../assets/village_img_1.png';
+import avatar from '../../assets/avatar.png'
 import Link from 'next/link';
 
 const DashboardLink = ({ option, name, value, onChange }) => {
@@ -43,7 +44,7 @@ const DashboardLink = ({ option, name, value, onChange }) => {
           }}
         >
           <div className={styles.profile__user_img}>
-            <Image src={village_img_1} />
+            <Image src={avatar} />
           </div>
         </div>
         {isDropDownVisible ? (
