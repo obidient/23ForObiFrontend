@@ -2,11 +2,14 @@ import React from 'react';
 import DashboardMain from '../../components/Dashboard/DashboardMain';
 import DeliverVotes from '../../components/Dashboard/DeliverVotes';
 import DashboardNav from '../../components/DashboardNav/Index';
+import useAuthStore from '../../store/authStore';
 // import styles from './pagestyles/home.module.scss';
 import styles from '../pagestyles/home.module.scss';
 import ProfileDisplay from './../../components/Dashboard/ProfileDisplay';
 
 const dashboard = () => {
+  const { userProfile } = useAuthStore();
+ 
   return (
     <div className={`${styles.profile} container`}>
       <DashboardNav />

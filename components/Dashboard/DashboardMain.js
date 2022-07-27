@@ -14,6 +14,7 @@ import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import dynamic from 'next/dynamic';
 import TextError from '../Forms/TextError';
+import useAuthStore from '../../store/authStore';
 // Prevent serverside redering on the FormikControl Component
 const FormikControl = dynamic(() => import('../Forms/FormikControl'), {
   ssr: false,
@@ -27,6 +28,8 @@ const CustomSelectInput = dynamic(
 );
 
 const DashboardMain = () => {
+  const { userProfile } = useAuthStore();
+  const { email, first_name, last_name, image } = userProfile;
   ////// Modal State
   const [showModal, setShowModal] = useState(false);
 
@@ -125,7 +128,7 @@ const DashboardMain = () => {
 
   return (
     <div className={styles.dashboardmain}>
-      <h2>Welcome Sandra</h2>
+      <h2>Welcome {first_name}</h2>
       <hr />
       <div className={styles.village_control}>
         <div className={styles.village_control__input}>
@@ -237,7 +240,6 @@ const DashboardMain = () => {
               onClose={() => setShowModal(false)}
               width="54.4rem"
             >
-            
               <div className={styles.modal}>
                 <div className={`${styles.modal__heading} modal_heading`}>
                   <h2>

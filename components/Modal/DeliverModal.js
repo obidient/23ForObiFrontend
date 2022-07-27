@@ -164,6 +164,7 @@ const DeliverModal = ({ show, onClose }) => {
               <div className={styles.carousel_indicators}>
                 {slides.map((_, index) => (
                   <button
+                    key={index}
                     className={`${styles.carousel_indicator_item} ${
                       currentSlide === index ? styles.active : ''
                     }`}
@@ -197,7 +198,9 @@ const DeliverModal = ({ show, onClose }) => {
               <p>Sign-up with social media</p>
               <div className={styles_login.login_modal__body__container}>
                 <div
-                  className={styles_login.login_modal__body__container__content2}
+                  className={
+                    styles_login.login_modal__body__container__content2
+                  }
                 >
                   {/* <div
                     style={{ display: 'grid', placeItems: 'end' }}
@@ -212,7 +215,7 @@ const DeliverModal = ({ show, onClose }) => {
                     className={
                       styles_login.login_modal__body__container__content__para
                     }
-                    >
+                  >
                     <GoogleAuth />
                     {/* <p>Join with Google</p> */}
                   </div>
