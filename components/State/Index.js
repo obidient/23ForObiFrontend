@@ -11,7 +11,7 @@ import VILLAGESINCONTROL from '../../data/villageDetails';
 import { villageNotInDetails } from '../../data/villageDetails';
 import Modal from '../Modal/Index';
 import { FaTimes } from 'react-icons/fa';
-import Breadcrumbs from '../misc/Breadcrumbs';
+import {StateBreadcrumb} from '../misc/Breadcrumb';
 import SOCIALMEDIAIMAGES from '../../data/smImages';
 
 // Forms Import
@@ -203,7 +203,7 @@ console.log(last_vote_direction)
     <div className={styles.state}>
       <div className="container">
         <div className={styles.state_heading}>
-          <Breadcrumbs />
+          <StateBreadcrumb state={stateName} />
           <div className={styles.state_heading__title}>
             <h1 className="capitalize">{stateName} Villages</h1>
             <div className={styles.vill_control}>
