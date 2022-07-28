@@ -4,10 +4,13 @@ import logo from '../../assets/logo.png';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import DeliverModal from '../Modal/DeliverModal';
+import Modal from './../Modal/Index';
 
 const Footer = () => {
-  //Show Modal
+
+    //Show Modal
   const [showModal, setShowModal] = useState(false);
+  const [signInIsVisible, setSignInIsVisible] = useState(false);
 
   //Effect to hide scroll
   useEffect(() => {
@@ -36,12 +39,27 @@ const Footer = () => {
               {/* </Link> */}
             </div>
           </div>
+          {/* DELIVER VOTES MODAL */}
           {showModal && (
-            <DeliverModal
+            <Modal
               show={showModal}
               onClose={() => setShowModal(false)}
-            />
+              setShowModal={setShowModal}
+              setSignInIsVisible={setSignInIsVisible}
+              type="contribute"
+              // width={width.container(matches)}
+              width={signInIsVisible ? '50rem' : null}
+            >
+              <DeliverModal
+                show={showModal}
+                onClose={() => setShowModal(false)}
+                setSignInIsVisible={setSignInIsVisible}
+                signInIsVisible={signInIsVisible}
+                setShowModal={setShowModal}
+              />
+            </Modal>
           )}
+          {/* END DELIVER VOTES MODAL */}
           <div>{/* <p>Game</p> */}</div>
         </div>
       </div>

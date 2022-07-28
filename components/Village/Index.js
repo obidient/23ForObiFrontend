@@ -45,7 +45,11 @@ const Village = ({
       <div className="container">
         <div className={styles.state_heading}>
           <div className={styles.breadcrumb}>
-            <VillageBreadcrumb village={village_name} villageState={villageState} state_id={state_id}/>
+            <VillageBreadcrumb
+              village={village_name}
+              villageState={villageState}
+              state_id={state_id}
+            />
           </div>
           <div className={styles.state_heading__title}>
             <div>
@@ -72,6 +76,9 @@ const Village = ({
                 show={showModal}
                 onClose={() => setShowModal(false)}
                 width={registerFormIsVisible ? '54.4rem' : '50rem'}
+                setShowModal={setShowModal}
+                setSignInIsVisible={setSignInIsVisible}
+                type='contribute'
               >
                 <ContributeModal
                   setShowModal={setShowModal}

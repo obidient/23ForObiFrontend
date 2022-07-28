@@ -182,9 +182,15 @@
             }
         }
 
-        .btn {
-            padding: 1rem 2.2rem;            
+        .btn_container {
+            display: flex;
+            justify-content: flex-end;
+            
+            .btn {
+                padding: 1rem 2.2rem;    
+            }
         }
+
     }
 }
 
