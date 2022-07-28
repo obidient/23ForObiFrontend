@@ -189,7 +189,7 @@ const DeliverModal = ({
                 className={`btn_dark rounded-full ${styles.btn}`}
                 onClick={() => setSignInIsVisible(true)}
               >
-                Create an account
+                Login
               </button>
             </div>
           </div>
