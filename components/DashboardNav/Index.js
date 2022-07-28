@@ -11,7 +11,7 @@ import Link from 'next/link';
 const DashboardNav = () => {
   return (
     <div className={styles.dashboardnav}>
-      <Link href="/">
+      <Link href="/dashboard">
         <div className={styles.logo}>
           <Image src={logo} />
         </div>
