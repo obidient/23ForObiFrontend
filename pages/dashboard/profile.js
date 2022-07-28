@@ -8,8 +8,6 @@ import styles from '../pagestyles/home.module.scss';
 import ProfileDisplay from './../../components/Dashboard/ProfileDisplay';
 
 const dashboard = () => {
-  const { userProfile } = useAuthStore();
- 
   return (
     <div className={`${styles.profile} container`}>
       <DashboardNav />
