@@ -1,6 +1,6 @@
 import styles from './Styles.module.scss';
 
-import logo from '../../assets/logo.png';
+import logo from '../../assets/23forobi.svg';
 import caret_down from '../../assets/caret_down.png';
 
 import React from 'react';
