@@ -29,7 +29,14 @@ const CustomSelectInput = dynamic(
 
 const DashboardMain = () => {
   const { userProfile } = useAuthStore();
-  const { email, first_name, last_name, image } = userProfile;
+  // const { email, first_name, last_name, image } = userProfile;
+  // const { email, first_name, last_name, image } = userProfile;
+
+  const email = userProfile?.email
+  const first_name = userProfile?.first_name;
+  const last_name = userProfile?.last_name;
+  const image = userProfile?.image;
+  
   ////// Modal State
   const [showModal, setShowModal] = useState(false);
 
