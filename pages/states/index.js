@@ -43,6 +43,7 @@ const homepage = ({ data, progress, total_number_of_voters }) => {
   const [showLoader, setShowLoader] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [showDeliverModal, setShowDeliverModal] = useState(false);
+  const [signInIsVisible, setSignInIsVisible] = useState(false);
 
   // const done = 13;
 
@@ -129,10 +130,23 @@ const homepage = ({ data, progress, total_number_of_voters }) => {
         <div className={styles.hero}>
           {/* DELIVER VOTES MODAL */}
           {showDeliverModal && (
-            <DeliverModal
+            <Modal
               show={showDeliverModal}
               onClose={() => setShowDeliverModal(false)}
-            />
+              setShowModal={setShowDeliverModal}
+              setSignInIsVisible={setSignInIsVisible}
+              type="contribute"
+              // width={width.container(matches)}
+              width={signInIsVisible ? '50rem' : null}
+            >
+              <DeliverModal
+                show={showDeliverModal}
+                onClose={() => setShowDeliverModal(false)}
+                setSignInIsVisible={setSignInIsVisible}
+                signInIsVisible={signInIsVisible}
+                setShowModal={setShowDeliverModal}
+              />
+            </Modal>
           )}
           {/* END DELIVER VOTES MODAL */}
           <div className="container">
