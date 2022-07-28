@@ -12,6 +12,14 @@
         align-items: center;
         column-gap: 2rem;
         &__user_img {
+			display: flex;
+			align-items: center;
+			justify-content: space-around;
+			h2 {
+				color: black;
+				font-size: 1.95rem;
+				padding: 1rem;
+			}
             span {
                 height: 4rem !important;
                 width: 4rem !important;
@@ -84,11 +92,14 @@
 			padding: 1.5rem 1rem;
 			cursor: pointer;
 			color: var(--text-color-4);
-
+			:hover {
+				font-weight: 700;
+			}
 			&:first-child {
 
 				&:hover {
 					background-color: #F3FFF7;
+					
 					border-top-left-radius: 16px;
 					border-top-right-radius: 16px;
 				}

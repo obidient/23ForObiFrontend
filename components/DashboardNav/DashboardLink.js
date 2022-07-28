@@ -10,7 +10,9 @@ import { useRouter } from 'next/router';
 import useAuthStore from '../../store/authStore';
 
 const DashboardLink = ({ option, name, value, onChange }) => {
-  const { removeUser } = useAuthStore();
+  const { removeUser,userProfile } = useAuthStore();
+  const first_name = userProfile?.first_name
+
   const router = useRouter()
   const [isDropDownVisible, setIsDropDownVisible] = useState(false);
 
@@ -51,6 +53,7 @@ const DashboardLink = ({ option, name, value, onChange }) => {
         >
           <div className={styles.profile__user_img}>
             <Image src={avatar} />
+            <h2>{first_name}</h2>
           </div>
         </div>
         {isDropDownVisible ? (
