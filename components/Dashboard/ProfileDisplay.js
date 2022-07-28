@@ -8,12 +8,18 @@ import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 // Prevent serverside redering on the FormikControl Component
 import dynamic from 'next/dynamic';
+import useAuthStore from '../../store/authStore';
 
 const FormikControl = dynamic(() => import('../Forms/FormikControl'), {
   ssr: false,
 });
 
 const ProfileDisplay = () => {
+  const { userProfile } = useAuthStore();
+  const first_name = userProfile?.first_name;
+  const last_name = userProfile?.last_name;
+  const email = userProfile?.email;
+  const image = userProfile?.image;
  
   //Initialize select options
   const stateOptions = [
@@ -47,9 +53,9 @@ const ProfileDisplay = () => {
 
   // Initial form values
   const initialValues = {
-    firstName: '',
-    lastName: '',
-    email: '',
+    firstName: first_name,
+    lastName: last_name,
+    email: email,
     state: '',
     village: '',
   };
@@ -66,8 +72,8 @@ const ProfileDisplay = () => {
   return (
     <div className={styles.profile}>
       <div className={styles.avatar}>
-        <Image src={avatar} />
-        <p>edit image</p>
+        <Image src={image ? image : avatar} />
+        <p className='capitalize'>edit image</p>
       </div>
       <div className={styles.form}>
         <Formik

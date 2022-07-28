@@ -370,6 +370,14 @@
   display: flex;
   padding-top: 4rem;
   column-gap: 10rem;
+  @media screen and (max-width: 26.43rem){
+    flex-direction: column;
+    align-items: center;
+    p {
+      margin: 1rem;
+      font-size: 2.5rem;
+    }
+  }
 
   .avatar {
     font-size: var(--font-p-text-1);
@@ -377,10 +385,15 @@
     text-align: center;
     text-decoration-line: underline;
     color: #5678ce;
+    padding: 1rem;
   }
 
   .form {
     width: 34.6rem;
+    @media screen and (max-width: 26.43rem) {
+      width: 100%;
+      margin: 1rem 0;
+    }
     form {
       display: flex;
       flex-direction: column;
