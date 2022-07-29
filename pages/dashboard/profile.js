@@ -6,6 +6,7 @@ import useAuthStore from '../../store/authStore';
 // import styles from './pagestyles/home.module.scss';
 import styles from '../pagestyles/home.module.scss';
 import ProfileDisplay from './../../components/Dashboard/ProfileDisplay';
+import ProtectedHOC from './../../components/misc/ProtectedHOC';
 
 const dashboard = () => {
   return (
@@ -22,4 +23,4 @@ const dashboard = () => {
   );
 };
 
-export default dashboard;
+export default ProtectedHOC(dashboard);

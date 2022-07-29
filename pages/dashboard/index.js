@@ -7,25 +7,9 @@ import DashboardNav from '../../components/DashboardNav/Index';
 import styles from '../pagestyles/home.module.scss';
 import useAuthStore from '../../store/authStore';
 import Loader from './../../components/Loader/index';
+import ProtectedHOC from './../../components/misc/ProtectedHOC';
 
 const dashboard = () => {
-
-  //Loading state
-  const [loading, setLoading] = useState(true);
-  // Auth State
-  const { userProfile } = useAuthStore();
-
-  console.log(userProfile);
-  const router = useRouter();
-  useEffect(() => {
-    if (!userProfile) {
-      router.push('/');
-    } else {
-      setLoading(false);
-    }
-  }, [userProfile, router]);
-
-  if (loading) return <Loader />
   
   return (
     <div className={`${styles.dashboard} container`}>
@@ -42,4 +26,4 @@ const dashboard = () => {
   );
 };
 
-export default dashboard;
+export default ProtectedHOC(dashboard);
