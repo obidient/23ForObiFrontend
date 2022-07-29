@@ -34,7 +34,7 @@ const Loader = ({
   return (
     <div className={styles.backdrop} style={{ ...backdropStyles }}>
       <div className={styles.modal} ref={modalRef} style={{ width: width }}>
-        <div>
+        <div className={styles.loader}>
           <Image src={big} alt="loader" />
         </div>
       </div>
