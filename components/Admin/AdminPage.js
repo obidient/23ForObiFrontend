@@ -1,27 +1,22 @@
 import Sidebar from './Sidebar';
 import styles from './Styles.module.scss';
-import {MdMenuOpen} from 'react-icons/md'
+import { MdMenuOpen } from 'react-icons/md';
 import { useState } from 'react';
+import AdminNav from './AdminNav';
 
 const AdminPage = ({ title, description, children }) => {
-//   const editTitle = title?.includes(undefined) ? 'loading...' : title;
-  const [toggle, setToggle] = useState(true)
+  //   const editTitle = title?.includes(undefined) ? 'loading...' : title;
+  const [toggle, setToggle] = useState(true);
 
   return (
-    <div className={styles.admin_page}>
-        <div 
-            className={`${
-                toggle
-                ? `${styles.admin_page__sidebar} ${styles.close}`
-                : `${styles.admin_page__sidebar} ${styles.open}`
-            }`}
-          >
-            <Sidebar />
+    <div>
+      <main className={styles.admin_page}>
+        <Sidebar />
+        <div>
+          <AdminNav />
+          <div>{children}</div>
         </div>
-        <button className={styles.toggle} onClick={() => setToggle(!toggle)}>
-          <MdMenuOpen className="text-5xl"/>
-        </button>
-      {children}
+      </main>
     </div>
   );
 };
