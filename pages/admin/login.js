@@ -1,7 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import styles from './admin.module.scss';
 import logo from '../../assets/23forobi.svg';
+import eye from '../../assets/eye-slashed.png';
 import close from '../../assets/close.png';
 //Form Imports
 import { Form, Formik } from 'formik';
@@ -24,8 +26,8 @@ const Login = () => {
 
   return (
     <div className="container flex flex-col">
-      <div className="pt-12 pl-1 pb-12">
-        <Link href="/dashboard">
+      <div className="pt-12 pl-1 pb-12 cursor-pointer">
+        <Link href="/">
           <div className="">
             <Image src={logo} />
           </div>
@@ -42,7 +44,7 @@ const Login = () => {
               <Image src={close} />
             </div>
           </div>
-          <div className="flex flex-col py-10 lg:py-5">
+          <div className={`flex flex-col py-10 lg:py-5 ${styles.form}`}>
             <p className="text-[#7A7B7B] py-6">
               Kindly enter your registration details to continue
             </p>
@@ -60,6 +62,7 @@ const Login = () => {
                     name="email"
                     type="email"
                   />
+
                   <FormikControl
                     values={values}
                     control="input"
@@ -67,6 +70,7 @@ const Login = () => {
                     name="password"
                     type="password"
                   />
+
                   <div className="flex items-center justify-between">
                     <div className="text-3xl lg:text-2xl my-10">
                       <input type="checkbox" />
