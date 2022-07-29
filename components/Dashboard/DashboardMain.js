@@ -8,6 +8,7 @@ import Modal from './../Modal/Index';
 import SelectInput from './../misc/SelectInput';
 import VillageContext from '../../Context/villageContext';
 import useVillage from '../../Context/villageContext';
+import close from '../../assets/closeW.png'
 
 import { Form, Formik } from 'formik';
 // import { CustomSelectInput } from '../Forms/SelectInput';
@@ -176,7 +177,7 @@ const DashboardMain = () => {
                   onClick={() => removeVillage(village)}
                   className={styles.cancel}
                 >
-                  x
+                  <Image src={close} />
                 </span>
               </div>
             );

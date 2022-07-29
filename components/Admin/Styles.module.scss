@@ -1,17 +1,35 @@
 //Sidebar
 .sidebar {
     padding: 3rem 1rem;
+    background-color: #2F3733;
+    height: 100%;
+    width: 257px;
+    .logo {
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+        margin-bottom: 52px;
+    }
+    @media (max-width: 56.25em) {
+        // width: 50%;
+    }
     
     ul {
+        position: relative;
         font-size: var(--font-p-text-1);
-        color: #2c2f2e;
+        color: #FFFFFF;
         
         li {
+           
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 400;
             padding: 1rem;
-            margin-bottom: 5px;
-
+            margin-bottom: 1.5rem !important;
+            width: 85%;
+            margin: 0 auto;
+            border-radius: 50px !important;
+            text-align: center;
+           
             &:hover {
                 background-color: var(--primary-color);
                 border-radius: 3px;
@@ -111,8 +129,9 @@
 //ADMINPAGE
 .admin_page {
     display: grid;
-    grid-template-columns: 15% auto;
+    grid-template-columns: 20% auto;
     background: #F1F1F1;
+    height: 100vh;
     
     // position: relative;
 
@@ -121,12 +140,18 @@
     }
 
     &__sidebar {
-        background-color: var(--tertiary-color);
-        filter: drop-shadow(0px 4px 13px rgba(2, 106, 32, 0.05));
-        height: 100vh;
-
+        background-color: #2F3733;
+        // filter: drop-shadow(0px 4px 13px rgba(2, 106, 32, 0.05));
+        height: 100%;
+        width: 257px;
+        .logo {
+            display: flex;
+            justify-content: center;
+            margin-top: 2.25rem;
+            margin-bottom: 52px;
+        }
         @media (max-width: 56.25em) {
-            width: 50%;
+            // width: 50%;
         }
     }
 
@@ -164,6 +189,26 @@
     &__dashboard {
         .list {
             margin: 1rem 2rem;
+        }
+    }
+}
+
+// Admin Nav
+.nav {
+    display: flex;
+    width: 100%;
+    height: 11.25rem;
+   
+
+    .wrapper {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        border-bottom: 1px solid #8c8888;
+        width: 100%;
+        padding: 0 3.5rem;
+        .input {
+            height: 4rem;
         }
     }
 }

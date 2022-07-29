@@ -5,21 +5,6 @@ import AdminPage from '../../../components/Admin/AdminPage';
 
 import VillageList from '../../../components/Admin/VillageList';
 
-const villages = () => (
-
-  <AdminPage>
-      <div className={styles.admin}>
-      <div className={styles.admin__dashboard}>  
-          <div className={styles.nav}>
-              <AdminNav />
-          </div>
-          <div className={styles.list}>
-              <VillageList />
-          </div>
-      </div>
-    </div>
-  </AdminPage>
-);
- 
+const villages = () => <AdminPage>Villages</AdminPage>;
 
 export default villages;
