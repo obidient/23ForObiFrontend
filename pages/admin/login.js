@@ -1,16 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import styles from './admin.module.scss';
 import logo from '../../assets/23forobi.svg';
 import eye from '../../assets/eye-slashed.png';
 import close from '../../assets/close.png';
+import Loader from '../../components/Loader';
 //Form Imports
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import FormikControl from '../../components/Forms/FormikControl';
+import { loginAdmin } from '../../adapters/requests';
 
 const Login = () => {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const initialValues = {
     email: '',
     password: '',
@@ -20,8 +25,27 @@ const Login = () => {
     email: Yup.string().email('Invalid email format').required('Required'),
     password: Yup.string().required('Required'),
   });
+
   const onSubmit = (values) => {
-    // Api call
+    const headers = {
+      accept: 'application/json',
+      'Content-Type': 'application/json',
+    };
+    const callApi = async () => {
+      try {
+        setLoading(true);
+        await loginAdmin(values, headers)?.then((res) => {
+          console.log(res);
+          if (res.status === 200) {
+            router.push('/admin/dashboard');
+          }
+        });
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    callApi();
   };
 
   return (
@@ -90,7 +114,7 @@ const Login = () => {
                       type="submit"
                       onSubmit={onSubmit}
                     >
-                      Log-in
+                      {loading ? 'Logging ...' : 'Log-in'}
                     </button>
                   </div>
                 </Form>
@@ -99,6 +123,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+      {loading && <Loader />}
     </div>
   );
 };
