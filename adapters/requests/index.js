@@ -40,3 +40,7 @@ export function addSupportGroup(requestData) {
 export function sendToken(token, config) {
   post(`/token?token=${token}/`, config);
 }
+
+export function loginAdmin(requestData){
+  post(`/`, requestData)
+}
