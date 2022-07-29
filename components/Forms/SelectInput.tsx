@@ -34,7 +34,7 @@ export default function SelectInput({ ...props }: SelectInputProps) {
   return (
     <div className={styles.select}>
       <Select
-        className="select-container"
+        className="select-container focus:border-[ #018226]"
         classNamePrefix="select"
         options={props.options}
         onChange={(option) => helpers.setValue(option?.value)}
