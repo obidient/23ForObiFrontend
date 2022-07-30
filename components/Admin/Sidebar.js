@@ -13,7 +13,7 @@ import { useState } from 'react';
 const Sidebar = () => {
   const router = useRouter();
   const [showSidebar, setShowSidebar] = useState(true);
-  const normalLink = ``;
+  // const normalLink = ``;
   const activeStyle =
     'bg-[#018226] px-10 py-3 rounded-full flex items-center gap-2 cursor-pointer text-[#F51997]';
   const inactiveStyle =
