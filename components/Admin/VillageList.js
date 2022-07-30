@@ -1,10 +1,9 @@
 import styles from './Styles.module.scss';
 import { DataGrid } from '@mui/x-data-grid';
-import village_img_2 from '../../assets/village_img_2.png'
+import village_img_2 from '../../assets/village_img_2.png';
 import Image from 'next/image';
 import { DeleteOutline } from '@material-ui/icons';
 import Link from 'next/link';
-
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 70 },
@@ -13,7 +12,7 @@ const columns = [
     headerName: 'Name',
     width: 130,
   },
-  { field: 'State', headerName: 'State', width: 130 },
+  { field: 'State', headerName: 'Village name', width: 130 },
   {
     field: 'progress',
     headerName: 'progress',
@@ -27,15 +26,13 @@ const columns = [
     renderCell: (params) => {
       return (
         <>
-        <Link href='/admin/villages/village'>
-          <button className={styles.edit_button}>
-            Edit
-          </button>
-        </Link>
-        <Link href="#">
-          <DeleteOutline className={styles.delete_button}/>
-        </Link>
-          </>
+          <Link href="/admin/villages/village">
+            <button className={styles.edit_button}>Edit</button>
+          </Link>
+          <Link href="#">
+            <DeleteOutline className={styles.delete_button} />
+          </Link>
+        </>
       );
     },
   },
