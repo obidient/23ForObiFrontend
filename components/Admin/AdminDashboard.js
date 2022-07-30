@@ -40,7 +40,7 @@ const AdminDashboard = () => {
           percent='-10.5'
         />
       </div>
-      <div className='border border-[#F1F1F1] h-[671px] w-full rounded-xl bg-white'>
+      <div className='border border-[#F1F1F1] h-full w-full rounded-xl bg-white'>
        <div className='flex py-9 items-center justify-between pr-6 pl-12'>
         <h2 className='text-[#2F3733] text-[16px]'>Recent activity</h2>
         <select>
