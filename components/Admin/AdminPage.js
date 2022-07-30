@@ -9,7 +9,7 @@ const AdminPage = ({ title, description, children }) => {
   const [toggle, setToggle] = useState(true);
 
   return (
-    <div className='h-full'>
+    <div className='h-[100vh]'>
       <main className={styles.admin_page}>
         <Sidebar />
         <div>

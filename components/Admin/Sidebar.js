@@ -8,6 +8,7 @@ import profileIcon from '../../assets/profileIcon.png';
 import noteIcon from '../../assets/noteIcon.png';
 import settings from '../../assets/setting.png';
 import map from '../../assets/Map.png';
+import logoutIcon from '../../assets/log-out.svg'
 import { useState } from 'react';
 
 const Sidebar = () => {
@@ -107,6 +108,16 @@ const Sidebar = () => {
             </span>
           </div>
         </Link>
+      </div>
+      <div className='w-[200px] text-justify absolute bottom-0'>
+        <button className={inactiveStyle}>
+          <span className="flex items-center justify-center font-bold text-2xl xl:text-md">
+            <Image src={logoutIcon} />
+          </span>
+          <span className="text-3xl font-medium text-white capitalize">
+              log-out
+            </span>
+        </button>
       </div>
     </div>
   );
