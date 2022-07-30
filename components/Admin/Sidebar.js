@@ -15,9 +15,9 @@ const Sidebar = () => {
   const [showSidebar, setShowSidebar] = useState(true);
   const normalLink = ``;
   const activeStyle =
-    'bg-[#018226] px-3 py-3 rounded-full flex items-center gap-2 justify-center cursor-pointer text-[#F51997]';
+    'bg-[#018226] px-10 py-3 rounded-full flex items-center gap-2 cursor-pointer text-[#F51997]';
   const inactiveStyle =
-    'hover:bg-[#018226] px-3 py-3 rounded-full flex items-center gap-2 justify-center cursor-pointer text-black';
+    'hover:bg-[#018226] px-10 py-3 rounded-full flex items-center gap-2  cursor-pointer text-black';
 
   return (
     <div className={styles.sidebar}>
@@ -26,7 +26,7 @@ const Sidebar = () => {
           <Image src={logo} />
         </Link>
       </div>
-      <div className="my-1 w-[200px] text-justify">
+      <div className="my-3 w-[200px] text-justify">
         <Link href={'/admin/dashboard'}>
           <div
             className={
@@ -44,7 +44,7 @@ const Sidebar = () => {
           </div>
         </Link>
       </div>
-      <div className="my-1 w-[200px] text-justify">
+      <div className="my-3  w-[200px] text-justify">
         <Link href={'/admin/users'}>
           <div
             className={
@@ -60,7 +60,7 @@ const Sidebar = () => {
           </div>
         </Link>
       </div>
-      <div className="my-1 w-[200px] text-justify">
+      <div className="my-3  w-[200px] text-justify">
         <Link href={'/admin/villages'}>
           <div
             className={
@@ -76,7 +76,7 @@ const Sidebar = () => {
           </div>
         </Link>
       </div>
-      <div className="my-1 w-[200px] text-justify">
+      <div className="my-3 w-[200px] text-justify">
         <Link href={'/admin/states'}>
           <div
             className={
@@ -92,7 +92,7 @@ const Sidebar = () => {
           </div>
         </Link>
       </div>
-      <div className="my-1 w-[200px] text-justify">
+      <div className="my-3 w-[200px] text-justify">
         <Link href={'/admin/settings'}>
           <div
             className={
