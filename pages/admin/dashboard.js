@@ -12,17 +12,23 @@ const admin = () => {
   const { adminUser } = useAuthStore();
   const router = useRouter();
 
-  useEffect(() => {
+  /*useEffect(() => {
     return () => {
       if (!adminUser) {
         router.push('/admin');
       }
     };
-  }, [adminUser, router]);
+  }, [adminUser, router]);*/
 
   const [toggle, setToggle] = useState(true);
 
-  return <AdminPage>Admin Dashboard</AdminPage>;
+  return (
+    <AdminPage>
+      <div>
+        <AdminDashboard />
+      </div>
+    </AdminPage>
+  );
 };
 
 export default admin;
