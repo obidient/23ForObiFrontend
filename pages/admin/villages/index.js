@@ -16,6 +16,7 @@ import stateDetails from '../../../data/stateDetails';
 const villages = ({ villages }) => {
   const [showModal, setShowModal] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
 
   // Form validation schema using Yup
   const villageValidationSchema = Yup.object({
@@ -24,11 +25,16 @@ const villages = ({ villages }) => {
   });
 
   //Initialize select options
-
   const stateOptions = stateDetails.map((item) => ({
     value: item.slug,
     label: item.name,
   }));
+
+  // Delete handler
+  const deleteHandler = async (villageId) => {};
+
+  // Edit handler
+  const editHandler = async (villageId) => {};
 
   return (
     <AdminPage>
@@ -78,12 +84,17 @@ const villages = ({ villages }) => {
                   <td className="text-[#2F3733]">{item.contributors}</td>
                   <td className="text-[#2F3733]">{item.progress}%</td>
                   <td className="text-xl ">
-                    <span className="mx-5 text-[#5678CE] underline cursor-pointer">
+                    <span
+                      className="mx-5 text-[#5678CE] underline cursor-pointer"
+                      onClick={() => setOpenEdit(true)}
+                    >
                       Edit
                     </span>
                     <span
                       className="mx-5 text-[#D60602] underline cursor-pointer"
-                      onClick={() => setOpenDelete(true)}
+                      onClick={() => {
+                        setOpenDelete(true);
+                      }}
                     >
                       Delete
                     </span>
@@ -212,12 +223,96 @@ const villages = ({ villages }) => {
             </div>
             <div className={styles.modal__body}>
               <p className="my-8 text-[#7A7B7B]">
-                Kindly note that you are about to delete the village ukpor from
-                the list. Are you sure?
+                {`Kindly note that you are about to delete the village Ukpor from
+                the list. Are you sure?`}
               </p>
-              <div className='flex items-center justify-around'>
-                <button className='px-3 py-3 rounded-full w-[172px] border border-[#018226] text-[#018226]' >Cancel</button>
-                <button className='w-[172px] bg-[#D60602] text-white px-3 py-3 rounded-full'>Delete</button>
+              <div className="flex items-center justify-around">
+                <button className="px-3 py-3 rounded-full w-[172px] border border-[#018226] text-[#018226]">
+                  Cancel
+                </button>
+                <button className="w-[172px] bg-[#D60602] text-white px-3 py-3 rounded-full">
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </Modal>
+      )}
+      {openEdit && (
+        <Modal
+          show={showModal}
+          onClose={() => setOpenEdit(false)}
+          width="794px"
+        >
+          <div className={styles.modal}>
+            <div className={`${styles.modal__heading} modal_heading`}>
+              <h2>
+                Edit Contributor
+                <br />
+                <span className="font-bold">Information</span>
+              </h2>
+              <button className={`closeBtn`} onClick={() => setOpenEdit(false)}>
+                &times;
+              </button>
+            </div>
+            <div className={styles.modal__body}>
+              <div className="flex items-center justify-around mt-10 mb-14">
+                <p className="font-normal text-[#979797] text-xl">
+                  NO of Contributors
+                  <br />
+                  <span className="text-[#2F3733] text-2xl">200</span>
+                </p>
+                <p className="font-normal text-[#979797] text-xl">
+                  Progress
+                  <br />
+                  <span className="text-[#2F3733] text-2xl">100%</span>
+                </p>
+                <p className="font-normal text-[#979797] text-xl">
+                  Date added
+                  <br />
+                  <span className="text-[#2F3733] text-2xl">7, July 2022</span>
+                </p>
+              </div>
+              <div className={`${styles.details_form}`}>
+                <Formik
+                  initialValues={{
+                    state: '',
+                    village: '',
+                  }}
+                  validationSchema={villageValidationSchema}
+                  onSubmit={(values) => console.log('Form data', values)}
+                >
+                  {({ values }) => (
+                    <Form autoComplete="off">
+                      <div className="flex items-center justify-around gap-2 w-full">
+                        <div className='w-1/2'>
+                          <FormikControl
+                            values={values}
+                            control="input"
+                            placeholder="Enter the name of a new village"
+                            name="village"
+                            type="text"
+                          />
+                        </div>
+                        <div className='w-1/2'>
+                          <FormikControl
+                            values={values}
+                            control="select"
+                            placeholder="Select your state"
+                            name="state"
+                            options={stateOptions}
+                          />
+                        </div>
+                      </div>
+                      <button
+                        type="submit"
+                        className="btn_dark w-full rounded-full h-20 mt-9"
+                      >
+                        Save village
+                      </button>
+                    </Form>
+                  )}
+                </Formik>
               </div>
             </div>
           </div>
