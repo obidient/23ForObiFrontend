@@ -9,6 +9,7 @@ import SelectInput from './../misc/SelectInput';
 import VillageContext from '../../Context/villageContext';
 import useVillage from '../../Context/villageContext';
 import close from '../../assets/closeW.png'
+import StateContext from './../../Context/StateContext';
 
 import { Form, Formik } from 'formik';
 // import { CustomSelectInput } from '../Forms/SelectInput';
@@ -16,23 +17,31 @@ import * as Yup from 'yup';
 import dynamic from 'next/dynamic';
 import TextError from '../Forms/TextError';
 import useAuthStore from '../../store/authStore';
+import useUserStore from '../../store/userStore';
+
 // Prevent serverside redering on the FormikControl Component
 const FormikControl = dynamic(() => import('../Forms/FormikControl'), {
   ssr: false,
 });
 // Prevent serverside redering on the CustomSelectInput Component
-const CustomSelectInput = dynamic(
-  () => import('../Forms/SelectInput').then((mod) => mod.CustomSelectInput),
-  {
-    ssr: false,
-  }
-);
+// const CustomSelectInput = dynamic(
+//   () => import('../Forms/SelectInput').then((mod) => mod.CustomSelectInput),
+//   {
+//     ssr: false,
+//   }
+// );
 
-const DashboardMain = () => {
+const DashboardMain = ({states}) => {
   const { userProfile } = useAuthStore();
-  // const { email, first_name, last_name, image } = userProfile;
-  // const { email, first_name, last_name, image } = userProfile;
+  const { userVillages } = useUserStore();
 
+  console.log(userVillages);
+
+  const stateOption = states.map(state => {
+    return (state.state_name)
+  })
+
+  console.log(stateOption) 
   const email = userProfile?.email
   const first_name = userProfile?.first_name;
   const last_name = userProfile?.last_name;
@@ -154,10 +163,10 @@ const DashboardMain = () => {
             >
               {(props) => (
                 <Form>
-                  <CustomSelectInput
+                  <SelectInput
                     placeholder="Select your village"
                     name="village"
-                    options={villageOptions}
+                    options={states}
                     addVillageHandler={addVillageHandler}
                   />
                   {villageError && (

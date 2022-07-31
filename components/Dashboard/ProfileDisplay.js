@@ -9,6 +9,7 @@ import * as Yup from 'yup';
 // Prevent serverside redering on the FormikControl Component
 import dynamic from 'next/dynamic';
 import useAuthStore from '../../store/authStore';
+import useUserStore from '../../store/userStore';
 
 const FormikControl = dynamic(() => import('../Forms/FormikControl'), {
   ssr: false,
@@ -16,6 +17,10 @@ const FormikControl = dynamic(() => import('../Forms/FormikControl'), {
 
 const ProfileDisplay = () => {
   const { userProfile } = useAuthStore();
+  const { userStates } = useUserStore();
+
+  console.log(userStates)
+
   const first_name = userProfile?.first_name;
   const last_name = userProfile?.last_name;
   const email = userProfile?.email;

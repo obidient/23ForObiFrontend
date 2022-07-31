@@ -4,25 +4,27 @@ import Image from 'next/image';
 import { useContext, useState, useEffect } from 'react';
 import VillageContext from '../../Context/villageContext';
 import useVillage from '../../Context/villageContext';
+import StateContext from './../../Context/StateContext';
+import useUserStore from './../../store/userStore';
+import { getVillage } from './../../adapters/requests/index';
+import axios from 'axios'
 
 const SelectInput = () => {
   const [isDropDownVisible, setIsDropDownVisible] = useState(false);
+  const { states } = useContext(StateContext);
 
-  //dropdown items
-  const [itemsList, setItemsList] = useState([
-    {
-      name: 'Ezeani Village',
-      value: 'Ezeani Village 1',
-    },
-    {
-      name: 'Osusu Village',
-      value: 'Osusus Village 2',
-    },
-    {
-      name: 'Ariara Village',
-      value: 'Ariara Village 3',
-    },
-  ]);
+  const { addVillages } = useUserStore();
+  
+
+  const [itemsList, setItemsList] = useState(states.map((state) =>  {
+      const itemsss = 
+        {
+          name: state.state_name,
+          value: state.id,
+        }
+        return itemsss
+    }
+  ));
 
   // console.log(itemsList);
   const [selectedItemIndex, setSelectedItemsIndex] = useState(null);
@@ -50,9 +52,17 @@ const SelectInput = () => {
     // console.log(villageState);
   }, [selectedItemIndex]);
 
-  const handleClick = (index) => {
+  const handleClick = async(index, item) => {
+    
     setSelectedItemsIndex(index);
     setIsDropDownVisible(!isDropDownVisible);
+    axios.get(`https://api.23forobi.com/villages/${item.value}`).then(result => {
+          const res = result.data
+          addVillages(res)
+          console.log(res)
+          return res
+      });
+    // console.log(stateVillages);
   };
 
   return (
@@ -80,7 +90,7 @@ const SelectInput = () => {
                 <div
                   className={styles.dropdown_item}
                   key={item.value}
-                  onClick={() => handleClick(index)}
+                  onClick={() => handleClick(index, item)}
                 >
                   <p>{item.name}</p>
                 </div>

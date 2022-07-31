@@ -32,6 +32,7 @@ export function getVillage(id) {
 export function getVoters(id) {
   return get(`/voters/${id}`);
 }
+
 //POST REQUESTS
 export function addSupportGroup(requestData) {
   post('/support-group/', requestData);
