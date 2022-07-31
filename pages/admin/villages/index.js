@@ -242,7 +242,7 @@ const villages = ({ villages }) => {
         <Modal
           show={showModal}
           onClose={() => setOpenEdit(false)}
-          width="794px"
+          width="54.5rem"
         >
           <div className={styles.modal}>
             <div className={`${styles.modal__heading} modal_heading`}>
@@ -272,6 +272,12 @@ const villages = ({ villages }) => {
                   <br />
                   <span className="text-[#2F3733] text-2xl">7, July 2022</span>
                 </p>
+                <span
+                  className="font-normal text-xl text-[#D60602] underline cursor-pointer"
+                  onClick={() => setOpenDelete(true)}
+                >
+                  <a>Delete village</a>
+                </span>
               </div>
               <div className={`${styles.details_form}`}>
                 <Formik
@@ -284,32 +290,39 @@ const villages = ({ villages }) => {
                 >
                   {({ values }) => (
                     <Form autoComplete="off">
-                      <div className="flex items-center justify-around gap-2 w-full">
-                        <div className='w-1/2'>
-                          <FormikControl
-                            values={values}
-                            control="input"
-                            placeholder="Enter the name of a new village"
-                            name="village"
-                            type="text"
-                          />
-                        </div>
-                        <div className='w-1/2'>
-                          <FormikControl
-                            values={values}
-                            control="select"
-                            placeholder="Select your state"
-                            name="state"
-                            options={stateOptions}
-                          />
-                        </div>
+                      <FormikControl
+                        values={values}
+                        control="input"
+                        placeholder="Enter the name of a new village"
+                        name="village"
+                        type="text"
+                      />
+                      <FormikControl
+                        values={values}
+                        control="select"
+                        placeholder="Select your state"
+                        name="state"
+                        options={stateOptions}
+                      />
+
+                      <div className="my-5">
+                        <Link href={'/admin/villages/contributors'}>
+                          <span className="text-xl text-[#5678CE] underline cursor-pointer">
+                            Contributors list
+                          </span>
+                        </Link>
                       </div>
-                      <button
-                        type="submit"
-                        className="btn_dark w-full rounded-full h-20 mt-9"
-                      >
-                        Save village
-                      </button>
+                      <div className="flex w-full items-center justify-end gap-5">
+                        <button className="px-3 py-3 rounded-full w-[172px] border border-[#018226] text-[#018226]">
+                          Cancel
+                        </button>
+                        <button
+                          disabled
+                          className="w-[172px] bg-[#018226] text-white px-3 py-3 rounded-full"
+                        >
+                          Save
+                        </button>
+                      </div>
                     </Form>
                   )}
                 </Formik>
