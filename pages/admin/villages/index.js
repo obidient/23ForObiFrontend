@@ -15,7 +15,8 @@ import stateDetails from '../../../data/stateDetails';
 
 const villages = ({ villages }) => {
   const [showModal, setShowModal] = useState(false);
-  const [option, setOption] = useState(null);
+  const [openDelete, setOpenDelete] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
 
   // Form validation schema using Yup
   const villageValidationSchema = Yup.object({
@@ -24,11 +25,16 @@ const villages = ({ villages }) => {
   });
 
   //Initialize select options
-
   const stateOptions = stateDetails.map((item) => ({
     value: item.slug,
     label: item.name,
   }));
+
+  // Delete handler
+  const deleteHandler = async (villageId) => {};
+
+  // Edit handler
+  const editHandler = async (villageId) => {};
 
   return (
     <AdminPage>
@@ -53,11 +59,11 @@ const villages = ({ villages }) => {
           </button>
         </div>
       </div>
-      <div className="my-6 bg-white border border-[#FFFFFF] rounded-xl m-10">
+      <div className="my-6 bg-white p-3 border border-[#FFFFFF] rounded-xl m-10">
         <table className="table-fixed w-full text-justify">
           <thead>
             <tr className="h-[37px] border border-b-[#000000] text-[#979797] text-xl">
-              <th>SN</th>
+              <th className="px-5">SN</th>
               <th>VILLAGE NAME</th>
               <th>VILLAGE STATE</th>
               <th>NO OF CONTRIBUTORS</th>
@@ -72,18 +78,26 @@ const villages = ({ villages }) => {
                   key={index}
                   className="h-[37px] border border-b-[#000000] text-[#979797] text-2xl"
                 >
-                  <td className="text-[#2F3733]">{item.id}</td>
+                  <td className="text-[#2F3733] px-5">{item.id}</td>
                   <td className="text-[#2F3733]">{item.name}</td>
                   <td className="text-[#2F3733]">{item.state}</td>
                   <td className="text-[#2F3733]">{item.contributors}</td>
                   <td className="text-[#2F3733]">{item.progress}%</td>
-                  <td className="">
-                    <div>
-                      <button type="button border border-red">Edit</button>
-                    </div>
-                    <div>
-                      <button type="button">Delete</button>
-                    </div>
+                  <td className="text-xl ">
+                    <span
+                      className="mx-5 text-[#5678CE] underline cursor-pointer"
+                      onClick={() => setOpenEdit(true)}
+                    >
+                      Edit
+                    </span>
+                    <span
+                      className="mx-5 text-[#D60602] underline cursor-pointer"
+                      onClick={() => {
+                        setOpenDelete(true);
+                      }}
+                    >
+                      Delete
+                    </span>
                   </td>
                 </tr>
               ))
@@ -187,6 +201,136 @@ const villages = ({ villages }) => {
         </Modal>
       )}
       {/* CONTRIBUTOR MODAL END */}
+      {openDelete && (
+        <Modal
+          show={showModal}
+          onClose={() => setOpenDelete(false)}
+          width="44.5rem"
+        >
+          <div className={styles.modal}>
+            <div className={`${styles.modal__heading} modal_heading`}>
+              <h2>
+                Delete
+                <br />
+                <span className="font-bold">Village</span>
+              </h2>
+              <button
+                className={`closeBtn`}
+                onClick={() => setOpenDelete(false)}
+              >
+                &times;
+              </button>
+            </div>
+            <div className={styles.modal__body}>
+              <p className="my-8 text-[#7A7B7B]">
+                {`Kindly note that you are about to delete the village Ukpor from
+                the list. Are you sure?`}
+              </p>
+              <div className="flex items-center justify-around">
+                <button className="px-3 py-3 rounded-full w-[172px] border border-[#018226] text-[#018226]">
+                  Cancel
+                </button>
+                <button className="w-[172px] bg-[#D60602] text-white px-3 py-3 rounded-full">
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </Modal>
+      )}
+      {openEdit && (
+        <Modal
+          show={showModal}
+          onClose={() => setOpenEdit(false)}
+          width="54.5rem"
+        >
+          <div className={styles.modal}>
+            <div className={`${styles.modal__heading} modal_heading`}>
+              <h2>
+                Edit Contributor
+                <br />
+                <span className="font-bold">Information</span>
+              </h2>
+              <button className={`closeBtn`} onClick={() => setOpenEdit(false)}>
+                &times;
+              </button>
+            </div>
+            <div className={styles.modal__body}>
+              <div className="flex items-center justify-around mt-10 mb-14">
+                <p className="font-normal text-[#979797] text-xl">
+                  NO of Contributors
+                  <br />
+                  <span className="text-[#2F3733] text-2xl">200</span>
+                </p>
+                <p className="font-normal text-[#979797] text-xl">
+                  Progress
+                  <br />
+                  <span className="text-[#2F3733] text-2xl">100%</span>
+                </p>
+                <p className="font-normal text-[#979797] text-xl">
+                  Date added
+                  <br />
+                  <span className="text-[#2F3733] text-2xl">7, July 2022</span>
+                </p>
+                <span
+                  className="font-normal text-xl text-[#D60602] underline cursor-pointer"
+                  onClick={() => setOpenDelete(true)}
+                >
+                  <a>Delete village</a>
+                </span>
+              </div>
+              <div className={`${styles.details_form}`}>
+                <Formik
+                  initialValues={{
+                    state: '',
+                    village: '',
+                  }}
+                  validationSchema={villageValidationSchema}
+                  onSubmit={(values) => console.log('Form data', values)}
+                >
+                  {({ values }) => (
+                    <Form autoComplete="off">
+                      <FormikControl
+                        values={values}
+                        control="input"
+                        placeholder="Enter the name of a new village"
+                        name="village"
+                        type="text"
+                      />
+                      <FormikControl
+                        values={values}
+                        control="select"
+                        placeholder="Select your state"
+                        name="state"
+                        options={stateOptions}
+                      />
+
+                      <div className="my-5">
+                        <Link href={'/admin/villages/contributors'}>
+                          <span className="text-xl text-[#5678CE] underline cursor-pointer">
+                            Contributors list
+                          </span>
+                        </Link>
+                      </div>
+                      <div className="flex w-full items-center justify-end gap-5">
+                        <button className="px-3 py-3 rounded-full w-[172px] border border-[#018226] text-[#018226]">
+                          Cancel
+                        </button>
+                        <button
+                          disabled
+                          className="w-[172px] bg-[#018226] text-white px-3 py-3 rounded-full"
+                        >
+                          Save
+                        </button>
+                      </div>
+                    </Form>
+                  )}
+                </Formik>
+              </div>
+            </div>
+          </div>
+        </Modal>
+      )}
     </AdminPage>
   );
 };
