@@ -1,15 +1,23 @@
 import styles from './Styles.module.scss';
 import Image from 'next/image';
 
+//IMAGES
 import status_check from '../../assets/status_check.png';
+import close from '../../assets/closeW.png'
+import add_img_green from '../../assets/add_img_green.png';
 import caret_down from '../../assets/caret_down.png';
+
 import { useContext, useState, useEffect } from 'react';
 import Modal from './../Modal/Index';
 import SelectInput from './../misc/SelectInput';
 import VillageContext from '../../Context/villageContext';
 import useVillage from '../../Context/villageContext';
-import close from '../../assets/closeW.png'
 import StateContext from './../../Context/StateContext';
+
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import Team from '../../data/teamImages';
+import TeamCard from '../../components/ImgCard/TeamCard';
+import VillageDetails from './VillageDetails'
 
 import { Form, Formik } from 'formik';
 // import { CustomSelectInput } from '../Forms/SelectInput';
@@ -18,6 +26,7 @@ import dynamic from 'next/dynamic';
 import TextError from '../Forms/TextError';
 import useAuthStore from '../../store/authStore';
 import useUserStore from '../../store/userStore';
+
 
 // Prevent serverside redering on the FormikControl Component
 const FormikControl = dynamic(() => import('../Forms/FormikControl'), {
@@ -31,22 +40,29 @@ const FormikControl = dynamic(() => import('../Forms/FormikControl'), {
 //   }
 // );
 
+
+
 const DashboardMain = ({states}) => {
   const { userProfile } = useAuthStore();
   const { userVillages } = useUserStore();
-
+  
   console.log(userVillages);
-
-  const stateOption = states.map(state => {
+  
+  const stateOption = states?.map(state => {
     return (state.state_name)
   })
-
+  
+  const [tabIndex, setTabIndex] = useState(0);
+  
   console.log(stateOption) 
   const email = userProfile?.email
   const first_name = userProfile?.first_name;
   const last_name = userProfile?.last_name;
   const image = userProfile?.image;
   
+  //VILLAGES
+  const villageIn = ['Eziama Village', 'Osusu Village'];
+
   ////// Modal State
   const [showModal, setShowModal] = useState(false);
 
@@ -145,9 +161,46 @@ const DashboardMain = ({states}) => {
 
   return (
     <div className={styles.dashboardmain}>
-      <h2>Welcome {first_name}</h2>
+      <div className={styles.dashboardmain__top}>
+        <div className={styles.dashboardmain_welcome}>
+          <h2>Welcome back! {first_name},</h2>
+          <p>We are glad to have you</p>
+        </div>
+        <div className={styles.dashboardmain_add_village}>
+          <Image src={add_img_green} />
+          <p>Add a new village</p>
+        </div>
+      </div>
       <hr />
-      <div className={styles.village_control}>
+      <Tabs
+        selectedIndex={tabIndex}
+        onSelect={(index) => setTabIndex(index)}
+        selectedTabClassName="border-b-[1px] border-[#018226] text-[#2F3733] outline-none"
+      >
+        <TabList className="flex border-b border-[#F1F1F1] w-full items-center justify-start text-center mt-8">
+          {villageIn.map((item) => (
+            <Tab
+              key={item}
+              className="font-bold lg:px-8 py-3 text-3xl lg:text-2xl  w-[200px] cursor-pointer hover:border-[#018226] hover:border-b-[1px]"
+            >
+              {item}
+            </Tab>
+          ))}
+        </TabList>
+        <TabPanel>
+          <div>
+            <VillageDetails />
+          </div>
+        </TabPanel>
+        <TabPanel>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
+            {Team.map((item) => (
+              <TeamCard src={item.src} />
+            ))}
+          </div>
+        </TabPanel>
+      </Tabs>
+      {/* <div className={styles.village_control}>
         <div className={styles.village_control__input}>
           <h3>VIllages you have control in</h3>
           <p>Add the villages you have control over within your state.</p>
@@ -192,10 +245,10 @@ const DashboardMain = ({states}) => {
             );
           })}
         </div>
-      </div>
-      <hr />
-      <div className={styles.main_bottom}>
-        <div className={styles.main_bottom__contact}>
+      </div> */}
+      {/* <hr /> */}
+      {/* <div className={styles.main_bottom}> */}
+      {/* <div className={styles.main_bottom__contact}>
           <Formik
             initialValues={{ name: '', phone: '', whatsapp: '' }}
             validationSchema={Yup.object({
@@ -243,15 +296,15 @@ const DashboardMain = ({states}) => {
               </Form>
             )}
           </Formik>
-        </div>
-        <div className={styles.main_bottom__contributors}>
+        </div> */}
+      {/* <div className={styles.main_bottom__contributors}>
           <div className={styles.heading}>
             <h5>Contributors</h5>
             <p onClick={() => setShowModal(true)}>Add a new contributor</p>
-          </div>
+          </div> */}
 
-          {/* CONTRIBUTOR MODAL */}
-          {showModal && (
+      {/* CONTRIBUTOR MODAL */}
+      {/* {showModal && (
             <Modal
               show={showModal}
               onClose={() => setShowModal(false)}
@@ -326,9 +379,9 @@ const DashboardMain = ({states}) => {
                 </div>
               </div>
             </Modal>
-          )}
-          {/* CONTRIBUTOR MODAL END */}
-          <div className={styles.contributors_table}>
+          )} */}
+      {/* CONTRIBUTOR MODAL END */}
+      {/* <div className={styles.contributors_table}>
             <table>
               <tbody>
                 <tr>
@@ -373,9 +426,9 @@ const DashboardMain = ({states}) => {
                 </tr>
               </tbody>
             </table>
-          </div>
-        </div>
-      </div>
+          </div> */}
+      {/* </div> */}
+      {/* </div> */}
     </div>
   );
 };

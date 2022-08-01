@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import DashboardMain from '../../components/Dashboard/DashboardMain';
-import DeliverVotes from '../../components/Dashboard/DeliverVotes';
+import Sidebar from '../../components/Dashboard/Sidebar';
 import DashboardNav from '../../components/DashboardNav/Index';
 // import styles from './pagestyles/home.module.scss';
 import styles from '../pagestyles/home.module.scss';
@@ -21,7 +21,7 @@ const dashboard = (props) => {
           <DashboardMain states={states}/>
         </div>
         <div className={styles.aside}>
-          <DeliverVotes />
+          <Sidebar />
         </div>
       </div>
     </div>

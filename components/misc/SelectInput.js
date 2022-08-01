@@ -16,7 +16,7 @@ const SelectInput = () => {
   const { addVillages } = useUserStore();
   
 
-  const [itemsList, setItemsList] = useState(states.map((state) =>  {
+  const [itemsList, setItemsList] = useState(states?.map((state) =>  {
       const itemsss = 
         {
           name: state.state_name,

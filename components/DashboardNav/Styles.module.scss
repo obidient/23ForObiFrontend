@@ -26,6 +26,23 @@
             }
         }
     }
+
+	&__top_left {
+		display: flex;
+		align-items: flex-end;
+		justify-content: space-between;
+		column-gap: 3.7rem;
+	}
+
+	&__progress {
+		width: 26.8rem;
+
+
+		.head {
+			display: flex;
+			justify-content: space-between;
+		}
+	}
 }
 
 

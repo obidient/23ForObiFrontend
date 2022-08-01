@@ -1,9 +1,33 @@
 .dashboardmain {
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    .dashboardmain_add_village {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      column-gap: 1.275rem;
+      p {
+        color: var(--primary-color);
+        margin-bottom: 0;
+      }
+    }
+  }
+
   h2 {
     font-weight: 700;
     font-size: var(--font-header-3);
     line-height: 130%;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  p {
+    font-size: 1.3rem;
+    line-height: 130%;
+    color: var(--text-color-4);
+    margin-bottom: 1rem;
   }
 
   hr {
@@ -230,11 +254,15 @@
   }
 }
 
-.delivervotes {
+.sidebar {
   padding-bottom: 8rem;
   h2 {
     margin-top: 2.5rem;
     margin-bottom: 1.5rem;
+    font-weight: 700;
+    font-size: var(--font-header-3);
+    line-height: 100%;
+    color: var(--text-color-1);
   }
 
   p {
@@ -249,13 +277,44 @@
     border: 1px solid #e1e1e1;
   }
 
+  &__achievements {
+    
+    .achievements_images {
+      display: flex;
+      justify-content: space-between;
+      column-gap: 1.5rem;
+      padding: 3rem 0;
+
+      .img {
+        border: 1.68749px solid #C0CFF5;
+        border-radius: 500px;
+        background-color: #D8E2FA;
+        padding: 1.6rem 2.2rem;
+      }
+    }
+    
+    .link {
+      margin-bottom: 3rem;
+      
+      a {
+        font-size: var(--font-p-text-1);
+        line-height: 130%;
+        text-decoration-line: underline;
+        color: #5678CE;
+      }
+    }
+  }
+
   .instruction_cards {
     .card {
-      background: #d8e2fa;
-      border: 1px solid #c0cff5;
-      border-radius: 16px;
-      padding: 1.5rem 2rem 0;
+      // background: #d8e2fa;
+      // border: 1px solid #c0cff5;
+      // border-radius: 16px;
+      padding: 1.5rem 0rem 0;
       margin-bottom: 1rem;
+      display: flex;
+      align-items: flex-start;
+      column-gap: .5rem;
 
       h3 {
         font-weight: 700;
@@ -264,9 +323,28 @@
         // margin-bottom: .5rem;
       }
 
+      .inec {
+        color: #5678CE;
+      } 
+
       p {
         margin-bottom: 1.5rem;
         margin-top: 0.5rem;
+      }
+
+      .num {
+        border: 1.68749px solid #C0CFF5;
+        border-radius: 500px;
+        background-color: #D8E2FA;
+        padding: 1rem;
+        p {
+          font-weight: 700;
+          font-size: var(--font-p-text-1);          
+          margin-bottom: 0;
+          margin-top: 0;
+          text-align: center;
+          color: #5678CE;
+        }
       }
     }
   }
@@ -419,3 +497,53 @@
     }
   }
 }
+
+/////////////////// VILLAGE DETAILS ////////////////////////
+.village_details {
+  margin-top: 2.65rem;
+  &__heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .dashboardmain_add_village {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      column-gap: 1.275rem;
+      p {
+        margin-bottom: 0;
+        color: var(--primary-color);
+      }
+    }
+
+    &__table {
+      overflow: auto;
+      border-radius: 6px;
+      border: 1px solid #F1F1F1;
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        border-radius: 10px;
+        border-style: hidden;
+
+        width:100%;
+        max-width: 100%;
+
+      }
+      
+      tr {
+        border: 1px solid #F1F1F1;
+        border-radius: 10px;
+        text-align: left;
+        padding: 8px;
+
+      }
+      
+      td, th {
+        padding: 8px;
+      }
+    }
+}
+
