@@ -9,6 +9,7 @@ import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import FormikControl from '../../components/Forms/FormikControl';
 import Modal from '../../components/Modal/Index';
+import Toggle from '../../components/misc/Toggle';
 
 const roles = ['Profile', 'Security', 'Notifications', 'Groups'];
 const settings = () => {
@@ -16,6 +17,8 @@ const settings = () => {
   const [showModal, setShowModal] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
+  const [value, setValue] = useState(false);
+  const [value2, setValue2] = useState(false);
 
   const userList = [
     {
@@ -196,13 +199,21 @@ const settings = () => {
             <div className="border border-[#F1F1F1] rounded-2xl bg-white h-[100vh] w-[95%] m-10 text-[#2F3733] p-10 cursor-pointer">
               <div className="flex items-center justify-between border-b border-[#F1F1F1]">
                 <h2 className="pb-4 pt-6 text-3xl">Get notifications</h2>
-                <input type="checkbox" />
+                <Toggle
+                  isOn={value}
+                  onColor="#AAFBC1"
+                  handleToggle={() => setValue(!value)}
+                />
               </div>
               <div className="flex items-center justify-between border-b border-[#F1F1F1]">
                 <h2 className="pb-4 pt-6 text-3xl">
                   Get new village notification
                 </h2>
-                <input type="checkbox" />
+                <Toggle
+                  isOn={value2}
+                  onColor="#AAFBC1"
+                  handleToggle={() => setValue2(!value2)}
+                />
               </div>
             </div>
           </TabPanel>
