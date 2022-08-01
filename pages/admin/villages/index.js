@@ -12,11 +12,13 @@ import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import FormikControl from '../../../components/Forms/FormikControl';
 import stateDetails from '../../../data/stateDetails';
+import success from '../../../assets/success.png';
 
 const villages = ({ villages }) => {
   const [showModal, setShowModal] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
+  const [successModal, setSuccessModal] = useState(false);
 
   // Form validation schema using Yup
   const villageValidationSchema = Yup.object({
@@ -29,6 +31,12 @@ const villages = ({ villages }) => {
     value: item.slug,
     label: item.name,
   }));
+
+  // Create village Handler
+  const submitHandler = async() => {
+    // api call
+    setSuccessModal(true)
+  }
 
   // Delete handler
   const deleteHandler = async (villageId) => {};
@@ -201,6 +209,7 @@ const villages = ({ villages }) => {
         </Modal>
       )}
       {/* CONTRIBUTOR MODAL END */}
+      {/**Delete Modal */}
       {openDelete && (
         <Modal
           show={showModal}
@@ -238,6 +247,7 @@ const villages = ({ villages }) => {
           </div>
         </Modal>
       )}
+      {/**Edit modal */}
       {openEdit && (
         <Modal
           show={showModal}
@@ -326,6 +336,42 @@ const villages = ({ villages }) => {
                     </Form>
                   )}
                 </Formik>
+              </div>
+            </div>
+          </div>
+        </Modal>
+      )}
+      {successModal && (
+        <Modal
+          show={showModal}
+          onClose={() => setSuccessModal(false)}
+          width="44.5rem"
+        >
+          <div className={`${styles.modal} flex items-center flex-col`}>
+            <div
+              className={`${styles.modal__heading} modal_heading flex items-center w-full`}
+            >
+              <Image src={success} style={{ margin: '0 auto' }} />
+              <div className="absolute right-0 z-20">
+                <button
+                  className={`closeBtn`}
+                  onClick={() => setSuccessModal(false)}
+                >
+                  &times;
+                </button>
+              </div>
+            </div>
+            <div className={`${styles.modal__body} flex flex-col items-center`}>
+              <h2 className="text-center">
+                A new village has been added successfully
+              </h2>
+              <p className="my-8 text-[#7A7B7B] text-center">
+                You have added a new village
+              </p>
+              <div className="flex items-center justify-around w-full">
+                <button className="w-full bg-[#018226] text-white px-3 py-3 rounded-full">
+                  Continue
+                </button>
               </div>
             </div>
           </div>
