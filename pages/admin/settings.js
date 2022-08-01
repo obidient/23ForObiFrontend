@@ -9,6 +9,7 @@ import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import FormikControl from '../../components/Forms/FormikControl';
 import Modal from '../../components/Modal/Index';
+import Toggle from '../../components/misc/Toggle';
 
 const roles = ['Profile', 'Security', 'Notifications', 'Groups'];
 const settings = () => {
@@ -16,6 +17,10 @@ const settings = () => {
   const [showModal, setShowModal] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
+  const [groupModal, setGroupModal] = useState(false);
+  const [value, setValue] = useState(false);
+  const [value2, setValue2] = useState(false);
+  const [value3, setValue3] = useState(false);
 
   const userList = [
     {
@@ -34,6 +39,18 @@ const settings = () => {
       users: 20,
     },
   ];
+  const permissions = [
+    'Add a village',
+    'Add a state',
+    'Remove users',
+    'Download list',
+    'Create group',
+    'Invite members',
+    'Remove members',
+    'Create group',
+    'Delete village',
+    'Delete state',
+  ];
 
   // Form validation schema using Yup
   const userValidationSchema = Yup.object({
@@ -43,6 +60,7 @@ const settings = () => {
     phone: Yup.string().required('Required'),
     password: Yup.string().required('Required'),
     confirm_password: Yup.string().required('Required'),
+    village: Yup.string().required('Required'),
   });
 
   return (
@@ -196,13 +214,21 @@ const settings = () => {
             <div className="border border-[#F1F1F1] rounded-2xl bg-white h-[100vh] w-[95%] m-10 text-[#2F3733] p-10 cursor-pointer">
               <div className="flex items-center justify-between border-b border-[#F1F1F1]">
                 <h2 className="pb-4 pt-6 text-3xl">Get notifications</h2>
-                <input type="checkbox" />
+                <Toggle
+                  isOn={value}
+                  onColor="#AAFBC1"
+                  handleToggle={() => setValue(!value)}
+                />
               </div>
               <div className="flex items-center justify-between border-b border-[#F1F1F1]">
                 <h2 className="pb-4 pt-6 text-3xl">
                   Get new village notification
                 </h2>
-                <input type="checkbox" />
+                <Toggle
+                  isOn={value2}
+                  onColor="#AAFBC1"
+                  handleToggle={() => setValue2(!value2)}
+                />
               </div>
             </div>
           </TabPanel>
@@ -211,7 +237,7 @@ const settings = () => {
               <div className="flex items-center mx-4 my-8">
                 <button
                   className="bg-[#018226] w-[197px] h-[44px] rounded-full text-white flex items-center justify-center ml-auto"
-                  onClick={() => setShowModal(true)}
+                  onClick={() => setGroupModal(true)}
                 >
                   <span className="flex items-center justify-center px-2">
                     <Image src={circleIcon} />
@@ -274,6 +300,7 @@ const settings = () => {
           </TabPanel>
         </Tabs>
       </div>
+      {/**Delete Modal */}
       {openDelete && (
         <Modal
           show={showModal}
@@ -306,6 +333,104 @@ const settings = () => {
                 <button className="w-[172px] bg-[#D60602] text-white px-3 py-3 rounded-full">
                   Delete
                 </button>
+              </div>
+            </div>
+          </div>
+        </Modal>
+      )}
+      {/**Create Gropu Modal */}
+      {groupModal && (
+        <Modal
+          show={showModal}
+          onClose={() => setGroupModal(false)}
+          width="54.4rem"
+        >
+          <div className={styles.modal}>
+            <div className={`${styles.modal__heading} modal_heading`}>
+              <h2>
+                Create a <br />
+                <span className="font-bold">New group</span>
+              </h2>
+              <button
+                className={`closeBtn`}
+                onClick={() => setGroupModal(false)}
+              >
+                &times;
+              </button>
+            </div>
+            <div className={styles.modal__body}>
+              <p className="my-5 text-[#7A7B7B]">
+                Kindly enter the details to create a new group
+              </p>
+              <div className={styles.details_form}>
+                <Formik
+                  initialValues={{
+                    village: '',
+                  }}
+                  validationSchema={userValidationSchema}
+                  onSubmit={(values) => console.log('Form data', values)}
+                >
+                  {({ values }) => (
+                    <Form autoComplete="off">
+                      <FormikControl
+                        values={values}
+                        control="input"
+                        placeholder="Enter group name"
+                        name="village"
+                        type="text"
+                      />
+                      <div className="p-4 border border-t-[#F1F1F1] outline-none">
+                        <p className="text-[#7A7B7B] py-4">Assign permission</p>
+                        <div className="">
+                          <input
+                            type="checkbox"
+                            name="all"
+                            className="outline-none"
+                          />
+                          <label
+                            htmlFor="all"
+                            className="text-[#2F3733] px-4 text-2xl py-4"
+                          >
+                            Assign all permission
+                          </label>
+                        </div>
+                        <div className="grid grid-cols-3 py-2 border border-b-[#F1F1F1]">
+                          {permissions &&
+                            permissions.length &&
+                            permissions.map((item, index) => (
+                              <div key={index}>
+                                <input
+                                  type="checkbox"
+                                  name={item}
+                                  className="outline-none"
+                                />
+                                <label
+                                  htmlFor={item}
+                                  className="text-[#2F3733] p-4 my-6 text-[13px]"
+                                >
+                                  {item}
+                                </label>
+                              </div>
+                            ))}
+                        </div>
+                        <div className="flex items-center justify-between my-5">
+                          <p>Activate group</p>
+                          <Toggle
+                            isOn={value3}
+                            handleToggle={() => setValue3(!value3)}
+                            onColor="#AAFBC1"
+                          />
+                        </div>
+                      </div>
+                      <button
+                        type="submit"
+                        className="btn_dark w-full rounded-full h-20 mt-9"
+                      >
+                        Save group
+                      </button>
+                    </Form>
+                  )}
+                </Formik>
               </div>
             </div>
           </div>

@@ -152,6 +152,7 @@
 
     @media (max-width: 75em) {
         grid-template-columns: 100%;
+        height: auto;
     }
 
     &__sidebar {

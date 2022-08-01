@@ -18,7 +18,7 @@ const admin = () => {
         router.push('/admin');
       }
     };
-  }, [adminUser, router]);
+  }, [adminUser, router])
 
   const [toggle, setToggle] = useState(true);
 
