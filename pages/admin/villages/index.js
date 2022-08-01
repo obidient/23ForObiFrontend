@@ -209,6 +209,7 @@ const villages = ({ villages }) => {
         </Modal>
       )}
       {/* CONTRIBUTOR MODAL END */}
+      {/**Delete Modal */}
       {openDelete && (
         <Modal
           show={showModal}
@@ -246,6 +247,7 @@ const villages = ({ villages }) => {
           </div>
         </Modal>
       )}
+      {/**Edit modal */}
       {openEdit && (
         <Modal
           show={showModal}
