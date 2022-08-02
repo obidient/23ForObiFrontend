@@ -193,10 +193,8 @@ const DashboardMain = ({states}) => {
           </div>
         </TabPanel>
         <TabPanel>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
-            {Team.map((item) => (
-              <TeamCard src={item.src} />
-            ))}
+          <div>
+            <VillageDetails />
           </div>
         </TabPanel>
       </Tabs>

@@ -12,6 +12,7 @@
       p {
         color: var(--primary-color);
         margin-bottom: 0;
+        font-size: var(--font-p-text-1);
       }
     }
   }
@@ -501,7 +502,13 @@
 /////////////////// VILLAGE DETAILS ////////////////////////
 .village_details {
   margin-top: 2.65rem;
+
+  &__stats {
+    margin-bottom: 2rem;
+  }
+
   &__heading {
+    margin-top: 2.7rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -514,6 +521,7 @@
       column-gap: 1.275rem;
       p {
         margin-bottom: 0;
+        font-size: var(--font-p-text-1);
         color: var(--primary-color);
       }
     }
@@ -522,6 +530,7 @@
       overflow: auto;
       border-radius: 6px;
       border: 1px solid #F1F1F1;
+      margin-top: 2.2rem;
       table {
         border-collapse: collapse;
         width: 100%;
@@ -537,13 +546,126 @@
         border: 1px solid #F1F1F1;
         border-radius: 10px;
         text-align: left;
-        padding: 8px;
-
       }
       
       td, th {
-        padding: 8px;
+        // padding: 8px;
+      }
+
+      th {
+        padding-top: 2rem;
+        padding-bottom: 1rem;
+        padding-left: 2rem;
+        font-weight: 700;
+        font-size: 1.3rem;
+        line-height: 130%;
+        color: var(--text-color-4);
+      }
+
+      td {
+        padding-top: 1rem;
+        padding-bottom: 2rem;
+        padding-left: 2rem;
+        font-weight: 400;
+        font-size: 1.3rem;
+        line-height: 130%;
+        color: var(--text-color-1);
+
+        a {
+          line-height: 130%;
+          text-decoration-line: underline;
+          color: #5678CE;
+          }
       }
     }
 }
 
+////////////////////VILLAGE STAT/////////////////////////
+.village_stat {
+  background-color: var(--primary-color);
+  display: grid;
+  grid-template-columns: 50% 50%;
+  padding: 2rem;
+  border: 1px solid #02B836;
+  border-radius: 16px;
+
+  p {
+    line-height: 130%; 
+    color: #2EE061;
+  }
+  
+  h3 {
+    font-weight: 700;
+    font-size: var(--font-header-1);
+    line-height: 130%;
+    color: #FFFFFF;
+      }
+
+  .stat_one {
+    position: relative;
+    &__num_votes {
+      width: 30.4rem;
+      p {
+        font-size: var(--font-p-text-1);
+      }
+      h3 {
+        font-weight: 700;
+        color: #FFFFFF;
+      }
+  
+    }
+
+    ::before {
+      content: "";
+      position: absolute;
+      height: 6.7rem;
+      width: .2rem;
+      background: #02B836;
+      right: 0;
+      top: .7rem;
+    }
+  }
+
+  .stat_two {
+    padding-left: 10rem;
+    padding-top: 1rem;
+    display: flex;
+    // text-align: end;
+    justify-content: space-between;
+
+     @media (max-width: 45.25em) {
+         padding-left: 5rem;
+        }
+    p {
+      font-size: 1.3rem;
+    }
+
+    h3 {
+      font-size: var(--font-header-2);
+      line-height: 100%;
+    }
+    &__rewards {
+      padding-right: 7rem;
+      position: relative;
+      
+      @media (max-width: 45.25em) {
+         padding-right: 5rem;
+        }
+      ::before {
+      content: "";
+      position: absolute;
+      height: 3rem;
+      width: .2rem;
+      background: #02B836;
+      right: 10px;
+      top: 1rem;
+    }
+  }
+
+    &__num_villages {
+      // padding-left: 1.5rem;
+
+    }
+  }
+
+}
