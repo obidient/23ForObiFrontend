@@ -26,18 +26,30 @@ const FormikControl = dynamic(() => import('../Forms/FormikControl'), {
 //Images
 import search from '../../assets/search.png';
 import pdp from '../../assets/pdp.png';
+import apc from '../../assets/apc.png'
 import ikpeazu from '../../assets/ikpeazu.png';
+import avatar from '../../assets/avatar.png';
 
 import add_img from '../../assets/add_img.png';
 import download_img from '../../assets/download.png';
 import ImgCard from '../ImgCard/ImgCard';
 import Link from 'next/link';
 import ShareCard from '../ImgCard/ShareCard';
-import axios from 'axios'
+import axios from 'axios';
 import uploaded from '../../assets/uploaded.png';
 
-const State = ({ stateName, detail, images }) => {
+const State = ({ stateName, detail, images, villages }) => {
   // console.log(detail);
+  // console.log(villages)
+  const {
+    current_governor,
+    progress,
+    terms,
+    vote_control,
+    current_governor_appointment_date,
+    last_vote_direction,
+    image,
+  } = detail;
   // Modals
   const [showModal, setShowModal] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
@@ -55,7 +67,7 @@ const State = ({ stateName, detail, images }) => {
   const [villagesIn, setVillagesIn] = useState(VILLAGESINCONTROL);
   const [villagesNotIn, setVillagesNotIn] = useState(villageNotInDetails);
   const [selectedImages, setSelectedImages] = useState([]);
-  
+
   //IMAGE FOR STATE
   const [imgForm, setImgForm] = useState({
     title: '',
@@ -63,62 +75,62 @@ const State = ({ stateName, detail, images }) => {
     contributed_by: '',
   });
 
+// console.log(villages.list_of_villages)
   //ONCHANGE FOR TITLE
   const onImgChange = (e) => {
     setImgForm((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
-    console.log(imgForm)
+    console.log(imgForm);
   };
-  
-  // FUNCTION FOR PREVIEWING IMAGES
-  
-  const [imageUpload, setImageUpload] = useState('')
 
-    //IMAGE ONCHANGE
-  const onSelectFile = useCallback(async(e) => {
+  // FUNCTION FOR PREVIEWING IMAGES
+
+  const [imageUpload, setImageUpload] = useState('');
+
+  //IMAGE ONCHANGE
+  const onSelectFile = useCallback(async (e) => {
     const selectedFiles = e.target.files[0];
-    const base64 = await convertToBase64(selectedFiles)
-    setImageUpload(base64)
-    e.target.value = ""
+    const base64 = await convertToBase64(selectedFiles);
+    setImageUpload(base64);
+    e.target.value = '';
     setSelectedImages(selectedFiles);
   }, []);
   //CONVERT TO BASE64
-  const convertToBase64 = file => {
+  const convertToBase64 = (file) => {
     return new Promise((resolve, reject) => {
-      const fileReader = new FileReader()
-      if(!file) {
-        alert('Please select an image')
+      const fileReader = new FileReader();
+      if (!file) {
+        alert('Please select an image');
       } else {
-        fileReader.readAsDataURL(file)
+        fileReader.readAsDataURL(file);
         fileReader.onload = () => {
-          resolve(fileReader.result)
-        }
+          resolve(fileReader.result);
+        };
       }
       fileReader.onerror = (error) => {
-        reject(error)
-      }
-    })
-  }
-    //DELETE IMAGE
+        reject(error);
+      };
+    });
+  };
+  //DELETE IMAGE
   const deleteImage = (e) => {
-    e.preventDefault()
-    setImageUpload(null)
-  }
-  
+    e.preventDefault();
+    setImageUpload(null);
+  };
+
   //PAYLOAD
-    //GET DATA AND ADD TO AN UP OBJECT TO POST
+  //GET DATA AND ADD TO AN UP OBJECT TO POST
   const url = imageUpload;
-  const {title, location, contributed_by} = imgForm
+  const { title, location, contributed_by } = imgForm;
 
-  const imgPayload = {title, location, contributed_by, url}
+  const imgPayload = { title, location, contributed_by, url };
 
-  
   //POST DATA TO ENDPOINT
   const onSubmit = (e) => {
-    e.preventDefault()
-    
+    e.preventDefault();
+
     //Api call
     const headers = {
       accept: 'application/json',
@@ -134,7 +146,7 @@ const State = ({ stateName, detail, images }) => {
             console.log(res);
           });
 
-          console.log(res);
+        console.log(res);
       } catch (err) {
         console.log(err);
       }
@@ -163,14 +175,16 @@ const State = ({ stateName, detail, images }) => {
     setSearchQuery(e.target.value);
   };
 
+  const villagesList = villages.list_of_villages 
+  console.log(villagesList)
+
   const filter = (villages, query) => {
     return villages.filter((village) => {
       return searchParam.some((newVillage) => {
-        return village[newVillage].toString().toLowerCase().indexOf(query) > -1;
+        return village[newVillage]?.toString().toLowerCase().indexOf(query) > -1;
       });
     });
   };
-
 
   // Handle Change
   const handleChange = (e) => {
@@ -195,10 +209,10 @@ const State = ({ stateName, detail, images }) => {
             <div className={styles.vill_control}>
               <div className={styles.vill_control__text}>
                 <h5>Villages in control</h5>
-                <p>10% control</p>
+                <p>{vote_control ? `${vote_control} %` : `${0}%`} control</p>
               </div>
               <div className={styles.vill_control__progress}>
-                <SingleStateProgress done={10} />
+                <SingleStateProgress done={progress ? `${progress}` : `${0}`} />
               </div>
             </div>
           </div>
@@ -207,11 +221,15 @@ const State = ({ stateName, detail, images }) => {
               <div className={styles.current_gov}>
                 <p>Current governor</p>
                 <div className={styles.current_gov__details}>
-                  <Image src={ikpeazu} />
+                  <Image src={image ? image : avatar} width={78} height={78} />
                   <div className={styles.text}>
-                    <h5>{detail?.current_governor}</h5>
-                    <p>Since: May 29, 2015</p>
-                    <p>Terms: 2(Two)</p>
+                    <h5>
+                      {current_governor
+                        ? current_governor
+                        : ''}
+                    </h5>
+                  <p>Since: {current_governor_appointment_date ? current_governor_appointment_date : ''}</p>
+                    <p>Terms: {terms ? terms : ''}</p>
                   </div>
                 </div>
               </div>
@@ -219,10 +237,10 @@ const State = ({ stateName, detail, images }) => {
               <div className={styles.vote_dir}>
                 <p>Last vote direction</p>
                 <div className={styles.vote_dir__details}>
-                  <Image src={pdp} />
+                  <Image src={last_vote_direction ? pdp : apc} />
                   <div className={styles.text}>
-                    <h5>PDP</h5>
-                    <p>People Democratic Party</p>
+                    <h5>{last_vote_direction ? last_vote_direction : ''}</h5>
+                    <p>{last_vote_direction ? 'People Democratic Party': 'All Progressive Congress'}</p>
                   </div>
                 </div>
               </div>
@@ -245,18 +263,21 @@ const State = ({ stateName, detail, images }) => {
             </div>
           </div>
           <div className="cards">
-            {villagesIn && villagesIn.length > 0 ? (
-              filter(villagesIn, searchQuery.toLowerCase()).map((item) => (
+            {villagesList && villagesList.length > 0 ? (
+              filter(villagesList, searchQuery.toLowerCase()).map((item) => (
                 <Card
                   key={item.id}
                   village={item.name}
                   type={item.type}
-                  progress={item.progress}
+                  progress={item.progress_percentage}
                   slug={item.slug}
+                  contributors={item.top_contributors}
+                  voters={item.voters}
+                  id={item.id}
                 />
               ))
             ) : (
-              <h2 className="text-lg">No Village exists</h2>
+              <h2>No Villages</h2>
             )}
           </div>
         </div>
@@ -276,8 +297,8 @@ const State = ({ stateName, detail, images }) => {
             </div>
           </div>
           <div className="cards">
-            {villagesNotIn && villagesNotIn.length > 0 ? (
-              filter(villagesNotIn, searchNotInQuery.toLowerCase()).map(
+            {villages && villages.length > 0 ? (
+              filter(villages, searchNotInQuery.toLowerCase()).map(
                 (item) => (
                   <Card
                     key={item.id}
@@ -289,7 +310,7 @@ const State = ({ stateName, detail, images }) => {
                 )
               )
             ) : (
-              <h2 className="text-lg">No Village exists</h2>
+              <h2>No Villages</h2>
             )}
           </div>
         </div>

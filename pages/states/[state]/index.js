@@ -1,24 +1,28 @@
 import { useRouter } from 'next/router';
 import Breadcrumbs from '../../../components/misc/Breadcrumbs';
-import Footer from '../../../components/Footer/Index';
-import Navbar from '../../../components/NavBar/Index';
 import State from '../../../components/State/Index';
 import Page from './../../../components/Page';
 import axios from 'axios';
+import { getStateDetails, getCampaignImages, getVillages } from '../../../adapters/requests';
 
-const state = ({ data, images }) => {
+const state = ({ data, images, villages }) => {
   const router = useRouter();
   const { state } = router.query;
 
-  console.log(data);
-  console.log(images);
+  // console.log(data);
+  console.log(router.query);
 
   return (
     <div>
       <Page title={`State || ${state}`}>
         {/* <Navbar /> */}
 
-        <State stateName={data.state_name} detail={data} images={images} />
+        <State
+          stateName={data.state_name}
+          detail={data}
+          images={images}
+          villages={villages}
+        />
         {/* <Footer /> */}
       </Page>
     </div>
@@ -28,15 +32,17 @@ const state = ({ data, images }) => {
 export const getServerSideProps = async ({ params, res }) => {
   try {
     const { state } = params;
-    const { data } = await axios.get(
-      `https://api.23forobi.com/state-details/${state}`
-    );
-    const images = await axios.get(
-      `https://api.23forobi.com/campaign-images/${state}`
-    );
+    const { data } = await getStateDetails(state);
+    const images = await getCampaignImages(state);
+
+    const villages = await getVillages(state);
 
     return {
-      props: { data, images: images.data },
+      props: {
+        data,
+        images: images.data,
+        villages: villages.data,
+      },
     };
   } catch {
     res.statusCode = 404;

@@ -49,6 +49,7 @@
         color: var(--secondary-color);
         font-weight: 300;
         width: 40rem;
+        line-height: 4.5rem;
         @media screen and (max-width: 26.43rem){
           width: 100%;
         }
@@ -80,6 +81,9 @@
     .percent {
         display: flex;
         justify-content: space-between;
+        :nth-child(2){
+          color: #D60602;
+        }
     }
   }
 }
@@ -345,18 +349,22 @@
     display: flex;
     flex-direction: column;
 
-
+    
+    
     &__content {
+      border: 1px solid #2F3733;
+   }
+    &__content, &__content2 {
       display: flex;
       justify-content: center;
       align-items: center;
       width: 70%;
       margin: 0 auto;
-      border: 1px solid #2F3733;
       border-radius: 3rem;
       padding-bottom: 10px;
       cursor: pointer;
-     margin-top: 20px;
+      margin-top: 20px;
+
 
       &__image {
         position: relative;

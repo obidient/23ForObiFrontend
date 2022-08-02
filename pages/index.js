@@ -2,49 +2,130 @@
 // import Homepage from './';homepage
 import Homepage from './states';
 import axios from 'axios';
+import Image from 'next/image';
 import StateContext from '../Context/StateContext';
 import React from 'react';
-import GoogleLogin from 'react-google-login'
-import {useScript} from '../hooks/useScript'
 import { useState, useRef } from 'react';
+import useAuthStore from '../store/authStore';
+import { GoogleLogin, googleLogout } from '@react-oauth/google';
 
-export default function Home(props) {
-console.log(props)
-   const googlebuttonref = useRef();
-   const [user, setuser] = useState(false);
-   console.log(user)
-   const onGoogleSignIn = (user) => {
-     let userCred = user;
-     // let payload = jwt_deocde(userCred);
-     // console.log(payload);
-     setuser(userCred);
-   };
+import {
+  getStates,
+  getSupportGroups,
+  getOverallprogress,
+} from './../adapters/requests/index';
+import GoogleAuth from './../utils/googleLogin';
 
-   useScript('https://accounts.google.com/gsi/client', () => {
-     window.google.accounts.id.initialize({
-       client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID, // here's your Google ID
-       callback: onGoogleSignIn,
-       auto_select: false,
-     });
+export default function Home({
+  total_number_of_voters,
+  progress,
+  initailData,
+}) {
+  const { userProfile, removeUser } = useAuthStore();
+  
+  const sendApi = async (res) => {
+    console.log(res.credential);
 
-     window.google.accounts.id.renderButton(googlebuttonref.current, {
-       size: 'medium',
-     });
-   });
+    const token = res.credential
+    let payload = await axios.post(
+      `https://api.23forobi.com/google/token?token=${token}`,
+      {
+        headers: {
+          Accept: 'application/json',
+          'WWW-Authenticate': `Bearer ${res}`,
+        },
+      }
+    );
+    console.log(payload);
+  };
+
 
   return (
     <div>
-      {/* {!user && <div ref={googlebuttonref} className="opacity: 0"></div>} */}
-      <Homepage />
+      {/*userProfile ? (
+        userProfile?.image && (
+          <>
+            <Link href={'/'}>
+              <>
+                <Image
+                  width={24}
+                  height={24}
+                  className="rounded-full"
+                  src={userProfile?.image}
+                  alt="profile photo"
+                />
+              </>
+            </Link>
+            <button
+              type="button"
+              onClick={() => {
+                googleLogout();
+                removeUser();
+              }}
+            >
+              Logout
+            </button>
+          </>
+        )
+      ) : (
+      )*/}
+      {/* <GoogleLogin onSuccess={(res) => sendApi(res)} /> */}
+      {/* <GoogleLogin onSuccess={(res) => {
+        console.log(res)
+        const url = 'https://api.23forobi.com/google/token';
+        const headers = {
+          "Content-Type": "application/json",
+          Accept: "application/json", 
+        };
+        const data = {
+          "token": res.credential,
+        }
+        axios.post(url, data, headers).then((res) => {
+          console.log(res)
+        }) 
+      }} 
+
+      onError={console.log("Login Failed")}
+      /> */}
+      {/* <GoogleAuth /> */}
+      {/*!token && <div ref={googlebuttonref} className="opacity: 0"></div>*/}
+      {/* {!token && <div ref={googlebuttonref} className="opacity: 0"></div>} */}
+      <Homepage
+        data={initailData}
+        progress={progress}
+        total_number_of_voters={total_number_of_voters}
+      />
     </div>
   );
 }
 
-export async function getServerSideProps(ctx) {
+export async function getServerSideProps() {
   try {
+    const supportGroups = await getSupportGroups();
+    const states = await getStates();
+    const progress = await getOverallprogress();
+    return {
+      props: {
+        initailData: supportGroups?.data,
+        states: states?.data,
+        progress: progress?.data?.progress_percentage,
+        total_number_of_voters: progress?.data?.total_number_of_voters,
+      },
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      props: {
+        states: [],
+      },
+    };
+  }
+  {
+    /**
+try {
     // const { data } = await axios.get('https://api.23forobi.com/support-group/');
     // const states = await axios.get('https://api.23forobi.com/states/');
-    // const allStates = JSON.parse(JSON.stringify(states)) 
+    // const allStates = JSON.parse(JSON.stringify(states))
 
     const supportGroupsReq = axios({
       method: 'GET',
@@ -64,10 +145,14 @@ export async function getServerSideProps(ctx) {
         states: states.data,
       },
     };
-  } catch {
-    res.statusCode = 404;
+  } catch (error) {
+    // res.statusCode = 404;
+    console.log(error);
     return {
       props: {},
     };
+  }
+
+*/
   }
 }

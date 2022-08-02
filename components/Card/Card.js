@@ -19,6 +19,9 @@ const Card = ({
   village,
   slug,
   contributors,
+  votes,
+  voters,
+  id
 }) => {
   // const stateSlug = state?.split(' ').slice(0, -1).join(' ').toLowerCase();
 
@@ -31,8 +34,8 @@ const Card = ({
     <Link
       href={
         type === 'control'
-          ? `states/${slug}`
-          : `${path}/${village?.toLowerCase()}`
+          ? `states/${slug.toLowerCase()}`
+          : `${path}/${id}`
       }
     >
       <div className={styles.card}>
@@ -50,17 +53,22 @@ const Card = ({
           <StateProgress progress={progress} />
           <div className={styles.percent}>
             <p>{progress}%</p>
+            <p>{voters ? `( ${voters} votes guaranteed )` : ''}</p>
             <p>100%</p>
           </div>
         </div>
         {type === 'control' ? (
           <div className={styles.control}>
             <p>Vote control: </p>
-            <p>{voteControl}%</p>
+            <p>
+              {voteControl}% {votes}
+            </p>
           </div>
         ) : (
           <>
-            <p className="my-3 font-medium">Top 5 Contributors</p>
+            <p className="my-3 font-medium">
+              {contributors > 0 ? 'Delivered By' : ''}
+            </p>
             {type === 'contributor' && (
               <div className={styles.contributors_img}>
                 <Image src={village_img_1} />

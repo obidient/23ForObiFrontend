@@ -6,10 +6,13 @@ import Image from 'next/image';
 const ProgressBar = ({ done, bgColor, pgColor, type }) => {
   const [style, setStyle] = useState({});
 
+  const progress = done < 11 ? 11 : done;
+  
   setTimeout(() => {
     const newStyle = {
       opacity: 1,
-      width: `${done}%`,
+      width: `${progress}%`,
+      // width: '12%',
       backgroundColor: pgColor,
     };
 

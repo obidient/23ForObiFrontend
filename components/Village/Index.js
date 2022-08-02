@@ -15,18 +15,14 @@ import village_img_3 from '../../assets/village_img_3.png';
 import village_img_4 from '../../assets/village_img_4.png';
 import village_img_5 from '../../assets/village_img_5.png';
 
-import google from '../../assets/google.png';
-import facebook from '../../assets/facebook.png';
-import twitter from '../../assets/twitter.png';
-import apple from '../../assets/google.png';
-import SelectInput from '../misc/SelectInput';
-
 import ContributeModal from './ContributeModal';
 
-const Village = () => {
+const Village = ({ contributors, progress_percentage, village_name, village_id }) => {
   const [showModal, setShowModal] = useState(false);
   const [registerFormIsVisible, setRegisterFormIsVisible] = useState(false);
+  const [signInIsVisible, setSignInIsVisible] = useState(false);
 
+  console.log(contributors)
   //Effect to hide scroll
   useEffect(() => {
     const body = document.querySelector('body');
@@ -41,58 +37,20 @@ const Village = () => {
             <Breadcrumbs />
           </div>
           <div className={styles.state_heading__title}>
-            <h1>Eziama village</h1>
+            <div>
+              <h1>{village_name ? `${village_name} village` : ''}</h1>
+              <p className={styles.red}>
+                {contributors > 0 ? `We have got 5 votes guarantedd in ${village_name ? village_name : ''} Village in Abia State.Robert Okonkwo is our man on ground.Calistus Okafor is coordinating activities in this village`
+                  : `We do not have anyone on ground in ${
+                      village_name ? village_name : ''
+                    } village.Can you help?`}
+              </p>
+            </div>
             <div className={styles.title_btn}>
               <button onClick={() => setShowModal(true)} className="btn_light">
                 Contribute here
               </button>
             </div>
-
-            {/* SIGN IN MODAL  */}
-
-            {/* {showModal && (
-              <Modal show={showModal} 
-              onClose={() => setShowModal(false)}               
-              width="54.4rem"
-
-              >
-                <div className={styles.modal}>
-                  <div className={`${styles.modal__heading} modal_heading`}>
-                    <h2>
-                      Welcome to <br />
-                      <span>Peter Obi Campaign</span>
-                    </h2>
-                    <button
-                    className={`closeBtn`}
-                    onClick={() => setShowModal(false)}
-                  >
-                    &times;
-                  </button>
-                  </div>
-                  <div className={styles.modal__body}>
-                    <p>Sign-up with social media</p>
-                    <div className={styles.social_login}>
-                      <button>
-                        <Image src={google} />
-                        Join with Google
-                      </button>
-                      <button>
-                        <Image src={facebook} />
-                        Join with Facebook
-                      </button>
-                      <button>
-                        <Image src={twitter} />
-                        Join with Twitter
-                      </button>
-                      <button>
-                        <Image src={apple} />
-                        Join with Apple
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </Modal>
-            )} */}
 
             {/* DETAILS FORM */}
             {showModal && (
@@ -105,6 +63,8 @@ const Village = () => {
                   setShowModal={setShowModal}
                   registerFormIsVisible={registerFormIsVisible}
                   setRegisterFormIsVisible={setRegisterFormIsVisible}
+                  setSignInIsVisible={setSignInIsVisible}
+                  signInIsVisible={signInIsVisible}
                 />
               </Modal>
             )}
@@ -175,24 +135,42 @@ const Village = () => {
           <div className={styles.state_heading__contribution_progress}>
             <div className={styles.text}>
               <p>Contribution Progress</p>
-              <p>10% control of Eziama village</p>
+              <p>
+                {progress_percentage ? `${progress_percentage}%` : '0%'} control
+                of {village_name ? village_name : ''} village
+              </p>
             </div>
             <Progress
-              done={10}
+              done={progress_percentage > 0 ? progress_percentage : 0}
               pgColor="#CE9E56"
               bgColor="#FAF1E4"
               type="village"
             />
             <div className={styles.prog_percent}>
-              <p>10%</p>
+              <p>{progress_percentage ? `${progress_percentage}%` : '0%'}</p>
               <p>100%</p>
             </div>
           </div>
         </div>
         <div className={styles.top_contributor}>
-          <h2>Top Contributor</h2>
-          <p>These are the top contributors in this village</p>
-          <div className={styles.contributors}>
+          <h2>{contributors ? 'Top' : 'No'} Contributor</h2>
+
+          <p>
+            {contributors
+              ? 'These are the top contributors in this village'
+              : 'There are no contributors in this village'}
+          </p>
+          {contributors > 0 &&
+            contributors.map((item, index) => (
+              <Contributor
+                key={index}
+                name={item.name}
+                votes={item.votes}
+                type="vote"
+              />
+            ))}
+          {/**
+           <div className={styles.contributors}>
             <Contributor
               name="Ejima Benson"
               votes={50}
@@ -254,12 +232,26 @@ const Village = () => {
               type="top_contributor"
             />
           </div>
+           */}
         </div>
         <div className={styles.votes_guaranteed}>
-          <h2>Vote Guaranteed</h2>
-          <p>These are the votes quaranteed in this village</p>
+          <h2>{contributors ? 'Votes' : 'No Votes'} Guaranteed</h2>
+          <p>
+            {contributors
+              ? 'These are the votes quaranteed in this village'
+              : 'These are no votes quaranteed in this village'}
+          </p>
           <div className={styles.contributors}>
-            <Contributor
+            {contributors > 0 &&
+              contributors.map((item, index) => (
+                <Contributor
+                  key={index}
+                  name={item.name}
+                  votes={item.votes}
+                  type="vote"
+                />
+              ))}
+            {/*<Contributor
               name="Ejima Benson"
               votes={50}
               img={village_img_1}
@@ -390,7 +382,7 @@ const Village = () => {
               votes={50}
               img={village_img_1}
               type="vote"
-            />
+              />*/}
           </div>
         </div>
         {/* <div className={styles.votes_delivered}>

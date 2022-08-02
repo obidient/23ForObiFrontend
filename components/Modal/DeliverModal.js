@@ -1,4 +1,5 @@
 import styles from './Styles.module.scss';
+import styles_login from '../../pages/pagestyles/home.module.scss';
 import React, { useEffect, useRef } from 'react';
 import Modal from './Index';
 import Image from 'next/image';
@@ -12,7 +13,15 @@ import img3 from '../../assets/how_it_works_img3.png';
 import { useState } from 'react';
 import Link from 'next/link';
 
+//images
+import google from '../../assets/google.png';
+import facebook from '../../assets/facebook.png';
+import apple from '../../assets/apple.png';
+import twitter from '../../assets/twitter.png';
+import GoogleAuth from './../../utils/googleLogin';
+
 const DeliverModal = ({ show, onClose }) => {
+  const [showLogin, setShowLogin] = useState(false);
   //Carousel
   const slides = [
     {
@@ -74,10 +83,15 @@ const DeliverModal = ({ show, onClose }) => {
     }),
   };
 
-
   return (
     <div className={styles.backdrop}>
-      <Modal show={show} onClose={onClose} width={width.container(matches)} delModRes="60rem">
+      <Modal
+        show={show}
+        // onClose={onClose}
+        type="deliver"
+        width={width.container(matches)}
+        delModRes="60rem"
+      >
         <div className={styles.deliver_modal}>
           <div className={`${styles.deliver_modal__heading} modal_heading`}>
             <h2>
@@ -162,12 +176,112 @@ const DeliverModal = ({ show, onClose }) => {
             <button
               type="submit"
               className={`btn_dark rounded-full ${styles.btn}`}
+              onClick={() => setShowLogin(true)}
             >
               Create an account
             </button>
           </div>
         </div>
       </Modal>
+      {showLogin && (
+        <Modal
+          show={showLogin}
+          onClose={() => setShowLogin(false)}
+          width="51.1rem"
+        >
+          <div className={styles_login.login_modal}>
+            <h2>
+              Welcome to <br /> <span>Peter Obi Campaign</span>
+            </h2>
+            <div className={styles_login.login_modal__body}>
+              <p>Sign-up with social media</p>
+              <div className={styles_login.login_modal__body__container}>
+                <div
+                  className={styles_login.login_modal__body__container__content2}
+                >
+                  {/* <div
+                    style={{ display: 'grid', placeItems: 'end' }}
+                    className={
+                      styles_login.login_modal__body__container__content__image
+                    }
+                  >
+                    <Image src={google} alt="google icon" />
+                  </div> */}
+                  <div
+                    onClick={() => console.log('clicked')}
+                    className={
+                      styles_login.login_modal__body__container__content__para
+                    }
+                    >
+                    <GoogleAuth />
+                    {/* <p>Join with Google</p> */}
+                  </div>
+                </div>
+
+                <div
+                  className={styles_login.login_modal__body__container__content}
+                >
+                  <div
+                    style={{ display: 'grid', placeItems: 'end' }}
+                    className={
+                      styles_login.login_modal__body__container__content__image
+                    }
+                  >
+                    <Image src={facebook} alt="google icon" />
+                  </div>
+                  <div
+                    className={
+                      styles_login.login_modal__body__container__content__para
+                    }
+                  >
+                    <p>Join with Facebook</p>
+                  </div>
+                </div>
+
+                <div
+                  className={styles_login.login_modal__body__container__content}
+                >
+                  <div
+                    style={{ display: 'grid', placeItems: 'end' }}
+                    className={
+                      styles_login.login_modal__body__container__content__image
+                    }
+                  >
+                    <Image src={twitter} alt="google icon" />
+                  </div>
+                  <div
+                    className={
+                      styles_login.login_modal__body__container__content__para
+                    }
+                  >
+                    <p>Join with Twitter</p>
+                  </div>
+                </div>
+
+                <div
+                  className={styles_login.login_modal__body__container__content}
+                >
+                  <div
+                    style={{ display: 'grid', placeItems: 'end' }}
+                    className={
+                      styles_login.login_modal__body__container__content__image
+                    }
+                  >
+                    <Image src={apple} alt="google icon" />
+                  </div>
+                  <div
+                    className={
+                      styles_login.login_modal__body__container__content__para
+                    }
+                  >
+                    <p>Join with Apple</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Modal>
+      )}
     </div>
   );
 };

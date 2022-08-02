@@ -8,7 +8,6 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import NavBar from '../../components/NavBar/Index';
 import Footer from '../../components/Footer/Index';
-import Modal from '../../components/Modal/Index';
 import Loader from '../../components/Loader';
 import { FetchEvent } from 'next/dist/server/web/spec-compliant/fetch-event';
 import { countryContext } from './../../Context/countryContext';
@@ -30,15 +29,23 @@ import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import FormikControl from '../../components/Forms/FormikControl';
 
-const homepage = (props) => {
+//Adapters
+import { addSupportGroup } from './../../adapters/requests/index';
+
+//Modals
+import DeliverModal from './../../components/Modal/DeliverModal';
+import Modal from '../../components/Modal/Index';
+
+const homepage = ({ data, progress, total_number_of_voters }) => {
   const [showModal, setShowModal] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
+  const [showDeliverModal, setShowDeliverModal] = useState(false);
 
-  const done = 13;
+  // const done = 13;
 
-  const { data } = useContext(countryContext);
-  console.log('home', data);
+  // const { data } = useContext(countryContext);
+  // console.log('home', data);
   const router = useRouter();
   const query = router.query;
 
@@ -46,20 +53,20 @@ const homepage = (props) => {
     name: '',
     // state: '',
     // village: '',
-    votes_delivered: 0,
+    // votes_delivered: 0,
   };
   // Form validation schema using Yup
   const validationSchema = Yup.object({
     name: Yup.string().required('Required'),
     //state: Yup.string().required('Required'),
     //village: Yup.string().required('Required'),
-    votes_delivered: Yup.number().required('Required'),
+    // votes_delivered: Yup.number().required('Required'),
   });
 
   const onSubmit = (values) => {
     // console.log('Form Data', values);
     setShowModal(false);
-    setShowLoader(true)
+    setShowLoader(true);
     setShowLogin(true);
 
     //Api call
@@ -70,10 +77,7 @@ const homepage = (props) => {
     const callAPI = async () => {
       try {
         setShowLoader(true);
-        const res = await axios.post(`https://api.23forobi.com/support-group/`, values, {
-            headers: headers,
-          })
-          .then((res) => {
+        const res = await addSupportGroup(values)?.then((res) => {
             console.log(res);
           });
         setShowLoader(false);
@@ -121,6 +125,14 @@ const homepage = (props) => {
     >
       <div className={styles.homepage}>
         <div className={styles.hero}>
+          {/* DELIVER VOTES MODAL */}
+            {showDeliverModal && (
+              <DeliverModal
+                show={showDeliverModal}
+                onClose={() => setShowDeliverModal(false)}
+              />
+            )}
+          {/* END DELIVER VOTES MODAL */}
           <div className="container">
             <div className={styles.hero__top}>
               <div className={styles.hero__details}>
@@ -132,7 +144,7 @@ const homepage = (props) => {
                   within each state and with your help and the help of your
                   loved ones, we can do this
                 </p>
-                <button className={`${styles.btn_vote} btn_dark`}>
+                <button className={`${styles.btn_vote} btn_dark`} onClick={() => setShowDeliverModal(true)}>
                   Yes, I can
                 </button>
               </div>
@@ -143,13 +155,14 @@ const homepage = (props) => {
             <div className={styles.hero__bottom}>
               <h5>OUR PROGRESS SO FAR</h5>
               <ProgressBar
-                done={done}
+                done={progress ? progress : 0}
                 bgColor="#E4FFEC"
                 pgColor="rgba(1, 130, 38, 1)"
                 type="state"
               />
               <div className={styles.percent}>
-                <h5>{done}%</h5>
+                <h5>{progress ? progress : 0}%</h5>
+                <h5>{total_number_of_voters ? `( ${total_number_of_voters} votes guaranteed so far )`: '( No votes guaranteed so far )'}</h5>
                 <h5>100%</h5>
               </div>
             </div>
@@ -217,7 +230,7 @@ const homepage = (props) => {
                               name="name"
                               type="text"
                             />
-                            <FormikControl
+                            {/* <FormikControl
                               values={values}
                               control="input"
                               placeholder="Group Name"
@@ -225,7 +238,7 @@ const homepage = (props) => {
                               type="number"
                             />
 
-                            {/*<FormikControl
+                           <FormikControl
                               values={values}
                               control="select"
                               placeholder="Select your state"

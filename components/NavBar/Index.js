@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/23forobi.svg';
 import styles from './Styles.module.scss';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { useRouter } from 'next/router';
@@ -40,7 +40,9 @@ const NavBar = () => {
         <nav className={styles.navbar}>
           <div className={styles.navbar__logo}>
             <Link href="/">
-              <Image src={logo} />
+              <>
+                <Image src={logo} width='130px' height='33px' />
+              </>
             </Link>
           </div>
           <div ref={navRef} className={styles.navbar__menu}>
@@ -93,7 +95,10 @@ const NavBar = () => {
                   </a>
                 </Link>
               </li>
-              <button className={`${styles.btn_vote_mobile} btn_light`}>
+              <button
+                className={`${styles.btn_vote_mobile} btn_light`}
+                onClick={() => setShowModal(true)}
+              >
                 Deliver Votes
               </button>
             </ul>

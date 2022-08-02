@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 const Modal = ({
   show,
+  type,
   onClose,
   backdropStyles,
   width,
@@ -25,7 +26,7 @@ const Modal = ({
   const style = {
     width: width,
 
-    '@media (max-width: 500px)': {
+    '@media (maxWidth: 500px)': {
       width: delModRes,
     },
   };
@@ -36,7 +37,9 @@ const Modal = ({
       return;
     }
     // outside the modal
-    onClose();
+    if(type !== 'deliver') {
+      onClose();
+    }
   }, []);
 
   return (

@@ -1,18 +1,20 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './Styles.module.scss';
 import peterobi from '../../assets/peterobi.png';
 
 const StateProgress = ({ progress }) => {
   const [style, setStyle] = useState({});
-  setTimeout(() => {
-    const newStyle = {
-      opacity: 1,
-      width: `${progress}%`,
-      backgroundColor: `${progress < 50 ? '#CE9E56' : '#018226'}`,
-    };
+  useEffect(() => {
+    setTimeout(() => {
+      const newStyle = {
+        opacity: 1,
+        width: `${progress}%`,
+        backgroundColor: `${progress < 50 ? '#CE9E56' : '#018226'}`,
+      };
 
-    setStyle(newStyle);
-  }, 200);
+      setStyle(newStyle);
+    }, 200);
+  });
 
   const progressBgStyle = {
     backgroundColor: `${progress < 50 ? '#FAF1E4' : '#E7FFEC'}`,
