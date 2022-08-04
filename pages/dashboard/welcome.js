@@ -1,25 +1,72 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
+import { Formik, Field, Form } from 'formik';
 import styles from '../pagestyles/home.module.scss';
 import DashboardNav from '../../components/DashboardNav/Index';
 import StateProgress from '../../components/misc/StateProgress';
-import nextIcon from '../../assets/arrow-right-2.png';
-import { Formik, Field, Form } from 'formik';
+
+// steps
+import FirstStep from '../../components/Welcome/Step1';
+import SecondStep from '../../components/Welcome/Step2';
+import ThirdStep from '../../components/Welcome/Step3';
+import FourthStep from '../../components/Welcome/Step4';
+import FifthStep from '../../components/Welcome/Step5';
+import StepButton from '../../components/misc/StepButton';
 
 const welcome = () => {
-  const [select, setSelect] = useState('');
+  const [steps, setSteps] = useState(1);
+  const [progress, setProgress] = useState(20);
+  const [disabled, setDisabled] = useState(false);
+  const [formData, setFormData] = useState({
+    pvc: '',
+    vote: '',
+    available: '',
+    state: '',
+    lga: '',
+    village: '',
+    full_name: '',
+    phone: '',
+  });
+
+  const conditionalComponent = () => {
+    switch (steps) {
+      case 1:
+        return <FirstStep formData={formData} setFormData={setFormData}/>;
+      case 2:
+        return <SecondStep formData={formData} setFormData={setFormData} />;
+      case 3:
+        return <ThirdStep formData={formData} setFormData={setFormData} />;
+      case 4:
+        return <FourthStep formData={formData} setFormData={setFormData} />;
+      case 5:
+        return <FifthStep formData={formData} setFormData={setFormData} />;
+
+      default:
+        return <FifthStep formData={formData} setFormData={setFormData} />;
+    }
+  };
+
+ 
+  
+ 
+  const handleSubmit = () => {
+    setSteps(steps + 1);
+    setProgress(progress + 20);
+  };
+
+  const submitForm = () => {
+    console.log('Submiited');
+    console.log(formData)
+  };
+
+  const handleSkip = () => {
+    console.log('Skipped');
+  };
+
   const initialValues = {
     selected: '',
   };
-  const enabledBtn =
-    'flex items-center justify-center w-[173px] h-[44px] bg-[#018226]  rounded-full text-white';
-  const handleChange = (e) => {
-    setSelect(e.target.value);
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(select);
-  };
+
   return (
     <div className={`${styles.dashboard} container h-[100vh]`}>
       <DashboardNav />
@@ -36,18 +83,32 @@ const welcome = () => {
             </h2>
           </div>
           <div className="lg:w-1/4 w-1/2 py-5 lg:py-0">
-            <StateProgress progress={20} />
-            <p className="my-1">Progress : 1</p>
+            <StateProgress progress={progress} />
+            <p className="my-1">Progress : {steps}</p>
           </div>
         </div>
       </div>
-      <div className="my-0">
+      <div>
+        {conditionalComponent()}
+        <StepButton
+          steps={steps}
+          handleSubmit={handleSubmit}
+          submitForm={submitForm}
+          handleSkip={handleSkip}
+          type="submit"
+        />
+      </div>
+
+      {/*<div className="my-0">
         <div>
           <h2 className="text-[#2F3733] text-3xl">
             Do you have your PVC (Permanent voters card)?
           </h2>
-          <Formik initialValues={initialValues} onSubmit={(values) => console.log(values)}>
-            {({ values }) => (
+          <Formik
+            initialValues={initialValues}
+            onSubmit={(values, { setSubmitting }) => console.log(values)}
+          >
+            {(dirty) => (
               <Form>
                 <div className="my-5">
                   <Field type="radio" name="selected" value="yes" />
@@ -65,10 +126,8 @@ const welcome = () => {
                 <div>
                   <button
                     type="submit"
-                    disabled={!values}
-                    className={
-                      !values ? `${enabledBtn} opacity-40` : enabledBtn
-                    }
+                    disabled={!dirty}
+                    className={!dirty ? `${enabledBtn} opacity-40` : enabledBtn}
                   >
                     Next
                     <div className="flex items-center pl-4">
@@ -80,7 +139,7 @@ const welcome = () => {
             )}
           </Formik>
         </div>
-      </div>
+            </div>*/}
     </div>
   );
 };
