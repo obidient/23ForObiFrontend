@@ -49,6 +49,14 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
      });
    };
 
+   if(villageDetails === undefined) {
+    return (
+      <div className="flex">
+        <h2 className="m-auto text-3xl">No Village</h2>
+      </div>
+    );
+   } 
+   
   return (
     <div className={styles.village_details}>
       <hr />
