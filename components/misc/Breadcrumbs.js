@@ -20,7 +20,7 @@ const Breadcrumbs = () => {
     return item.breadcrumb !== 'states';
   });
 
-  console.log(router.asPath);
+  // console.log(router.asPath);
 
   useEffect(() => {
     if (router) {

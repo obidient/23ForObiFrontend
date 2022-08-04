@@ -81,12 +81,12 @@ const homepage = ({ data, progress, total_number_of_voters }) => {
       try {
         setShowLoader(true);
         const res = await addSupportGroup(values)?.then((res) => {
-          console.log(res);
+          // console.log(res);
         });
         setShowLoader(false);
         // console.log(data);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     callAPI();

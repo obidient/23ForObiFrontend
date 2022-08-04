@@ -57,7 +57,6 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
   
   const [tabIndex, setTabIndex] = useState(0);
   
-  console.log(stateOption) 
   const email = userProfile?.email
   const first_name = userProfile?.first_name;
   const last_name = userProfile?.last_name;
@@ -65,8 +64,6 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
 
   ////////////////// Selected Village///////////////////////
   const [selectedVillage, setSelectedVillage] = useState("")
-  console.log(selectedVillage)
-  console.log(villageDetails)
 
   const handleVillage = async () => {
     const url = 'https://api.23forobi.com/user-villages';
@@ -81,13 +78,13 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
 
     };
     axios.post(url, data, { headers })?.then((res) => {
-
       try {
-        console.log(res.data);
-
+        // console.log(res.data);
+        
       } catch (error) {
-        console.log(error)
+        // console.log(error)
       }
+      setShowModal(false);
     });
   }
   ///////// End Selected Village //////////////////
@@ -229,7 +226,7 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
           />
         </div>
         {villageDetails?.map((items) => (
-          <TabPanel>
+          <TabPanel key={items.id}>
             <div>
               <VillageDetails
                 villageDetails={items}
@@ -238,11 +235,6 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
             </div>
           </TabPanel>
         ))}
-        <TabPanel>
-          <div>
-            <VillageDetails />
-          </div>
-        </TabPanel>
       </Tabs>
 
       {/* NEW VILLAGE MODAL */}

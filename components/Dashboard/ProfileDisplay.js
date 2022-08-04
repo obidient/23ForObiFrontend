@@ -19,7 +19,7 @@ const ProfileDisplay = () => {
   const { userProfile } = useAuthStore();
   const { userStates } = useUserStore();
 
-  console.log(userStates)
+  // console.log(userStates)
 
   const first_name = userProfile?.first_name;
   const last_name = userProfile?.last_name;

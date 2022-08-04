@@ -39,7 +39,7 @@ const Modal = ({
       return;
     }
     // outside the modal
-    if(type === 'deliver') {
+    if(type !== 'contribute') {
       onClose();
     } 
     

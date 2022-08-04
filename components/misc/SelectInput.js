@@ -12,7 +12,7 @@ import axios from 'axios'
 const SelectInput = ({placeholder, state}) => {
   const [isDropDownVisible, setIsDropDownVisible] = useState(false);
   
-  console.log(state)
+  // console.log(state)
   const { states } = useContext(StateContext);
 
 
@@ -62,7 +62,7 @@ const SelectInput = ({placeholder, state}) => {
     axios.get(`https://api.23forobi.com/villages/${item.value}`).then(result => {
           const res = result.data
           addVillages(res)
-          console.log(res)
+          // console.log(res)
           return res
       });
     // console.log(stateVillages);

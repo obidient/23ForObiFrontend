@@ -13,7 +13,6 @@ import useAuthStore from './../../store/authStore';
 const SelectInputVillage = ({ placeholder, state, setSelectedVillage }) => {
   const [isDropDownVisible, setIsDropDownVisible] = useState(false);
 
-  console.log(state);
   const { states } = useContext(StateContext);
 
   const { accessToken } = useAuthStore();
@@ -21,7 +20,6 @@ const SelectInputVillage = ({ placeholder, state, setSelectedVillage }) => {
   const { userVillages } = useUserStore();
 
   const villageList = userVillages?.list_of_villages;
-  console.log(villageList);
 
   const itemsList =
     villageList &&
@@ -33,7 +31,6 @@ const SelectInputVillage = ({ placeholder, state, setSelectedVillage }) => {
       return itemsss;
     });
 
-  console.log(itemsList);
   const [selectedItemIndex, setSelectedItemsIndex] = useState(null);
 
   // const { villages, setVillages } = useContext(VillageContext);

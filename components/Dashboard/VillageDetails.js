@@ -4,7 +4,7 @@ import styles from './Styles.module.scss';
 import add_img_green from '../../assets/add_img_green.png';
 import VillageStat from './VillageStat';
 import Modal from './../Modal/Index';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Form, Formik } from 'formik';
 // import { CustomSelectInput } from '../Forms/SelectInput';
 import * as Yup from 'yup';
@@ -18,13 +18,11 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
   const [showModal, setShowModal] = useState();
   const { accessToken } = useAuthStore();
 
-  console.log(villageDetails);
   // Form validation schema using Yup
   const votersValidationSchema = Yup.object({
     name: Yup.string().required('Required'),
     contact: Yup.number().required('Required'),
   });
-  console.log(villageDetails);
 
    const handleVoters = (values) => {
 
@@ -42,12 +40,18 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
 
      axios.post(url, data, { headers })?.then((res) => {
        try {
-         console.log(res.data);
+        //  console.log(res.data);
        } catch (error) {
-         console.log(error);
+        //  console.log(error);
        }
+       setShowModal(false);
      });
    };
+
+     useEffect(() => {
+       const body = document.querySelector('body');
+       body.style.overflow = showModal ? 'hidden' : 'auto';
+     }, [showModal]);
 
    if(villageDetails === undefined) {
     return (
@@ -72,21 +76,25 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
       </div>
       <div className={styles.village_details__table}>
         <table>
-          <tr>
-            <th>S/N</th>
-            <th>VOTERS NAME</th>
-            <th>MOBILE NUMBER</th>
-            <th>ACTION</th>
-          </tr>
-          {votersDetails?.map((voters, index) => (
-            <tr key={voters.id}>
-              <td>{index + 1}</td>
-              <td>{voters.name}</td>
-              <td>+234 {voters.contact}</td>
-              <td>
-                <Link href="#">Edit</Link>
-              </td>
+          <thead>
+            <tr>
+              <th>S/N</th>
+              <th>VOTERS NAME</th>
+              <th>MOBILE NUMBER</th>
+              <th>ACTION</th>
             </tr>
+          </thead>
+          {votersDetails?.map((voters, index) => (
+            <tbody key={voters.id}>
+              <tr>
+                <td>{index + 1}</td>
+                <td>{voters.name}</td>
+                <td>+234 {voters.contact}</td>
+                <td>
+                  <Link href="#">Edit</Link>
+                </td>
+              </tr>
+            </tbody>
           ))}
         </table>
       </div>
