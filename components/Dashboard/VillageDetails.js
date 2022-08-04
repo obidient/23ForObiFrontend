@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './Styles.module.scss';
-import add_img_green from '../../assets/add_img_green.png';
 import VillageStat from './VillageStat';
 import Modal from './../Modal/Index';
 import { useState, useEffect } from 'react';
@@ -14,8 +13,13 @@ import FormikControl from './../Forms/FormikControl';
 import useAuthStore from './../../store/authStore';
 import axios from 'axios';
 
+//IMPORT IMAGES
+import add_img_green from '../../assets/add_img_green.png';
+import CompleteModal from './../misc/CompleteModal';
+
 const VillageDetails = ({ villageDetails, votersDetails }) => {
   const [showModal, setShowModal] = useState();
+  const [showCompleteModal, setShowCompleteModal] = useState();
   const { accessToken } = useAuthStore();
 
   console.log(villageDetails.village.name)
@@ -52,6 +56,7 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
         //  console.log(error);
        }
        setShowModal(false);
+       setShowCompleteModal(true);
      });
    };
 
@@ -170,6 +175,14 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
         </Modal>
       )}
       {/* NEW VOTER MODAL END */}
+
+      {/* COMPLETE MODAL */}
+
+      {showCompleteModal && 
+      <CompleteModal showCompleteModal={showCompleteModal} setShowCompleteModal={setShowCompleteModal}/>
+      }
+
+      {/* END COMPLETE MODAL */}
     </div>
   );
 };
