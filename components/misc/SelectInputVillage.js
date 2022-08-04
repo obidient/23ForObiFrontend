@@ -4,32 +4,36 @@ import Image from 'next/image';
 import { useContext, useState, useEffect } from 'react';
 import VillageContext from '../../Context/villageContext';
 import useVillage from '../../Context/villageContext';
-import StateContext from './../../Context/StateContext';
-import useUserStore from './../../store/userStore';
-import { getVillage } from './../../adapters/requests/index';
+import StateContext from '../../Context/StateContext';
+import useUserStore from '../../store/userStore';
+import { getVillage } from '../../adapters/requests/index';
 import axios from 'axios'
+import useAuthStore from './../../store/authStore';
 
-const SelectInput = ({placeholder, state}) => {
+const SelectInputVillage = ({ placeholder, state, setSelectedVillage }) => {
   const [isDropDownVisible, setIsDropDownVisible] = useState(false);
-  
-  console.log(state)
+
+  console.log(state);
   const { states } = useContext(StateContext);
 
+  const { accessToken } = useAuthStore();
 
-  const { addVillages } = useUserStore();
-  
+  const { userVillages } = useUserStore();
 
-  const [itemsList, setItemsList] = useState(state?.map((state) =>  {
-      const itemsss = 
-        {
-          name: state.state_name,
-          value: state.id,
-        }
-        return itemsss
-    }
-  ));
+  const villageList = userVillages?.list_of_villages;
+  console.log(villageList);
 
-  // console.log(itemsList);
+  const itemsList =
+    villageList &&
+    villageList.map((villageItems) => {
+      const itemsss = {
+        name: villageItems.name,
+        value: villageItems.id,
+      };
+      return itemsss;
+    });
+
+  console.log(itemsList);
   const [selectedItemIndex, setSelectedItemsIndex] = useState(null);
 
   // const { villages, setVillages } = useContext(VillageContext);
@@ -55,17 +59,10 @@ const SelectInput = ({placeholder, state}) => {
     // console.log(villageState);
   }, [selectedItemIndex]);
 
-  const handleClick = async(index, item) => {
-    
+  const handleClick = async (index, item) => {
     setSelectedItemsIndex(index);
     setIsDropDownVisible(!isDropDownVisible);
-    axios.get(`https://api.23forobi.com/villages/${item.value}`).then(result => {
-          const res = result.data
-          addVillages(res)
-          console.log(res)
-          return res
-      });
-    // console.log(stateVillages);
+    setSelectedVillage(item);
   };
 
   return (
@@ -88,7 +85,7 @@ const SelectInput = ({placeholder, state}) => {
         </div>
         {isDropDownVisible ? (
           <div className={styles.dropdown__item_holder}>
-            {itemsList.map((item, index) => {
+            {itemsList?.map((item, index) => {
               return (
                 <div
                   className={styles.dropdown_item}
@@ -108,4 +105,4 @@ const SelectInput = ({placeholder, state}) => {
   );
 };
 
-export default SelectInput;
+export default SelectInputVillage;

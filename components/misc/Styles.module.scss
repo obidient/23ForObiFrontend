@@ -300,6 +300,13 @@
         text-indent: 1px;
         text-overflow: '';
 		position: relative;
+
+		p {
+			font-size: var(--font-p-text-1);
+			line-height: 130%;
+			color: var(--text-color-5);
+			margin: 0;
+		}
 		
 		&::after {
 			display: block;
