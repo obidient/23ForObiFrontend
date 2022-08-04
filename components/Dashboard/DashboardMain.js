@@ -30,6 +30,7 @@ import useUserStore from '../../store/userStore';
 import { addUserVillage } from '../../adapters/requests';
 import axios from 'axios';
 import VillageStat from './VillageStat';
+import CompleteModal from '../misc/CompleteModal';
 
 
 // Prevent serverside redering on the FormikControl Component
@@ -39,7 +40,8 @@ const FormikControl = dynamic(() => import('../Forms/FormikControl'), {
 // Prevent serverside redering on the CustomSelectInput Component
 // const CustomSelectInput = dynamic(
 //   () => import('../Forms/SelectInput').then((mod) => mod.CustomSelectInput),
-//   {
+//   {import CompleteModal from './../misc/CompleteModal';
+
 //     ssr: false,
 //   }
 // );
@@ -49,6 +51,9 @@ const FormikControl = dynamic(() => import('../Forms/FormikControl'), {
 const DashboardMain = ({states, villageDetails, votersDetails}) => {
   const { userProfile } = useAuthStore();
   const { accessToken } = useAuthStore();
+
+  ///////////COMPLTETE MODAL//////////////
+  const [showCompleteModal, setShowCompleteModal] = useState();
 
 
   const stateOption = states?.map(state => {
@@ -84,8 +89,9 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
       } catch (error) {
         // console.log(error)
       }
-      setShowModal(false);
+      setShowCompleteModal(true);
     });
+    setShowModal(false);
   }
   ///////// End Selected Village //////////////////
 
@@ -306,6 +312,21 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
         </Modal>
       )}
       {/* NEW VILLAGE MODAL END */}
+
+      {/* COMPLETE MODAL */}
+
+      {showCompleteModal && (
+        <CompleteModal
+          showCompleteModal={showCompleteModal}
+          setShowCompleteModal={setShowCompleteModal}
+          heading={
+            'Congratulations! You have successfully added a new village.'
+          }
+          description={'Go Champ! You are doing so great, let’s keep the fire burning'}
+        />
+      )}
+
+      {/* END COMPLETE MODAL */}
     </div>
   );
 };

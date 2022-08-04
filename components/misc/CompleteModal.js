@@ -6,7 +6,11 @@ import Image from 'next/image';
 //IMPORT IMAGES
 import uploaded from '../../assets/uploaded.png';
 
-const CompleteModal = ({ showCompleteModal, setShowCompleteModal }) => {
+const CompleteModal = ({ 
+    showCompleteModal, 
+    setShowCompleteModal, 
+    description, 
+    heading}) => {
   return (
     <div>
       <Modal
@@ -25,8 +29,8 @@ const CompleteModal = ({ showCompleteModal, setShowCompleteModal }) => {
           </div>
           <div className={styles.complete_body}>
             <Image src={uploaded} />
-            <h2>Congratulations! You have successfully added a new village.</h2>
-            <p>Go Champ! You are doing so great, let’s keep the fire burning</p>
+            <h2>{heading}</h2>
+            <p>{description}</p>
             <button
               className={`${styles.btn_submit} btn_dark`}
               onClick={() => setShowCompleteModal(false)}

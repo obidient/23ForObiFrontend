@@ -22,10 +22,8 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
   const [showCompleteModal, setShowCompleteModal] = useState();
   const { accessToken } = useAuthStore();
 
-  console.log(villageDetails.village.name)
-
   //FILTER VOTERS BY VILLAGE NAME
-  const votersInVillage = votersDetails.filter(
+  const votersInVillage = votersDetails?.filter(
     (items) => items.village.name === villageDetails.village.name
     );    
 
@@ -178,9 +176,18 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
 
       {/* COMPLETE MODAL */}
 
-      {showCompleteModal && 
-      <CompleteModal showCompleteModal={showCompleteModal} setShowCompleteModal={setShowCompleteModal}/>
-      }
+      {showCompleteModal && (
+        <CompleteModal
+          showCompleteModal={showCompleteModal}
+          setShowCompleteModal={setShowCompleteModal}
+          heading={
+            'Congratulations! You have successfully added a new voter.'
+          }
+          description={
+            'Go Champ! You are doing so great, let’s keep the fire burning'
+          }
+        />
+      )}
 
       {/* END COMPLETE MODAL */}
     </div>
