@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Step1 = ({ formData, setFormData }) => {
+  const { pvc } = formData;
   return (
     <div className="my-5">
       <h2 className="text-[#2F3733] text-3xl my-10">
@@ -10,7 +11,7 @@ const Step1 = ({ formData, setFormData }) => {
         <div className="my-5">
           <input
             type="radio"
-            checked={formData.pvc === 'yes'}
+            checked={pvc === 'yes'}
             value="yes"
             onChange={(e) => setFormData({ ...formData, pvc: e.target.value })}
           />
@@ -24,7 +25,7 @@ const Step1 = ({ formData, setFormData }) => {
         <div className="my-5">
           <input
             type="radio"
-            checked={formData.pvc === 'no'}
+            checked={pvc === 'no'}
             value="no"
             onChange={(e) => setFormData({ ...formData, pvc: e.target.value })}
           />
