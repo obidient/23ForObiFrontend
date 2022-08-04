@@ -1,9 +1,35 @@
 .dashboardmain {
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    .dashboardmain_add_village {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      column-gap: 1.275rem;
+      cursor: pointer;
+      p {
+        color: var(--primary-color);
+        margin-bottom: 0;
+        font-size: var(--font-p-text-1);
+      }
+    }
+  }
+
   h2 {
     font-weight: 700;
     font-size: var(--font-header-3);
     line-height: 130%;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  p {
+    font-size: var(--font-p-text-2);
+    line-height: 130%;
+    color: var(--text-color-4);
+    margin-bottom: 1rem;
   }
 
   hr {
@@ -230,11 +256,15 @@
   }
 }
 
-.delivervotes {
+.sidebar {
   padding-bottom: 8rem;
   h2 {
     margin-top: 2.5rem;
     margin-bottom: 1.5rem;
+    font-weight: 700;
+    font-size: var(--font-header-3);
+    line-height: 100%;
+    color: var(--text-color-1);
   }
 
   p {
@@ -249,13 +279,44 @@
     border: 1px solid #e1e1e1;
   }
 
+  &__achievements {
+    
+    .achievements_images {
+      display: flex;
+      justify-content: space-between;
+      column-gap: 1.5rem;
+      padding: 3rem 0;
+
+      .img {
+        border: 1.68749px solid #C0CFF5;
+        border-radius: 500px;
+        background-color: #D8E2FA;
+        padding: 1.6rem 2.2rem;
+      }
+    }
+    
+    .link {
+      margin-bottom: 3rem;
+      
+      a {
+        font-size: var(--font-p-text-1);
+        line-height: 130%;
+        text-decoration-line: underline;
+        color: #5678CE;
+      }
+    }
+  }
+
   .instruction_cards {
     .card {
-      background: #d8e2fa;
-      border: 1px solid #c0cff5;
-      border-radius: 16px;
-      padding: 1.5rem 2rem 0;
+      // background: #d8e2fa;
+      // border: 1px solid #c0cff5;
+      // border-radius: 16px;
+      padding: 1.5rem 0rem 0;
       margin-bottom: 1rem;
+      display: flex;
+      align-items: flex-start;
+      column-gap: .5rem;
 
       h3 {
         font-weight: 700;
@@ -264,9 +325,28 @@
         // margin-bottom: .5rem;
       }
 
+      .inec {
+        color: #5678CE;
+      } 
+
       p {
         margin-bottom: 1.5rem;
         margin-top: 0.5rem;
+      }
+
+      .num {
+        border: 1.68749px solid #C0CFF5;
+        border-radius: 500px;
+        background-color: #D8E2FA;
+        padding: 1rem;
+        p {
+          font-weight: 700;
+          font-size: var(--font-p-text-1);          
+          margin-bottom: 0;
+          margin-top: 0;
+          text-align: center;
+          color: #5678CE;
+        }
       }
     }
   }
@@ -340,6 +420,13 @@
     p {
       line-height: 130%;
       color: var(--text-color-3);
+    }
+
+    .details_form {
+      
+      .select_desc {
+        margin: 1.5rem 0 3rem;
+      }
     }
   }
 
@@ -418,4 +505,181 @@
       border: none;
     }
   }
+}
+
+/////////////////// VILLAGE DETAILS ////////////////////////
+.village_details {
+  margin-top: 2.65rem;
+
+  &__no_villages {
+    
+  }
+
+  &__stats {
+    margin-bottom: 2rem;
+  }
+
+  &__heading {
+    margin-top: 2.7rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .dashboardmain_add_village {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      column-gap: 1.275rem;
+      cursor: pointer;
+      p {
+        margin-bottom: 0;
+        font-size: var(--font-p-text-1);
+        color: var(--primary-color);
+      }
+    }
+
+    &__table {
+      overflow: auto;
+      border-radius: 6px;
+      border: 1px solid #F1F1F1;
+      margin-top: 2.2rem;
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        border-radius: 10px;
+        border-style: hidden;
+
+        width:100%;
+        max-width: 100%;
+
+      }
+      
+      tr {
+        border: 1px solid #F1F1F1;
+        border-radius: 10px;
+        text-align: left;
+      }
+      
+      td, th {
+        // padding: 8px;
+      }
+
+      th {
+        padding-top: 2rem;
+        padding-bottom: 1rem;
+        padding-left: 2rem;
+        font-weight: 700;
+        font-size: var(--font-p-text-2);
+        line-height: 130%;
+        color: var(--text-color-4);
+      }
+
+      td {
+        padding-top: 1rem;
+        padding-bottom: 2rem;
+        padding-left: 2rem;
+        font-weight: 400;
+        font-size: var(--font-p-text-2);
+        line-height: 130%;
+        color: var(--text-color-1);
+
+        a {
+          line-height: 130%;
+          text-decoration-line: underline;
+          color: #5678CE;
+          }
+      }
+    }
+}
+
+////////////////////VILLAGE STAT/////////////////////////
+.village_stat {
+  background-color: var(--primary-color);
+  display: grid;
+  grid-template-columns: 50% 50%;
+  padding: 2rem;
+  border: 1px solid #02B836;
+  border-radius: 16px;
+  margin-top: 2rem;
+
+  p {
+    line-height: 130%; 
+    color: #2EE061;
+  }
+  
+  h3 {
+    font-weight: 700;
+    font-size: var(--font-header-1);
+    line-height: 130%;
+    color: #FFFFFF;
+      }
+
+  .stat_one {
+    position: relative;
+    &__num_votes {
+      width: 30.4rem;
+      p {
+        font-size: var(--font-p-text-1);
+      }
+      h3 {
+        font-weight: 700;
+        color: #FFFFFF;
+      }
+  
+    }
+
+    ::before {
+      content: "";
+      position: absolute;
+      height: 6.7rem;
+      width: .2rem;
+      background: #02B836;
+      right: 0;
+      top: .7rem;
+    }
+  }
+
+  .stat_two {
+    padding-left: 10rem;
+    padding-top: 1rem;
+    display: flex;
+    // text-align: end;
+    justify-content: space-between;
+
+     @media (max-width: 45.25em) {
+         padding-left: 5rem;
+        }
+    p {
+      font-size: var(--font-p-text-2);
+    }
+
+    h3 {
+      font-size: var(--font-header-2);
+      line-height: 100%;
+    }
+    &__rewards {
+      padding-right: 7rem;
+      position: relative;
+      
+      @media (max-width: 45.25em) {
+         padding-right: 5rem;
+        }
+      ::before {
+      content: "";
+      position: absolute;
+      height: 3rem;
+      width: .2rem;
+      background: #02B836;
+      right: 10px;
+      top: 1rem;
+    }
+  }
+
+    &__num_villages {
+      // padding-left: 1.5rem;
+
+    }
+  }
+
 }

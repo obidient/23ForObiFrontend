@@ -1,10 +1,10 @@
 import Axios from 'axios';
 
 //CREATE AXIOS INSTANCE
-function returnAxiosInstance() {
+function returnAxiosInstance(accessToken) {
+
   return Axios.create({
     baseURL: 'https://api.23forobi.com/',
-    // baseURL: "//localhost:22664/api/v1/",
     headers: {
       'Content-Type': 'application/json',
     },
@@ -24,8 +24,8 @@ export function get(url, requestData) {
 }
 
 //POST REQUEST
-export function post(url, requestData) {
-  const axios = returnAxiosInstance();
+export function post(url, requestData, accessToken) {
+  const axios = returnAxiosInstance(accessToken);
   return axios.post(url, requestData);
 }
 

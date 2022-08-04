@@ -6,6 +6,7 @@ import useAuthStore from '../store/authStore';
 export default function GoogleAuth(props) {
   // Auth State
   const { addUser } = useAuthStore();
+  const { addUserAuth } = useAuthStore();
   const router = useRouter();
   return (
     <div>
@@ -25,6 +26,8 @@ export default function GoogleAuth(props) {
             // console.log(res.data);
             if (res.data && res.data.access_token) {
               addUser(res.data.user)
+              addUserAuth(res.data.access_token);
+              // console.log(res.data)
               router.push('/dashboard');
             }
           });

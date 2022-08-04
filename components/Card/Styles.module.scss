@@ -44,17 +44,19 @@
         border-top: 1px solid #E1E1E1;
         padding: 2.5rem 0 2.1rem;
         margin: 1.5rem 0 2rem;
-
+        
         p {
             font-weight: 400;
             line-height: 130%;
             color: var(--text-color-1);
+            margin-bottom: 1.5rem;
         }
-
+        
         .percent {
             display: flex;
             justify-content: space-between;
-
+            margin-top: 1.5rem;
+            
             p {
                 font-weight: 400;
                 font-size: var(--font-p-text-2);

@@ -8,13 +8,13 @@ const villageReducer = (state, action) => {
 
   switch (type) {
     case 'ADD_VILLAGE':
-      console.log('ADD_VILLAGE', payload);
+      // console.log('ADD_VILLAGE', payload);
       return {
         ...state,
         villages: payload.villages,
       };
     case 'REMOVE_VILLAGE':
-      console.log('ADD_VILLAGE', payload);
+      // console.log('ADD_VILLAGE', payload);
       return {
         ...state,
         villages: payload.villages,

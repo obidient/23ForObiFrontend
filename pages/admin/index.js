@@ -35,14 +35,14 @@ const Login = () => {
       try {
         setLoading(true);
         await loginAdmin(values, headers)?.then((res) => {
-          console.log(res);
+          // console.log(res);
           if (res.status === 200) {
             router.push('/admin/dashboard');
           }
         });
         setLoading(false);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
     callApi();

@@ -4,6 +4,7 @@
     justify-content: space-between;
     align-items: center;
 	padding-top: 6.1rem;
+
 	.logo {
 		cursor: pointer;
 	}
@@ -26,6 +27,27 @@
             }
         }
     }
+
+	&__top_left {
+		display: flex;
+		align-items: flex-end;
+		justify-content: space-between;
+		column-gap: 3.7rem;
+
+		@media (max-width: 35.25em) {
+			flex-direction: column;
+		}
+	}
+
+	&__progress {
+		width: 26.8rem;
+
+
+		.head {
+			display: flex;
+			justify-content: space-between;
+		}
+	}
 }
 
 

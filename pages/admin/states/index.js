@@ -290,7 +290,7 @@ console.log(arrCount)
                       {arrCount.length < 4  && (
 
                       <div className={styles.main__another} onClick={increment}>
-                        <BsPlus style={{fontSize: "20px", cursor: "pointer"}} />
+                        <BsPlus style={{fontSize: "20px"}} />
                         <p>Add another village</p>
                       </div>
                       )}
