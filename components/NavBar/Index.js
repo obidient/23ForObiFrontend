@@ -13,9 +13,13 @@ import { MdOutlineArrowForwardIos } from 'react-icons/md';
 import img1 from '../../assets/how_it_works_img1.png';
 import img2 from '../../assets/how_it_works_img2.png';
 import img3 from '../../assets/how_it_works_img3.png';
+import avatar from '../../assets/avatar.png';
 import DeliverModal from './../Modal/DeliverModal';
+import useAuthStore from '../../store/authStore';
+import { googleLogout } from '@react-oauth/google';
 
 const NavBar = () => {
+  const { userProfile, removeUser } = useAuthStore();
   const navRef = useRef();
 
   const showNavbar = () => {
@@ -24,6 +28,7 @@ const NavBar = () => {
 
   //Show Modal
   const [showModal, setShowModal] = useState(false);
+  const [signInIsVisible, setSignInIsVisible] = useState(false);
 
   //Effect to hide scroll
   useEffect(() => {
@@ -33,6 +38,12 @@ const NavBar = () => {
 
   //Router
   const router = useRouter();
+  
+  const width = {
+    container: (bigScreen) => ({
+      flexDirection: bigScreen ? '79.4rem' : '60rem',
+    }),
+  };
 
   return (
     <div className="container">
@@ -40,9 +51,7 @@ const NavBar = () => {
         <nav className={styles.navbar}>
           <div className={styles.navbar__logo}>
             <Link href="/">
-              <>
-                <Image src={logo} width='130px' height='33px' />
-              </>
+              <Image src={logo} width="130px" height="33px" />
             </Link>
           </div>
           <div ref={navRef} className={styles.navbar__menu}>
@@ -51,7 +60,7 @@ const NavBar = () => {
                 <Link href="/">
                   <a
                     className={router.pathname == '/' ? styles.active : ''}
-                    href="#"
+                    href="/"
                   >
                     Home
                   </a>
@@ -95,12 +104,20 @@ const NavBar = () => {
                   </a>
                 </Link>
               </li>
-              <button
-                className={`${styles.btn_vote_mobile} btn_light`}
-                onClick={() => setShowModal(true)}
-              >
-                Deliver Votes
-              </button>
+              {userProfile ? (
+                <div className="lg:hidden md:block cursor-pointer">
+                  <Link href="/dashboard">
+                    <Image src={avatar} width={35} height={35} />
+                  </Link>
+                </div>
+              ) : (
+                <button
+                  className={`${styles.btn_vote_mobile} btn_light`}
+                  onClick={() => setShowModal(true)}
+                >
+                  Deliver Votes
+                </button>
+              )}
             </ul>
             <div
               onClick={showNavbar}
@@ -110,19 +127,40 @@ const NavBar = () => {
             </div>
           </div>
           {/* <Link href="/how-it-works"> */}
-          <button
-            className={`${styles.btn_vote} btn_dark`}
-            onClick={() => setShowModal(true)}
-          >
-            Deliver Votes
-          </button>
+          {userProfile ? (
+            <div className="hidden lg:block cursor-pointer">
+              <Link href="/dashboard">
+                <Image src={avatar} width={35} height={35} />
+              </Link>
+            </div>
+          ) : (
+            <button
+              className={`${styles.btn_vote} btn_dark`}
+              onClick={() => setShowModal(true)}
+            >
+              Deliver Votes
+            </button>
+          )}
           {/* </Link> */}
           {/* DELIVER VOTES MODAL */}
           {showModal && (
-            <DeliverModal
+            <Modal
               show={showModal}
               onClose={() => setShowModal(false)}
-            />
+              setShowModal={setShowModal}
+              setSignInIsVisible={setSignInIsVisible}
+              type="contribute"
+              // width={width.container(matches)}
+              width={signInIsVisible ? '50rem' : null}
+            >
+              <DeliverModal
+                show={showModal}
+                onClose={() => setShowModal(false)}
+                setSignInIsVisible={setSignInIsVisible}
+                signInIsVisible={signInIsVisible}
+                setShowModal={setShowModal}
+              />
+            </Modal>
           )}
           {/* END DELIVER VOTES MODAL */}
           <div

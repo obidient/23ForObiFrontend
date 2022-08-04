@@ -73,7 +73,7 @@
       padding-left: 1.5rem;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      grid-gap: 1rem;
+      gap: 1rem;
 
       @media (max-width: 35.25em) {
         border: none;
@@ -82,6 +82,10 @@
       }
 
       .output {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         background: #018226;
         border: 1px solid #02b836;
         border-radius: 61px;
@@ -89,9 +93,7 @@
         min-width: 15.4rem;
         height: 3rem;
 
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+        
 
         @media (max-width: 35.25em) {
           width: 100%;
@@ -108,7 +110,10 @@
       }
 
       .cancel {
+        position: absolute;
         cursor: pointer;
+        right: 10px;
+        top: 3px;
       }
     }
   }
@@ -370,6 +375,14 @@
   display: flex;
   padding-top: 4rem;
   column-gap: 10rem;
+  @media screen and (max-width: 26.43rem){
+    flex-direction: column;
+    align-items: center;
+    p {
+      margin: 1rem;
+      font-size: 2.5rem;
+    }
+  }
 
   .avatar {
     font-size: var(--font-p-text-1);
@@ -377,10 +390,15 @@
     text-align: center;
     text-decoration-line: underline;
     color: #5678ce;
+    padding: 1rem;
   }
 
   .form {
     width: 34.6rem;
+    @media screen and (max-width: 26.43rem) {
+      width: 100%;
+      margin: 1rem 0;
+    }
     form {
       display: flex;
       flex-direction: column;

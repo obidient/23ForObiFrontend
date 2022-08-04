@@ -33,12 +33,19 @@
   outline: none;
   border: 1px solid #2f3733;
   border-radius: 48px;
+  &:focus {
+    border: 1px solid #018226;
+    background-color: #F3FFF7;
+}
 }
 
 .select {
   margin-bottom: 2rem;
   position: relative;
-
+  &:focus {
+    border: 1px solid #018226;
+    background-color: #F3FFF7;
+}
   &:nth-last-of-type(1) {
     margin-bottom: 1rem;
   }

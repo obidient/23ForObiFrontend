@@ -11,6 +11,8 @@ const Modal = ({
   children,
   innerClose,
   delModRes,
+  setShowModal,
+  setSignInIsVisible
 }) => {
   const modalRef = useRef();
   useEffect(() => {
@@ -37,9 +39,15 @@ const Modal = ({
       return;
     }
     // outside the modal
-    if(type !== 'deliver') {
+    if(type === 'deliver') {
       onClose();
+    } 
+    
+    if(type === 'contribute') {
+      onClose();
+      setSignInIsVisible(false) 
     }
+    
   }, []);
 
   return (

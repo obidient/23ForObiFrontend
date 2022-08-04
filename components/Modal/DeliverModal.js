@@ -2,6 +2,7 @@ import styles from './Styles.module.scss';
 import styles_login from '../../pages/pagestyles/home.module.scss';
 import React, { useEffect, useRef } from 'react';
 import Modal from './Index';
+import LoginModal from './LoginModal';
 import Image from 'next/image';
 
 import { MdOutlineArrowBackIosNew } from 'react-icons/md';
@@ -20,8 +21,12 @@ import apple from '../../assets/apple.png';
 import twitter from '../../assets/twitter.png';
 import GoogleAuth from './../../utils/googleLogin';
 
-const DeliverModal = ({ show, onClose }) => {
-  const [showLogin, setShowLogin] = useState(false);
+const DeliverModal = ({ 
+  show,
+  onClose,
+  setSignInIsVisible,
+  signInIsVisible,
+  setShowModal }) => {
   //Carousel
   const slides = [
     {
@@ -83,15 +88,19 @@ const DeliverModal = ({ show, onClose }) => {
     }),
   };
 
+  if (signInIsVisible) {
+    return (
+      <>
+        <DeliverSignInModal
+          setShowModal={setShowModal}
+          setSignInIsVisible={setSignInIsVisible}
+        />
+      </>
+    );
+  }
+  
   return (
-    <div className={styles.backdrop}>
-      <Modal
-        show={show}
-        // onClose={onClose}
-        type="deliver"
-        width={width.container(matches)}
-        delModRes="60rem"
-      >
+    <div >
         <div className={styles.deliver_modal}>
           <div className={`${styles.deliver_modal__heading} modal_heading`}>
             <h2>
@@ -112,7 +121,7 @@ const DeliverModal = ({ show, onClose }) => {
               >
                 {slides.map((slide, index) => {
                   return (
-                    <div className={styles.carousel__item}>
+                    <div className={styles.carousel__item} key={index}>
                       <div className={styles.details}>
                         <div className={styles.text}>
                           <h3>
@@ -164,6 +173,7 @@ const DeliverModal = ({ show, onClose }) => {
               <div className={styles.carousel_indicators}>
                 {slides.map((_, index) => (
                   <button
+                    key={index}
                     className={`${styles.carousel_indicator_item} ${
                       currentSlide === index ? styles.active : ''
                     }`}
@@ -173,115 +183,30 @@ const DeliverModal = ({ show, onClose }) => {
               </div>
               <Link href="/how-it-works">Learn More</Link>
             </div>
-            <button
-              type="submit"
-              className={`btn_dark rounded-full ${styles.btn}`}
-              onClick={() => setShowLogin(true)}
-            >
-              Create an account
-            </button>
-          </div>
-        </div>
-      </Modal>
-      {showLogin && (
-        <Modal
-          show={showLogin}
-          onClose={() => setShowLogin(false)}
-          width="51.1rem"
-        >
-          <div className={styles_login.login_modal}>
-            <h2>
-              Welcome to <br /> <span>Peter Obi Campaign</span>
-            </h2>
-            <div className={styles_login.login_modal__body}>
-              <p>Sign-up with social media</p>
-              <div className={styles_login.login_modal__body__container}>
-                <div
-                  className={styles_login.login_modal__body__container__content2}
-                >
-                  {/* <div
-                    style={{ display: 'grid', placeItems: 'end' }}
-                    className={
-                      styles_login.login_modal__body__container__content__image
-                    }
-                  >
-                    <Image src={google} alt="google icon" />
-                  </div> */}
-                  <div
-                    onClick={() => console.log('clicked')}
-                    className={
-                      styles_login.login_modal__body__container__content__para
-                    }
-                    >
-                    <GoogleAuth />
-                    {/* <p>Join with Google</p> */}
-                  </div>
-                </div>
-
-                <div
-                  className={styles_login.login_modal__body__container__content}
-                >
-                  <div
-                    style={{ display: 'grid', placeItems: 'end' }}
-                    className={
-                      styles_login.login_modal__body__container__content__image
-                    }
-                  >
-                    <Image src={facebook} alt="google icon" />
-                  </div>
-                  <div
-                    className={
-                      styles_login.login_modal__body__container__content__para
-                    }
-                  >
-                    <p>Join with Facebook</p>
-                  </div>
-                </div>
-
-                <div
-                  className={styles_login.login_modal__body__container__content}
-                >
-                  <div
-                    style={{ display: 'grid', placeItems: 'end' }}
-                    className={
-                      styles_login.login_modal__body__container__content__image
-                    }
-                  >
-                    <Image src={twitter} alt="google icon" />
-                  </div>
-                  <div
-                    className={
-                      styles_login.login_modal__body__container__content__para
-                    }
-                  >
-                    <p>Join with Twitter</p>
-                  </div>
-                </div>
-
-                <div
-                  className={styles_login.login_modal__body__container__content}
-                >
-                  <div
-                    style={{ display: 'grid', placeItems: 'end' }}
-                    className={
-                      styles_login.login_modal__body__container__content__image
-                    }
-                  >
-                    <Image src={apple} alt="google icon" />
-                  </div>
-                  <div
-                    className={
-                      styles_login.login_modal__body__container__content__para
-                    }
-                  >
-                    <p>Join with Apple</p>
-                  </div>
-                </div>
-              </div>
+            <div className={styles.btn_container}>
+              <button
+                type="submit"
+                className={`btn_dark rounded-full ${styles.btn}`}
+                onClick={() => setSignInIsVisible(true)}
+              >
+                Login
+              </button>
             </div>
           </div>
-        </Modal>
-      )}
+        </div>
+    </div>
+  );
+};
+
+const DeliverSignInModal = ({setSignInIsVisible, setShowModal}) => {
+  const [showLogin, setShowLogin] = useState(false);
+  return (
+    <div>
+      <LoginModal
+        type="deliver"
+        setSignInIsVisible={setSignInIsVisible}
+        setShowModal={setShowModal}
+      />
     </div>
   );
 };

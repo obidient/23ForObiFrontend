@@ -11,7 +11,7 @@ import VILLAGESINCONTROL from '../../data/villageDetails';
 import { villageNotInDetails } from '../../data/villageDetails';
 import Modal from '../Modal/Index';
 import { FaTimes } from 'react-icons/fa';
-import Breadcrumbs from '../misc/Breadcrumbs';
+import {StateBreadcrumb} from '../misc/Breadcrumb';
 import SOCIALMEDIAIMAGES from '../../data/smImages';
 
 // Forms Import
@@ -75,7 +75,7 @@ const State = ({ stateName, detail, images, villages }) => {
     contributed_by: '',
   });
 
-// console.log(villages.list_of_villages)
+console.log(last_vote_direction)
   //ONCHANGE FOR TITLE
   const onImgChange = (e) => {
     setImgForm((prevState) => ({
@@ -203,7 +203,7 @@ const State = ({ stateName, detail, images, villages }) => {
     <div className={styles.state}>
       <div className="container">
         <div className={styles.state_heading}>
-          <Breadcrumbs />
+          <StateBreadcrumb state={stateName} />
           <div className={styles.state_heading__title}>
             <h1 className="capitalize">{stateName} Villages</h1>
             <div className={styles.vill_control}>
@@ -237,7 +237,7 @@ const State = ({ stateName, detail, images, villages }) => {
               <div className={styles.vote_dir}>
                 <p>Last vote direction</p>
                 <div className={styles.vote_dir__details}>
-                  <Image src={last_vote_direction ? pdp : apc} />
+                  {/* <Image src={last_vote_direction ? pdp : apc} /> */}
                   <div className={styles.text}>
                     <h5>{last_vote_direction ? last_vote_direction : ''}</h5>
                     <p>{last_vote_direction ? 'People Democratic Party': 'All Progressive Congress'}</p>

@@ -6,7 +6,9 @@ import check from '../../assets/check.png';
 import Modal from '../Modal/Index';
 import { useState, useEffect } from 'react';
 import { FaTimes } from 'react-icons/fa';
+import {VillageBreadcrumb} from '../misc/Breadcrumb';
 import Breadcrumbs from '../misc/Breadcrumbs';
+import avatar from '../../assets/avatar.png';
 
 /* Images Import */
 import village_img_1 from '../../assets/village_img_1.png';
@@ -17,7 +19,16 @@ import village_img_5 from '../../assets/village_img_5.png';
 
 import ContributeModal from './ContributeModal';
 
-const Village = ({ contributors, progress_percentage, village_name, village_id }) => {
+const Village = ({
+  contributors,
+  progress_percentage,
+  village_name,
+  village_id,
+  voters,
+  villageState,
+  state_id,
+  votersData,
+}) => {
   const [showModal, setShowModal] = useState(false);
   const [registerFormIsVisible, setRegisterFormIsVisible] = useState(false);
   const [signInIsVisible, setSignInIsVisible] = useState(false);
@@ -29,18 +40,26 @@ const Village = ({ contributors, progress_percentage, village_name, village_id }
     body.style.overflow = showModal ? 'hidden' : 'auto';
   }, [showModal]);
 
+
   return (
     <div className={styles.state}>
       <div className="container">
         <div className={styles.state_heading}>
           <div className={styles.breadcrumb}>
-            <Breadcrumbs />
+            <VillageBreadcrumb
+              village={village_name}
+              villageState={villageState}
+              state_id={state_id}
+            />
           </div>
           <div className={styles.state_heading__title}>
             <div>
               <h1>{village_name ? `${village_name} village` : ''}</h1>
               <p className={styles.red}>
-                {contributors > 0 ? `We have got 5 votes guarantedd in ${village_name ? village_name : ''} Village in Abia State.Robert Okonkwo is our man on ground.Calistus Okafor is coordinating activities in this village`
+                {contributors > 0
+                  ? `We have got 5 votes guaranteed in ${
+                      village_name ? village_name : ''
+                    } Village in Abia State.Robert Okonkwo is our man on ground.Calistus Okafor is coordinating activities in this village`
                   : `We do not have anyone on ground in ${
                       village_name ? village_name : ''
                     } village.Can you help?`}
@@ -58,6 +77,9 @@ const Village = ({ contributors, progress_percentage, village_name, village_id }
                 show={showModal}
                 onClose={() => setShowModal(false)}
                 width={registerFormIsVisible ? '54.4rem' : '50rem'}
+                setShowModal={setShowModal}
+                setSignInIsVisible={setSignInIsVisible}
+                type='contribute'
               >
                 <ContributeModal
                   setShowModal={setShowModal}
@@ -160,87 +182,6 @@ const Village = ({ contributors, progress_percentage, village_name, village_id }
               ? 'These are the top contributors in this village'
               : 'There are no contributors in this village'}
           </p>
-          {contributors > 0 &&
-            contributors.map((item, index) => (
-              <Contributor
-                key={index}
-                name={item.name}
-                votes={item.votes}
-                type="vote"
-              />
-            ))}
-          {/**
-           <div className={styles.contributors}>
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_1}
-              type="top_contributor"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_2}
-              type="top_contributor"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_3}
-              type="top_contributor"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_4}
-              type="top_contributor"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_5}
-              type="top_contributor"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_4}
-              type="top_contributor"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_5}
-              type="top_contributor"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_2}
-              type="top_contributor"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_3}
-              type="top_contributor"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_1}
-              type="top_contributor"
-            />
-          </div>
-           */}
-        </div>
-        <div className={styles.votes_guaranteed}>
-          <h2>{contributors ? 'Votes' : 'No Votes'} Guaranteed</h2>
-          <p>
-            {contributors
-              ? 'These are the votes quaranteed in this village'
-              : 'These are no votes quaranteed in this village'}
-          </p>
           <div className={styles.contributors}>
             {contributors > 0 &&
               contributors.map((item, index) => (
@@ -251,138 +192,28 @@ const Village = ({ contributors, progress_percentage, village_name, village_id }
                   type="vote"
                 />
               ))}
-            {/*<Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_1}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_2}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_3}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_4}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_5}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_4}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_5}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_2}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_3}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_1}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_5}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_2}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_3}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_1}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_5}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_2}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_3}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_1}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_5}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_2}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_3}
-              type="vote"
-            />
-            <Contributor
-              name="Ejima Benson"
-              votes={50}
-              img={village_img_1}
-              type="vote"
-              />*/}
+          </div>
+        </div>
+        <div className={styles.votes_guaranteed}>
+          <h2>
+            {votersData ? `${votersData.length} Votes` : 'No Votes'} Guaranteed
+          </h2>
+          <p>
+            {votersData
+              ? 'These are the votes quaranteed in this village'
+              : 'These are no votes quaranteed in this village'}
+          </p>
+          <div className={styles.contributors}>
+            {votersData.length > 0 &&
+              votersData.map((item, index) => (
+                <Contributor
+                  key={index}
+                  name={item.name}
+                  votes={item.votes}
+                  type="vote"
+                  img={avatar}
+                />
+              ))}
           </div>
         </div>
         {/* <div className={styles.votes_delivered}>

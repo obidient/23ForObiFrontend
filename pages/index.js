@@ -22,8 +22,8 @@ export default function Home({
   initailData,
 }) {
   const { userProfile, removeUser } = useAuthStore();
-  
-  const sendApi = async (res) => {
+
+  /*const sendApi = async (res) => {
     console.log(res.credential);
 
     const token = res.credential
@@ -37,8 +37,7 @@ export default function Home({
       }
     );
     console.log(payload);
-  };
-
+  };*/
 
   return (
     <div>

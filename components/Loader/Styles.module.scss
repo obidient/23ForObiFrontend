@@ -21,7 +21,28 @@
     //   border: 1px solid #E1E1E1;
       border-radius: 1.1875rem;
       padding: 3rem 3.5rem;
+
+      .loader {
+        animation:animateC 2s linear infinite;
+      }
   
+      .spinner {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: 3px solid #fff;
+        border-top: 3px solid #018226;
+        animation: spin 0.8s linear infinite;
+
+        @keyframes spin {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+      }
       
       .modalContent {
         position: relative;
@@ -44,8 +65,18 @@
     }
   }
   
-  
-  
+@keyframes animateC
+{
+  0%
+  {
+    transform:rotate(0deg);
+  }
+
+  100%
+  {
+    transform:rotate(360deg);
+  }
+}
   
   @media screen and (max-width: 750px) {
     .modal {

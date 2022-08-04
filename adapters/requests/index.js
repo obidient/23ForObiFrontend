@@ -26,9 +26,12 @@ export function getVillages(state) {
 }
 
 export function getVillage(id) {
-  return get(`village-details/${id}/`)
+  return get(`village-details/${id}/`);
 }
 
+export function getVoters(id) {
+  return get(`/voters/${id}`);
+}
 //POST REQUESTS
 export function addSupportGroup(requestData) {
   post('/support-group/', requestData);
@@ -38,3 +41,6 @@ export function sendToken(token, config) {
   post(`/token?token=${token}/`, config);
 }
 
+export function loginAdmin(requestData){
+  post(`/`, requestData)
+}

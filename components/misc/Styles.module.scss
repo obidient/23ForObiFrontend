@@ -392,3 +392,40 @@
 		}
 	}
 }
+
+////////////// TOGGLE BTN ////////////
+.toggle_checkbox {
+	height: 0;
+	width: 0;
+	visibility: hidden;
+}
+.toggle_label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  width: 25px;
+  height: 7.88px;
+  background: grey;
+  border-radius: 25px;
+  position: relative;
+  transition: background-color .2s;
+}
+.toggle_label .toggle_btn {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 13.13px;
+  height: 13.13px;
+  border-radius: 13.13px;
+  transition: 0.2s;
+  background: #018226;
+}
+.toggle_checkbox:checked + .toggle_label .toggle_btn {
+  left: calc(100%);
+  transform: translateX(-100%);
+}
+.toggle_label:active .toggle_btn {
+	width: 13.13px;
+}

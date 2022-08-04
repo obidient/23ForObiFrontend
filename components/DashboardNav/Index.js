@@ -1,6 +1,6 @@
 import styles from './Styles.module.scss';
 
-import logo from '../../assets/logo.png';
+import logo from '../../assets/23forobi.svg';
 import caret_down from '../../assets/caret_down.png';
 
 import React from 'react';
@@ -11,7 +11,7 @@ import Link from 'next/link';
 const DashboardNav = () => {
   return (
     <div className={styles.dashboardnav}>
-      <Link href="/">
+      <Link href="/dashboard">
         <div className={styles.logo}>
           <Image src={logo} />
         </div>

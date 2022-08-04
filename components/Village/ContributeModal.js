@@ -11,6 +11,7 @@ import facebook from '../../assets/facebook.png';
 import twitter from '../../assets/twitter.png';
 import apple from '../../assets/google.png';
 import SelectInput from '../misc/SelectInput';
+import LoginModal from './../Modal/LoginModal';
 
 const ContributeModal = ({
   setShowModal,
@@ -202,44 +203,10 @@ const ContributeModal = ({
 const SignInModal = ({ setShowModal, setSignInIsVisible }) => {
   return (
     <div>
-      <div className={styles.modal}>
-        <div className={`${styles.modal__heading} modal_heading`}>
-          <h2>
-            Welcome to <br />
-            <span>Peter Obi Campaign</span>
-          </h2>
-          <button
-            className={`closeBtn`}
-            onClick={() => {
-              setShowModal(false);
-              setSignInIsVisible(false);
-            }}
-          >
-            &times;
-          </button>
-        </div>
-        <div className={styles.modal__body}>
-          <p>Sign-up with social media</p>
-          <div className={styles.social_login}>
-            <button>
-              <Image src={google} />
-              Join with Google
-            </button>
-            <button>
-              <Image src={facebook} />
-              Join with Facebook
-            </button>
-            <button>
-              <Image src={twitter} />
-              Join with Twitter
-            </button>
-            <button>
-              <Image src={apple} />
-              Join with Apple
-            </button>
-          </div>
-        </div>
-      </div>
+      <LoginModal
+        setShowModal={setShowModal}
+        setSignInIsVisible={setSignInIsVisible}
+      />
     </div>
   );
 };

@@ -8,12 +8,14 @@ import Modal from './../Modal/Index';
 import SelectInput from './../misc/SelectInput';
 import VillageContext from '../../Context/villageContext';
 import useVillage from '../../Context/villageContext';
+import close from '../../assets/closeW.png'
 
 import { Form, Formik } from 'formik';
 // import { CustomSelectInput } from '../Forms/SelectInput';
 import * as Yup from 'yup';
 import dynamic from 'next/dynamic';
 import TextError from '../Forms/TextError';
+import useAuthStore from '../../store/authStore';
 // Prevent serverside redering on the FormikControl Component
 const FormikControl = dynamic(() => import('../Forms/FormikControl'), {
   ssr: false,
@@ -27,6 +29,15 @@ const CustomSelectInput = dynamic(
 );
 
 const DashboardMain = () => {
+  const { userProfile } = useAuthStore();
+  // const { email, first_name, last_name, image } = userProfile;
+  // const { email, first_name, last_name, image } = userProfile;
+
+  const email = userProfile?.email
+  const first_name = userProfile?.first_name;
+  const last_name = userProfile?.last_name;
+  const image = userProfile?.image;
+  
   ////// Modal State
   const [showModal, setShowModal] = useState(false);
 
@@ -125,7 +136,7 @@ const DashboardMain = () => {
 
   return (
     <div className={styles.dashboardmain}>
-      <h2>Welcome Sandra</h2>
+      <h2>Welcome {first_name}</h2>
       <hr />
       <div className={styles.village_control}>
         <div className={styles.village_control__input}>
@@ -166,7 +177,7 @@ const DashboardMain = () => {
                   onClick={() => removeVillage(village)}
                   className={styles.cancel}
                 >
-                  x
+                  <Image src={close} />
                 </span>
               </div>
             );
@@ -237,7 +248,6 @@ const DashboardMain = () => {
               onClose={() => setShowModal(false)}
               width="54.4rem"
             >
-            
               <div className={styles.modal}>
                 <div className={`${styles.modal__heading} modal_heading`}>
                   <h2>
