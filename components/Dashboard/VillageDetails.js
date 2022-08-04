@@ -18,6 +18,13 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
   const [showModal, setShowModal] = useState();
   const { accessToken } = useAuthStore();
 
+  console.log(villageDetails.village.name)
+
+  //FILTER VOTERS BY VILLAGE NAME
+  const votersInVillage = votersDetails.filter(
+    (items) => items.village.name === villageDetails.village.name
+    );    
+
   // Form validation schema using Yup
   const votersValidationSchema = Yup.object({
     name: Yup.string().required('Required'),
@@ -84,7 +91,7 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
               <th>ACTION</th>
             </tr>
           </thead>
-          {votersDetails?.map((voters, index) => (
+          {votersInVillage?.map((voters, index) => (
             <tbody key={voters.id}>
               <tr>
                 <td>{index + 1}</td>
