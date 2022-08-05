@@ -19,6 +19,7 @@ import CompleteModal from './../misc/CompleteModal';
 
 const VillageDetails = ({ villageDetails, votersDetails }) => {
   const [showModal, setShowModal] = useState();
+  const [showEditModal, setShowEditModal] = useState();
   const [showCompleteModal, setShowCompleteModal] = useState();
   const { accessToken } = useAuthStore();
 
@@ -57,6 +58,32 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
        setShowCompleteModal(true);
      });
    };
+
+   const handleEditVoters = (valuesedit) => {
+    //  const url = 'https://api.23forobi.com/voters';
+    //  const data = {
+    //    name: values.name,
+    //    contact: values.contact,
+    //    village_id: villageDetails.village.id,
+    //  };
+    //  const headers = {
+    //    'Content-Type': 'application/json',
+    //    Accept: 'application/json',
+    //    Authorization: `Bearer ${accessToken}`,
+    //  };
+
+    //  axios.post(url, data, { headers })?.then((res) => {
+    //    try {
+    //      //  console.log(res.data);
+    //    } catch (error) {
+    //      //  console.log(error);
+    //    }
+    //    setShowModal(false);
+    //    setShowCompleteModal(true);
+    //  });
+   };
+
+   console.log(votersDetails);
 
      useEffect(() => {
        const body = document.querySelector('body');
@@ -104,6 +131,70 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
                   <Link href="#">Edit</Link>
                 </td>
               </tr>
+              {/* EDIT VOTER MODAL */}
+              {showEditModal && (
+                <Modal
+                  show={showEditModal}
+                  onClose={() => setShowEditModal(false)}
+                  width="54.4rem"
+                >
+                  <div className={styles.modal}>
+                    <div className={`${styles.modal__heading} modal_heading`}>
+                      <h2>
+                        Add a new <br />
+                        <span>Village</span>
+                      </h2>
+                      <button
+                        className={`closeBtn`}
+                        onClick={() => setShowEditModal(false)}
+                      >
+                        &times;
+                      </button>
+                    </div>
+                    <div className={styles.modal__body}>
+                      <p>Kindly enter the details for a new village</p>
+                      <div className={styles.details_form}>
+                        <Formik
+                          initialValues={{
+                            name: '',
+                            contact: '',
+                          }}
+                          validationSchema={votersValidationSchema}
+                          onSubmit={handleEditVoters}
+                        >
+                          {({ valuesedit }) => (
+                            <Form autoComplete="off">
+                              <FormikControl
+                                values={valuesedit}
+                                control="input"
+                                placeholder="Enter full name"
+                                name="name"
+                                type="text"
+                              />
+                              <FormikControl
+                                values={valuesedit}
+                                control="input"
+                                placeholder="Phone Number"
+                                name="contact"
+                                type="text"
+                              />
+
+                              <button
+                                type="submit"
+                                className="btn_dark w-full rounded-full h-20 mt-9"
+                                onClick={handleEditVoters}
+                              >
+                                Continue
+                              </button>
+                            </Form>
+                          )}
+                        </Formik>
+                      </div>
+                    </div>
+                  </div>
+                </Modal>
+              )}
+              {/* EDIT VOTER MODAL END */}
             </tbody>
           ))}
         </table>
@@ -180,9 +271,7 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
         <CompleteModal
           showCompleteModal={showCompleteModal}
           setShowCompleteModal={setShowCompleteModal}
-          heading={
-            'Congratulations! You have successfully added a new voter.'
-          }
+          heading={'Congratulations! You have successfully added a new voter.'}
           description={
             'Go Champ! You are doing so great, let’s keep the fire burning'
           }

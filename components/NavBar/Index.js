@@ -36,6 +36,7 @@ const NavBar = () => {
     body.style.overflow = showModal ? 'hidden' : 'auto';
   }, [showModal]);
 
+  console.log(userProfile)
   //Router
   const router = useRouter();
   
@@ -128,10 +129,11 @@ const NavBar = () => {
           </div>
           {/* <Link href="/how-it-works"> */}
           {userProfile ? (
-            <div className="hidden lg:block cursor-pointer">
+            <div className="hidden lg:flex items-center gap-x-3 cursor-pointer">
               <Link href="/dashboard">
                 <Image src={avatar} width={35} height={35} />
               </Link>
+              <p>{userProfile.first_name}</p>
             </div>
           ) : (
             <button
