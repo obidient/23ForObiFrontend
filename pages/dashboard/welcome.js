@@ -23,7 +23,6 @@ const welcome = () => {
     state: '',
     lga: '',
     village: '',
-    // selectedVillage: '',
     full_name: '',
     phone: '',
   });
@@ -40,8 +39,7 @@ const welcome = () => {
         return <FourthStep formData={formData} setFormData={setFormData} />;
       case 5:
         return <FifthStep formData={formData} setFormData={setFormData} />;
-      case 6:
-        return <SixthStep />;
+
       default:
         return <FifthStep formData={formData} setFormData={setFormData} />;
     }
