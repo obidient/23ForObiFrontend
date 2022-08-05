@@ -25,13 +25,9 @@ export default function GoogleAuth(props) {
           axios.post(url, data, headers).then((res) => {
             // console.log(res.data);
             if (res.data && res.data.access_token) {
-              addUser(res.data.user)
-<<<<<<< HEAD
+              addUser(res.data.user);
+
               router.push('/dashboard/welcome');
-=======
-             
-              
->>>>>>> 7682b1b487c80a0376dd442f63db1988ef433b09
             }
           });
         }}
