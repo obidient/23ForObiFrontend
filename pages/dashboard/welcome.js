@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import Image from 'next/image';
-import { Formik, Field, Form } from 'formik';
+import { useRouter } from 'next/router';
 import styles from '../pagestyles/home.module.scss';
 import DashboardNav from '../../components/DashboardNav/Index';
 import StateProgress from '../../components/misc/StateProgress';
@@ -14,9 +13,9 @@ import FifthStep from '../../components/Welcome/Step5';
 import StepButton from '../../components/misc/StepButton';
 
 const welcome = () => {
+  const router = useRouter();
   const [steps, setSteps] = useState(1);
   const [progress, setProgress] = useState(20);
-  const [disabled, setDisabled] = useState(false);
   const [formData, setFormData] = useState({
     pvc: '',
     vote: '',
@@ -24,6 +23,7 @@ const welcome = () => {
     state: '',
     lga: '',
     village: '',
+    // selectedVillage: '',
     full_name: '',
     phone: '',
   });
@@ -31,7 +31,7 @@ const welcome = () => {
   const conditionalComponent = () => {
     switch (steps) {
       case 1:
-        return <FirstStep formData={formData} setFormData={setFormData}/>;
+        return <FirstStep formData={formData} setFormData={setFormData} />;
       case 2:
         return <SecondStep formData={formData} setFormData={setFormData} />;
       case 3:
@@ -40,15 +40,13 @@ const welcome = () => {
         return <FourthStep formData={formData} setFormData={setFormData} />;
       case 5:
         return <FifthStep formData={formData} setFormData={setFormData} />;
-
+      case 6:
+        return <SixthStep />;
       default:
         return <FifthStep formData={formData} setFormData={setFormData} />;
     }
   };
 
- 
-  
- 
   const handleSubmit = () => {
     setSteps(steps + 1);
     setProgress(progress + 20);
@@ -56,15 +54,12 @@ const welcome = () => {
 
   const submitForm = () => {
     console.log('Submiited');
-    console.log(formData)
+    console.log(formData);
+    router.push('/dashboard/summary');
   };
 
   const handleSkip = () => {
     console.log('Skipped');
-  };
-
-  const initialValues = {
-    selected: '',
   };
 
   return (
@@ -96,6 +91,11 @@ const welcome = () => {
           submitForm={submitForm}
           handleSkip={handleSkip}
           type="submit"
+          disabled1={!formData.pvc}
+          disabled2={!formData.vote}
+          disabled3={!formData.available}
+          disabled4={!formData.state || !formData.lga || !formData.village}
+          disabled5={!formData.full_name || !formData.phone}
         />
       </div>
 

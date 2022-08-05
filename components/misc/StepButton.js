@@ -2,15 +2,30 @@ import Image from 'next/image';
 import React from 'react';
 import nextIcon from '../../assets/arrow-right-2.png';
 
-const StepButton = ({ steps, handleSubmit, submitForm, handleSkip, type }) => {
+const StepButton = ({
+  steps,
+  handleSubmit,
+  submitForm,
+  handleSkip,
+  type,
+  disabled1,
+  disabled2,
+  disabled3,
+  disabled4,
+  disabled5,
+}) => {
+  const enabledBtn =
+    'flex items-center justify-center w-[173px] h-[44px] bg-[#018226]  rounded-full text-white my-10';
+  const disabledBtn = `${enabledBtn} opacity-40`;
   switch (steps) {
     case 1:
       return (
         <>
           <button
+            disabled={disabled1}
             type={type}
             onClick={handleSubmit}
-            className="flex items-center justify-center w-[173px] h-[44px] bg-[#018226]  rounded-full text-white my-10"
+            className={!disabled1 ? enabledBtn : disabledBtn}
           >
             Next
             <div className="flex items-center pl-4 hover:translate-x-1">
@@ -23,9 +38,10 @@ const StepButton = ({ steps, handleSubmit, submitForm, handleSkip, type }) => {
       return (
         <>
           <button
+            disabled={disabled2}
             type={type}
             onClick={handleSubmit}
-            className="flex items-center justify-center w-[173px] h-[44px] bg-[#018226]  rounded-full text-white my-10"
+            className={!disabled2 ? enabledBtn : disabledBtn}
           >
             Next
             <div className="flex items-center pl-4 hover:translate-x-1">
@@ -38,9 +54,10 @@ const StepButton = ({ steps, handleSubmit, submitForm, handleSkip, type }) => {
       return (
         <>
           <button
+            disabled={disabled3}
             type={type}
             onClick={handleSubmit}
-            className="flex items-center justify-center w-[173px] h-[44px] bg-[#018226]  rounded-full text-white my-10"
+            className={!disabled3 ? enabledBtn : disabledBtn}
           >
             Next
             <div className="flex items-center pl-4 hover:translate-x-1">
@@ -53,9 +70,10 @@ const StepButton = ({ steps, handleSubmit, submitForm, handleSkip, type }) => {
       return (
         <>
           <button
+            disabled={disabled4}
             type={type}
             onClick={handleSubmit}
-            className="flex items-center justify-center w-[173px] h-[44px] bg-[#018226]  rounded-full text-white my-10"
+            className={!disabled4 ? enabledBtn : disabledBtn}
           >
             Next
             <div className="flex items-center pl-4 hover:translate-x-1">
@@ -75,9 +93,10 @@ const StepButton = ({ steps, handleSubmit, submitForm, handleSkip, type }) => {
             Skip
           </button>
           <button
+            disabled={disabled5}
             type={type}
             onClick={submitForm}
-            className="flex items-center justify-center w-[173px] h-[44px] bg-[#018226]  rounded-full text-white my-10"
+            className={!disabled5 ? enabledBtn : disabledBtn}
           >
             Next
             <div className="flex items-center pl-4 hover:translate-x-1">
