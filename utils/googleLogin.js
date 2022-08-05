@@ -26,7 +26,7 @@ export default function GoogleAuth(props) {
             // console.log(res.data);
             if (res.data && res.data.access_token) {
               addUser(res.data.user);
-
+              addUserAuth(res.data.access_token)
               router.push('/dashboard/welcome');
             }
           });
