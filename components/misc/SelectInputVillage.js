@@ -27,7 +27,7 @@ const SelectInputVillage = ({ placeholder, state, setSelectedVillage }) => {
   const [villageList, setVillageList] = useState([]);
 
   useEffect(() => {
-    const newList = async () => setVillageList(userVillages?.list_of_villages.concat(others));
+    const newList = async () => setVillageList(userVillages?.list_of_villages?.concat(others));
 
     newList();
   }, [userVillages]);
