@@ -18,8 +18,20 @@ const SelectInputVillage = ({ placeholder, state, setSelectedVillage }) => {
   const { accessToken } = useAuthStore();
 
   const { userVillages } = useUserStore();
+  ////ADD OTHERS OBJECT TO LIST OF VILLAGES
+  const others = {
+    id: 999,
+    name: "Others"
+  }  
+  
+  const [villageList, setVillageList] = useState([]);
 
-  const villageList = userVillages?.list_of_villages;
+  useEffect(() => {
+    const newList = async () => setVillageList(userVillages?.list_of_villages.concat(others));
+
+    newList();
+  }, [userVillages]);
+  
 
   const itemsList =
     villageList &&
