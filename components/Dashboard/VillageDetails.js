@@ -94,18 +94,40 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
               <th>ACTION</th>
             </tr>
           </thead>
-          {votersInVillage?.map((voters, index) => (
-            <tbody key={voters.id}>
-              <tr>
-                <td>{index + 1}</td>
-                <td>{voters.name}</td>
-                <td>+234 {voters.contact}</td>
-                <td>
-                  <Link href="#">Edit</Link>
-                </td>
-              </tr>
-            </tbody>
-          ))}
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Okoli Felistus</td>
+              <td>+234 8099356901</td>
+              <td>
+                <Link href="#">Edit</Link>
+              </td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>Okoli Felistus</td>
+              <td>+234 8099356901</td>
+              <td>
+                <Link href="#">Edit</Link>
+              </td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>Okoli Felistus</td>
+              <td>+234 8099356901</td>
+              <td>
+                <Link href="#">Edit</Link>
+              </td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>Okoli Felistus</td>
+              <td>+234 8099356901</td>
+              <td>
+                <Link href="#">Edit</Link>
+              </td>
+            </tr>
+          </tbody>
         </table>
       </div>
 
