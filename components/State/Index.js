@@ -75,14 +75,14 @@ const State = ({ stateName, detail, images, villages }) => {
     contributed_by: '',
   });
 
-console.log(last_vote_direction)
+// console.log(last_vote_direction)
   //ONCHANGE FOR TITLE
   const onImgChange = (e) => {
     setImgForm((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
-    console.log(imgForm);
+    // console.log(imgForm);
   };
 
   // FUNCTION FOR PREVIEWING IMAGES
@@ -143,12 +143,12 @@ console.log(last_vote_direction)
             headers: headers,
           })
           .then((res) => {
-            console.log(res);
+            // console.log(res);
           });
 
-        console.log(res);
+        // console.log(res);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     callAPI();
@@ -176,7 +176,7 @@ console.log(last_vote_direction)
   };
 
   const villagesList = villages.list_of_villages 
-  // console.log(villagesList)
+  console.log(villagesList)
 
   const filter = (villages, query) => {
     return villages.filter((village) => {

@@ -9,6 +9,7 @@
       justify-content: space-between;
       align-items: center;
       column-gap: 1.275rem;
+      cursor: pointer;
       p {
         color: var(--primary-color);
         margin-bottom: 0;
@@ -25,7 +26,7 @@
   }
   
   p {
-    font-size: 1.3rem;
+    font-size: var(--font-p-text-2);
     line-height: 130%;
     color: var(--text-color-4);
     margin-bottom: 1rem;
@@ -420,6 +421,13 @@
       line-height: 130%;
       color: var(--text-color-3);
     }
+
+    .details_form {
+      
+      .select_desc {
+        margin: 1.5rem 0 3rem;
+      }
+    }
   }
 
   .select {
@@ -503,6 +511,10 @@
 .village_details {
   margin-top: 2.65rem;
 
+  &__no_villages {
+    
+  }
+
   &__stats {
     margin-bottom: 2rem;
   }
@@ -519,6 +531,7 @@
       justify-content: space-between;
       align-items: center;
       column-gap: 1.275rem;
+      cursor: pointer;
       p {
         margin-bottom: 0;
         font-size: var(--font-p-text-1);
@@ -557,7 +570,7 @@
         padding-bottom: 1rem;
         padding-left: 2rem;
         font-weight: 700;
-        font-size: 1.3rem;
+        font-size: var(--font-p-text-2);
         line-height: 130%;
         color: var(--text-color-4);
       }
@@ -567,7 +580,7 @@
         padding-bottom: 2rem;
         padding-left: 2rem;
         font-weight: 400;
-        font-size: 1.3rem;
+        font-size: var(--font-p-text-2);
         line-height: 130%;
         color: var(--text-color-1);
 
@@ -588,6 +601,7 @@
   padding: 2rem;
   border: 1px solid #02B836;
   border-radius: 16px;
+  margin-top: 2rem;
 
   p {
     line-height: 130%; 
@@ -637,7 +651,7 @@
          padding-left: 5rem;
         }
     p {
-      font-size: 1.3rem;
+      font-size: var(--font-p-text-2);
     }
 
     h3 {

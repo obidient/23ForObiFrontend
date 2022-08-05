@@ -112,7 +112,7 @@ export async function getServerSideProps() {
       },
     };
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return {
       props: {
         states: [],

@@ -33,6 +33,10 @@ export function getVoters(id) {
   return get(`/voters/${id}`);
 }
 
+export function getUserVillage(requestData){
+  get(`/user-villages`, requestData)
+}
+
 //POST REQUESTS
 export function addSupportGroup(requestData) {
   post('/support-group/', requestData);
@@ -44,4 +48,8 @@ export function sendToken(token, config) {
 
 export function loginAdmin(requestData){
   post(`/`, requestData)
+}
+
+export function addUserVillage(requestData){
+  post(`/user-villages`, requestData)
 }

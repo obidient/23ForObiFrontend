@@ -1,9 +1,13 @@
 import React from 'react'
-import AdminPage from '../../../components/Admin/AdminPage'
+import States from '../../../components/Admin/adminState/States'
+
 
 const states = () => {
+  
   return (
-    <AdminPage>state</AdminPage>
+    <div>
+      <States />
+    </div>
   )
 }
 

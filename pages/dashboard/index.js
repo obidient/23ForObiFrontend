@@ -9,16 +9,42 @@ import useAuthStore from '../../store/authStore';
 import Loader from './../../components/Loader/index';
 import ProtectedHOC from './../../components/misc/ProtectedHOC';
 import { getStates } from '../../adapters/requests';
+import useSWR from 'swr';
+import axios from 'axios';
+
 
 const dashboard = (props) => {
+
   const { states } = props
-  
+
+  /////////// USER VILLAGES /////////////
+  const { accessToken } = useAuthStore();
+
+  const fetcher = (url, token) =>
+    axios
+      .get(url, { headers: { Authorization: 'Bearer ' + token } })
+      .then((res) => res.data);
+      
+  const { data: villageData, error: villageError } = useSWR(
+      [`https://api.23forobi.com/user-villages`, accessToken],
+      fetcher
+    );
+  const { data: votersData, error: votersError } = useSWR(
+    [
+      `https://api.23forobi.com/voters-by-contributor`,
+      accessToken,
+    ],
+    fetcher
+  );
+
+
+
   return (
     <div className={`${styles.dashboard} container`}>
       <DashboardNav />
       <div className={styles.dashboard__body}>
         <div className={styles.main}>
-          <DashboardMain states={states}/>
+          <DashboardMain states={states} villageDetails={villageData} votersDetails={votersData}/>
         </div>
         <div className={styles.aside}>
           <Sidebar />

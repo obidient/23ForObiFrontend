@@ -46,7 +46,7 @@ export const getServerSideProps = async ({ params }) => {
       },
     };
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return {
       props: {
         village: {},
