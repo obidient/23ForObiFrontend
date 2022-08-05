@@ -15,7 +15,7 @@ const admin = () => {
   useEffect(() => {
     return () => {
       if (!adminUser) {
-        router.push('/admin');
+        // router.push('/admin');
       }
     };
   }, [adminUser, router])
