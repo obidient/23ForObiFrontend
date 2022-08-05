@@ -1,7 +1,7 @@
 import styles from './Styles.module.scss';
 import caret_down from '../../assets/caret_down.png';
 import Image from 'next/image';
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect, useRef, useCallback } from 'react';
 import VillageContext from '../../Context/villageContext';
 import useVillage from '../../Context/villageContext';
 import StateContext from '../../Context/StateContext';
@@ -56,6 +56,28 @@ const SelectInputVillage = ({ placeholder, state, setSelectedVillage }) => {
     // console.log(villageState);
   }, [selectedItemIndex]);
 
+  //CLOSE SELECT ON OUTER CLICK
+  const selectRef = useRef();
+
+  useEffect(() => {
+    //  add when mounted
+    document.addEventListener('mousedown', handleClose);
+
+    //  clean on unmount
+    return () => {
+      document.removeEventListener('mousedown', handleClose);
+    };
+  }, []);
+
+  const handleClose = useCallback((e) => {
+    // // clicked inside the select
+    if (selectRef?.current?.contains(e.target)) {
+      return;
+    }
+    // outside the select
+    setIsDropDownVisible(false);
+  }, []);
+
   const handleClick = async (index, item) => {
     setSelectedItemsIndex(index);
     setIsDropDownVisible(!isDropDownVisible);
@@ -64,7 +86,7 @@ const SelectInputVillage = ({ placeholder, state, setSelectedVillage }) => {
 
   return (
     <div>
-      <div className={styles.dropdown}>
+      <div className={styles.dropdown} ref={selectRef}>
         <div
           className={`${styles.dropdown__selection} ${
             isDropDownVisible ? styles.visible : ''

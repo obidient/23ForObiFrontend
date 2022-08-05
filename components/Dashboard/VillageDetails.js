@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './Styles.module.scss';
-import add_img_green from '../../assets/add_img_green.png';
 import VillageStat from './VillageStat';
 import Modal from './../Modal/Index';
 import { useState, useEffect } from 'react';
@@ -14,9 +13,19 @@ import FormikControl from './../Forms/FormikControl';
 import useAuthStore from './../../store/authStore';
 import axios from 'axios';
 
+//IMPORT IMAGES
+import add_img_green from '../../assets/add_img_green.png';
+import CompleteModal from './../misc/CompleteModal';
+
 const VillageDetails = ({ villageDetails, votersDetails }) => {
   const [showModal, setShowModal] = useState();
+  const [showCompleteModal, setShowCompleteModal] = useState();
   const { accessToken } = useAuthStore();
+
+  //FILTER VOTERS BY VILLAGE NAME
+  const votersInVillage = votersDetails?.filter(
+    (items) => items.village.name === villageDetails.village.name
+    );    
 
   // Form validation schema using Yup
   const votersValidationSchema = Yup.object({
@@ -45,6 +54,7 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
         //  console.log(error);
        }
        setShowModal(false);
+       setShowCompleteModal(true);
      });
    };
 
@@ -84,7 +94,7 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
               <th>ACTION</th>
             </tr>
           </thead>
-          {votersDetails?.map((voters, index) => (
+          {votersInVillage?.map((voters, index) => (
             <tbody key={voters.id}>
               <tr>
                 <td>{index + 1}</td>
@@ -163,6 +173,23 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
         </Modal>
       )}
       {/* NEW VOTER MODAL END */}
+
+      {/* COMPLETE MODAL */}
+
+      {showCompleteModal && (
+        <CompleteModal
+          showCompleteModal={showCompleteModal}
+          setShowCompleteModal={setShowCompleteModal}
+          heading={
+            'Congratulations! You have successfully added a new voter.'
+          }
+          description={
+            'Go Champ! You are doing so great, let’s keep the fire burning'
+          }
+        />
+      )}
+
+      {/* END COMPLETE MODAL */}
     </div>
   );
 };
