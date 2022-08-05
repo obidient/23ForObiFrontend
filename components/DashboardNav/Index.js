@@ -9,7 +9,7 @@ import DashboardLink from './DashboardLink';
 import Link from 'next/link';
 import StateProgress from './../misc/StateProgress';
 
-const DashboardNav = ({ progress, profile }) => {
+const DashboardNav = () => {
   return (
     <div className={styles.dashboardnav}>
       <div className={styles.dashboardnav__top_left}>
@@ -18,21 +18,17 @@ const DashboardNav = ({ progress, profile }) => {
             <Image src={logo} />
           </div>
         </Link>
-        {progress && (
-          <div className={styles.dashboardnav__progress}>
-            <div className={styles.head}>
-              <p>Your achievement</p>
-              <p>20%</p>
-            </div>
-            <StateProgress progress={20} />
+        <div className={styles.dashboardnav__progress}>
+          <div className={styles.head}>
+            <p>Your achievement</p>
+            <p>20%</p>
           </div>
-        )}
-      </div>
-      {profile && (
-        <div className={styles.profile}>
-          <DashboardLink />
+          <StateProgress progress={20}/>
         </div>
-      )}
+      </div>
+      <div className={styles.profile}>
+        <DashboardLink />
+      </div>
     </div>
   );
 };
