@@ -64,7 +64,7 @@ const welcome = () => {
   };
 
   return (
-    <div className={`${styles.dashboard} container h-[100%]`}>
+    <div className={`container h-auto`}>
       <DashboardNav />
       <div className="flex flex-col justify-center py-11">
         <h2 className="text-4xl font-light mt-10">
