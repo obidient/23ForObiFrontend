@@ -41,7 +41,7 @@ const dashboard = (props) => {
 
   return (
     <div className={`${styles.dashboard} container`}>
-      <DashboardNav />
+      <DashboardNav progress='true' profile='true' />
       <div className={styles.dashboard__body}>
         <div className={styles.main}>
           <DashboardMain states={states} villageDetails={villageData} votersDetails={votersData}/>
