@@ -3,6 +3,7 @@ import { persist } from 'zustand/middleware';
 // import axios from 'axios';
 
 const authStore = (set) => ({
+  accessToken: null,
   userProfile: null,
   adminUser: null,
   allUsers: [],
