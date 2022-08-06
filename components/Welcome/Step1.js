@@ -4,7 +4,7 @@ const Step1 = ({ formData, setFormData }) => {
   const { pvc } = formData;
   return (
     <div className="my-5">
-      <h2 className="text-[#2F3733] text-3xl my-10">
+      <h2 className="text-[#2F3733] lg:text-3xl my-10">
         Do you have your PVC (Permanent voters card)?
       </h2>
       <form>

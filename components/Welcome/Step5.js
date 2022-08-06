@@ -5,7 +5,7 @@ const Step5 = ({ formData, setFormData }) => {
   const { full_name, phone } = formData;
   return (
     <div className="my-5">
-      <h2 className="text-[#2F3733] text-3xl my-10">
+      <h2 className="text-[#2F3733] lg:text-3xl my-10">
         Which voter from your village (apart from you) do you know who will
         surely vote for Peter Obi?
       </h2>
@@ -13,7 +13,7 @@ const Step5 = ({ formData, setFormData }) => {
         <div className="my-5">
           <div className="my-10">
             <input
-              className="rounded-full w-[496px] h-[44px] border border-[#2F3733] text-[ #979797] text-2xl px-5 focus:border-[#018226] focus:bg-[#F3FFF7]"
+              className="rounded-full lg:w-[496px] w-full h-[44px] border border-[#2F3733] text-[ #979797] lg:text-3xl text-4xl px-5 focus:border-[#018226] focus:bg-[#F3FFF7] outline-none"
               type="text"
               placeholder="Full name"
               value={full_name}
@@ -24,7 +24,7 @@ const Step5 = ({ formData, setFormData }) => {
           </div>
           <div className="my-10">
             <input
-              className="rounded-full w-[496px] h-[44px] border border-[#2F3733] text-[ #979797] text-2xl px-5 focus:border-[#018226] focus:bg-[#F3FFF7]"
+              className="rounded-full lg:w-[496px] w-full h-[44px] border border-[#2F3733] text-[ #979797] lg:text-3xl text-4xl px-5 focus:border-[#018226] focus:bg-[#F3FFF7] outline-none"
               type="text"
               placeholder="08058999999"
               value={phone}
