@@ -45,11 +45,13 @@ const welcome = () => {
     }
   };
 
+  // handle steps
   const handleSubmit = () => {
     setSteps(steps + 1);
     setProgress(progress + 20);
   };
 
+  // submit forms
   const submitForm = () => {
     console.log('Submiited');
     console.log(formData);
@@ -58,6 +60,7 @@ const welcome = () => {
 
   const handleSkip = () => {
     console.log('Skipped');
+    router.push('/dashboard/summary')
   };
 
   return (

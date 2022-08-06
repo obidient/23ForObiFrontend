@@ -51,7 +51,8 @@ const FormikControl = dynamic(() => import('../Forms/FormikControl'), {
 const DashboardMain = ({states, villageDetails, votersDetails}) => {
   const { userProfile } = useAuthStore();
   const { accessToken } = useAuthStore();
-
+  
+  const [otherVillage, setOtherVillage] = useState();
   ///////////COMPLTETE MODAL//////////////
   const [showCompleteModal, setShowCompleteModal] = useState();
 
@@ -69,7 +70,6 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
 
   ////////////////// Selected Village///////////////////////
   const [selectedVillage, setSelectedVillage] = useState("")
-
   const handleVillage = async () => {
     const url = 'https://api.23forobi.com/user-villages';
     const villageId = selectedVillage.value;
@@ -149,36 +149,6 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
     setContributor(initialValues);
     setShowModal(false);
   };
-
-  //Initialize select options
-  const stateOptions = [
-    {
-      label: 'Rivers',
-      value: 'Rivers State',
-    },
-    {
-      label: 'Lagos',
-      value: 'Lagos State',
-    },
-    {
-      label: 'Ogun',
-      value: 'Ogun State',
-    },
-  ];
-  const villageOptions = [
-    {
-      label: 'Ezeani Village 1',
-      value: 'Ezeani Village',
-    },
-    {
-      label: 'Osusus Village 2',
-      value: 'Osusu Village',
-    },
-    {
-      label: 'Ariara Village 3',
-      value: 'Ariara Village',
-    },
-  ];
 
   // Form validation schema using Yup
   const contributorValidationSchema = Yup.object({
@@ -266,7 +236,7 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
             <div className={styles.modal__body}>
               <p>Kindly enter the details for a new village</p>
               <div className={styles.details_form}>
-                <Formik
+                {/* <Formik
                   initialValues={{
                     firstName: '',
                     lastName: '',
@@ -276,11 +246,11 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
                   validationSchema={contributorValidationSchema}
                   onSubmit={(values) => console.log('Form data', values)}
                 >
-                  {({ values }) => (
-                    <Form autoComplete="off">
+                  {({ values }) => ( */}
+                    <form>
                       <SelectInput
                         placeholder="Select a state"
-                        name="village"
+                        name="state"
                         options={states}
                         state={states}
                         addVillageHandler={addVillageHandler}
@@ -295,7 +265,16 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
                         options={states}
                         setSelectedVillage={setSelectedVillage}
                         addVillageHandler={addVillageHandler}
-                      />
+                        />
+                      {selectedVillage.name === "Others" ? <div className='mt-28'>
+                        <input
+                          type="text"
+                          placeholder="Add a village"
+                          name="otherVillage"
+                          value={otherVillage}
+                          onChange={(e) => setOtherVillage(e.target.value)}
+                        />
+                      </div> : null}
                       <button
                         type="submit"
                         className="btn_dark w-full rounded-full h-20 mt-9"
@@ -303,9 +282,9 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
                       >
                         Continue
                       </button>
-                    </Form>
-                  )}
-                </Formik>
+                    </form>
+                  {/* )}
+                </Formik> */}
               </div>
             </div>
           </div>
@@ -322,7 +301,9 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
           heading={
             'Congratulations! You have successfully added a new village.'
           }
-          description={'Go Champ! You are doing so great, let’s keep the fire burning'}
+          description={
+            'Go Champ! You are doing so great, let’s keep the fire burning'
+          }
         />
       )}
 

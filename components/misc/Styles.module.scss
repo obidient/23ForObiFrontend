@@ -332,7 +332,7 @@
 	&__item_holder {
 		background: #FFFFFF;
 		border-radius: 16px;
-
+		margin-top: 1rem;
 		border: 1px solid var(--text-color-8);
 		box-shadow: 0px 4px 13px rgba(2, 106, 32, 0.05);
 		position: absolute;
@@ -341,6 +341,21 @@
 		z-index: 100;
     	height: 30rem;
 		overflow-y: scroll;
+		
+		&::-webkit-scrollbar {
+			width: 4px;
+			margin: 2rem;
+		}
+		
+		&::-webkit-scrollbar-track {
+			display: none;
+		}
+		
+		&::-webkit-scrollbar-thumb {
+			border-radius: 16px;
+			background-color: darkgrey;
+			outline: 1px solid slategrey;
+		}
 		
 
 		
