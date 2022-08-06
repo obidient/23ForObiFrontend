@@ -20,6 +20,7 @@ import { googleLogout } from '@react-oauth/google';
 
 const NavBar = () => {
   const { userProfile, removeUser } = useAuthStore();
+  const first_name = userProfile?.first_name;
   const navRef = useRef();
 
   const showNavbar = () => {
@@ -38,7 +39,7 @@ const NavBar = () => {
 
   //Router
   const router = useRouter();
-  
+
   const width = {
     container: (bigScreen) => ({
       flexDirection: bigScreen ? '79.4rem' : '60rem',
@@ -107,7 +108,10 @@ const NavBar = () => {
               {userProfile ? (
                 <div className="lg:hidden md:block cursor-pointer">
                   <Link href="/dashboard">
-                    <Image src={avatar} width={35} height={35} />
+                    <a className='flex items-center'>
+                      <Image src={avatar} width={35} height={35} />
+                      <h2 className="text-[#fff] px-3">{first_name}</h2>
+                    </a>
                   </Link>
                 </div>
               ) : (
@@ -128,9 +132,12 @@ const NavBar = () => {
           </div>
           {/* <Link href="/how-it-works"> */}
           {userProfile ? (
-            <div className="hidden lg:block cursor-pointer">
+            <div className="hidden lg:flex items-center justify-center cursor-pointer">
               <Link href="/dashboard">
-                <Image src={avatar} width={35} height={35} />
+                <a className='flex items-center'>
+                  <Image src={avatar} width={35} height={35} />
+                  <h2 className="px-3 text-3xl">{first_name}</h2>
+                </a>
               </Link>
             </div>
           ) : (

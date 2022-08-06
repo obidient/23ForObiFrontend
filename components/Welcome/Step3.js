@@ -4,7 +4,7 @@ const Step3 = ({ formData, setFormData }) => {
 const {available} = formData
   return (
     <div className="my-5">
-      <h2 className="text-[#2F3733] text-3xl my-10">
+      <h2 className="text-[#2F3733] lg:text-3xl my-10">
         Can you be our person on ground in your village to educate people?
       </h2>
       <form>

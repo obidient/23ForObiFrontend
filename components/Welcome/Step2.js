@@ -4,7 +4,7 @@ const Step2 = ({ formData, setFormData }) => {
   const {vote} = formData
   return (
     <div className="my-5">
-      <h2 className="text-[#2F3733] text-3xl my-10">
+      <h2 className="text-[#2F3733] lg:text-3xl my-10">
         Can you guarantee at least one vote for Peter Obi?
       </h2>
       <form>
