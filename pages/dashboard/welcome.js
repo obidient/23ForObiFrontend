@@ -11,6 +11,7 @@ import ThirdStep from '../../components/Welcome/Step3';
 import FourthStep from '../../components/Welcome/Step4';
 import FifthStep from '../../components/Welcome/Step5';
 import StepButton from '../../components/misc/StepButton';
+import Head from 'next/head';
 
 const welcome = () => {
   const router = useRouter();
@@ -60,47 +61,51 @@ const welcome = () => {
 
   const handleSkip = () => {
     console.log('Skipped');
-    router.push('/dashboard/summary')
+    router.push('/dashboard/summary');
   };
 
   return (
-    <div className={`container`}>
-      <DashboardNav />
-      <div className="flex flex-col justify-center py-11">
-        <h2 className="text-4xl font-light mt-10">
-          We are so glad to <br />
-          <span className="font-bold">Have you here</span>
-        </h2>
-        <hr className="mb-5 mt-2" />
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between  my-2">
-          <div className="lg:w-3/4 w-full">
-            <h2 className="text-[#018226] font-bold text-3xl">
-              HERE ARE A FEW QUESTIONS TO GET YOU STARTED.
-            </h2>
-          </div>
-          <div className="lg:w-1/4 w-1/2 py-5 lg:py-0">
-            <StateProgress progress={progress} />
-            <p className="my-1">Progress : {steps}</p>
+    <>
+    <Head>
+      <title>Welcome</title>
+    </Head>
+      <div className={`container`}>
+        <DashboardNav />
+        <div className="flex flex-col justify-center py-11">
+          <h2 className="text-4xl font-light mt-10">
+            We are so glad to <br />
+            <span className="font-bold">Have you here</span>
+          </h2>
+          <hr className="mb-5 mt-2" />
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between  my-2">
+            <div className="lg:w-3/4 w-full">
+              <h2 className="text-[#018226] font-bold text-3xl">
+                HERE ARE A FEW QUESTIONS TO GET YOU STARTED.
+              </h2>
+            </div>
+            <div className="lg:w-1/4 w-1/2 py-5 lg:py-0">
+              <StateProgress progress={progress} />
+              <p className="my-1">Progress : {steps}</p>
+            </div>
           </div>
         </div>
-      </div>
-      <div>
-        {conditionalComponent()}
-        <StepButton
-          steps={steps}
-          handleSubmit={handleSubmit}
-          submitForm={submitForm}
-          handleSkip={handleSkip}
-          type="submit"
-          disabled1={!formData.pvc}
-          disabled2={!formData.vote}
-          disabled3={!formData.available}
-          disabled4={!formData.state || !formData.lga || !formData.village}
-          disabled5={!formData.full_name || !formData.phone}
-        />
-      </div>
+        <div>
+          {conditionalComponent()}
+          <StepButton
+            steps={steps}
+            handleSubmit={handleSubmit}
+            submitForm={submitForm}
+            handleSkip={handleSkip}
+            type="submit"
+            disabled1={!formData.pvc}
+            disabled2={!formData.vote}
+            disabled3={!formData.available}
+            disabled4={!formData.state || !formData.lga || !formData.village}
+            disabled5={!formData.full_name || !formData.phone}
+          />
+        </div>
 
-      {/*<div className="my-0">
+        {/*<div className="my-0">
         <div>
           <h2 className="text-[#2F3733] text-3xl">
             Do you have your PVC (Permanent voters card)?
@@ -141,7 +146,8 @@ const welcome = () => {
           </Formik>
         </div>
             </div>*/}
-    </div>
+      </div>
+    </>
   );
 };
 
