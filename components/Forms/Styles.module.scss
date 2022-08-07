@@ -42,9 +42,10 @@
 .select {
   margin-bottom: 2rem;
   position: relative;
+  outline: none;
   &:focus {
-    border: 1px solid #018226;
-    background-color: #F3FFF7;
+    border: 1px solid #018226 !important;
+    background-color: #F3FFF7 !important;
 }
   &:nth-last-of-type(1) {
     margin-bottom: 1rem;
