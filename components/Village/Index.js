@@ -5,6 +5,7 @@ import Image from 'next/image';
 import check from '../../assets/check.png';
 import Modal from '../Modal/Index';
 import { useState, useEffect } from 'react';
+import {useRouter} from 'next/router'
 import { FaTimes } from 'react-icons/fa';
 import {VillageBreadcrumb} from '../misc/Breadcrumb';
 import Breadcrumbs from '../misc/Breadcrumbs';
@@ -18,6 +19,7 @@ import village_img_4 from '../../assets/village_img_4.png';
 import village_img_5 from '../../assets/village_img_5.png';
 
 import ContributeModal from './ContributeModal';
+import useAuthStore from '../../store/authStore';
 
 const Village = ({
   contributors,
@@ -29,6 +31,8 @@ const Village = ({
   state_id,
   votersData,
 }) => {
+  const {userProfile} = useAuthStore()
+  const router = useRouter()
   const [showModal, setShowModal] = useState(false);
   const [registerFormIsVisible, setRegisterFormIsVisible] = useState(false);
   const [signInIsVisible, setSignInIsVisible] = useState(false);
@@ -66,7 +70,13 @@ const Village = ({
               </p>
             </div>
             <div className={styles.title_btn}>
-              <button onClick={() => setShowModal(true)} className="btn_light">
+              <button onClick={() => {
+                if(!userProfile){
+                  setShowModal(true)
+                } else {
+                  router.push('/dashboard')
+                }
+               }} className="btn_light">
                 Contribute here
               </button>
             </div>

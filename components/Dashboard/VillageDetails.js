@@ -120,7 +120,7 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
             <div className={`${styles.modal__heading} modal_heading`}>
               <h2>
                 Add a new <br />
-                <span>Village</span>
+                <span>Voter</span>
               </h2>
               <button
                 className={`closeBtn`}
@@ -130,7 +130,7 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
               </button>
             </div>
             <div className={styles.modal__body}>
-              <p>Kindly enter the details for a new village</p>
+              <p>Kindly enter the details for a new voter</p>
               <div className={styles.details_form}>
                 <Formik
                   initialValues={{
