@@ -10,6 +10,7 @@ import * as Yup from 'yup';
 import dynamic from 'next/dynamic';
 import useAuthStore from '../../store/authStore';
 import useUserStore from '../../store/userStore';
+import stateDetails from '../../data/stateDetails';
 
 const FormikControl = dynamic(() => import('../Forms/FormikControl'), {
   ssr: false,
@@ -25,22 +26,12 @@ const ProfileDisplay = () => {
   const last_name = userProfile?.last_name;
   const email = userProfile?.email;
   const image = userProfile?.image;
- 
+
   //Initialize select options
-  const stateOptions = [
-    {
-      label: 'Rivers',
-      value: 'Rivers State',
-    },
-    {
-      label: 'Lagos',
-      value: 'Lagos State',
-    },
-    {
-      label: 'Ogun',
-      value: 'Ogun State',
-    },
-  ];
+  const stateOptions = stateDetails.map((item, index) => ({
+    label: `${item.name} State`,
+    option: `${item.slug}`,
+  }));
   const villageOptions = [
     {
       label: 'Ezeani Village 1',
@@ -78,7 +69,7 @@ const ProfileDisplay = () => {
     <div className={styles.profile}>
       <div className={styles.avatar}>
         <Image src={image ? image : avatar} />
-        <p className='capitalize'>edit image</p>
+        <p className="capitalize">edit image</p>
       </div>
       <div className={styles.form}>
         <Formik
