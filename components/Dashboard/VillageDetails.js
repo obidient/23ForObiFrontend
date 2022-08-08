@@ -26,7 +26,7 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
   //FILTER VOTERS BY VILLAGE NAME
   const votersInVillage = votersDetails?.filter(
     (items) => items.village.name === villageDetails.village.name
-    );    
+  );
 
   // Form validation schema using Yup
   const votersValidationSchema = Yup.object({
@@ -34,70 +34,43 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
     contact: Yup.number().required('Required'),
   });
 
-   const handleVoters = (values) => {
+  const handleVoters = (values) => {
+    const url = 'https://api.23forobi.com/voters';
+    const data = {
+      name: values.name,
+      contact: values.contact,
+      village_id: villageDetails.village.id,
+    };
+    const headers = {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    };
 
-     const url = 'https://api.23forobi.com/voters';
-     const data = {
-       name: values.name,
-       contact: values.contact,
-       village_id: villageDetails.village.id,
-     };
-     const headers = {
-       'Content-Type': 'application/json',
-       Accept: 'application/json',
-       Authorization: `Bearer ${accessToken}`,
-     };
-
-     axios.post(url, data, { headers })?.then((res) => {
-       try {
+    axios.post(url, data, { headers })?.then((res) => {
+      try {
         //  console.log(res.data);
-       } catch (error) {
+      } catch (error) {
         //  console.log(error);
-       }
-       setShowModal(false);
-       setShowCompleteModal(true);
-     });
-   };
-
-   const handleEditVoters = (valuesedit) => {
-    //  const url = 'https://api.23forobi.com/voters';
-    //  const data = {
-    //    name: values.name,
-    //    contact: values.contact,
-    //    village_id: villageDetails.village.id,
-    //  };
-    //  const headers = {
-    //    'Content-Type': 'application/json',
-    //    Accept: 'application/json',
-    //    Authorization: `Bearer ${accessToken}`,
-    //  };
-
-    //  axios.post(url, data, { headers })?.then((res) => {
-    //    try {
-    //      //  console.log(res.data);
-    //    } catch (error) {
-    //      //  console.log(error);
-    //    }
-    //    setShowModal(false);
-    //    setShowCompleteModal(true);
-    //  });
-   };
-
-   console.log(votersDetails);
+      }
+      setShowModal(false);
+      setShowCompleteModal(true);
+    });
+  };
 
      useEffect(() => {
        const body = document.querySelector('body');
        body.style.overflow = showModal ? 'hidden' : 'auto';
      }, [showModal]);
 
-   if(villageDetails === undefined) {
+  if (villageDetails === undefined) {
     return (
       <div className="flex">
         <h2 className="m-auto text-3xl">No Village</h2>
       </div>
     );
-   } 
-   
+  }
+
   return (
     <div className={styles.village_details}>
       <hr />
@@ -131,70 +104,6 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
                   <Link href="#">Edit</Link>
                 </td>
               </tr>
-              {/* EDIT VOTER MODAL */}
-              {showEditModal && (
-                <Modal
-                  show={showEditModal}
-                  onClose={() => setShowEditModal(false)}
-                  width="54.4rem"
-                >
-                  <div className={styles.modal}>
-                    <div className={`${styles.modal__heading} modal_heading`}>
-                      <h2>
-                        Add a new <br />
-                        <span>Village</span>
-                      </h2>
-                      <button
-                        className={`closeBtn`}
-                        onClick={() => setShowEditModal(false)}
-                      >
-                        &times;
-                      </button>
-                    </div>
-                    <div className={styles.modal__body}>
-                      <p>Kindly enter the details for a new village</p>
-                      <div className={styles.details_form}>
-                        <Formik
-                          initialValues={{
-                            name: '',
-                            contact: '',
-                          }}
-                          validationSchema={votersValidationSchema}
-                          onSubmit={handleEditVoters}
-                        >
-                          {({ valuesedit }) => (
-                            <Form autoComplete="off">
-                              <FormikControl
-                                values={valuesedit}
-                                control="input"
-                                placeholder="Enter full name"
-                                name="name"
-                                type="text"
-                              />
-                              <FormikControl
-                                values={valuesedit}
-                                control="input"
-                                placeholder="Phone Number"
-                                name="contact"
-                                type="text"
-                              />
-
-                              <button
-                                type="submit"
-                                className="btn_dark w-full rounded-full h-20 mt-9"
-                                onClick={handleEditVoters}
-                              >
-                                Continue
-                              </button>
-                            </Form>
-                          )}
-                        </Formik>
-                      </div>
-                    </div>
-                  </div>
-                </Modal>
-              )}
-              {/* EDIT VOTER MODAL END */}
             </tbody>
           ))}
         </table>
