@@ -1,8 +1,6 @@
 import styles from './Styles.module.scss';
 import Image from 'next/image';
-
 import epic_champ from '../../assets/epic_champ.png';
-
 import level_1 from '../../assets/level_1.svg';
 import level_2 from '../../assets/level_2.svg';
 import level_3 from '../../assets/level_3.svg';
@@ -18,13 +16,13 @@ const Sidebar = ({ voters }) => {
           <>
             <div className={styles.achievements_images}>
               <div>
-                <Image src={level1} />
+                <Image src={level_1} />
               </div>
               <div>
-                <Image src={level2} />
+                <Image src={level_2} />
               </div>
               <div>
-                <Image src={level3} />
+                <Image src={level_3} />
               </div>
             </div>
             <div className={styles.link}>
@@ -36,19 +34,6 @@ const Sidebar = ({ voters }) => {
             <h2 className="text-[#2F3733]">No Achievements yet!</h2>
           </div>
         )}
-        =======
-        <div className={styles.achievements_images}>
-          <div className={styles.img}>
-            <Image src={level_1} />
-          </div>
-          <div className={styles.img}>
-            <Image src={level_2} />
-          </div>
-          <div className={styles.img}>
-            <Image src={level_3} />
-          </div>
-        </div>
-        >>>>>>> 817016a0e12f361dff756aee89c39cf13086ff70
         <hr />
       </div>
       <h2>Learn how to deliver votes</h2>
