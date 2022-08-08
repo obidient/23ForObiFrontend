@@ -49,7 +49,7 @@ const dashboard = (props) => {
             />
           </div>
           <div className={styles.aside}>
-            <Sidebar />
+            <Sidebar voters={votersData} />
           </div>
         </div>
       </div>

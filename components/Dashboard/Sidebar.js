@@ -1,28 +1,40 @@
 import styles from './Styles.module.scss';
 import Image from 'next/image';
-import epic_champ from '../../assets/epic_champ.png'
+import epic_champ from '../../assets/epic_champ.png';
+import level1 from '../../assets/level_1.png';
+import level2 from '../../assets/level_2.png';
+import level3 from '../../assets/level_3.png';
 import Link from 'next/link';
 
-const Sidebar = () => {
+const Sidebar = ({voters}) => {
   return (
     <div className={styles.sidebar}>
       <div className={styles.sidebar__achievements}>
         <h2>Achievements</h2>
         <hr />
-        <div className={styles.achievements_images}>
-          <div className={styles.img}>
-            <Image src={epic_champ} />
+        {voters && voters.length > 0 ? (
+          <>
+            <div className={styles.achievements_images}>
+          <div>
+            <Image src={level1} />
           </div>
-          <div className={styles.img}>
-            <Image src={epic_champ} />
+          <div>
+            <Image src={level2} />
           </div>
-          <div className={styles.img}>
-            <Image src={epic_champ} />
+          <div>
+            <Image src={level3} />
           </div>
         </div>
         <div className={styles.link}>
           <Link href="">View all</Link>
         </div>
+          </>
+        ): (
+          <div className='flex items-center'>
+            <h2 className='text-[#2F3733]'>No Achievements yet!</h2>
+          </div>
+        )}
+        
         <hr />
       </div>
       <h2>Learn how to deliver votes</h2>
