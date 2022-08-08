@@ -77,6 +77,9 @@ const welcome = () => {
         )
         .then((res) => {
           console.log(res.data);
+          if (res.status === 200) {
+            router.push('/dashboard/summary');
+          }
         });
     } catch (error) {
       console.log(error);
@@ -88,7 +91,7 @@ const welcome = () => {
 
   const handleSkip = () => {
     console.log('Skipped');
-    router.push('/dashboard/summary');
+    // router.push('/dashboard/summary');
   };
 
   return (
