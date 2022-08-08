@@ -12,8 +12,13 @@ import FourthStep from '../../components/Welcome/Step4';
 import FifthStep from '../../components/Welcome/Step5';
 import StepButton from '../../components/misc/StepButton';
 import Head from 'next/head';
+import useAuthStore from '../../store/authStore';
+import axios from 'axios';
 
 const welcome = () => {
+  const { accessToken } = useAuthStore();
+  const token = accessToken;
+  console.log(token);
   const router = useRouter();
   const [steps, setSteps] = useState(1);
   const [progress, setProgress] = useState(20);
@@ -53,10 +58,32 @@ const welcome = () => {
   };
 
   // submit forms
-  const submitForm = () => {
-    console.log('Submiited');
-    console.log(formData);
-    router.push('/dashboard/summary');
+  const submitForm = async () => {
+    // console.log(formData);
+    const url = 'https://api.23forobi.com/user-data';
+    // const headers = { Authorization: 'Bearer ' + token };
+    const data = formData;
+    try {
+      await axios
+        .post(
+          url,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'content-type': 'application/json',
+            },
+          },
+          data
+        )
+        .then((res) => {
+          console.log(res.data);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+    //console.log('Submiited');
+    //console.log(formData);
+    //router.push('/dashboard/summary');
   };
 
   const handleSkip = () => {
@@ -66,9 +93,9 @@ const welcome = () => {
 
   return (
     <>
-    <Head>
-      <title>Welcome</title>
-    </Head>
+      <Head>
+        <title>Welcome</title>
+      </Head>
       <div className={`container`}>
         <DashboardNav />
         <div className="flex flex-col justify-center py-11">
