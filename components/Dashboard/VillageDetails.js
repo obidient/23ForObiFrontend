@@ -19,6 +19,7 @@ import CompleteModal from './../misc/CompleteModal';
 
 const VillageDetails = ({ villageDetails, votersDetails }) => {
   const [showModal, setShowModal] = useState();
+  const [showEditModal, setShowEditModal] = useState();
   const [showCompleteModal, setShowCompleteModal] = useState();
   const { accessToken } = useAuthStore();
 
@@ -57,10 +58,10 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
     });
   };
 
-  useEffect(() => {
-    const body = document.querySelector('body');
-    body.style.overflow = showModal ? 'hidden' : 'auto';
-  }, [showModal]);
+     useEffect(() => {
+       const body = document.querySelector('body');
+       body.style.overflow = showModal ? 'hidden' : 'auto';
+     }, [showModal]);
 
   if (villageDetails === undefined) {
     return (
@@ -93,24 +94,18 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
               <th>ACTION</th>
             </tr>
           </thead>
-          {votersInVillage && votersInVillage.length > 0 ? (
-            votersInVillage?.map((voters, index) => (
-              <tbody key={voters.id}>
-                <tr>
-                  <td>{index + 1}</td>
-                  <td>{voters.name}</td>
-                  <td>+234 {voters.contact}</td>
-                  <td>
-                    <Link href="#">Edit</Link>
-                  </td>
-                </tr>
-              </tbody>
-            ))
-          ) : (
-            <div className="my-10">
-              <h2 className='text-2xl text-[#2F3733] font-l'>No Data</h2>
-            </div>
-          )}
+          {votersInVillage?.map((voters, index) => (
+            <tbody key={voters.id}>
+              <tr>
+                <td>{index + 1}</td>
+                <td>{voters.name}</td>
+                <td>+234 {voters.contact}</td>
+                <td>
+                  <Link href="#">Edit</Link>
+                </td>
+              </tr>
+            </tbody>
+          ))}
         </table>
       </div>
 

@@ -108,7 +108,7 @@ const NavBar = () => {
               {userProfile ? (
                 <div className="lg:hidden md:block cursor-pointer">
                   <Link href="/dashboard">
-                    <a className='flex items-center'>
+                    <a className="flex items-center">
                       <Image src={avatar} width={35} height={35} />
                       <h2 className="text-[#fff] px-3">{first_name}</h2>
                     </a>
@@ -134,7 +134,7 @@ const NavBar = () => {
           {userProfile ? (
             <div className="hidden lg:flex items-center justify-center cursor-pointer">
               <Link href="/dashboard">
-                <a className='flex items-center'>
+                <a className="flex items-center">
                   <Image src={avatar} width={35} height={35} />
                   <h2 className="px-3 text-3xl">{first_name}</h2>
                 </a>
