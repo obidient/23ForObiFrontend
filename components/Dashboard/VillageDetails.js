@@ -58,10 +58,10 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
     });
   };
 
-     useEffect(() => {
-       const body = document.querySelector('body');
-       body.style.overflow = showModal ? 'hidden' : 'auto';
-     }, [showModal]);
+  useEffect(() => {
+    const body = document.querySelector('body');
+    body.style.overflow = showModal ? 'hidden' : 'auto';
+  }, [showModal]);
 
   if (villageDetails === undefined) {
     return (
@@ -94,18 +94,26 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
               <th>ACTION</th>
             </tr>
           </thead>
-          {votersInVillage?.map((voters, index) => (
-            <tbody key={voters.id}>
+          {votersInVillage && votersInVillage.length > 0 ? (
+            votersInVillage?.map((voters, index) => (
+              <tbody key={voters.id}>
+                <tr>
+                  <td>{index + 1}</td>
+                  <td>{voters.name}</td>
+                  <td>+234 {voters.contact}</td>
+                  <td>
+                    <Link href="#">Edit</Link>
+                  </td>
+                </tr>
+              </tbody>
+            ))
+          ) : (
+            <tbody>
               <tr>
-                <td>{index + 1}</td>
-                <td>{voters.name}</td>
-                <td>+234 {voters.contact}</td>
-                <td>
-                  <Link href="#">Edit</Link>
-                </td>
+                <td className="my-10 text-2xl">No data</td>
               </tr>
             </tbody>
-          ))}
+          )}
         </table>
       </div>
 

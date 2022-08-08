@@ -12,15 +12,18 @@ import ProtectedHOC from './../../components/misc/ProtectedHOC';
 import { getStates } from '../../adapters/requests';
 import useSWR from 'swr';
 import axios from 'axios';
+import { data } from 'autoprefixer';
 
 const dashboard = (props) => {
   const { states } = props;
+  const [progress, setProgress] = useState(0);
 
   /////////// USER VILLAGES /////////////
   const { accessToken } = useAuthStore();
+  // console.log(accessToken)
 
-  const fetcher = (url, token) =>
-    axios
+  const fetcher = async (url, token) =>
+    await axios
       .get(url, { headers: { Authorization: 'Bearer ' + token } })
       .then((res) => res.data);
 
@@ -33,13 +36,31 @@ const dashboard = (props) => {
     fetcher
   );
 
+  useEffect(() => {
+    try {
+      const getVotersProgress = async () => {
+        await axios
+          .get('https://api.23forobi.com/voters-by-contributor', {
+            headers: { Authorization: `Bearer ${accessToken}` },
+          })
+          .then((res) => setProgress(res.data.length));
+      };
+      getVotersProgress();
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  const expectedVotes = 30
+  let votersProgress = (100/expectedVotes)*progress
+
   return (
     <>
       <Head>
         <title>Dashboard</title>
       </Head>
       <div className={`${styles.dashboard} container`}>
-        <DashboardNav progress="true" profile="true" />
+        <DashboardNav progress={votersProgress} progressbar="true" profile="true" />
         <div className={styles.dashboard__body}>
           <div className={styles.main}>
             <DashboardMain
@@ -49,7 +70,7 @@ const dashboard = (props) => {
             />
           </div>
           <div className={styles.aside}>
-            <Sidebar />
+            <Sidebar voters={votersData} />
           </div>
         </div>
       </div>
