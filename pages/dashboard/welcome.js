@@ -18,7 +18,7 @@ import axios from 'axios';
 const welcome = () => {
   const { accessToken } = useAuthStore();
   const token = accessToken;
-  console.log(token);
+  // console.log(token);
   const router = useRouter();
   const [steps, setSteps] = useState(1);
   const [progress, setProgress] = useState(20);
@@ -131,7 +131,7 @@ const welcome = () => {
             disabled2={!formData.vote}
             disabled3={!formData.available}
             disabled4={!formData.state || !formData.lga || !formData.village}
-            disabled5={!formData.full_name || !formData.phone}
+            disabled5={!formData.full_name || !formData.phone || formData.phone.length < 11}
           />
         </div>
 
