@@ -28,7 +28,7 @@ export default function GoogleAuth(props) {
               addUser(res.data.user)
               addUserAuth(res.data.access_token);
               // console.log(res.data)
-              router.push('/dashboard');
+              router.push('/dashboard/welcome');
             }
           });
         }}

@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import React from 'react';
 import DashboardMain from '../../components/Dashboard/DashboardMain';
 import DashboardNav from '../../components/DashboardNav/Index';
@@ -9,16 +10,21 @@ import ProtectedHOC from './../../components/misc/ProtectedHOC';
 
 const dashboard = () => {
   return (
-    <div className={`${styles.profile} container`}>
-      <DashboardNav />
-      <div className={styles.profile__box}>
-        <div className={styles.head}>
-          <h2>Profile</h2>
-          <hr />
+    <>
+    <Head>
+      <title>Profile</title>
+    </Head>
+      <div className={`${styles.profile} container`}>
+        <DashboardNav />
+        <div className={styles.profile__box}>
+          <div className={styles.head}>
+            <h2>Profile</h2>
+            <hr />
+          </div>
+          <ProfileDisplay />
         </div>
-        <ProfileDisplay />
       </div>
-    </div>
+    </>
   );
 };
 
