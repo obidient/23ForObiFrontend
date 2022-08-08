@@ -25,7 +25,7 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
   //FILTER VOTERS BY VILLAGE NAME
   const votersInVillage = votersDetails?.filter(
     (items) => items.village.name === villageDetails.village.name
-    );    
+  );
 
   // Form validation schema using Yup
   const votersValidationSchema = Yup.object({
@@ -33,44 +33,43 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
     contact: Yup.number().required('Required'),
   });
 
-   const handleVoters = (values) => {
+  const handleVoters = (values) => {
+    const url = 'https://api.23forobi.com/voters';
+    const data = {
+      name: values.name,
+      contact: values.contact,
+      village_id: villageDetails.village.id,
+    };
+    const headers = {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    };
 
-     const url = 'https://api.23forobi.com/voters';
-     const data = {
-       name: values.name,
-       contact: values.contact,
-       village_id: villageDetails.village.id,
-     };
-     const headers = {
-       'Content-Type': 'application/json',
-       Accept: 'application/json',
-       Authorization: `Bearer ${accessToken}`,
-     };
-
-     axios.post(url, data, { headers })?.then((res) => {
-       try {
+    axios.post(url, data, { headers })?.then((res) => {
+      try {
         //  console.log(res.data);
-       } catch (error) {
+      } catch (error) {
         //  console.log(error);
-       }
-       setShowModal(false);
-       setShowCompleteModal(true);
-     });
-   };
+      }
+      setShowModal(false);
+      setShowCompleteModal(true);
+    });
+  };
 
-     useEffect(() => {
-       const body = document.querySelector('body');
-       body.style.overflow = showModal ? 'hidden' : 'auto';
-     }, [showModal]);
+  useEffect(() => {
+    const body = document.querySelector('body');
+    body.style.overflow = showModal ? 'hidden' : 'auto';
+  }, [showModal]);
 
-   if(villageDetails === undefined) {
+  if (villageDetails === undefined) {
     return (
       <div className="flex">
         <h2 className="m-auto text-3xl">No Village</h2>
       </div>
     );
-   } 
-   
+  }
+
   return (
     <div className={styles.village_details}>
       <hr />
@@ -94,18 +93,24 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
               <th>ACTION</th>
             </tr>
           </thead>
-          {votersInVillage?.map((voters, index) => (
-            <tbody key={voters.id}>
-              <tr>
-                <td>{index + 1}</td>
-                <td>{voters.name}</td>
-                <td>+234 {voters.contact}</td>
-                <td>
-                  <Link href="#">Edit</Link>
-                </td>
-              </tr>
-            </tbody>
-          ))}
+          {votersInVillage && votersInVillage.length > 0 ? (
+            votersInVillage?.map((voters, index) => (
+              <tbody key={voters.id}>
+                <tr>
+                  <td>{index + 1}</td>
+                  <td>{voters.name}</td>
+                  <td>+234 {voters.contact}</td>
+                  <td>
+                    <Link href="#">Edit</Link>
+                  </td>
+                </tr>
+              </tbody>
+            ))
+          ) : (
+            <div className="my-10">
+              <h2 className='text-2xl text-[#2F3733] font-l'>No Data</h2>
+            </div>
+          )}
         </table>
       </div>
 
@@ -180,9 +185,7 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
         <CompleteModal
           showCompleteModal={showCompleteModal}
           setShowCompleteModal={setShowCompleteModal}
-          heading={
-            'Congratulations! You have successfully added a new voter.'
-          }
+          heading={'Congratulations! You have successfully added a new voter.'}
           description={
             'Go Champ! You are doing so great, let’s keep the fire burning'
           }
