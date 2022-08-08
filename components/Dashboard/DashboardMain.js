@@ -47,12 +47,14 @@ const FormikControl = dynamic(() => import('../Forms/FormikControl'), {
 // );
 
 
-
 const DashboardMain = ({states, villageDetails, votersDetails}) => {
   const { userProfile } = useAuthStore();
   const { accessToken } = useAuthStore();
   
   const [otherVillage, setOtherVillage] = useState();
+
+  const [stateId, setStateId] = useState(null);
+
   ///////////COMPLTETE MODAL//////////////
   const [showCompleteModal, setShowCompleteModal] = useState();
 
@@ -70,11 +72,18 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
 
   ////////////////// Selected Village///////////////////////
   const [selectedVillage, setSelectedVillage] = useState("")
+
   const handleVillage = async () => {
     const url = 'https://api.23forobi.com/user-villages';
     const villageId = selectedVillage.value;
     const data = {
       village_id: villageId,
+    };
+
+    const urlCreate = 'https://api.23forobi.com/villages';
+    const dataCreate = {
+      name: otherVillage,
+      location_id: stateId,
     };
     const headers = {
       'Content-Type': 'application/json',
@@ -82,15 +91,28 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
       'Authorization': `Bearer ${accessToken}`,
 
     };
-    axios.post(url, data, { headers })?.then((res) => {
-      try {
-        // console.log(res.data);
-        
-      } catch (error) {
-        // console.log(error)
-      }
-      setShowCompleteModal(true);
-    });
+
+    if (selectedVillage.name !== "Others") {
+
+      axios.post(url, data, { headers })?.then((res) => {
+        try {
+          // console.log(res.data);
+          
+        } catch (error) {
+          // console.log(error)
+        }
+      });
+    } else {
+      axios.post(urlCreate, dataCreate, { headers })?.then((res) => {
+        try {
+          console.log(res.data);
+        } catch (error) {
+          // console.log(error)
+        }
+        setShowCompleteModal(true);
+        setOtherVillage("")
+      });
+    }
     setShowModal(false);
   }
   ///////// End Selected Village //////////////////
@@ -183,15 +205,20 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
       <Tabs
         selectedIndex={tabIndex}
         onSelect={(index) => setTabIndex(index)}
-        selectedTabClassName="border-b-[1px] border-[#018226] text-[#2F3733] outline-none"
+        selectedTabClassName={`border-b-[1px] border-[#018226] text-[#2F3733] outline-none`}        
       >
-        <TabList className="flex border-b border-[#F1F1F1] w-full items-center justify-start text-center mt-8">
+        <TabList
+          className={
+            `flex border-b border-[#F1F1F1] w-full items-center justify-start text-center mt-8 overflow-x-scroll ${styles.tabs}`
+          }
+        >
           {villageDetails?.map((item) => (
             <Tab
               key={item.village.id}
-              className="font-bold lg:px-8 py-3 text-3xl lg:text-2xl  w-[200px] cursor-pointer hover:border-[#018226] hover:border-b-[1px]"
+              className="font-bold lg:px-8 py-3 text-3xl lg:text-2xl  min-w-[40%] cursor-pointer hover:border-[#018226] hover:border-b-[1px] flex gap-2"
             >
               {item.village.name}
+              <p className="lowercase">({item.village.location_id})</p>
             </Tab>
           ))}
         </TabList>
@@ -247,43 +274,47 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
                   onSubmit={(values) => console.log('Form data', values)}
                 >
                   {({ values }) => ( */}
-                    <form>
-                      <SelectInput
-                        placeholder="Select a state"
-                        name="state"
-                        options={states}
-                        state={states}
-                        addVillageHandler={addVillageHandler}
+                <form>
+                  <SelectInput
+                    placeholder="Select a state"
+                    name="state"
+                    options={states}
+                    state={states}
+                    addVillageHandler={addVillageHandler}
+                    setStateId={(val) => setStateId(() => val)}
+                  />
+                  <p className={styles.select_desc}>
+                    Kindly note that the state you selected on registration
+                    cannot be changed
+                  </p>
+                  <SelectInputVillage
+                    placeholder="Select a village"
+                    name="village"
+                    options={states}
+                    setSelectedVillage={setSelectedVillage}
+                    addVillageHandler={addVillageHandler}
+                  />
+
+                  {selectedVillage.name === 'Others' ? (
+                    <div className="mt-28">
+                      <input
+                        type="text"
+                        placeholder="Add a village"
+                        name="otherVillage"
+                        value={otherVillage}
+                        onChange={(e) => setOtherVillage(e.target.value)}
                       />
-                      <p className={styles.select_desc}>
-                        Kindly note that the state you selected on registration
-                        cannot be changed
-                      </p>
-                      <SelectInputVillage
-                        placeholder="Select a village"
-                        name="village"
-                        options={states}
-                        setSelectedVillage={setSelectedVillage}
-                        addVillageHandler={addVillageHandler}
-                        />
-                      {selectedVillage.name === "Others" ? <div className='mt-28'>
-                        <input
-                          type="text"
-                          placeholder="Add a village"
-                          name="otherVillage"
-                          value={otherVillage}
-                          onChange={(e) => setOtherVillage(e.target.value)}
-                        />
-                      </div> : null}
-                      <button
-                        type="submit"
-                        className="btn_dark w-full rounded-full h-20 mt-9"
-                        onClick={handleVillage}
-                      >
-                        Continue
-                      </button>
-                    </form>
-                  {/* )}
+                    </div>
+                  ) : null}
+                  <button
+                    type="button"
+                    className="btn_dark w-full rounded-full h-20 mt-9"
+                    onClick={handleVillage}
+                  >
+                    Continue
+                  </button>
+                </form>
+                {/* )}
                 </Formik> */}
               </div>
             </div>
