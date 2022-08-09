@@ -17,8 +17,8 @@ import axios from 'axios';
 
 const welcome = () => {
   const { accessToken } = useAuthStore();
-  const token = accessToken;
-  // console.log(token);
+  let token = accessToken;
+  console.log(token);
   const router = useRouter();
   const [steps, setSteps] = useState(1);
   const [progress, setProgress] = useState(20);
@@ -61,36 +61,29 @@ const welcome = () => {
   const submitForm = async () => {
     // console.log(formData);
     const url = 'https://api.23forobi.com/user-data';
-    // const headers = { Authorization: 'Bearer ' + token };
-    const data = formData;
+    const headers = {
+      //'Content-Type': 'application/json',
+      //Accept: 'application/json',
+      Authorization: `Bearer ${token}`,
+    };
+    const data = {
+      data: formData,
+    };
     try {
-      await axios
-        .post(
-          url,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              'content-type': 'application/json',
-            },
-          },
-          data
-        )
-        .then((res) => {
-          console.log(res.data);
-          if (res.status === 200) {
-            router.push('/dashboard/summary');
-          }
-        });
+      await axios.post(url, data, { headers: headers }).then((res) => {
+        console.log(res.data);
+        if (res.data && res.status === 200) {
+          router.push('/dashboard/summary');
+        }
+      });
     } catch (error) {
       console.log(error);
     }
-    //console.log('Submiited');
-    //console.log(formData);
-    //router.push('/dashboard/summary');
   };
 
   const handleSkip = () => {
-    console.log('Skipped');
+    // console.log('Skipped');
+    submitForm();
     // router.push('/dashboard/summary');
   };
 
@@ -131,51 +124,13 @@ const welcome = () => {
             disabled2={!formData.vote}
             disabled3={!formData.available}
             disabled4={!formData.state || !formData.lga || !formData.village}
-            disabled5={!formData.full_name || !formData.phone || formData.phone.length < 11}
+            disabled5={
+              !formData.full_name ||
+              !formData.phone ||
+              formData.phone.length < 11
+            }
           />
         </div>
-
-        {/*<div className="my-0">
-        <div>
-          <h2 className="text-[#2F3733] text-3xl">
-            Do you have your PVC (Permanent voters card)?
-          </h2>
-          <Formik
-            initialValues={initialValues}
-            onSubmit={(values, { setSubmitting }) => console.log(values)}
-          >
-            {(dirty) => (
-              <Form>
-                <div className="my-5">
-                  <Field type="radio" name="selected" value="yes" />
-                  <label className="px-3 lg:text-2xl text-4xl font-normal text-[#2F3733]">
-                    Yes
-                  </label>
-                </div>
-                <div>
-                  <Field type="radio" name="selected" value="no" />
-                  <label className="px-3 lg:text-2xl text-4xl font-normal text-[#2F3733]">
-                    No
-                  </label>
-                </div>
-                <hr className="mb-5 mt-10" />
-                <div>
-                  <button
-                    type="submit"
-                    disabled={!dirty}
-                    className={!dirty ? `${enabledBtn} opacity-40` : enabledBtn}
-                  >
-                    Next
-                    <div className="flex items-center pl-4">
-                      <Image src={nextIcon} />
-                    </div>
-                  </button>
-                </div>
-              </Form>
-            )}
-          </Formik>
-        </div>
-            </div>*/}
       </div>
     </>
   );
