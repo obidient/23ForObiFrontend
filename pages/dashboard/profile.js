@@ -15,12 +15,9 @@ const dashboard = () => {
       <title>Profile</title>
     </Head>
       <div className={`${styles.profile} container`}>
-        <DashboardNav />
+        <DashboardNav progress="true" profile="true" />
         <div className={styles.profile__box}>
-          <div className={styles.head}>
-            <h2>Profile</h2>
-            <hr />
-          </div>
+          
           <ProfileDisplay />
         </div>
       </div>
