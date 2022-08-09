@@ -102,8 +102,8 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
               <th>ACTION</th>
             </tr>
           </thead>
-          {votersDetails && votersDetails.length > 0 ? (
-            votersDetails?.map((voters, index) => (
+          {votersInVillage && votersInVillage.length > 0 ? (
+            votersInVillage?.map((voters, index) => (
               <tbody key={voters.id}>
                 <tr>
                   <td>{index + 1}</td>
