@@ -15,15 +15,45 @@ const Sidebar = ({ voters }) => {
         {voters && voters.length > 0 ? (
           <>
             <div className={styles.achievements_images}>
-              <div>
-                <Image src={level_1} />
-              </div>
-              <div>
-                <Image src={level_2} />
-              </div>
-              <div>
-                <Image src={level_3} />
-              </div>
+              {voters.length >= 3 ? (
+                <>
+                  <div>
+                    <Image src={level_1} />
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div>
+                    <Image src={level_1} style={{ opacity: 0.4 }} />
+                  </div>
+                </>
+              )}
+              {voters.length >= 6 ? (
+                <>
+                  <div>
+                    <Image src={level_2} />
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div>
+                    <Image src={level_2} style={{ opacity: 0.4 }} />
+                  </div>
+                </>
+              )}
+              {voters.length >= 9 ? (
+                <>
+                  <div>
+                    <Image src={level_3} />
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div>
+                    <Image src={level_3} style={{ opacity: 0.4 }} />
+                  </div>
+                </>
+              )}
             </div>
             <div className={styles.link}>
               <Link href="">View all</Link>

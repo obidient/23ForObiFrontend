@@ -51,8 +51,8 @@ const dashboard = (props) => {
     }
   }, []);
 
-  const expectedVotes = 30
-  let votersProgress = (100/expectedVotes)*progress
+  const expectedVotes = 30;
+  let votersProgress = Math.trunc((100 / expectedVotes) * progress);
 
   return (
     <>
@@ -60,7 +60,11 @@ const dashboard = (props) => {
         <title>Dashboard</title>
       </Head>
       <div className={`${styles.dashboard} container`}>
-        <DashboardNav progress={votersProgress} progressbar="true" profile="true" />
+        <DashboardNav
+          progress={votersProgress}
+          progressbar="true"
+          profile="true"
+        />
         <div className={styles.dashboard__body}>
           <div className={styles.main}>
             <DashboardMain

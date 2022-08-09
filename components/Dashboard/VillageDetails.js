@@ -18,7 +18,7 @@ import add_img_green from '../../assets/add_img_green.png';
 import CompleteModal from './../misc/CompleteModal';
 
 const VillageDetails = ({ villageDetails, votersDetails }) => {
-  const [showModal, setShowModal] = useState();
+  const [showModal, setShowModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState();
   const [showCompleteModal, setShowCompleteModal] = useState();
   const { accessToken } = useAuthStore();
@@ -34,7 +34,7 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
     contact: Yup.number().required('Required'),
   });
 
-  const handleVoters = (values) => {
+  const handleVoters = async (values) => {
     const url = 'https://api.23forobi.com/voters';
     const data = {
       name: values.name,
@@ -47,7 +47,14 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
       Authorization: `Bearer ${accessToken}`,
     };
 
-    axios.post(url, data, { headers })?.then((res) => {
+    try {
+      await axios.post(url, data, { headers: headers })?.then((res) => {
+        console.log(res.data);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+    /*axios.post(url, data, { headers })?.then((res) => {
       try {
         //  console.log(res.data);
       } catch (error) {
@@ -55,7 +62,7 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
       }
       setShowModal(false);
       setShowCompleteModal(true);
-    });
+    });*/
   };
 
   useEffect(() => {
@@ -76,6 +83,7 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
       <hr />
       <div className={styles.village_details__heading}>
         <h2>Voters</h2>
+
         <div
           className={styles.dashboardmain_add_village}
           onClick={() => setShowModal(true)}
@@ -94,13 +102,13 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
               <th>ACTION</th>
             </tr>
           </thead>
-          {votersInVillage && votersInVillage.length > 0 ? (
-            votersInVillage?.map((voters, index) => (
+          {votersDetails && votersDetails.length > 0 ? (
+            votersDetails?.map((voters, index) => (
               <tbody key={voters.id}>
                 <tr>
                   <td>{index + 1}</td>
                   <td>{voters.name}</td>
-                  <td>+234 {voters.contact}</td>
+                  <td>+234{voters.contact.slice(1,voters.contact.length)}</td>
                   <td>
                     <Link href="#">Edit</Link>
                   </td>
