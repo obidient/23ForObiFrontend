@@ -12,6 +12,7 @@ import ProtectedHOC from './../../components/misc/ProtectedHOC';
 const dashboard = () => {
   const { accessToken } = useAuthStore();
   const [userVoters, setUserVoters] = useState([]);
+  const [progress, setProgress] = useState(0)
   
   useEffect(() => {
     try {
@@ -23,6 +24,7 @@ const dashboard = () => {
           .then((res) => {
             // console.log(res.data)
             setUserVoters(res.data)
+            setProgress(res.data.length)
           });
       };
       getVotersProgress();
@@ -30,13 +32,15 @@ const dashboard = () => {
       console.log(error);
     }
   }, []);
+  const expectedVotes = 30;
+  let votersProgress = Math.trunc((100 / expectedVotes) * progress);
   return (
     <>
       <Head>
         <title>Profile</title>
       </Head>
       <div className={`${styles.profile} container`}>
-        <DashboardNav progress="true" profile="true" />
+        <DashboardNav progress={votersProgress} progressbar="true"  profile="true" />
         <div className={styles.profile__box}>
           <ProfileDisplay userVoters={userVoters} />
         </div>
