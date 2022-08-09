@@ -1,28 +1,69 @@
 import styles from './Styles.module.scss';
 import Image from 'next/image';
-import epic_champ from '../../assets/epic_champ.png'
+import epic_champ from '../../assets/epic_champ.png';
+import level_1 from '../../assets/level_1.svg';
+import level_2 from '../../assets/level_2.svg';
+import level_3 from '../../assets/level_3.svg';
 import Link from 'next/link';
 
-const Sidebar = () => {
+const Sidebar = ({ voters }) => {
   return (
     <div className={styles.sidebar}>
       <div className={styles.sidebar__achievements}>
         <h2>Achievements</h2>
         <hr />
-        <div className={styles.achievements_images}>
-          <div className={styles.img}>
-            <Image src={epic_champ} />
+        {voters && voters.length > 0 ? (
+          <>
+            <div className={styles.achievements_images}>
+              {voters.length >= 3 ? (
+                <>
+                  <div>
+                    <Image src={level_1} />
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div>
+                    <Image src={level_1} style={{ opacity: 0.4 }} />
+                  </div>
+                </>
+              )}
+              {voters.length >= 6 ? (
+                <>
+                  <div>
+                    <Image src={level_2} />
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div>
+                    <Image src={level_2} style={{ opacity: 0.4 }} />
+                  </div>
+                </>
+              )}
+              {voters.length >= 9 ? (
+                <>
+                  <div>
+                    <Image src={level_3} />
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div>
+                    <Image src={level_3} style={{ opacity: 0.4 }} />
+                  </div>
+                </>
+              )}
+            </div>
+            <div className={styles.link}>
+              <Link href="">View all</Link>
+            </div>
+          </>
+        ) : (
+          <div className="flex items-center">
+            <h2 className="text-[#2F3733]">No Achievements yet!</h2>
           </div>
-          <div className={styles.img}>
-            <Image src={epic_champ} />
-          </div>
-          <div className={styles.img}>
-            <Image src={epic_champ} />
-          </div>
-        </div>
-        <div className={styles.link}>
-          <Link href="">View all</Link>
-        </div>
+        )}
         <hr />
       </div>
       <h2>Learn how to deliver votes</h2>

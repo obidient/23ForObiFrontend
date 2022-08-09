@@ -25,12 +25,12 @@
     margin-bottom: 1rem;
   }
   
-  p {
-    font-size: var(--font-p-text-2);
-    line-height: 130%;
-    color: var(--text-color-4);
-    margin-bottom: 1rem;
-  }
+  // p {
+  //   font-size: var(--font-p-text-2);
+  //   line-height: 130%;
+  //   color: var(--text-color-4);
+  //   margin-bottom: 1rem;
+  // }
 
   hr {
     border: 1px solid #e1e1e1;
@@ -291,7 +291,7 @@
         border: 1.68749px solid #C0CFF5;
         border-radius: 500px;
         background-color: #D8E2FA;
-        padding: 1.6rem 2.2rem;
+        padding: 1.2rem 1.8rem;
       }
     }
     
@@ -774,7 +774,7 @@
       width: .2rem;
       background: #02B836;
       right: 0;
-      top: .7rem;
+      top: -0rem;
     }
   }
 
@@ -806,11 +806,11 @@
       ::before {
       content: "";
       position: absolute;
-      height: 3rem;
+      height: 6.7rem;
       width: .2rem;
       background: #02B836;
       right: 10px;
-      top: 1rem;
+      top: -1rem;
     }
   }
 
@@ -820,4 +820,18 @@
     }
   }
 
+}
+
+.tabs {
+
+      /* Hide scrollbar for Chrome, Safari and Opera */
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
 }

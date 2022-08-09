@@ -25,10 +25,14 @@ export default function GoogleAuth(props) {
           axios.post(url, data, headers).then((res) => {
             // console.log(res.data);
             if (res.data && res.data.access_token) {
-              addUser(res.data.user)
+              addUser(res.data.user);
               addUserAuth(res.data.access_token);
-              // console.log(res.data)
-              router.push('/dashboard/welcome');
+              console.log(res.data);
+              if (res.data.is_new_user === true) {
+                router.push('/dashboard/welcome');
+              } else {
+                router.push('/dashboard');
+              }
             }
           });
         }}

@@ -9,7 +9,7 @@ import useUserStore from './../../store/userStore';
 import { getVillage } from './../../adapters/requests/index';
 import axios from 'axios'
 
-const SelectInput = ({placeholder, state}) => {
+const SelectInput = ({placeholder, state, setStateId}) => {
   const [isDropDownVisible, setIsDropDownVisible] = useState(false);
   
   // console.log(state)
@@ -66,7 +66,8 @@ const SelectInput = ({placeholder, state}) => {
     const villageIsInVillages = villages.find(
       (village) => village === itemsList[selectedItemIndex]?.name
     );
-
+    
+    setStateId(itemsList[selectedItemIndex]?.value);
     // if (!villageIsInVillages) {
     //   addVillage(itemsList[selectedItemIndex]?.name || villages);
     //   setIsInVillages(false);
@@ -77,6 +78,7 @@ const SelectInput = ({placeholder, state}) => {
     // console.log(villageState);
   }, [selectedItemIndex]);
 
+
   const handleClick = async(index, item) => {
     
     setSelectedItemsIndex(index);
@@ -84,6 +86,7 @@ const SelectInput = ({placeholder, state}) => {
     axios.get(`https://api.23forobi.com/villages/${item.value}`).then(result => {
           const res = result.data
           addVillages(res)
+          
           // console.log(res)
           return res
       });
