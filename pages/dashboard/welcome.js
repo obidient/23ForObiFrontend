@@ -18,7 +18,7 @@ import axios from 'axios';
 const welcome = () => {
   const { accessToken } = useAuthStore();
   let token = accessToken;
-  console.log(token);
+  // console.log(token);
   const router = useRouter();
   const [steps, setSteps] = useState(1);
   const [progress, setProgress] = useState(20);
@@ -71,7 +71,7 @@ const welcome = () => {
     };
     try {
       await axios.post(url, data, { headers: headers }).then((res) => {
-        console.log(res.data);
+        //console.log(res.data);
         if (res.data && res.status === 200) {
           router.push('/dashboard/summary');
         }
