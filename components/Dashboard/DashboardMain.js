@@ -78,7 +78,6 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
 
   ////////////////// Selected Village///////////////////////
   const [selectedVillage, setSelectedVillage] = useState("")
-  console.log(selectedVillage, "selected")
 
   const handleVillage = async () => {
     const url = 'https://api.23forobi.com/user-villages';
