@@ -32,14 +32,6 @@ const ConditionalRenderedList = ({
     newList();
   }, [villages]);
 
-  useEffect(() => {
-    // if (villageList === undefined) {
-    //   setIsVillageEmpty(true)
-    // } else {
-    //   setIsVillageEmpty(false);
-    // }
-  }, [villageList]);
-  
   const itemsList =
     villageList &&
     villageList.map((villageItems) => {
@@ -92,7 +84,7 @@ const ConditionalRenderedList = ({
           <div
             onClick={() => {
               setToggle(false);
-              // setValue(item.name);
+              setValue(item.name);
             }}
             className={styles.dropdown_item}
           >
