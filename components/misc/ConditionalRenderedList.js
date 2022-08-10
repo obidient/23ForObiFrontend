@@ -24,12 +24,22 @@ const ConditionalRenderedList = ({
 
   const [villageList, setVillageList] = useState([]);
 
+  console.log(villageList);
+
   useEffect(() => {
     const newList = async () =>
       setVillageList(villages?.list_of_villages?.concat(others));
     newList();
   }, [villages]);
 
+  useEffect(() => {
+    // if (villageList === undefined) {
+    //   setIsVillageEmpty(true)
+    // } else {
+    //   setIsVillageEmpty(false);
+    // }
+  }, [villageList]);
+  
   const itemsList =
     villageList &&
     villageList.map((villageItems) => {
@@ -40,15 +50,17 @@ const ConditionalRenderedList = ({
       return itemsss;
     });
 
+  console.log(value);
   if (value) {
     const filteredVillages = itemsList?.filter((item) =>
       item.name.toString().toLowerCase().startsWith(value.toLowerCase())
     );
+    console.log(filteredVillages);
     if (filteredVillages?.length) {
       return (
         toggle && (
           <div className={styles.village_dropdown}>
-            {filteredVillages.map((item) => (
+            {filteredVillages?.map((item) => (
               <div
                 onClick={() => {
                   setToggle(false);
@@ -81,6 +93,7 @@ const ConditionalRenderedList = ({
             onClick={() => {
               setToggle(false);
               setValue(item.name);
+              setSelectedVillage(item);
             }}
             className={styles.dropdown_item}
           >

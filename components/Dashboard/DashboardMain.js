@@ -99,8 +99,7 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
 
     };
 
-    if (selectedVillage.name !== "Others") {
-
+    if (selectedVillage.name !== "Others" && !isVillageEmpty) {
       axios.post(url, data, { headers })?.then((res) => {
         try {
           // console.log(res.data);
@@ -323,7 +322,7 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
                         type="text"
                         placeholder="Add a village"
                         name="otherVillage"
-                        value={otherVillage}
+                        value={otherVillage ?? ""}
                         onChange={(e) => setOtherVillage(e.target.value)}
                       />
                     </div>
@@ -336,7 +335,7 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
                           type="text"
                           placeholder="Add a village"
                           name="otherVillage"
-                          value={otherVillage}
+                          value={otherVillage ?? ""}
                           onChange={(e) => setOtherVillage(e.target.value)}
                         />
                       </div>

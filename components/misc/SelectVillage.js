@@ -47,7 +47,7 @@ const SelectVillage = ({ placeholder, states, setSelectedVillage, handleOnChange
           onChange={(inputValue) => {
             setValue(inputValue);
             setToggle(true);
-            handleOnChange(inputValue);
+            // handleOnChange(inputValue);
           }}
           value={value}
         />
@@ -57,7 +57,7 @@ const SelectVillage = ({ placeholder, states, setSelectedVillage, handleOnChange
         villages={userVillages}
         setValue={(value) => {
           setValue(value);
-          handleOnChange(value);
+          // handleOnChange(value);
         }}
         toggle={toggle}
         setToggle={setToggle}
