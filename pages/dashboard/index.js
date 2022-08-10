@@ -17,7 +17,10 @@ import { data } from 'autoprefixer';
 const dashboard = (props) => {
   const { states } = props;
   const [progress, setProgress] = useState(0);
-
+  // const [votersData, setVotersData] = useState("");
+  const [voterData, setVoterData] = useState();
+  const WAIT_TIME = 5000;  
+  
   /////////// USER VILLAGES /////////////
   const { accessToken } = useAuthStore();
   // console.log(accessToken)
@@ -31,11 +34,27 @@ const dashboard = (props) => {
     [`https://api.23forobi.com/user-villages`, accessToken],
     fetcher
   );
-  const { data: votersData, error: votersError } = useSWR(
-    [`https://api.23forobi.com/voters-by-contributor`, accessToken],
-    fetcher
-  );
-
+  // const { data: votersData, error: votersError } = useSWR(
+  //   [`https://api.23forobi.com/voters-by-contributor`, accessToken],
+  //   fetcher
+  //   );
+  
+  //GET DATA AND REFRESH AFTER 5 SECONDS
+  useEffect(() => {
+    const id = setInterval(() => {
+      try {
+          axios
+            .get('https://api.23forobi.com/voters-by-contributor', {
+              headers: { Authorization: `Bearer ${accessToken}` },
+            })
+            .then((res) => setVoterData(res.data));
+      } catch (error) {
+        // console.log(error);
+      }
+    }, WAIT_TIME);
+    return () => clearInterval(id);
+  }, [voterData]);
+  
   useEffect(() => {
     try {
       const getVotersProgress = async () => {
@@ -70,11 +89,11 @@ const dashboard = (props) => {
             <DashboardMain
               states={states}
               villageDetails={villageData}
-              votersDetails={votersData}
+              votersDetails={voterData}
             />
           </div>
           <div className={styles.aside}>
-            <Sidebar voters={votersData} />
+            <Sidebar voters={voterData} />
           </div>
         </div>
       </div>

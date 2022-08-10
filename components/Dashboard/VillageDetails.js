@@ -31,7 +31,6 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
   // Form validation schema using Yup
   const votersValidationSchema = Yup.object({
     name: Yup.string().required('Required'),
-    contact: Yup.number().required('Required'),
   });
 
   const handleVoters = async (values) => {
@@ -54,13 +53,13 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
     } catch (error) {
       // console.log(error);
     }
+    setShowModal(false);
     /*axios.post(url, data, { headers })?.then((res) => {
       try {
         //  console.log(res.data);
       } catch (error) {
         //  console.log(error);
       }
-      setShowModal(false);
       setShowCompleteModal(true);
     });*/
   };
