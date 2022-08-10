@@ -24,8 +24,6 @@ const ConditionalRenderedList = ({
 
   const [villageList, setVillageList] = useState([]);
 
-  console.log(villageList);
-
   useEffect(() => {
     const newList = async () =>
       setVillageList(villages?.list_of_villages?.concat(others));
@@ -42,12 +40,10 @@ const ConditionalRenderedList = ({
       return itemsss;
     });
 
-  console.log(value);
   if (value) {
     const filteredVillages = itemsList?.filter((item) =>
       item.name.toString().toLowerCase().startsWith(value.toLowerCase())
     );
-    console.log(filteredVillages);
     if (filteredVillages?.length) {
       return (
         toggle && (

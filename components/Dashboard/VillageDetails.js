@@ -49,10 +49,10 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
 
     try {
       await axios.post(url, data, { headers: headers })?.then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
       });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
     /*axios.post(url, data, { headers })?.then((res) => {
       try {

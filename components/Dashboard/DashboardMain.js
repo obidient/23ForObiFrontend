@@ -58,14 +58,8 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
 
   const [userVillage, setUserVillage] = useState(null);
   const [stateClicked, setStateClicked] = useState(false);
-  console.log(stateClicked)
 
-  const [isVillageEmpty, setIsVillageEmpty] = useState(null);
-  // console.log(isVillageEmpty)
-
-
-
-  
+  const [isVillageEmpty, setIsVillageEmpty] = useState(null);  
 
   ///////////COMPLTETE MODAL//////////////
   const [showCompleteModal, setShowCompleteModal] = useState();
@@ -119,7 +113,7 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
     } else {
       axios.post(urlCreate, dataCreate, { headers })?.then((res) => {
         try {
-          console.log(res.data);
+          // console.log(res.data);
         } catch (error) {
           // console.log(error)
         }
@@ -316,7 +310,7 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
                   {stateClicked && (
                     <SelectVillage
                       states={states}
-                      handleOnChange={(value) => console.log(value)}
+                      // handleOnChange={(value) => console.log(value)}
                       setSelectedVillage={setSelectedVillage}
                       setUserVillage={setUserVillage}
                       setIsVillageEmpty={setIsVillageEmpty}

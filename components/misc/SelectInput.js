@@ -13,7 +13,6 @@ const SelectInput = ({placeholder, state, setStateId, setIsVillageEmpty, setStat
   const [isDropDownVisible, setIsDropDownVisible] = useState(false);
   
   const { userVillages } = useUserStore();
-  console.log(userVillages)
   
   const { states } = useContext(StateContext);
 

@@ -176,7 +176,7 @@ const State = ({ stateName, detail, images, villages }) => {
   };
 
   const villagesList = villages.list_of_villages 
-  console.log(villagesList)
+  // console.log(villagesList)
 
   const filter = (villages, query) => {
     return villages.filter((village) => {
