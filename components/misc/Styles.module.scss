@@ -515,11 +515,28 @@
 	width: 100%;
 	z-index: 100;
 	z-index: 100;
-	// height: 30rem;
+	height: 25rem;
 	overflow-y: scroll;
+	color: var(--text-color-4);
+
+	&::-webkit-scrollbar {
+			width: 4px;
+			margin: 2rem;
+		}
+		
+		&::-webkit-scrollbar-track {
+			display: none;
+		}
+		
+		&::-webkit-scrollbar-thumb {
+			border-radius: 16px;
+			background-color: darkgrey;
+			outline: 1px solid slategrey;
+		}
+
 
 	.dropdown_item {
-			font-size: 16px;
+			font-size: var(--font-p-text-1);
 			line-height: 130%;
 			padding: 1.5rem 1rem;
 			cursor: pointer;

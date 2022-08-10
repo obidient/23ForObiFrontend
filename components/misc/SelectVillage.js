@@ -17,12 +17,32 @@ const SelectVillage = ({ placeholder, states, setSelectedVillage, handleOnChange
   const [value, setValue] = useState();
 
   const { userVillages } = useUserStore();
-  
+
+  //CLOSE SELECT ON OUTER CLICK
+  const selectRef = useRef();
+
+   useEffect(() => {
+     //  add when mounted
+     document.addEventListener('mousedown', handleClose);
+
+     //  clean on unmount
+     return () => {
+       document.removeEventListener('mousedown', handleClose);
+     };
+   }, []);
+
+   const handleClose = useCallback((e) => {
+     // // clicked inside the select
+     if (selectRef?.current?.contains(e.target)) {
+       return;
+     }
+     // outside the select
+     setToggle(false)
+   }, []);
+
   return (
-    <div>
-      <div
-        onClick={() =>setToggle(!toggle)}    
-      >    
+    <div ref={selectRef}>
+      <div onClick={() => setToggle(!toggle)}>
         <Input
           onChange={(inputValue) => {
             setValue(inputValue);
@@ -30,12 +50,15 @@ const SelectVillage = ({ placeholder, states, setSelectedVillage, handleOnChange
             handleOnChange(inputValue);
           }}
           value={value}
-          />
+        />
       </div>
       <ConditionalRenderedList
         value={value}
         villages={userVillages}
-        setValue={(value) => {setValue(value); handleOnChange(value)}}
+        setValue={(value) => {
+          setValue(value);
+          handleOnChange(value);
+        }}
         toggle={toggle}
         setToggle={setToggle}
         setSelectedVillage={setSelectedVillage}
