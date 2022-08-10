@@ -17,6 +17,16 @@ import stateDetails from '../../data/stateDetails';
 import achieveActive from '../../assets/achieActive.png';
 import achieveDisabled from '../../assets/achieDisabled.png';
 import copy from '../../assets/copy.png';
+import level1 from '../../assets/level-1.svg';
+import level2 from '../../assets/level-2.svg';
+import level3 from '../../assets/level-3.svg';
+import level4 from '../../assets/level-4.svg';
+import level5 from '../../assets/level-5.svg';
+import level6 from '../../assets/level-6.svg';
+import level7 from '../../assets/level-7.svg';
+import level8 from '../../assets/level-8.svg';
+import level9 from '../../assets/level-9.svg';
+import level10 from '../../assets/level-10.svg';
 
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
@@ -200,12 +210,12 @@ const ProfileDisplay = ({ userVoters }) => {
             <>
               {userVoters.length >= 3 ? (
                 <div>
-                  <Image src={achieveActive} alt="achievement" />
+                  <Image src={level1} alt="achievement" />
                 </div>
               ) : (
                 <div>
                   <Image
-                    src={achieveActive}
+                    src={level1}
                     alt="achievement"
                     style={{ opacity: 0.3 }}
                   />
@@ -213,12 +223,12 @@ const ProfileDisplay = ({ userVoters }) => {
               )}
               {userVoters.length >= 6 ? (
                 <div>
-                  <Image src={achieveActive} alt="achievement" />
+                  <Image src={level2} alt="achievement" />
                 </div>
               ) : (
                 <div>
                   <Image
-                    src={achieveActive}
+                    src={level2}
                     alt="achievement"
                     style={{ opacity: 0.3 }}
                   />
@@ -226,12 +236,12 @@ const ProfileDisplay = ({ userVoters }) => {
               )}
               {userVoters.length >= 9 ? (
                 <div>
-                  <Image src={achieveActive} alt="achievement" />
+                  <Image src={level3} alt="achievement" />
                 </div>
               ) : (
                 <div>
                   <Image
-                    src={achieveActive}
+                    src={level3}
                     alt="achievement"
                     style={{ opacity: 0.3 }}
                   />
@@ -239,12 +249,12 @@ const ProfileDisplay = ({ userVoters }) => {
               )}
               {userVoters.length >= 12 ? (
                 <div>
-                  <Image src={achieveActive} alt="achievement" />
+                  <Image src={level4} alt="achievement" />
                 </div>
               ) : (
                 <div>
                   <Image
-                    src={achieveActive}
+                    src={level4}
                     alt="achievement"
                     style={{ opacity: 0.3 }}
                   />
@@ -252,12 +262,12 @@ const ProfileDisplay = ({ userVoters }) => {
               )}
               {userVoters.length >= 15 ? (
                 <div>
-                  <Image src={achieveActive} alt="achievement" />
+                  <Image src={level5} alt="achievement" />
                 </div>
               ) : (
                 <div>
                   <Image
-                    src={achieveActive}
+                    src={level5}
                     alt="achievement"
                     style={{ opacity: 0.3 }}
                   />
@@ -265,12 +275,12 @@ const ProfileDisplay = ({ userVoters }) => {
               )}
               {userVoters.length >= 18 ? (
                 <div>
-                  <Image src={achieveActive} alt="achievement" />
+                  <Image src={level6} alt="achievement" />
                 </div>
               ) : (
                 <div>
                   <Image
-                    src={achieveActive}
+                    src={level6}
                     alt="achievement"
                     style={{ opacity: 0.3 }}
                   />
@@ -278,12 +288,12 @@ const ProfileDisplay = ({ userVoters }) => {
               )}
               {userVoters.length >= 21 ? (
                 <div>
-                  <Image src={achieveActive} alt="achievement" />
+                  <Image src={level7} alt="achievement" />
                 </div>
               ) : (
                 <div>
                   <Image
-                    src={achieveActive}
+                    src={level7}
                     alt="achievement"
                     style={{ opacity: 0.3 }}
                   />
@@ -291,12 +301,12 @@ const ProfileDisplay = ({ userVoters }) => {
               )}
               {userVoters.length >= 24 ? (
                 <div>
-                  <Image src={achieveActive} alt="achievement" />
+                  <Image src={level8} alt="achievement" />
                 </div>
               ) : (
                 <div>
                   <Image
-                    src={achieveActive}
+                    src={level8}
                     alt="achievement"
                     style={{ opacity: 0.3 }}
                   />
@@ -304,12 +314,12 @@ const ProfileDisplay = ({ userVoters }) => {
               )}
               {userVoters.length >= 27 ? (
                 <div>
-                  <Image src={achieveActive} alt="achievement" />
+                  <Image src={level9} alt="achievement" />
                 </div>
               ) : (
                 <div>
                   <Image
-                    src={achieveActive}
+                    src={level9}
                     alt="achievement"
                     style={{ opacity: 0.3 }}
                   />
@@ -317,19 +327,17 @@ const ProfileDisplay = ({ userVoters }) => {
               )}
               {userVoters.length >= 30 ? (
                 <div>
-                  <Image src={achieveActive} alt="achievement" />
+                  <Image src={level10} alt="achievement" />
                 </div>
               ) : (
                 <div>
                   <Image
-                    src={achieveActive}
+                    src={level10}
                     alt="achievement"
                     style={{ opacity: 0.3 }}
                   />
                 </div>
               )}
-
-              
             </>
           ) : (
             <>
