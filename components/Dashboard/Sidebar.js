@@ -1,9 +1,9 @@
 import styles from './Styles.module.scss';
 import Image from 'next/image';
 import epic_champ from '../../assets/epic_champ.png';
-import level_1 from '../../assets/level_1.svg';
-import level_2 from '../../assets/level_2.svg';
-import level_3 from '../../assets/level_3.svg';
+import level_1 from '../../assets/level-1.svg';
+import level_2 from '../../assets/level-2.svg';
+import level_3 from '../../assets/level-3.svg';
 import Link from 'next/link';
 
 const Sidebar = ({ voters }) => {
