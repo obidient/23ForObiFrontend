@@ -9,14 +9,28 @@ import useUserStore from './../../store/userStore';
 import { getVillage } from './../../adapters/requests/index';
 import axios from 'axios'
 
-const SelectInput = ({placeholder, state, setStateId}) => {
+const SelectInput = ({placeholder, state, setStateId, setIsVillageEmpty, setStateClicked}) => {
   const [isDropDownVisible, setIsDropDownVisible] = useState(false);
   
-  // console.log(state)
+  const { userVillages } = useUserStore();
+  console.log(userVillages)
+  
   const { states } = useContext(StateContext);
+
 
   //CLOSE SELECT ON OUTER CLICK
   const selectRef = useRef();
+
+  useEffect(() => {
+    if (Array.isArray(userVillages)) {
+      setIsVillageEmpty(true);
+    } else {
+      setIsVillageEmpty(false);
+
+    }
+
+
+  }, [userVillages]);
 
   useEffect(() => {
     //  add when mounted
@@ -68,6 +82,10 @@ const SelectInput = ({placeholder, state, setStateId}) => {
     );
     
     setStateId(itemsList[selectedItemIndex]?.value);
+
+    selectedItemIndex === null
+      ? setStateClicked(false)
+      : setStateClicked(true);
     // if (!villageIsInVillages) {
     //   addVillage(itemsList[selectedItemIndex]?.name || villages);
     //   setIsInVillages(false);
@@ -77,7 +95,6 @@ const SelectInput = ({placeholder, state, setStateId}) => {
 
     // console.log(villageState);
   }, [selectedItemIndex]);
-
 
   const handleClick = async(index, item) => {
     

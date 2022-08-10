@@ -41,6 +41,7 @@ const FormikControl = dynamic(() => import('../Forms/FormikControl'), {
 // const CustomSelectInput = dynamic(
 //   () => import('../Forms/SelectInput').then((mod) => mod.CustomSelectInput),
 //   {import CompleteModal from './../misc/CompleteModal';
+import SelectVillage from './../misc/SelectVillage';
 
 //     ssr: false,
 //   }
@@ -54,6 +55,17 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
   const [otherVillage, setOtherVillage] = useState();
 
   const [stateId, setStateId] = useState(null);
+
+  const [userVillage, setUserVillage] = useState(null);
+  const [stateClicked, setStateClicked] = useState(false);
+  console.log(stateClicked)
+
+  const [isVillageEmpty, setIsVillageEmpty] = useState(null);
+  // console.log(isVillageEmpty)
+
+
+
+  
 
   ///////////COMPLTETE MODAL//////////////
   const [showCompleteModal, setShowCompleteModal] = useState();
@@ -72,6 +84,7 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
 
   ////////////////// Selected Village///////////////////////
   const [selectedVillage, setSelectedVillage] = useState("")
+  console.log(selectedVillage, "selected")
 
   const handleVillage = async () => {
     const url = 'https://api.23forobi.com/user-villages';
@@ -101,6 +114,7 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
         } catch (error) {
           // console.log(error)
         }
+        setSelectedVillage("");
       });
     } else {
       axios.post(urlCreate, dataCreate, { headers })?.then((res) => {
@@ -111,6 +125,7 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
         }
         setShowCompleteModal(true);
         setOtherVillage("")
+        setSelectedVillage("");
       });
     }
     setShowModal(false);
@@ -205,12 +220,10 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
       <Tabs
         selectedIndex={tabIndex}
         onSelect={(index) => setTabIndex(index)}
-        selectedTabClassName={`border-b-[1px] border-[#018226] text-[#2F3733] outline-none`}        
+        selectedTabClassName={`border-b-[1px] border-[#018226] text-[#2F3733] outline-none`}
       >
         <TabList
-          className={
-            `flex border-b border-[#F1F1F1] w-full items-center justify-start text-center mt-8 overflow-x-scroll ${styles.tabs}`
-          }
+          className={`flex border-b border-[#F1F1F1] w-full items-center justify-start text-center mt-8 overflow-x-scroll ${styles.tabs}`}
         >
           {villageDetails?.map((item) => (
             <Tab
@@ -255,7 +268,10 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
               </h2>
               <button
                 className={`closeBtn`}
-                onClick={() => setShowModal(false)}
+                onClick={() => {
+                  setShowModal(false);
+                  setSelectedVillage(null);
+                }}
               >
                 &times;
               </button>
@@ -282,20 +298,32 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
                     state={states}
                     addVillageHandler={addVillageHandler}
                     setStateId={(val) => setStateId(() => val)}
+                    setIsVillageEmpty={setIsVillageEmpty}
+                    setStateClicked={setStateClicked}
                   />
                   <p className={styles.select_desc}>
                     Kindly note that the state you selected on registration
                     cannot be changed
                   </p>
-                  <SelectInputVillage
+                  {/* <SelectInputVillage
                     placeholder="Select a village"
                     name="village"
                     options={states}
                     setSelectedVillage={setSelectedVillage}
                     addVillageHandler={addVillageHandler}
-                  />
+                  /> */}
 
-                  {selectedVillage.name === 'Others' ? (
+                  {stateClicked && (
+                    <SelectVillage
+                      states={states}
+                      handleOnChange={(value) => console.log(value)}
+                      setSelectedVillage={setSelectedVillage}
+                      setUserVillage={setUserVillage}
+                      setIsVillageEmpty={setIsVillageEmpty}
+                    />
+                  )}
+                  {selectedVillage?.name === 'Others' &&
+                  isVillageEmpty === false ? (
                     <div className="mt-28">
                       <input
                         type="text"
@@ -306,6 +334,19 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
                       />
                     </div>
                   ) : null}
+                  {isVillageEmpty &&
+                    stateClicked ? (
+                      <div className="mt-28">
+                        <p> No Village in this state. Add one</p>
+                        <input
+                          type="text"
+                          placeholder="Add a village"
+                          name="otherVillage"
+                          value={otherVillage}
+                          onChange={(e) => setOtherVillage(e.target.value)}
+                        />
+                      </div>
+                    ) : null}
                   <button
                     type="button"
                     className="btn_dark w-full rounded-full h-20 mt-9"
