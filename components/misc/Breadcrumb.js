@@ -37,7 +37,7 @@ export const VillageBreadcrumb = ({state, village, villageState, state_id}) => {
             <a>{villageState}</a>
           </li>
         </Link>
-        <li>
+        <li className='capitalize'>
           {village}
         </li>
       </ol>

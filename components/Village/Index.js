@@ -58,7 +58,7 @@ const Village = ({
           </div>
           <div className={styles.state_heading__title}>
             <div>
-              <h1>{village_name ? `${village_name} village` : ''}</h1>
+              <h1 className='capitalize'>{village_name ? `${village_name} village` : ''}</h1>
               <p className={styles.red}>
                 {contributors > 0
                   ? `We have got 5 votes guaranteed in ${
