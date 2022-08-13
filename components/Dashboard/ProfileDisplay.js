@@ -41,9 +41,10 @@ const FormikControl = dynamic(() => import('../Forms/FormikControl'), {
 });
 
 const ProfileDisplay = ({ userVoters }) => {
-  const { userProfile } = useAuthStore();
+  const { userProfile, registeredUser } = useAuthStore();
   const { userStates } = useUserStore();
   //console.log(userVoters)
+  // console.log(registeredUser.data.lga)
   const [state, setState] = useState({
     open: false,
     vertical: 'top',
@@ -70,6 +71,9 @@ const ProfileDisplay = ({ userVoters }) => {
   const last_name = userProfile?.last_name;
   const email = userProfile?.email;
   const image = userProfile?.image;
+  const stateOfOrigin = registeredUser?.data?.state;
+  const lga = registeredUser?.data?.lga;
+  const village = registeredUser?.data.village
 
   //Initialize select options
   const stateOptions = stateDetails.map((item, index) => ({
@@ -111,9 +115,9 @@ const ProfileDisplay = ({ userVoters }) => {
     firstName: first_name,
     lastName: last_name,
     email: email,
-    state: '',
-    LGA: '',
-    village: '',
+    state: stateOfOrigin || '',
+    LGA: lga || '',
+    village: village || '',
   };
 
   // Form validation schema using Yup
@@ -175,24 +179,27 @@ const ProfileDisplay = ({ userVoters }) => {
                   />
                   <FormikControl
                     values={values}
-                    control="select"
+                    control="input"
                     placeholder="Select your state"
                     name="state"
-                    options={stateOptions}
+                    type='text'
+                    //options={stateOfOrigin}
                   />
                   <FormikControl
                     values={values}
-                    control="select"
+                    control="input"
                     placeholder="Select your local government"
                     name="LGA"
-                    options={lgaOptions}
+                    //options={lgaOptions}
+                    type='text'
                   />
                   <FormikControl
                     values={values}
-                    control="select"
-                    placeholder="Select your village"
+                    control="input"
+                    placeholder="Enter your village"
                     name="village"
-                    options={villageOptions}
+                    type='text'
+                    // options={villageOptions}
                   />
                   <button className="btn_dark mt-8" type="submit">
                     Update
