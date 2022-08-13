@@ -170,7 +170,7 @@ const homepage = ({ data, progress, total_number_of_voters }) => {
                 )}
               </div>
               <div className={styles.hero__img}>
-                <Image src={labourparty} />
+                <Image src={labourparty} width={373} height={280} alt='' />
               </div>
             </div>
             <div className={styles.hero__bottom}>

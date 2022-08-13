@@ -45,7 +45,7 @@ const States = () => {
               onChange={handleChange}
             />
             <div className={styles.heading__search_icon}>
-              <Image src={search} alt="search" />
+              <Image src={search} alt="search" width={24} height={24} />
             </div>
           </div>
         </div>
