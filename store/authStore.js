@@ -5,8 +5,10 @@ import { persist } from 'zustand/middleware';
 const authStore = (set) => ({
   accessToken: null,
   userProfile: null,
+  registeredUser: null,
   adminUser: null,
   allUsers: [],
+  registerUser: (newUser) => set({registeredUser: newUser}),
   addUser: (user) => set({ userProfile: user }),
   addUserAuth: (user) => set({ accessToken: user }),
   removeUser: () => set({ userProfile: null, accessToken: null }),
