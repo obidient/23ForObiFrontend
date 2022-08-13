@@ -73,7 +73,7 @@ const ProfileDisplay = ({ userVoters }) => {
   const image = userProfile?.image;
   const stateOfOrigin = registeredUser?.data?.state;
   const lga = registeredUser?.data?.lga;
-  const village = registeredUser?.data.village
+  const village = registeredUser?.data.village;
 
   //Initialize select options
   const stateOptions = stateDetails.map((item, index) => ({
@@ -115,9 +115,9 @@ const ProfileDisplay = ({ userVoters }) => {
     firstName: first_name,
     lastName: last_name,
     email: email,
-    state: stateOfOrigin || '',
-    LGA: lga || '',
-    village: village || '',
+    state: stateOfOrigin,
+    LGA: lga,
+    village: village,
   };
 
   // Form validation schema using Yup
@@ -182,7 +182,7 @@ const ProfileDisplay = ({ userVoters }) => {
                     control="input"
                     placeholder="Select your state"
                     name="state"
-                    type='text'
+                    type="text"
                     //options={stateOfOrigin}
                   />
                   <FormikControl
@@ -191,14 +191,14 @@ const ProfileDisplay = ({ userVoters }) => {
                     placeholder="Select your local government"
                     name="LGA"
                     //options={lgaOptions}
-                    type='text'
+                    type="text"
                   />
                   <FormikControl
                     values={values}
                     control="input"
                     placeholder="Enter your village"
                     name="village"
-                    type='text'
+                    type="text"
                     // options={villageOptions}
                   />
                   <button className="btn_dark mt-8" type="submit">
