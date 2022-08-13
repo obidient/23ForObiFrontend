@@ -11,7 +11,7 @@ const authStore = (set) => ({
   registerUser: (newUser) => set({registeredUser: newUser}),
   addUser: (user) => set({ userProfile: user }),
   addUserAuth: (user) => set({ accessToken: user }),
-  removeUser: () => set({ userProfile: null, accessToken: null }),
+  removeUser: () => set({ userProfile: null, accessToken: null, registerUser: null }),
   addAdminUser: (admin) => set({ adminUser: admin }),
   removeAdminUser: () => set({ adminUser: null }),
 });
