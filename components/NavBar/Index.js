@@ -52,7 +52,7 @@ const NavBar = () => {
         <nav className={styles.navbar}>
           <div className={styles.navbar__logo}>
             <Link href="/">
-              <Image src={logo} width="130px" height="33px" />
+              <Image src={logo} width={130} height={33} alt="" />
             </Link>
           </div>
           <div ref={navRef} className={styles.navbar__menu}>
@@ -116,6 +116,7 @@ const NavBar = () => {
                 </div>
               ) : (
                 <button
+                  type="button"
                   className={`${styles.btn_vote_mobile} btn_light`}
                   onClick={() => setShowModal(true)}
                 >
@@ -142,6 +143,7 @@ const NavBar = () => {
             </div>
           ) : (
             <button
+              type="button"
               className={`${styles.btn_vote} btn_dark`}
               onClick={() => setShowModal(true)}
             >
