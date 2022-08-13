@@ -23,7 +23,7 @@ const Footer = () => {
       <div className="container">
         <div className={styles.footer_container}>
           <div className={styles.footer__logo}>
-            <Image src={logo} />
+            <Image src={logo} alt='23forObi logo' width={130} height={33}  />
           </div>
           <div className={styles.footer__details}>
             <h2>Be a part of the movement</h2>
