@@ -43,7 +43,7 @@ const FormikControl = dynamic(() => import('../Forms/FormikControl'), {
 });
 
 const ProfileDisplay = ({ userVoters, states }) => {
-  const { userProfile } = useAuthStore();
+  const { userProfile, registeredUser } = useAuthStore();
   const { userStates } = useUserStore();
   const { userVillages, addVillages } = useUserStore();
 

@@ -17,7 +17,7 @@ const Step4 = ({ formData, setFormData }) => {
       </h2>
       <form>
         <div className="my-5 flex flex-col items-center w-full">
-          <div className='w-full my-4'>
+          <div className="w-full my-4">
             <select
               placeholder="Select your state"
               className="rounded-full lg:w-[496px] w-full h-[44px] border border-[#2F3733] text-[ #979797] lg:text-3xl text-4xl px-5 focus:border-[#018226] focus:bg-[#F3FFF7]"
@@ -35,7 +35,7 @@ const Step4 = ({ formData, setFormData }) => {
               ))}
             </select>
           </div>
-          <div className='w-full'>
+          <div className="w-full">
             {state && (
               <>
                 <h2 className="text-[#2F3733] lg:text-3xl my-10">
@@ -50,7 +50,16 @@ const Step4 = ({ formData, setFormData }) => {
                   <option value={lga} key={lga}>
                     Select your LGA
                   </option>
-                  <option value="aba">Aba</option>
+                  {stateDetails.map((item) => (
+                    <>
+                      {item.name &&
+                        item.lgas.map((item, index) => (
+                          <>
+                            <option key={index}>{item}</option>
+                          </>
+                        ))}
+                    </>
+                  ))}
                 </select>
               </>
             )}
@@ -75,8 +84,8 @@ const Step4 = ({ formData, setFormData }) => {
               </>
             )}
                 </div>*/}
-          <div className='w-full'>
-            {lga  && (
+          <div className="w-full">
+            {lga && (
               <>
                 <h2 className="text-[#2F3733] lg:text-3xl my-10">
                   Enter the name of your village
