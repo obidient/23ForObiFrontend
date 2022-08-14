@@ -47,7 +47,7 @@ const ProfileDisplay = ({ userVoters, states }) => {
   const { userStates } = useUserStore();
   const { userVillages, addVillages } = useUserStore();
 
-  console.log(userProfile)
+  // console.log(userProfile)
 
   //console.log(userVoters)
   const [state, setState] = useState({
@@ -102,7 +102,7 @@ const ProfileDisplay = ({ userVoters, states }) => {
         axios.get(`https://api.23forobi.com/villages/${stateID}`).then((result) => {
           const res = result.data;
           addVillages(res);
-          console.log(res);
+          // console.log(res);
   
           return res;
         });
@@ -122,7 +122,7 @@ const ProfileDisplay = ({ userVoters, states }) => {
   //FORM SUBMIT FUNCTION
   const handleUpdate = (e) => {
     e.preventDefault()
-    console.log(values)
+    // console.log(values)
   } 
   
   
