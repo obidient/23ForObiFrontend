@@ -177,7 +177,7 @@ const ProfileDisplay = ({ userVoters, states }) => {
                 control="selectState"
               >
                 <option value="none" selected>
-                    {initialValues.state}
+                  {initialValues.state}
                 </option>
                 {states?.map((item) => {
                   return (                    
