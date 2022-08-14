@@ -27,7 +27,7 @@ interface SelectInputProps {
   placeholder?: string;
   name: string;
   values: valuesProps;
-  option: string;
+  // options: string;
   addVillageHandler?: (village: villageProps) => void;
 }
 
@@ -49,35 +49,35 @@ export default function SelectInput({ ...props }: SelectInputProps) {
   );
 }
 
-export function SelectVillagesInput({ ...props }: SelectInputProps) {
-  const [field, meta, helpers] = useField(props.name);
-    const { addVillages } = useUserStore();
+// export function SelectVillagesInput({ ...props }: SelectInputProps) {
+//   const [field, meta, helpers] = useField(props.name);
+//     const { addVillages } = useUserStore();
 
 
-  return (
-    <div className={styles.select}>
-      <Select
-        className="select-container focus:border-[ #018226]"
-        classNamePrefix="select"
-        options={props.options}
-        value={field.value}
-        onChange={(option) => {
-          helpers.setValue(option?.value);
-          axios.get(`https://api.23forobi.com/villages/${option?.option}`).then(result => {
-          const res = result.data
-          console.log(res)
-          addVillages(res)
+//   return (
+//     <div className={styles.select}>
+//       <Select
+//         className="select-container focus:border-[ #018226]"
+//         classNamePrefix="select"
+//         options={props.options}
+//         value={field.value}
+//         onChange={(option) => {
+//           helpers.setValue(option?.value);
+//           axios.get(`https://api.23forobi.com/villages/${option?.option}`).then(result => {
+//           const res = result.data
+//           console.log(res)
+//           addVillages(res)
           
-          return res
-      });
-        }}
-        name={field.name}
-        placeholder={props.placeholder}
-      />
-      {meta.touched && meta.error ? <TextError>{meta.error}</TextError> : null}
-    </div>
-  );
-}
+//           return res
+//       });
+//         }}
+//         name={field.name}
+//         placeholder={props.placeholder}
+//       />
+//       {meta.touched && meta.error ? <TextError>{meta.error}</TextError> : null}
+//     </div>
+//   );
+// }
 
 export const CustomSelectInput: React.FC<SelectInputProps> = (props) => {
   const [field, meta, helpers] = useField(props);
