@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import styles from './Styles.module.scss';
 import avatar from '../../assets/avatar.png';
-import SelectInput from './../misc/SelectInput';
+// import SelectInput from './../misc/SelectInput';
 
 //Form Imports
 import { Form, Formik } from 'formik';
@@ -31,6 +31,8 @@ import level10 from '../../assets/level-10.svg';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import axios from 'axios';
+import { SelectVillagesInput } from '../Forms/SelectInput';
+import SelectInput from '../Forms/SelectInput';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -40,9 +42,13 @@ const FormikControl = dynamic(() => import('../Forms/FormikControl'), {
   ssr: false,
 });
 
-const ProfileDisplay = ({ userVoters }) => {
+const ProfileDisplay = ({ userVoters, states }) => {
   const { userProfile } = useAuthStore();
   const { userStates } = useUserStore();
+  const { userVillages, addVillages } = useUserStore();
+
+  console.log(userProfile)
+
   //console.log(userVoters)
   const [state, setState] = useState({
     open: false,
@@ -70,62 +76,56 @@ const ProfileDisplay = ({ userVoters }) => {
   const last_name = userProfile?.last_name;
   const email = userProfile?.email;
   const image = userProfile?.image;
+  const userState = userProfile?.state;
 
-  //Initialize select options
-  const stateOptions = stateDetails.map((item, index) => ({
-    label: `${item.name} State`,
-    option: `${item.slug}`,
-  }));
-  const villageOptions = [
-    {
-      label: 'Ezeani Village 1',
-      value: 'Ezeani Village',
-    },
-    {
-      label: 'Osusus Village 2',
-      value: 'Osusu Village',
-    },
-    {
-      label: 'Ariara Village 3',
-      value: 'Ariara Village',
-    },
-  ];
-
-  const lgaOptions = [
-    {
-      label: 'Ezeani Village 1',
-      value: 'Ezeani Village',
-    },
-    {
-      label: 'Osusus Village 2',
-      value: 'Osusu Village',
-    },
-    {
-      label: 'Ariara Village 3',
-      value: 'Ariara Village',
-    },
-  ];
-
+  
+  /////////////// FORM /////////////////////
   // Initial form values
   const initialValues = {
     firstName: first_name,
     lastName: last_name,
     email: email,
-    state: '',
-    LGA: '',
+    state: userState,
+    // lga: '',
     village: '',
   };
 
-  // Form validation schema using Yup
-  const validationSchema = Yup.object({
-    firstName: Yup.string().required('Required'),
-    lastName: Yup.string().required('Required'),
-    email: Yup.string().email('Invalid email format').required('Required'),
-    state: Yup.string().required('Required'),
-    LGA: Yup.string().required('Required'),
-    village: Yup.string().required('Required'),
-  });
+  const [values, setValues] = useState(initialValues);
 
+  const handleInputChange = (e) => {
+    //const name = e.target.name
+    //const value = e.target.value
+    const { name, value } = e.target;
+
+    if(name === "state") {
+      const stateID = e.target.value
+        axios.get(`https://api.23forobi.com/villages/${stateID}`).then((result) => {
+          const res = result.data;
+          addVillages(res);
+          console.log(res);
+  
+          return res;
+        });
+        // setValues({
+        //   ...values,
+        //   [e.target.name]: e.target.name,
+        // });
+      };
+    // }
+
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
+
+  //FORM SUBMIT FUNCTION
+  const handleUpdate = (e) => {
+    e.preventDefault()
+    console.log(values)
+  } 
+  
+  
   return (
     <div className={styles.profile}>
       <div className={styles.profile__profileMain}>
@@ -145,61 +145,73 @@ const ProfileDisplay = ({ userVoters }) => {
                 on how to add voters and so much.
               </p>
             </div>
-            <Formik
-              initialValues={initialValues}
-              validationSchema={validationSchema}
-              onSubmit={(values) => console.log('Form Data', values)}
-            >
-              {({ values }) => (
-                <Form autoComplete="off">
-                  <FormikControl
-                    values={values}
-                    control="input"
-                    placeholder="First Name"
-                    name="firstName"
-                    type="text"
-                  />
-                  <FormikControl
-                    values={values}
-                    control="input"
-                    placeholder="Last Name"
-                    name="lastName"
-                    type="text"
-                  />
-                  <FormikControl
-                    values={values}
-                    control="input"
-                    placeholder="Enter your email"
-                    name="email"
-                    type="email"
-                  />
-                  <FormikControl
-                    values={values}
-                    control="select"
-                    placeholder="Select your state"
-                    name="state"
-                    options={stateOptions}
-                  />
-                  <FormikControl
-                    values={values}
-                    control="select"
-                    placeholder="Select your local government"
-                    name="LGA"
-                    options={lgaOptions}
-                  />
-                  <FormikControl
-                    values={values}
-                    control="select"
-                    placeholder="Select your village"
-                    name="village"
-                    options={villageOptions}
-                  />
-                  <button className="btn_dark mt-8" type="submit">
-                    Update
-                  </button>
-                </Form>
-              )}
-            </Formik>
+            <form action="">
+              <input
+                type="text"
+                control="input"
+                placeholder="First Name"
+                name="firstName"
+                value={values.firstName}
+                onChange={handleInputChange}
+              />
+              <input
+                type="text"
+                control="input"
+                placeholder="Last Name"
+                name="lastName"
+                value={values.lastName}
+                onChange={handleInputChange}
+              />
+              <input
+                type="text"
+                control="input"
+                placeholder="Enter your email"
+                name="email"
+                value={values.email}
+                onChange={handleInputChange}
+              />
+              <select
+                onChange={handleInputChange}
+                value={values.state}
+                name="state"
+                control="selectState"
+              >
+                <option value="none" selected>
+                    {initialValues.state}
+                </option>
+                {states?.map((item) => {
+                  return (                    
+                      <option value={item.id} key={item.id}>
+                        {item.state_name}
+                      </option>                  
+                  );
+                })}
+              </select>
+              <select
+                // onChange={handleSelectState}
+                value={values.village}
+                name="village"
+                onChange={handleInputChange}
+              >
+                <option value="none" selected>
+                  Select a village
+                </option>
+                {userVillages?.list_of_villages?.map((item) => {
+                  return (
+                      <option value={item.id} key={item.id}>
+                        {item.name}
+                      </option>
+                  );
+                })}
+              </select>
+              <button
+                className="btn_dark mt-8"
+                type="submit"
+                onClick={handleUpdate}
+              >
+                Update
+              </button>
+            </form>            
           </div>
         </div>
       </div>

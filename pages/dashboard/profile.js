@@ -8,11 +8,26 @@ import useAuthStore from '../../store/authStore';
 import styles from '../pagestyles/home.module.scss';
 import ProfileDisplay from './../../components/Dashboard/ProfileDisplay';
 import ProtectedHOC from './../../components/misc/ProtectedHOC';
+import useSWR from 'swr';
 
-const dashboard = () => {
+//GET STATE
+const fetcher = async (url, token) =>
+  await axios
+    .get(url)
+    .then((res) => res.data);
+
+const profile = (props) => {
   const { accessToken } = useAuthStore();
   const [userVoters, setUserVoters] = useState([]);
   const [progress, setProgress] = useState(0)
+
+
+  const { data: stateData, error: stateError } = 
+    useSWR(`https://api.23forobi.com/states`, fetcher
+      );
+
+  console.log(stateData);
+
   
   useEffect(() => {
     try {
@@ -40,13 +55,33 @@ const dashboard = () => {
         <title>Profile</title>
       </Head>
       <div className={`${styles.profile} container`}>
-        <DashboardNav progress={votersProgress} progressbar="true"  profile="true" />
+        <DashboardNav
+          progress={votersProgress}
+          progressbar="true"
+          profile="true"
+        />
         <div className={styles.profile__box}>
-          <ProfileDisplay userVoters={userVoters} />
+          <ProfileDisplay userVoters={userVoters} states={stateData} />
         </div>
       </div>
     </>
   );
 };
 
-export default ProtectedHOC(dashboard);
+export const getServerSideProps = async ({ res }) => {
+  try {
+    const states = await getStates();
+    return {
+      props: {
+        states: states?.data,
+      },
+    };
+  } catch {
+    res.statusCode = 404;
+    return {
+      props: {},
+    };
+  }
+};
+
+export default ProtectedHOC(profile);

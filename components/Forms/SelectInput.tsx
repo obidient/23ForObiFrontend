@@ -2,6 +2,8 @@ import { useField } from 'formik';
 import Select from 'react-select';
 import styles from './Styles.module.scss';
 import TextError from './TextError';
+import useUserStore from './../../store/userStore';
+import axios from 'axios';
 
 export interface OptionProps {
   label: string;
@@ -25,6 +27,7 @@ interface SelectInputProps {
   placeholder?: string;
   name: string;
   values: valuesProps;
+  option: string;
   addVillageHandler?: (village: villageProps) => void;
 }
 
@@ -38,6 +41,36 @@ export default function SelectInput({ ...props }: SelectInputProps) {
         classNamePrefix="select"
         options={props.options}
         onChange={(option) => helpers.setValue(option?.value)}
+        name={field.name}
+        placeholder={props.placeholder}
+      />
+      {meta.touched && meta.error ? <TextError>{meta.error}</TextError> : null}
+    </div>
+  );
+}
+
+export function SelectVillagesInput({ ...props }: SelectInputProps) {
+  const [field, meta, helpers] = useField(props.name);
+    const { addVillages } = useUserStore();
+
+
+  return (
+    <div className={styles.select}>
+      <Select
+        className="select-container focus:border-[ #018226]"
+        classNamePrefix="select"
+        options={props.options}
+        value={field.value}
+        onChange={(option) => {
+          helpers.setValue(option?.value);
+          axios.get(`https://api.23forobi.com/villages/${option?.option}`).then(result => {
+          const res = result.data
+          console.log(res)
+          addVillages(res)
+          
+          return res
+      });
+        }}
         name={field.name}
         placeholder={props.placeholder}
       />
