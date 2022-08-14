@@ -2,8 +2,8 @@ import { useField } from 'formik';
 import Select from 'react-select';
 import styles from './Styles.module.scss';
 import TextError from './TextError';
-import useUserStore from './../../store/userStore';
-import axios from 'axios';
+// import useUserStore from './../../store/userStore';
+// import axios from 'axios';
 
 export interface OptionProps {
   label: string;
