@@ -25,9 +25,6 @@ const profile = (props) => {
   const { data: stateData, error: stateError } = 
     useSWR(`https://api.23forobi.com/states`, fetcher
       );
-
-  console.log(stateData);
-
   
   useEffect(() => {
     try {
