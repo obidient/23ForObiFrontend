@@ -10,14 +10,10 @@ const village = ({ village, votersData }) => {
   const { id } = router.query;
   const { name, progress_percentage, voters, top_contributors, state } = village;
   
-  // console.log(village);
-
   return (
     <div>
       <Page
-        title={
-          village === 'undefinded' ? 'loading...' : `Village || ${name}`
-        }
+        title={village === 'undefinded' ? 'loading...' : `Village || ${name}`}
       >
         {/* <Navbar /> */}
         <Village
@@ -28,9 +24,10 @@ const village = ({ village, votersData }) => {
           villageState={state?.state_name}
           state_id={state?.id}
           votersData={votersData}
+          top_contributors={top_contributors}
         />
       </Page>
-      </div>
+    </div>
   );
 };
 
