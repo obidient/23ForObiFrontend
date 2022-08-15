@@ -5,7 +5,7 @@ import styles from './Styles.module.scss';
 import check from '../../assets/check.png';
 
 const Contributor = ({ name, votes, img, type, first_name, last_name }) => {
-  console.log(name)
+
   return (
     <div className={styles.contributor}>
       <Image src={img} />

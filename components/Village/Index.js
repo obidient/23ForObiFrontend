@@ -38,7 +38,7 @@ const Village = ({
   const [registerFormIsVisible, setRegisterFormIsVisible] = useState(false);
   const [signInIsVisible, setSignInIsVisible] = useState(false);
 
-  console.log(villageState);
+  // console.log(villageState);
   //Effect to hide scroll
   useEffect(() => {
     const body = document.querySelector('body');
