@@ -1,17 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import useSWR from 'swr';
 import Image from 'next/image';
 import styles from './Styles.module.scss';
 import avatar from '../../assets/avatar.png';
 import SelectInput from './../misc/SelectInput';
 
 //Form Imports
-import { Form, Formik } from 'formik';
+import { Form, Formik, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 // Prevent serverside redering on the FormikControl Component
 import dynamic from 'next/dynamic';
 import useAuthStore from '../../store/authStore';
 import useUserStore from '../../store/userStore';
 import stateDetails from '../../data/stateDetails';
+
+import { getVillages } from '../../adapters/requests';
 
 //Images
 import achieveActive from '../../assets/achieActive.png';
@@ -32,6 +35,10 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import axios from 'axios';
 
+//data
+import StateContext from '../../Context/StateContext'
+import { getStates } from '../../adapters/requests';
+
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -40,16 +47,53 @@ const FormikControl = dynamic(() => import('../Forms/FormikControl'), {
   ssr: false,
 });
 
-const ProfileDisplay = ({ userVoters }) => {
+const fetcher = (...args) => fetch(...args).then((res) => res.json())
+
+const ProfileDisplay = ({ userVoters, allState }) => {
+  const { accessToken } = useAuthStore()
+  const [ stateList, setStateList ] = useState(allState)
+  const [idState, setIdState ] = useState('')
+  const [ activeState, setActiveState ] = useState('')
+  const { states } = useContext(StateContext)
+  
+    console.log(activeState)
+
   const { userProfile } = useAuthStore();
   const { userStates } = useUserStore();
+
+
+    const callAPI = async (dataValue) => {
+      const fil = stateList.find((item) => item.state_name === dataValue)
+      setIdState(fil.id)
+      // console.log(fil)
+      
+      
+    };
+    
+  
+  //   const fetcher = (url, token) =>
+  //   axios
+  //     .get(url, {
+  //        mode: 'no-cors',
+  //       headers: { Authorization: "Bearer " + token },
+  //     })
+  //     .then((res) => res.data);
+
+  // const { data, error } = useSWR(
+  //   [getVillages(idState), accessToken],
+  //   fetcher
+  // );
+
+  // console.log(data)
+
+
+ 
   //console.log(userVoters)
   const [state, setState] = useState({
     open: false,
     vertical: 'top',
     horizontal: 'center',
   });
-
   const { open } = state;
 
   const handleClose = () => {
@@ -72,10 +116,10 @@ const ProfileDisplay = ({ userVoters }) => {
   const image = userProfile?.image;
 
   //Initialize select options
-  const stateOptions = stateDetails.map((item, index) => ({
-    label: `${item.name} State`,
-    option: `${item.slug}`,
-  }));
+  // const stateOptions = stateList.map((item, index) => ({
+  //   label: `${item.state_name}`,
+  //   option: `${item.slug}`,
+  // }));
   const villageOptions = [
     {
       label: 'Ezeani Village 1',
@@ -121,10 +165,16 @@ const ProfileDisplay = ({ userVoters }) => {
     firstName: Yup.string().required('Required'),
     lastName: Yup.string().required('Required'),
     email: Yup.string().email('Invalid email format').required('Required'),
-    state: Yup.string().required('Required'),
-    LGA: Yup.string().required('Required'),
-    village: Yup.string().required('Required'),
+    // state: Yup.string().required('Required'),
+    // LGA: Yup.string().required('Required'),
+    // village: Yup.string().required('Required'),
   });
+
+  const onSubmit = (values) => {
+    console.log("values")
+  }
+
+  
 
   return (
     <div className={styles.profile}>
@@ -146,60 +196,66 @@ const ProfileDisplay = ({ userVoters }) => {
               </p>
             </div>
             <Formik
-              initialValues={initialValues}
-              validationSchema={validationSchema}
-              onSubmit={(values) => console.log('Form Data', values)}
-            >
-              {({ values }) => (
-                <Form autoComplete="off">
-                  <FormikControl
-                    values={values}
-                    control="input"
-                    placeholder="First Name"
-                    name="firstName"
-                    type="text"
-                  />
-                  <FormikControl
-                    values={values}
-                    control="input"
-                    placeholder="Last Name"
-                    name="lastName"
-                    type="text"
-                  />
-                  <FormikControl
-                    values={values}
-                    control="input"
-                    placeholder="Enter your email"
-                    name="email"
-                    type="email"
-                  />
-                  <FormikControl
-                    values={values}
-                    control="select"
-                    placeholder="Select your state"
-                    name="state"
-                    options={stateOptions}
-                  />
-                  <FormikControl
-                    values={values}
-                    control="select"
-                    placeholder="Select your local government"
-                    name="LGA"
-                    options={lgaOptions}
-                  />
-                  <FormikControl
-                    values={values}
-                    control="select"
-                    placeholder="Select your village"
-                    name="village"
-                    options={villageOptions}
-                  />
-                  <button className="btn_dark mt-8" type="submit">
-                    Update
-                  </button>
-                </Form>
-              )}
-            </Formik>
+       initialValues={initialValues}
+       validationSchema={validationSchema}
+       onSubmit={(values, { setSubmitting }) => {
+         console.log(values)
+       }}
+     >
+       {({ values, handleChange }) => (
+         <Form>
+            <FormikControl    
+              control="input"
+              placeholder="First Name"
+              name="firstName"
+              type="text"
+            />
+            <FormikControl    
+              control="input"
+              placeholder="Last Name"
+              name="lastName"
+              type="text"
+            />
+             <FormikControl    
+              control="input"
+              placeholder="Email"
+              name="email"
+              type="email"
+            />
+             <select  name="state" onChange={(e) => {
+                  console.log(e.currentTarget.value)
+                  setActiveState(e.currentTarget.value)
+                  callAPI(e.currentTarget.value)
+                }} >
+            <option value="">--select your state---</option>
+              {stateList?.map((item, index) => (
+                <option  value={item.state_name}>{item.state_name}</option>
+              ))}
+            </select>
+
+            <FormikControl    
+              control="select"
+              placeholder="village"
+              name="village"
+              type="text"
+            />
+
+            <FormikControl    
+              control="select"
+              placeholder="LGA"
+              name="LGA"
+              type="text"
+            />
+          
+           <button className="btn_dark mt-8" type="submit">
+             Update
+           </button>
+         </Form>
+       )}
+
+
+
+     </Formik>
           </div>
         </div>
       </div>
@@ -384,5 +440,24 @@ const ProfileDisplay = ({ userVoters }) => {
     </div>
   );
 };
+
+// export async function getServerSideProps(value) {
+//   try {
+//     const stateData = await getVillages();
+
+//     return {
+//       props: {
+//         allState: stateData?.data
+//       }
+//     }
+    
+//   } catch (error) {
+//     return {
+//       props: {
+//         stateData: []
+//       }
+//     }
+//   }
+// }
 
 export default ProfileDisplay;
