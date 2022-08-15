@@ -7,6 +7,7 @@ import { AppWrapper } from './../Context/villageContextProvider';
 import { CountryContextProvider } from './../Context/countryContext';
 import StateContext from '../Context/StateContext';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import "@fontsource/lato"
 
 function MyApp({ Component, pageProps }) {
   const { states, ...rest } = pageProps;
