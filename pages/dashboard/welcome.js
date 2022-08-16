@@ -16,7 +16,7 @@ import useAuthStore from '../../store/authStore';
 import axios from 'axios';
 
 const welcome = () => {
-  const { accessToken, registerUser } = useAuthStore();
+  const { accessToken,registerUser } = useAuthStore();
   let token = accessToken;
   // console.log(token);
   const router = useRouter();
@@ -71,9 +71,11 @@ const welcome = () => {
     };
     try {
       await axios.post(url, data, { headers: headers }).then((res) => {
-        console.log(res.data.user_data);
-       
+        //console.log(res);
+        
         if (res.data && res.status === 200) {
+          //setNewUser(user)
+          //console.log(newUser)
           registerUser(res.data.user_data);
           router.push('/dashboard/summary');
         }
