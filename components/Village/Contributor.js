@@ -4,13 +4,14 @@ import styles from './Styles.module.scss';
 
 import check from '../../assets/check.png';
 
-const Contributor = ({ name, votes, img, type }) => {
+const Contributor = ({ name, votes, img, type, first_name, last_name }) => {
+
   return (
     <div className={styles.contributor}>
       <Image src={img} />
-      <h5>{name}</h5>
+      {<h5>{name}</h5>}
 
-      {type === 'top_contributor' ? (
+      {type === 'contributor' ? (
         <p>Votes delivered {votes}</p>
       ) : (
         <div className={styles.guaranteed}>

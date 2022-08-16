@@ -55,9 +55,6 @@ const Sidebar = ({ voters }) => {
                 </>
               )}
             </div>
-            <div className={styles.link}>
-              <Link href="">View all</Link>
-            </div>
           </>
         ) : (
           <div className="flex items-center">

@@ -106,7 +106,7 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
               <tbody key={voters.id}>
                 <tr>
                   <td>{index + 1}</td>
-                  <td>{voters.name}</td>
+                  <td className='capitalize'>{voters.name}</td>
                   <td>+234{voters.contact.slice(1,voters.contact.length)}</td>
                   <td>
                     <Link href="#">Edit</Link>

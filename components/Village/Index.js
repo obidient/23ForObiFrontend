@@ -30,20 +30,20 @@ const Village = ({
   villageState,
   state_id,
   votersData,
+  top_contributors,
 }) => {
-  const {userProfile} = useAuthStore()
-  const router = useRouter()
+  const { userProfile } = useAuthStore();
+  const router = useRouter();
   const [showModal, setShowModal] = useState(false);
   const [registerFormIsVisible, setRegisterFormIsVisible] = useState(false);
   const [signInIsVisible, setSignInIsVisible] = useState(false);
 
-  console.log(contributors)
+  // console.log(villageState);
   //Effect to hide scroll
   useEffect(() => {
     const body = document.querySelector('body');
     body.style.overflow = showModal ? 'hidden' : 'auto';
   }, [showModal]);
-
 
   return (
     <div className={styles.state}>
@@ -58,25 +58,30 @@ const Village = ({
           </div>
           <div className={styles.state_heading__title}>
             <div>
-              <h1 className='capitalize'>{village_name ? `${village_name} village` : ''}</h1>
-              <p className={styles.red}>
-                {contributors > 0
-                  ? `We have got 5 votes guaranteed in ${
+              <h1 className="capitalize">
+                {village_name ? `${village_name} village` : ''}
+              </h1>
+              <p className={`${styles.red} md:w-[70%]`}>
+                {votersData.length > 0
+                  ? `We have got ${votersData.length} votes guaranteed in ${
                       village_name ? village_name : ''
-                    } Village in Abia State.Robert Okonkwo is our man on ground.Calistus Okafor is coordinating activities in this village`
+                    } Village in ${villageState}. Robert Okonkwo is our man on ground.Calistus Okafor is coordinating activities in this village`
                   : `We do not have anyone on ground in ${
                       village_name ? village_name : ''
                     } village.Can you help?`}
               </p>
             </div>
             <div className={styles.title_btn}>
-              <button onClick={() => {
-                if(!userProfile){
-                  setShowModal(true)
-                } else {
-                  router.push('/dashboard')
-                }
-               }} className="btn_light">
+              <button
+                onClick={() => {
+                  if (!userProfile) {
+                    setShowModal(true);
+                  } else {
+                    router.push('/dashboard');
+                  }
+                }}
+                className="btn_light"
+              >
                 Contribute here
               </button>
             </div>
@@ -89,7 +94,7 @@ const Village = ({
                 width={registerFormIsVisible ? '54.4rem' : '50rem'}
                 setShowModal={setShowModal}
                 setSignInIsVisible={setSignInIsVisible}
-                type='contribute'
+                type="contribute"
               >
                 <ContributeModal
                   setShowModal={setShowModal}
@@ -185,21 +190,24 @@ const Village = ({
           </div>
         </div>
         <div className={styles.top_contributor}>
-          <h2>{contributors ? 'Top' : 'No'} Contributor</h2>
+          <h2>{top_contributors ? 'Top' : 'No'} Contributors</h2>
 
           <p>
-            {contributors
+            {top_contributors
               ? 'These are the top contributors in this village'
               : 'There are no contributors in this village'}
           </p>
           <div className={styles.contributors}>
-            {contributors > 0 &&
-              contributors.map((item, index) => (
+            {top_contributors.length > 0 &&
+              top_contributors.map((item, index) => (
                 <Contributor
                   key={index}
-                  name={item.name}
+                  name={`${item.first_name} ${item.last_name}`}
+                  // first_name={item.first_name}
+                  // last_name={item.last_name}
+                  img={avatar}
                   votes={item.votes}
-                  type="vote"
+                  type="contributor"
                 />
               ))}
           </div>
