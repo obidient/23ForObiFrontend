@@ -47,7 +47,7 @@ const ProfileDisplay = ({ userVoters, states }) => {
   const { userStates } = useUserStore();
   const { userVillages, addVillages } = useUserStore();
 
-  // console.log(userProfile)
+  console.log(registeredUser);
 
   //console.log(userVoters)
   const [state, setState] = useState({

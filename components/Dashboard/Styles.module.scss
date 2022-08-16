@@ -725,10 +725,12 @@
         line-height: 130%;
         color: var(--text-color-1);
 
-        a {
+        p {
           line-height: 130%;
           text-decoration-line: underline;
           color: #5678CE;
+          width: fit-content;
+          cursor: pointer;
           }
       }
     }
