@@ -28,7 +28,7 @@ export default function GoogleAuth(props) {
               addUser(res.data.user);
               addUserAuth(res.data.access_token);
               // console.log(res.data);
-              if (res.data.is_new_user === true) {
+              if (!res.data.is_new_user === true) {
                 router.push('/dashboard/welcome');
               } else {
                 router.push('/dashboard');
