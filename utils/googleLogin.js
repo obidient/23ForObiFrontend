@@ -36,7 +36,7 @@ export default function GoogleAuth(props) {
             }
           });
         }}
-        onError={console.log('Login Failed')}
+        // onError={console.log('Login Failed')}
         text="signup_with"
         size="large"
         width="250%"

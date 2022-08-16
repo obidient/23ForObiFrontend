@@ -170,7 +170,7 @@ const homepage = ({ data, progress, total_number_of_voters }) => {
                 )}
               </div>
               <div className={styles.hero__img}>
-                <Image src={labourparty} />
+                <Image src={labourparty} width={373} height={280} alt='' />
               </div>
             </div>
             <div className={styles.hero__bottom}>
@@ -185,8 +185,8 @@ const homepage = ({ data, progress, total_number_of_voters }) => {
                 <h5>{progress ? progress : 0}%</h5>
                 <h5>
                   {total_number_of_voters
-                    ? `( ${total_number_of_voters} votes guaranteed so far )`
-                    : '( No votes guaranteed so far )'}
+                    ? `(${total_number_of_voters} votes guaranteed so far)`
+                    : '(No votes guaranteed so far)'}
                 </h5>
                 <h5>100%</h5>
               </div>

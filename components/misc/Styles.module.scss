@@ -503,3 +503,125 @@
         }
     }
 }
+
+/////////// VILLAGE SEARCH ////////////
+.not_found, .village_dropdown {
+	background: #FFFFFF;
+	border-radius: 16px;
+	// margin-top: .3rem;
+	border: 1px solid var(--text-color-8);
+	box-shadow: 0px 4px 13px rgba(2, 106, 32, 0.05);
+	position: absolute;
+	width: 100%;
+	z-index: 100;
+	z-index: 100;
+	height: 25rem;
+	overflow-y: scroll;
+	color: var(--text-color-4);
+
+	&::-webkit-scrollbar {
+			width: 4px;
+			margin: 2rem;
+		}
+		
+		&::-webkit-scrollbar-track {
+			display: none;
+		}
+		
+		&::-webkit-scrollbar-thumb {
+			border-radius: 16px;
+			background-color: darkgrey;
+			outline: 1px solid slategrey;
+		}
+
+
+	.dropdown_item {
+			font-size: var(--font-p-text-1);
+			line-height: 130%;
+			padding: 1.5rem 1rem;
+			cursor: pointer;
+
+			&:first-child {
+
+				&:hover {
+					background-color: #F3FFF7;
+					border-top-left-radius: 16px;
+					border-top-right-radius: 16px;
+				}
+			}
+
+			&:last-child {
+    
+				&:hover {
+					background-color: #F3FFF7;
+					border-bottom-left-radius: 16px;
+					border-bottom-right-radius: 16px;
+				}
+			}
+			
+			&:hover {
+				background-color: #F3FFF7;
+			}
+		}
+		
+}
+
+// &__item_holder {
+// 		background: #FFFFFF;
+// 		border-radius: 16px;
+// 		margin-top: 1rem;
+// 		border: 1px solid var(--text-color-8);
+// 		box-shadow: 0px 4px 13px rgba(2, 106, 32, 0.05);
+// 		position: absolute;
+// 		width: 100%;
+// 		z-index: 100;
+// 		z-index: 100;
+//     	height: 30rem;
+// 		overflow-y: scroll;
+		
+// 		&::-webkit-scrollbar {
+// 			width: 4px;
+// 			margin: 2rem;
+// 		}
+		
+// 		&::-webkit-scrollbar-track {
+// 			display: none;
+// 		}
+		
+// 		&::-webkit-scrollbar-thumb {
+// 			border-radius: 16px;
+// 			background-color: darkgrey;
+// 			outline: 1px solid slategrey;
+// 		}
+		
+
+		
+// 		.dropdown_item {
+// 			font-size: 16px;
+// 			line-height: 130%;
+// 			padding: 1.5rem 1rem;
+// 			cursor: pointer;
+
+// 			&:first-child {
+
+// 				&:hover {
+// 					background-color: #F3FFF7;
+// 					border-top-left-radius: 16px;
+// 					border-top-right-radius: 16px;
+// 				}
+// 			}
+
+// 			&:last-child {
+    
+// 				&:hover {
+// 					background-color: #F3FFF7;
+// 					border-bottom-left-radius: 16px;
+// 					border-bottom-right-radius: 16px;
+// 				}
+// 			}
+			
+// 			&:hover {
+// 				background-color: #F3FFF7;
+// 			}
+// 		}
+// 	}

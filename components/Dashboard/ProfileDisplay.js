@@ -3,7 +3,7 @@ import useSWR from 'swr';
 import Image from 'next/image';
 import styles from './Styles.module.scss';
 import avatar from '../../assets/avatar.png';
-import SelectInput from './../misc/SelectInput';
+// import SelectInput from './../misc/SelectInput';
 
 //Form Imports
 import { Form, Formik, Field, ErrorMessage } from 'formik';
@@ -34,6 +34,8 @@ import level10 from '../../assets/level-10.svg';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import axios from 'axios';
+import { SelectVillagesInput } from '../Forms/SelectInput';
+import SelectInput from '../Forms/SelectInput';
 
 //data
 import StateContext from '../../Context/StateContext'
@@ -47,47 +49,13 @@ const FormikControl = dynamic(() => import('../Forms/FormikControl'), {
   ssr: false,
 });
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json())
-
-const ProfileDisplay = ({ userVoters, allState }) => {
-  const { accessToken } = useAuthStore()
-  const [ stateList, setStateList ] = useState(allState)
-  const [idState, setIdState ] = useState('')
-  const [ activeState, setActiveState ] = useState('')
-  const { states } = useContext(StateContext)
-  
-    console.log(activeState)
-
-  const { userProfile } = useAuthStore();
+const ProfileDisplay = ({ userVoters, states }) => {
+  const { userProfile, registeredUser } = useAuthStore();
   const { userStates } = useUserStore();
+  const { userVillages, addVillages } = useUserStore();
 
+  // console.log(userProfile)
 
-    const callAPI = async (dataValue) => {
-      const fil = stateList.find((item) => item.state_name === dataValue)
-      setIdState(fil.id)
-      // console.log(fil)
-      
-      
-    };
-    
-  
-  //   const fetcher = (url, token) =>
-  //   axios
-  //     .get(url, {
-  //        mode: 'no-cors',
-  //       headers: { Authorization: "Bearer " + token },
-  //     })
-  //     .then((res) => res.data);
-
-  // const { data, error } = useSWR(
-  //   [getVillages(idState), accessToken],
-  //   fetcher
-  // );
-
-  // console.log(data)
-
-
- 
   //console.log(userVoters)
   const [state, setState] = useState({
     open: false,
@@ -114,68 +82,58 @@ const ProfileDisplay = ({ userVoters, allState }) => {
   const last_name = userProfile?.last_name;
   const email = userProfile?.email;
   const image = userProfile?.image;
-
-  //Initialize select options
-  // const stateOptions = stateList.map((item, index) => ({
-  //   label: `${item.state_name}`,
-  //   option: `${item.slug}`,
-  // }));
-  const villageOptions = [
-    {
-      label: 'Ezeani Village 1',
-      value: 'Ezeani Village',
-    },
-    {
-      label: 'Osusus Village 2',
-      value: 'Osusu Village',
-    },
-    {
-      label: 'Ariara Village 3',
-      value: 'Ariara Village',
-    },
-  ];
-
-  const lgaOptions = [
-    {
-      label: 'Ezeani Village 1',
-      value: 'Ezeani Village',
-    },
-    {
-      label: 'Osusus Village 2',
-      value: 'Osusu Village',
-    },
-    {
-      label: 'Ariara Village 3',
-      value: 'Ariara Village',
-    },
-  ];
-
+  const userState = userProfile?.state;
+console.log(registeredUser)
+  
+  /////////////// FORM /////////////////////
   // Initial form values
   const initialValues = {
     firstName: first_name,
     lastName: last_name,
     email: email,
-    state: '',
-    LGA: '',
+    state: userState,
+    // lga: '',
     village: '',
   };
 
-  // Form validation schema using Yup
-  const validationSchema = Yup.object({
-    firstName: Yup.string().required('Required'),
-    lastName: Yup.string().required('Required'),
-    email: Yup.string().email('Invalid email format').required('Required'),
-    // state: Yup.string().required('Required'),
-    // LGA: Yup.string().required('Required'),
-    // village: Yup.string().required('Required'),
-  });
+  const [values, setValues] = useState(initialValues);
+console.log(values)
+  const handleInputChange = (e) => {
+    //const name = e.target.name
+    //const value = e.target.value
+    const { name, value } = e.target;
 
-  const onSubmit = (values) => {
-    console.log("values")
-  }
-
+    if(name === "state") {
+      const stateID = e.target.value
+        axios.get(`https://api.23forobi.com/villages/${stateID}`).then((result) => {
+          const res = result.data;
+          addVillages(res);
+          // console.log(res);
   
+          return res;
+        });
+        // setValues({
+        //   ...values,
+        //   [e.target.name]: e.target.name,
+        // });
+      };
+    // }
 
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
+
+  //FORM SUBMIT FUNCTION
+  const handleUpdate = (e) => {
+    e.preventDefault()
+    axios.put('https://api.23forobi.com/docs#/User%20Data/update_user_data_user_data__user_data_id__put', {
+      data: {...values, userID: userProfile.id},
+    }).then((res) => console.log(res))
+  } 
+  
+  
   return (
     <div className={styles.profile}>
       <div className={styles.profile__profileMain}>
@@ -195,67 +153,73 @@ const ProfileDisplay = ({ userVoters, allState }) => {
                 on how to add voters and so much.
               </p>
             </div>
-            <Formik
-       initialValues={initialValues}
-       validationSchema={validationSchema}
-       onSubmit={(values, { setSubmitting }) => {
-         console.log(values)
-       }}
-     >
-       {({ values, handleChange }) => (
-         <Form>
-            <FormikControl    
-              control="input"
-              placeholder="First Name"
-              name="firstName"
-              type="text"
-            />
-            <FormikControl    
-              control="input"
-              placeholder="Last Name"
-              name="lastName"
-              type="text"
-            />
-             <FormikControl    
-              control="input"
-              placeholder="Email"
-              name="email"
-              type="email"
-            />
-             <select  name="state" onChange={(e) => {
-                  console.log(e.currentTarget.value)
-                  setActiveState(e.currentTarget.value)
-                  callAPI(e.currentTarget.value)
-                }} >
-            <option value="">--select your state---</option>
-              {stateList?.map((item, index) => (
-                <option  value={item.state_name}>{item.state_name}</option>
-              ))}
-            </select>
-
-            <FormikControl    
-              control="select"
-              placeholder="village"
-              name="village"
-              type="text"
-            />
-
-            <FormikControl    
-              control="select"
-              placeholder="LGA"
-              name="LGA"
-              type="text"
-            />
-          
-           <button className="btn_dark mt-8" type="submit">
-             Update
-           </button>
-         </Form>
-       )}
-
-
-
-     </Formik>
+            <form action="">
+              <input
+                type="text"
+                control="input"
+                placeholder="First Name"
+                name="firstName"
+                value={values.firstName}
+                onChange={handleInputChange}
+              />
+              <input
+                type="text"
+                control="input"
+                placeholder="Last Name"
+                name="lastName"
+                value={values.lastName}
+                onChange={handleInputChange}
+              />
+              <input
+                type="text"
+                control="input"
+                placeholder="Enter your email"
+                name="email"
+                value={values.email}
+                onChange={handleInputChange}
+              />
+              <select
+                onChange={handleInputChange}
+                value={values.state}
+                name="state"
+                control="selectState"
+              >
+                <option value="none" selected>
+                  {initialValues.state}
+                </option>
+                {states?.map((item) => {
+                  return (                    
+                      <option value={item.id} key={item.id}>
+                        {item.state_name}
+                      </option>                  
+                  );
+                })}
+              </select>
+              <select
+                // onChange={handleSelectState}
+                value={values.village}
+                name="village"
+                onChange={handleInputChange}
+              >
+                <option value="none" selected>
+                  Select a village
+                </option>
+                {userVillages?.list_of_villages?.map((item) => {
+                  return (
+                      <option value={item.id} key={item.id}>
+                        {item.name}
+                      </option>
+                  );
+                })}
+              </select>
+              <button
+                className="btn_dark mt-8"
+                type="submit"
+                onClick={handleUpdate}
+              >
+                Update
+              </button>
+            </form>            
           </div>
         </div>
       </div>

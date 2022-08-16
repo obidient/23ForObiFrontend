@@ -41,6 +41,7 @@ const FormikControl = dynamic(() => import('../Forms/FormikControl'), {
 // const CustomSelectInput = dynamic(
 //   () => import('../Forms/SelectInput').then((mod) => mod.CustomSelectInput),
 //   {import CompleteModal from './../misc/CompleteModal';
+import SelectVillage from './../misc/SelectVillage';
 
 //     ssr: false,
 //   }
@@ -54,6 +55,11 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
   const [otherVillage, setOtherVillage] = useState();
 
   const [stateId, setStateId] = useState(null);
+
+  const [userVillage, setUserVillage] = useState(null);
+  const [stateClicked, setStateClicked] = useState(false);
+
+  const [isVillageEmpty, setIsVillageEmpty] = useState(null);  
 
   ///////////COMPLTETE MODAL//////////////
   const [showCompleteModal, setShowCompleteModal] = useState();
@@ -92,8 +98,7 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
 
     };
 
-    if (selectedVillage.name !== "Others") {
-
+    if (selectedVillage.name !== "Others" && !isVillageEmpty) {
       axios.post(url, data, { headers })?.then((res) => {
         try {
           // console.log(res.data);
@@ -101,16 +106,18 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
         } catch (error) {
           // console.log(error)
         }
+        setSelectedVillage("");
       });
     } else {
       axios.post(urlCreate, dataCreate, { headers })?.then((res) => {
         try {
-          console.log(res.data);
+          // console.log(res.data);
         } catch (error) {
           // console.log(error)
         }
         setShowCompleteModal(true);
         setOtherVillage("")
+        setSelectedVillage("");
       });
     }
     setShowModal(false);
@@ -193,34 +200,50 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
           <h2>Welcome back! {first_name},</h2>
           <p>We are glad to have you</p>
         </div>
-        <div
-          className={styles.dashboardmain_add_village}
-          onClick={() => setShowModal(true)}
-        >
-          <Image src={add_img_green} />
-          <p>Add a new village</p>
-        </div>
+        {!villageDetails && (
+          <div
+            className={styles.dashboardmain_add_village}
+            onClick={() => setShowModal(true)}
+          >
+            <Image src={add_img_green} />
+            <p>Add a new village</p>
+          </div>
+        )}
       </div>
       <hr />
       <Tabs
         selectedIndex={tabIndex}
         onSelect={(index) => setTabIndex(index)}
-        selectedTabClassName={`border-b-[1px] border-[#018226] text-[#2F3733] outline-none`}        
+        selectedTabClassName={`border-b-[1px] border-[#018226] text-[#2F3733] outline-none`}
       >
         <TabList
-          className={
-            `flex border-b border-[#F1F1F1] w-full items-center justify-start text-center mt-8 overflow-x-scroll ${styles.tabs}`
-          }
+          className={`flex border-b border-[#F1F1F1] w-full items-center justify-start text-center mt-8 overflow-x-scroll ${styles.tabs}`}
         >
           {villageDetails?.map((item) => (
             <Tab
               key={item.village.id}
-              className="font-bold lg:px-8 py-3 text-3xl lg:text-2xl  min-w-[40%] cursor-pointer hover:border-[#018226] hover:border-b-[1px] flex gap-2"
+              className="font-bold lg:px-8 py-3 text-3xl lg:text-2xl  md:min-w-[40%] min-w-[70%] cursor-pointer hover:border-[#018226] hover:border-b-[1px] flex gap-2 justify-center"
             >
               {item.village.name}
-              <p className="lowercase">({item.village.location_id})</p>
+              <p className="lowercase">
+                ({item.village.location_id})
+              </p>
             </Tab>
           ))}
+          {villageDetails && (
+            <Tab
+              className="font-bold lg:px-8 py-3 lg:text-2xl  min-w-[40%] cursor-pointer hover:border-[#018226] hover:border-b-[1px] flex row-gap-2 border-none"
+              disabled={true}
+            >
+              <div
+                className="flex items-center gap-3 text-[#018226]"
+                onClick={() => setShowModal(true)}
+              >
+                <Image src={add_img_green} height="15%" width="15%" />
+                <p className="text-lg">Add a new village</p>
+              </div>
+            </Tab>
+          )}
         </TabList>
         <div className={styles.village_details__stats}>
           <VillageStat
@@ -255,7 +278,10 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
               </h2>
               <button
                 className={`closeBtn`}
-                onClick={() => setShowModal(false)}
+                onClick={() => {
+                  setShowModal(false);
+                  setSelectedVillage(null);
+                }}
               >
                 &times;
               </button>
@@ -282,26 +308,50 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
                     state={states}
                     addVillageHandler={addVillageHandler}
                     setStateId={(val) => setStateId(() => val)}
+                    setIsVillageEmpty={setIsVillageEmpty}
+                    setStateClicked={setStateClicked}
                   />
                   <p className={styles.select_desc}>
                     Kindly note that the state you selected on registration
                     cannot be changed
                   </p>
-                  <SelectInputVillage
+                  {/* <SelectInputVillage
                     placeholder="Select a village"
                     name="village"
                     options={states}
                     setSelectedVillage={setSelectedVillage}
                     addVillageHandler={addVillageHandler}
-                  />
+                  /> */}
 
-                  {selectedVillage.name === 'Others' ? (
+                  {stateClicked && (
+                    <SelectVillage
+                      states={states}
+                      // handleOnChange={(value) => console.log(value)}
+                      setSelectedVillage={setSelectedVillage}
+                      setUserVillage={setUserVillage}
+                      setIsVillageEmpty={setIsVillageEmpty}
+                    />
+                  )}
+                  {selectedVillage?.name === 'Others' &&
+                  isVillageEmpty === false ? (
                     <div className="mt-28">
                       <input
                         type="text"
                         placeholder="Add a village"
                         name="otherVillage"
-                        value={otherVillage}
+                        value={otherVillage ?? ''}
+                        onChange={(e) => setOtherVillage(e.target.value)}
+                      />
+                    </div>
+                  ) : null}
+                  {isVillageEmpty && stateClicked ? (
+                    <div className="mt-28">
+                      <p> No Village in this state. Add one</p>
+                      <input
+                        type="text"
+                        placeholder="Add a village"
+                        name="otherVillage"
+                        value={otherVillage ?? ''}
                         onChange={(e) => setOtherVillage(e.target.value)}
                       />
                     </div>
