@@ -49,7 +49,9 @@ import SelectVillage from './../misc/SelectVillage';
 const DashboardMain = ({ states, villageDetails, votersDetails }) => {
   const { userProfile, registeredUser } = useAuthStore();
   const { accessToken } = useAuthStore();
-  const { village, state } = registeredUser;
+  // const { village, state } = registeredUser;
+
+  // console.log(village)
 
   const [otherVillage, setOtherVillage] = useState();
 
