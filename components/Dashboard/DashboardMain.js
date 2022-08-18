@@ -46,7 +46,7 @@ import SelectVillage from './../misc/SelectVillage';
 //   }
 // );
 
-const DashboardMain = ({ states, villageDetails, votersDetails }) => {
+const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
   const { userProfile } = useAuthStore();
   const { accessToken } = useAuthStore();
 
@@ -254,6 +254,7 @@ const DashboardMain = ({ states, villageDetails, votersDetails }) => {
           <VillageStat
             votersDetails={votersDetails}
             villageDetails={villageDetails}
+            awards={awards}
           />
         </div>
         {villageDetails?.map((items) => (

@@ -1,6 +1,14 @@
 import styles from './Styles.module.scss'
 
-const VillageStat = ({ votersDetails, villageDetails }) => {
+const VillageStat = ({ votersDetails, villageDetails, awards }) => {
+const awardStats = awards / 10
+const Awards = () => {
+  if(awardStats > 9){
+    return `${awardStats}`
+  } else {
+    return `0${awardStats}`
+  }
+}
   return (
     <div className={styles.village_stat}>
       <div className={styles.stat_one}>
@@ -12,7 +20,7 @@ const VillageStat = ({ votersDetails, villageDetails }) => {
       <div className={styles.stat_two}>
         <div className={styles.stat_two__rewards}>
           <p>Rewards</p>
-          <h3>05</h3>
+          <h3>{awards ? <Awards /> : '-'}</h3>
         </div>
         <div className={styles.stat_two__num_villages}>
           <p>Number of Villages</p>
