@@ -47,9 +47,8 @@ import SelectVillage from './../misc/SelectVillage';
 // );
 
 const DashboardMain = ({ states, villageDetails, votersDetails }) => {
-  const { userProfile} = useAuthStore();
+  const { userProfile } = useAuthStore();
   const { accessToken } = useAuthStore();
-  
 
   const [otherVillage, setOtherVillage] = useState();
 
@@ -217,12 +216,16 @@ const DashboardMain = ({ states, villageDetails, votersDetails }) => {
         <TabList
           className={`flex border-b border-[#F1F1F1] w-full items-center justify-start text-center mt-8 overflow-x-scroll ${styles.tabs}`}
         >
-          {<Tab className="font-bold lg:px-8 py-3 text-3xl lg:text-2xl  md:min-w-[40%] min-w-[70%] cursor-pointer hover:border-[#018226] hover:border-b-[1px] flex gap-2 justify-center">
-            {registeredUserVillage  && registeredUserVillage}&nbsp;
-            <p>
-              <span className="lowercase">{`(${registeredUserState && registeredUserState})`}</span>
-            </p>
-        </Tab>}
+          {
+            <Tab className="font-bold lg:px-8 py-3 text-3xl lg:text-2xl  md:min-w-[40%] min-w-[70%] cursor-pointer hover:border-[#018226] hover:border-b-[1px] flex gap-2 justify-center">
+              {registeredUserVillage && registeredUserVillage}&nbsp;
+              <p>
+                <span className="lowercase">{`(${
+                  registeredUserState && registeredUserState
+                })`}</span>
+              </p>
+            </Tab>
+          }
           {/*villageDetails?.map((item) => (
             <Tab
               key={item.village.id}
