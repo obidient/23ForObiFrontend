@@ -567,6 +567,10 @@
     color: #fff;
     padding: 1rem;
 
+    img {
+      border-radius: 100%;
+    }
+
     &__pTag {
 
       background-color: var(--primary-color);
@@ -575,7 +579,10 @@
       padding: 1rem;
       margin-top: 30px;
       text-transform: capitalize;
-
+      cursor: pointer;
+      input[type='file']{
+        display: none;
+      }
       @media (max-width: 34rem) {
         width: 16rem;
         padding: 2rem;
