@@ -89,8 +89,8 @@ const ProfileDisplay = ({ userVoters, states }) => {
   const last_name = userProfile?.user?.last_name;
   const email = userProfile?.user?.email;
   const image = userProfile?.image;
-  const userState = userProfile?.user?.data?.state;
-  const userVillage = userProfile?.user?.data?.village;
+  const userState = userProfile?.user_data?.data?.state;
+  const userVillage = userProfile?.user_data?.data?.village;
 console.log(userProfile)
   /////////////// FORM /////////////////////
   // Initial form values
