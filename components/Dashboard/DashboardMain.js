@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 //IMAGES
 import status_check from '../../assets/status_check.png';
-import close from '../../assets/closeW.png'
+import close from '../../assets/closeW.png';
 import add_img_green from '../../assets/add_img_green.png';
 import caret_down from '../../assets/caret_down.png';
 
@@ -18,7 +18,7 @@ import StateContext from './../../Context/StateContext';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Team from '../../data/teamImages';
 import TeamCard from '../../components/ImgCard/TeamCard';
-import VillageDetails from './VillageDetails'
+import VillageDetails from './VillageDetails';
 
 import { Form, Formik } from 'formik';
 // import { CustomSelectInput } from '../Forms/SelectInput';
@@ -31,7 +31,6 @@ import { addUserVillage } from '../../adapters/requests';
 import axios from 'axios';
 import VillageStat from './VillageStat';
 import CompleteModal from '../misc/CompleteModal';
-
 
 // Prevent serverside redering on the FormikControl Component
 const FormikControl = dynamic(() => import('../Forms/FormikControl'), {
@@ -47,11 +46,10 @@ import SelectVillage from './../misc/SelectVillage';
 //   }
 // );
 
-
-const DashboardMain = ({states, villageDetails, votersDetails}) => {
+const DashboardMain = ({ states, villageDetails, votersDetails }) => {
   const { userProfile } = useAuthStore();
   const { accessToken } = useAuthStore();
-  
+
   const [otherVillage, setOtherVillage] = useState();
 
   const [stateId, setStateId] = useState(null);
@@ -59,25 +57,26 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
   const [userVillage, setUserVillage] = useState(null);
   const [stateClicked, setStateClicked] = useState(false);
 
-  const [isVillageEmpty, setIsVillageEmpty] = useState(null);  
+  const [isVillageEmpty, setIsVillageEmpty] = useState(null);
 
   ///////////COMPLTETE MODAL//////////////
   const [showCompleteModal, setShowCompleteModal] = useState();
 
+  const stateOption = states?.map((state) => {
+    return state.state_name;
+  });
 
-  const stateOption = states?.map(state => {
-    return (state.state_name)
-  })
-  
   const [tabIndex, setTabIndex] = useState(0);
-  
-  const email = userProfile?.email
-  const first_name = userProfile?.first_name;
-  const last_name = userProfile?.last_name;
-  const image = userProfile?.image;
+
+  const email = userProfile?.user?.email;
+  const first_name = userProfile?.user?.first_name;
+  const last_name = userProfile?.user?.last_name;
+  const image = userProfile?.user?.image;
+  const registeredUserVillage = userProfile?.user_data?.data?.village;
+  const registeredUserState = userProfile?.user_data?.data?.state;
 
   ////////////////// Selected Village///////////////////////
-  const [selectedVillage, setSelectedVillage] = useState("")
+  const [selectedVillage, setSelectedVillage] = useState('');
 
   const handleVillage = async () => {
     const url = 'https://api.23forobi.com/user-villages';
@@ -94,19 +93,17 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
     const headers = {
       'Content-Type': 'application/json',
       Accept: 'application/json',
-      'Authorization': `Bearer ${accessToken}`,
-
+      Authorization: `Bearer ${accessToken}`,
     };
 
-    if (selectedVillage.name !== "Others" && !isVillageEmpty) {
+    if (selectedVillage.name !== 'Others' && !isVillageEmpty) {
       axios.post(url, data, { headers })?.then((res) => {
         try {
           // console.log(res.data);
-          
         } catch (error) {
           // console.log(error)
         }
-        setSelectedVillage("");
+        setSelectedVillage('');
       });
     } else {
       axios.post(urlCreate, dataCreate, { headers })?.then((res) => {
@@ -116,12 +113,12 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
           // console.log(error)
         }
         setShowCompleteModal(true);
-        setOtherVillage("")
-        setSelectedVillage("");
+        setOtherVillage('');
+        setSelectedVillage('');
       });
     }
     setShowModal(false);
-  }
+  };
   ///////// End Selected Village //////////////////
 
   //VILLAGES
@@ -219,17 +216,25 @@ const DashboardMain = ({states, villageDetails, votersDetails}) => {
         <TabList
           className={`flex border-b border-[#F1F1F1] w-full items-center justify-start text-center mt-8 overflow-x-scroll ${styles.tabs}`}
         >
-          {villageDetails?.map((item) => (
+          {
+            <Tab className="font-bold lg:px-8 py-3 text-3xl lg:text-2xl  md:min-w-[40%] min-w-[70%] cursor-pointer hover:border-[#018226] hover:border-b-[1px] flex gap-2 justify-center">
+              {registeredUserVillage && registeredUserVillage}&nbsp;
+              <p>
+                <span className="lowercase">{`(${
+                  registeredUserState && registeredUserState
+                })`}</span>
+              </p>
+            </Tab>
+          }
+          {/*villageDetails?.map((item) => (
             <Tab
               key={item.village.id}
               className="font-bold lg:px-8 py-3 text-3xl lg:text-2xl  md:min-w-[40%] min-w-[70%] cursor-pointer hover:border-[#018226] hover:border-b-[1px] flex gap-2 justify-center"
             >
               {item.village.name}
-              <p className="lowercase">
-                ({item.village.location_id})
-              </p>
+              <p className="lowercase">({item.village.location_id})</p>
             </Tab>
-          ))}
+          ))*/}
           {villageDetails && (
             <Tab
               className="font-bold lg:px-8 py-3 lg:text-2xl  min-w-[40%] cursor-pointer hover:border-[#018226] hover:border-b-[1px] flex row-gap-2 border-none"

@@ -36,6 +36,7 @@ import MuiAlert from '@mui/material/Alert';
 import axios from 'axios';
 import { SelectVillagesInput } from '../Forms/SelectInput';
 import SelectInput from '../Forms/SelectInput';
+import Loader from '../Loader';
 
 //data
 import StateContext from '../../Context/StateContext'
@@ -50,12 +51,15 @@ const FormikControl = dynamic(() => import('../Forms/FormikControl'), {
 });
 
 const ProfileDisplay = ({ userVoters, states }) => {
+
   const { userProfile, registeredUser, accessToken } = useAuthStore();
   let token = accessToken;
+
+ 
   const { userStates } = useUserStore();
   const { userVillages, addVillages } = useUserStore();
 
-  // console.log(userProfile)
+  // console.log(registeredUser);
 
   //console.log(userVoters)
   const [state, setState] = useState({
@@ -79,37 +83,24 @@ const ProfileDisplay = ({ userVoters, states }) => {
 
   // console.log(userStates)
  
-  useEffect(() => {
-    
-    const apiCall = () => {
-
-      try {
-         axios.get('api.23forobi.com/states').then(data => {
-          console.log(data)
-        })
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    apiCall()
-  }, [])
-
-  const first_name = userProfile?.first_name;
-  const last_name = userProfile?.last_name;
-  const email = userProfile?.email;
-  const image = userProfile?.image;
-  const userState = userProfile?.state;
-console.log(userProfile.id)
   
+
+  const first_name = userProfile?.user?.first_name;
+  const last_name = userProfile?.user?.last_name;
+  const email = userProfile?.user?.email;
+  const image = userProfile?.image;
+  const userState = userProfile?.user?.data?.state;
+  const userVillage = userProfile?.user?.data?.village;
+console.log(userProfile)
   /////////////// FORM /////////////////////
   // Initial form values
   const initialValues = {
-    firstName: first_name,
-    lastName: last_name,
+    firstname: first_name,
+    lastname: last_name,
     email: email,
     state: userState,
     // lga: '',
-    village: '',
+    village: userVillage,
   };
 
   const [values, setValues] = useState(initialValues);
@@ -119,20 +110,22 @@ console.log(values)
     //const value = e.target.value
     const { name, value } = e.target;
 
-    if(name === "state") {
-      const stateID = e.target.value
-        axios.get(`https://api.23forobi.com/villages/${stateID}`).then((result) => {
+    if (name === 'state') {
+      const stateID = e.target.value;
+      axios
+        .get(`https://api.23forobi.com/villages/${stateID}`)
+        .then((result) => {
           const res = result.data;
           addVillages(res);
           // console.log(res);
-  
+
           return res;
         });
-        // setValues({
-        //   ...values,
-        //   [e.target.name]: e.target.name,
-        // });
-      };
+      // setValues({
+      //   ...values,
+      //   [e.target.name]: e.target.name,
+      // });
+    }
     // }
 
     setValues({
@@ -145,18 +138,47 @@ console.log(values)
 
   //FORM SUBMIT FUNCTION
   const handleUpdate = (e) => {
-    e.preventDefault()
+    e.preventDefault();
+    const headers = {
+      'Content-Type': 'application/json',
+      // Accept: 'application/json',
+      Authorization: `Bearer ${token}`,
+    };
     console.log(values)
-    
-    axios.put(`api.23forobi.com/user-details`, {
-      // data: {...values, userID: userProfile.id},
-  
-      data: values,
+    try {
+      axios.put('https://api.23forobi.com/user-details', {
+        firstname: values.firstname,
+        lastname: values.lastname,
+        email: values.email,
+        village: values.village,
+        state: values.state
+      }, {headers: headers}).then(res => {
+      console.log(res)
+    })
+      
+    } catch (error) {
+      console.log(error)
+    }
+  };
 
-    }).then((res) => console.log(res))
-  } 
-  
-  
+  useEffect(() => {
+    const apiCall = async() => {
+      const headers = {
+        //'Content-Type': 'application/json',
+        //Accept: 'application/json',
+        Authorization: `Bearer ${token}`,
+      };
+      try {
+        await axios.get('https://api.23forobi.com/user-details', {headers: headers}).then(res => {
+          console.log(res)
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    apiCall()
+  }, [])
+
   return (
     <div className={styles.profile}>
       <div className={styles.profile__profileMain}>
@@ -181,16 +203,16 @@ console.log(values)
                 type="text"
                 control="input"
                 placeholder="First Name"
-                name="firstName"
-                value={values.firstName}
+                name="firstname"
+                value={values.firstname}
                 onChange={handleInputChange}
               />
               <input
                 type="text"
                 control="input"
                 placeholder="Last Name"
-                name="lastName"
-                value={values.lastName}
+                name="lastname"
+                value={values.lastname}
                 onChange={handleInputChange}
               />
               <input
@@ -207,14 +229,14 @@ console.log(values)
                 name="state"
                 control="selectState"
               >
-                <option value="none" selected>
+                <option value={initialValues.state}>
                   {initialValues.state}
                 </option>
                 {states?.map((item) => {
-                  return (                    
-                      <option value={item.id} key={item.id}>
-                        {item.state_name}
-                      </option>                  
+                  return (
+                    <option value={item.id} key={item.id}>
+                      {item.state_name}
+                    </option>
                   );
                 })}
               </select>
@@ -224,14 +246,14 @@ console.log(values)
                 name="village"
                 onChange={handleInputChange}
               >
-                <option value="none" selected>
-                  Select a village
+                <option value={initialValues.village}>
+                  {initialValues.village}
                 </option>
                 {userVillages?.list_of_villages?.map((item) => {
                   return (
-                      <option value={item.id} key={item.id}>
-                        {item.name}
-                      </option>
+                    <option value={item.id} key={item.id}>
+                      {item.name}
+                    </option>
                   );
                 })}
               </select>
@@ -242,7 +264,7 @@ console.log(values)
               >
                 Update
               </button>
-            </form>            
+            </form>
           </div>
         </div>
       </div>
@@ -384,8 +406,8 @@ console.log(values)
             </>
           ) : (
             <>
-              <div className="flex items-center justify-center">
-                <h2 className="text-2xl">No achievements yet!</h2>
+              <div className="flex items-center justify-center w-full">
+                <p className="text-2xl">No achievements yet!</p>
               </div>
             </>
           )}

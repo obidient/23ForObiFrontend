@@ -58,7 +58,7 @@ const Sidebar = ({ voters }) => {
           </>
         ) : (
           <div className="flex items-center">
-            <h2 className="text-[#2F3733]">No Achievements yet!</h2>
+            <p className="text-[#2F3733]">No Achievements yet!</p>
           </div>
         )}
         <hr />

@@ -19,8 +19,9 @@ import CompleteModal from './../misc/CompleteModal';
 
 const VillageDetails = ({ villageDetails, votersDetails }) => {
   const [showModal, setShowModal] = useState(false);
-  const [showEditModal, setShowEditModal] = useState();
+  const [showEditModal, setShowEditModal] = useState(false);
   const [showCompleteModal, setShowCompleteModal] = useState();
+  const [updateVoterInitials, setUpdateVoterInitials] = useState();
   const { accessToken } = useAuthStore();
 
   //FILTER VOTERS BY VILLAGE NAME
@@ -33,17 +34,19 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
     name: Yup.string().required('Required'),
   });
 
+  /////////////////HEADER////////////////
+  const headers = {
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+    Authorization: `Bearer ${accessToken}`,
+  };
+
   const handleVoters = async (values) => {
     const url = 'https://api.23forobi.com/voters';
     const data = {
       name: values.name,
       contact: values.contact,
       village_id: villageDetails.village.id,
-    };
-    const headers = {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-      Authorization: `Bearer ${accessToken}`,
     };
 
     try {
@@ -62,6 +65,25 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
       }
       setShowCompleteModal(true);
     });*/
+  };
+
+  const handleUpdateVoters = async (values) => {
+    const url = `https://api.23forobi.com/voters/${updateVoterInitials.id}`;
+    const data = {
+      name: values.name,
+      contact: values.contact,
+      village_id: villageDetails.village.id,
+    };
+
+    setShowEditModal(false);
+    axios.put(url, data, { headers })?.then((res) => {
+      try {
+        //  console.log(res.data);
+      } catch (error) {
+        //  console.log(error);
+      }
+      // setShowCompleteModal(true);
+    });
   };
 
   useEffect(() => {
@@ -106,10 +128,17 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
               <tbody key={voters.id}>
                 <tr>
                   <td>{index + 1}</td>
-                  <td className='capitalize'>{voters.name}</td>
-                  <td>+234{voters.contact.slice(1,voters.contact.length)}</td>
+                  <td className="capitalize">{voters.name}</td>
+                  <td>+234{voters.contact.slice(1, voters.contact.length)}</td>
                   <td>
-                    <Link href="#">Edit</Link>
+                    <p
+                      onClick={(e) => {
+                        setShowEditModal(true);
+                        setUpdateVoterInitials(voters);
+                      }}
+                    >
+                      Edit
+                    </p>
                   </td>
                 </tr>
               </tbody>
@@ -175,7 +204,6 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
                       <button
                         type="submit"
                         className="btn_dark w-full rounded-full h-20 mt-9"
-                        onClick={handleVoters}
                       >
                         Continue
                       </button>
@@ -188,6 +216,70 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
         </Modal>
       )}
       {/* NEW VOTER MODAL END */}
+
+      {/* UPDATE VOTER MODAL */}
+      {showEditModal && (
+        <Modal
+          show={showEditModal}
+          onClose={() => setShowEditModal(false)}
+          width="54.4rem"
+        >
+          <div className={styles.modal}>
+            <div className={`${styles.modal__heading} modal_heading`}>
+              <h2>
+                Add a new <br />
+                <span>Voter</span>
+              </h2>
+              <button
+                className={`closeBtn`}
+                onClick={() => setShowEditModal(false)}
+              >
+                &times;
+              </button>
+            </div>
+            <div className={styles.modal__body}>
+              <p>Kindly enter the details for a new voter</p>
+              <div className={styles.details_form}>
+                <Formik
+                  initialValues={{
+                    name: updateVoterInitials.name,
+                    contact: updateVoterInitials.contact,
+                  }}
+                  validationSchema={votersValidationSchema}
+                  onSubmit={handleUpdateVoters}
+                >
+                  {({ values }) => (
+                    <Form autoComplete="off">
+                      <FormikControl
+                        values={values}
+                        control="input"
+                        placeholder="Enter full name"
+                        name="name"
+                        type="text"
+                      />
+                      <FormikControl
+                        values={values}
+                        control="input"
+                        placeholder="Phone Number"
+                        name="contact"
+                        type="text"
+                      />
+
+                      <button
+                        type="submit"
+                        className="btn_dark w-full rounded-full h-20 mt-9"
+                      >
+                        Continue
+                      </button>
+                    </Form>
+                  )}
+                </Formik>
+              </div>
+            </div>
+          </div>
+        </Modal>
+      )}
+      {/* UPDATE VOTER MODAL END */}
 
       {/* COMPLETE MODAL */}
 

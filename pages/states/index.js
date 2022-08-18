@@ -9,7 +9,7 @@ import Link from 'next/link';
 import NavBar from '../../components/NavBar/Index';
 import Footer from '../../components/Footer/Index';
 import Loader from '../../components/Loader';
-import { FetchEvent } from 'next/dist/server/web/spec-compliant/fetch-event';
+// import { FetchEvent } from 'next/dist/server/web/spec-compliant/fetch-event';
 import { countryContext } from './../../Context/countryContext';
 import { useContext, useState } from 'react';
 import Page from './../../components/Page';
