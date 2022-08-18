@@ -11,7 +11,7 @@ import useAuthStore from '../../store/authStore';
 
 const DashboardLink = ({ option, name, value, onChange }) => {
   const { removeUser,userProfile } = useAuthStore();
-  const first_name = userProfile?.first_name
+  const first_name = userProfile?.user?.first_name
 
   const router = useRouter()
   const [isDropDownVisible, setIsDropDownVisible] = useState(false);

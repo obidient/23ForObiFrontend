@@ -19,8 +19,8 @@ const dashboard = (props) => {
   const [progress, setProgress] = useState(0);
   // const [votersData, setVotersData] = useState("");
   const [voterData, setVoterData] = useState();
-  const WAIT_TIME = 5000;  
-  
+  const WAIT_TIME = 5000;
+
   /////////// USER VILLAGES /////////////
   const { accessToken } = useAuthStore();
   // console.log(accessToken)
@@ -38,23 +38,26 @@ const dashboard = (props) => {
   //   [`https://api.23forobi.com/voters-by-contributor`, accessToken],
   //   fetcher
   //   );
-  
+
   //GET DATA AND REFRESH AFTER 5 SECONDS
   useEffect(() => {
     const id = setInterval(() => {
       try {
-          axios
-            .get('https://api.23forobi.com/voters-by-contributor', {
-              headers: { Authorization: `Bearer ${accessToken}` },
-            })
-            .then((res) => setVoterData(res.data));
+        axios
+          .get('https://api.23forobi.com/voters-by-contributor', {
+            headers: { Authorization: `Bearer ${accessToken}` },
+          })
+          .then((res) => {
+            // console.log(res)
+            setVoterData(res.data);
+          });
       } catch (error) {
-        // console.log(error);
+        console.log(error);
       }
     }, WAIT_TIME);
     return () => clearInterval(id);
   }, [voterData]);
-  
+
   useEffect(() => {
     try {
       const getVotersProgress = async () => {
@@ -66,7 +69,7 @@ const dashboard = (props) => {
       };
       getVotersProgress();
     } catch (error) {
-      // console.log(error);
+      console.log(error);
     }
   }, []);
 
