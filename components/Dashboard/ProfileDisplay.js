@@ -33,6 +33,7 @@ import MuiAlert from '@mui/material/Alert';
 import axios from 'axios';
 import { SelectVillagesInput } from '../Forms/SelectInput';
 import SelectInput from '../Forms/SelectInput';
+import Loader from '../Loader';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -43,11 +44,11 @@ const FormikControl = dynamic(() => import('../Forms/FormikControl'), {
 });
 
 const ProfileDisplay = ({ userVoters, states }) => {
-  const { userProfile, registeredUser } = useAuthStore();
+  const { userProfile } = useAuthStore();
   const { userStates } = useUserStore();
   const { userVillages, addVillages } = useUserStore();
 
-  console.log(registeredUser);
+  // console.log(registeredUser);
 
   //console.log(userVoters)
   const [state, setState] = useState({
@@ -72,13 +73,13 @@ const ProfileDisplay = ({ userVoters, states }) => {
 
   // console.log(userStates)
 
-  const first_name = userProfile?.first_name;
-  const last_name = userProfile?.last_name;
-  const email = userProfile?.email;
+  const first_name = userProfile?.user?.first_name;
+  const last_name = userProfile?.user?.last_name;
+  const email = userProfile?.user?.email;
   const image = userProfile?.image;
-  const userState = userProfile?.state;
+  const userState = userProfile?.user_data?.data?.state;
+  const userVillage = userProfile?.user_data?.data?.village;
 
-  
   /////////////// FORM /////////////////////
   // Initial form values
   const initialValues = {
@@ -87,7 +88,7 @@ const ProfileDisplay = ({ userVoters, states }) => {
     email: email,
     state: userState,
     // lga: '',
-    village: '',
+    village: userVillage,
   };
 
   const [values, setValues] = useState(initialValues);
@@ -97,20 +98,22 @@ const ProfileDisplay = ({ userVoters, states }) => {
     //const value = e.target.value
     const { name, value } = e.target;
 
-    if(name === "state") {
-      const stateID = e.target.value
-        axios.get(`https://api.23forobi.com/villages/${stateID}`).then((result) => {
+    if (name === 'state') {
+      const stateID = e.target.value;
+      axios
+        .get(`https://api.23forobi.com/villages/${stateID}`)
+        .then((result) => {
           const res = result.data;
           addVillages(res);
           // console.log(res);
-  
+
           return res;
         });
-        // setValues({
-        //   ...values,
-        //   [e.target.name]: e.target.name,
-        // });
-      };
+      // setValues({
+      //   ...values,
+      //   [e.target.name]: e.target.name,
+      // });
+    }
     // }
 
     setValues({
@@ -121,11 +124,10 @@ const ProfileDisplay = ({ userVoters, states }) => {
 
   //FORM SUBMIT FUNCTION
   const handleUpdate = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     // console.log(values)
-  } 
-  
-  
+  };
+
   return (
     <div className={styles.profile}>
       <div className={styles.profile__profileMain}>
@@ -176,14 +178,14 @@ const ProfileDisplay = ({ userVoters, states }) => {
                 name="state"
                 control="selectState"
               >
-                <option value="none" selected>
+                <option value={initialValues.state}>
                   {initialValues.state}
                 </option>
                 {states?.map((item) => {
-                  return (                    
-                      <option value={item.id} key={item.id}>
-                        {item.state_name}
-                      </option>                  
+                  return (
+                    <option value={item.id} key={item.id}>
+                      {item.state_name}
+                    </option>
                   );
                 })}
               </select>
@@ -193,14 +195,14 @@ const ProfileDisplay = ({ userVoters, states }) => {
                 name="village"
                 onChange={handleInputChange}
               >
-                <option value="none" selected>
-                  Select a village
+                <option value={initialValues.village}>
+                  {initialValues.village}
                 </option>
                 {userVillages?.list_of_villages?.map((item) => {
                   return (
-                      <option value={item.id} key={item.id}>
-                        {item.name}
-                      </option>
+                    <option value={item.id} key={item.id}>
+                      {item.name}
+                    </option>
                   );
                 })}
               </select>
@@ -211,7 +213,7 @@ const ProfileDisplay = ({ userVoters, states }) => {
               >
                 Update
               </button>
-            </form>            
+            </form>
           </div>
         </div>
       </div>
@@ -353,8 +355,8 @@ const ProfileDisplay = ({ userVoters, states }) => {
             </>
           ) : (
             <>
-              <div className="flex items-center justify-center">
-                <h2 className="text-2xl">No achievements yet!</h2>
+              <div className="flex items-center justify-center w-full">
+                <p className="text-2xl">No achievements yet!</p>
               </div>
             </>
           )}
