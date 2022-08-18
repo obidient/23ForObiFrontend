@@ -20,7 +20,7 @@ import { googleLogout } from '@react-oauth/google';
 
 const NavBar = () => {
   const { userProfile, removeUser } = useAuthStore();
-  const first_name = userProfile?.first_name;
+  const first_name = userProfile?.user?.first_name;
   const navRef = useRef();
 
   const showNavbar = () => {

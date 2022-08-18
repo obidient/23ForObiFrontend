@@ -33,7 +33,7 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
   const votersValidationSchema = Yup.object({
     name: Yup.string().required('Required'),
   });
-  
+
   /////////////////HEADER////////////////
   const headers = {
     'Content-Type': 'application/json',
@@ -128,7 +128,7 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
               <tbody key={voters.id}>
                 <tr>
                   <td>{index + 1}</td>
-                  <td>{voters.name}</td>
+                  <td className="capitalize">{voters.name}</td>
                   <td>+234{voters.contact.slice(1, voters.contact.length)}</td>
                   <td>
                     <p
@@ -136,7 +136,6 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
                         setShowEditModal(true);
                         setUpdateVoterInitials(voters);
                       }}
-                      
                     >
                       Edit
                     </p>
