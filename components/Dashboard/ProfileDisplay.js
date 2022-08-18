@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
+import FileBase from 'react-file-base64';
 import styles from './Styles.module.scss';
 import avatar from '../../assets/avatar.png';
 // import SelectInput from './../misc/SelectInput';
@@ -89,6 +90,7 @@ const ProfileDisplay = ({ userVoters, states }) => {
     state: userState,
     // lga: '',
     village: userVillage,
+    selectedFile: '',
   };
 
   const [values, setValues] = useState(initialValues);
@@ -128,6 +130,10 @@ const ProfileDisplay = ({ userVoters, states }) => {
     // console.log(values)
   };
 
+  const clear = () => {
+    setValues({ ...values, selectedFile: '' });
+  };
+
   return (
     <div className={styles.profile}>
       <div className={styles.profile__profileMain}>
@@ -135,9 +141,26 @@ const ProfileDisplay = ({ userVoters, states }) => {
 
         <div className={styles.profile__profileContent}>
           <div className={styles.avatar}>
-            <Image src={image ? image : avatar} />
-            <p className={styles.avatar__pTag}>edit image</p>
-            <span>Remove Image</span>
+            <Image
+              src={values.selectedFile ? values.selectedFile : avatar}
+              width={177}
+              height={177}
+            />
+            <label className={styles.avatar__pTag}>
+              <FileBase
+                type="file"
+                multiple={false}
+                onDone={({ base64 }) =>
+                  setValues({ ...values, selectedFile: base64 })
+                }
+              />
+              {values.selectedFile ? 'edit Image' : 'add Image'}
+            </label>
+            {values.selectedFile && (
+              <span className="cursor-pointer" onClick={clear}>
+                Remove Image
+              </span>
+            )}
           </div>
           <div className={styles.form}>
             <div className={styles.form__text}>
