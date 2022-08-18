@@ -34,7 +34,7 @@ const profile = (props) => {
             headers: { Authorization: `Bearer ${accessToken}` },
           })
           .then((res) => {
-            console.log(res.data)
+            // console.log(res.data)
             setUserVoters(res.data)
             setProgress(res.data.length)
           });

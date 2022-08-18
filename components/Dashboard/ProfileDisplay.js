@@ -53,14 +53,14 @@ const FormikControl = dynamic(() => import('../Forms/FormikControl'), {
 
 const ProfileDisplay = ({ userVoters, states }) => {
 
-  const { userProfile, registeredUser, accessToken } = useAuthStore();
+  const { userProfile, accessToken } = useAuthStore();
   let token = accessToken;
 
  
   const { userStates } = useUserStore();
   const { userVillages, addVillages } = useUserStore();
 
-  // console.log(registeredUser);
+  
 
   //console.log(userVoters)
   const [state, setState] = useState({
@@ -99,14 +99,14 @@ console.log(userProfile)
     firstname: first_name,
     lastname: last_name,
     email: email,
-    state: userState,
+    state: '',
     // lga: '',
-    village: userVillage,
-    selectedFile: '',
+    village: '',
+    userImage: '',
   };
 
   const [values, setValues] = useState(initialValues);
-console.log(values)
+// console.log(values)
   const handleInputChange = (e) => {
     //const name = e.target.name
     //const value = e.target.value
@@ -152,8 +152,8 @@ console.log(values)
         firstname: values.firstname,
         lastname: values.lastname,
         email: values.email,
-        village: values.village,
-        state: values.state
+        village: values.village ,
+        state: values.state,
       }, {headers: headers}).then(res => {
       console.log(res)
     })
@@ -164,7 +164,7 @@ console.log(values)
   };
 
   const clear = () => {
-    setValues({ ...values, selectedFile: '' });
+    setValues({ ...values, userImage: '' });
   };
 
   return (
@@ -175,7 +175,7 @@ console.log(values)
         <div className={styles.profile__profileContent}>
           <div className={styles.avatar}>
             <Image
-              src={values.selectedFile ? values.selectedFile : avatar}
+              src={values.userImage ? values.userImage : avatar}
               width={177}
               height={177}
             />
@@ -184,12 +184,12 @@ console.log(values)
                 type="file"
                 multiple={false}
                 onDone={({ base64 }) =>
-                  setValues({ ...values, selectedFile: base64 })
+                  setValues({ ...values, userImage: base64 })
                 }
               />
-              {values.selectedFile ? 'edit Image' : 'add Image'}
+              {values.userImage ? 'edit Image' : 'add Image'}
             </label>
-            {values.selectedFile && (
+            {values.userImage && (
               <span className="cursor-pointer" onClick={clear}>
                 Remove Image
               </span>
@@ -234,8 +234,8 @@ console.log(values)
                 name="state"
                 control="selectState"
               >
-                <option value={initialValues.state}>
-                  {initialValues.state}
+                <option value={values.state}>
+                  {values.state}
                 </option>
                 {states?.map((item) => {
                   return (
@@ -251,8 +251,8 @@ console.log(values)
                 name="village"
                 onChange={handleInputChange}
               >
-                <option value={initialValues.village}>
-                  {initialValues.village}
+                <option value={values.village}>
+                  {values.village}
                 </option>
                 {userVillages?.list_of_villages?.map((item) => {
                   return (
