@@ -152,6 +152,7 @@ const State = ({ stateName, detail, images, villages }) => {
       }
     };
     callAPI();
+    setShowModal2(false);
   };
 
   // Show LightBox Images

@@ -51,7 +51,6 @@ const DashboardMain = ({ states, villageDetails, votersDetails }) => {
   const { accessToken } = useAuthStore();
   // const { village, state } = registeredUser;
 
-  // console.log(village)
 
   const [otherVillage, setOtherVillage] = useState();
 
