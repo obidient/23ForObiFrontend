@@ -50,7 +50,8 @@ const FormikControl = dynamic(() => import('../Forms/FormikControl'), {
 });
 
 const ProfileDisplay = ({ userVoters, states }) => {
-  const { userProfile, registeredUser } = useAuthStore();
+  const { userProfile, registeredUser, accessToken } = useAuthStore();
+  let token = accessToken;
   const { userStates } = useUserStore();
   const { userVillages, addVillages } = useUserStore();
 
@@ -77,13 +78,28 @@ const ProfileDisplay = ({ userVoters, states }) => {
   };
 
   // console.log(userStates)
+ 
+  useEffect(() => {
+    
+    const apiCall = () => {
+
+      try {
+         axios.get('api.23forobi.com/states').then(data => {
+          console.log(data)
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    apiCall()
+  }, [])
 
   const first_name = userProfile?.first_name;
   const last_name = userProfile?.last_name;
   const email = userProfile?.email;
   const image = userProfile?.image;
   const userState = userProfile?.state;
-console.log(registeredUser)
+console.log(userProfile.id)
   
   /////////////// FORM /////////////////////
   // Initial form values
@@ -125,11 +141,18 @@ console.log(values)
     });
   };
 
+
+
   //FORM SUBMIT FUNCTION
   const handleUpdate = (e) => {
     e.preventDefault()
-    axios.put('https://api.23forobi.com/docs#/User%20Data/update_user_data_user_data__user_data_id__put', {
-      data: {...values, userID: userProfile.id},
+    console.log(values)
+    
+    axios.put(`api.23forobi.com/user-details`, {
+      // data: {...values, userID: userProfile.id},
+  
+      data: values,
+
     }).then((res) => console.log(res))
   } 
   
