@@ -56,7 +56,8 @@ const ProfileDisplay = ({ userVoters, states }) => {
     vertical: 'top',
     horizontal: 'center',
   });
-
+  
+  
   const { open } = state;
 
   const handleClose = () => {
@@ -77,8 +78,11 @@ const ProfileDisplay = ({ userVoters, states }) => {
   const last_name = userProfile?.user?.last_name;
   const email = userProfile?.user?.email;
   const image = userProfile?.image;
-  const userState = userProfile?.user_data?.data?.state;
+  const userState = stateSelect;
   const userVillage = userProfile?.user_data?.data?.village;
+  
+  const [stateSelect, setStateSelect] = useState(userProfile?.user_data?.data?.state);
+
 
   /////////////// FORM /////////////////////
   // Initial form values
@@ -172,18 +176,21 @@ const ProfileDisplay = ({ userVoters, states }) => {
                 value={values.email}
                 onChange={handleInputChange}
               />
+              {/* <div > */}
+
               <select
                 onChange={handleInputChange}
                 value={values.state}
                 name="state"
                 control="selectState"
               >
-                <option value={initialValues.state}>
-                  {initialValues.state}
-                </option>
                 {states?.map((item) => {
                   return (
-                    <option value={item.id} key={item.id}>
+                    <option
+                      value={item.id}
+                      selected={item.state_name == stateSelect ? true : false}
+                      key={item.id}
+                      >
                       {item.state_name}
                     </option>
                   );
@@ -195,12 +202,18 @@ const ProfileDisplay = ({ userVoters, states }) => {
                 name="village"
                 onChange={handleInputChange}
               >
+                {!userVillages ? 
+                
                 <option value={initialValues.village}>
                   {initialValues.village}
-                </option>
-                {userVillages?.list_of_villages?.map((item) => {
+                </option> :
+                userVillages?.list_of_villages?.map((item) => {
+                
                   return (
-                    <option value={item.id} key={item.id}>
+                    <option
+                      value={item.id}
+                      key={item.id}
+                    >
                       {item.name}
                     </option>
                   );
