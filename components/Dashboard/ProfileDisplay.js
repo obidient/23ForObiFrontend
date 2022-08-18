@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import useSWR from 'swr';
 import Image from 'next/image';
 import FileBase from 'react-file-base64';
 import styles from './Styles.module.scss';
@@ -6,13 +7,15 @@ import avatar from '../../assets/avatar.png';
 // import SelectInput from './../misc/SelectInput';
 
 //Form Imports
-import { Form, Formik } from 'formik';
+import { Form, Formik, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 // Prevent serverside redering on the FormikControl Component
 import dynamic from 'next/dynamic';
 import useAuthStore from '../../store/authStore';
 import useUserStore from '../../store/userStore';
 import stateDetails from '../../data/stateDetails';
+
+import { getVillages } from '../../adapters/requests';
 
 //Images
 import achieveActive from '../../assets/achieActive.png';
@@ -36,6 +39,10 @@ import { SelectVillagesInput } from '../Forms/SelectInput';
 import SelectInput from '../Forms/SelectInput';
 import Loader from '../Loader';
 
+//data
+import StateContext from '../../Context/StateContext'
+import { getStates } from '../../adapters/requests';
+
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -45,7 +52,11 @@ const FormikControl = dynamic(() => import('../Forms/FormikControl'), {
 });
 
 const ProfileDisplay = ({ userVoters, states }) => {
-  const { userProfile } = useAuthStore();
+
+  const { userProfile, registeredUser, accessToken } = useAuthStore();
+  let token = accessToken;
+
+ 
   const { userStates } = useUserStore();
   const { userVillages, addVillages } = useUserStore();
 
@@ -57,7 +68,6 @@ const ProfileDisplay = ({ userVoters, states }) => {
     vertical: 'top',
     horizontal: 'center',
   });
-
   const { open } = state;
 
   const handleClose = () => {
@@ -73,6 +83,8 @@ const ProfileDisplay = ({ userVoters, states }) => {
   };
 
   // console.log(userStates)
+ 
+  
 
   const first_name = userProfile?.user?.first_name;
   const last_name = userProfile?.user?.last_name;
@@ -80,12 +92,12 @@ const ProfileDisplay = ({ userVoters, states }) => {
   const image = userProfile?.image;
   const userState = userProfile?.user_data?.data?.state;
   const userVillage = userProfile?.user_data?.data?.village;
-
+console.log(userProfile)
   /////////////// FORM /////////////////////
   // Initial form values
   const initialValues = {
-    firstName: first_name,
-    lastName: last_name,
+    firstname: first_name,
+    lastname: last_name,
     email: email,
     state: userState,
     // lga: '',
@@ -94,7 +106,7 @@ const ProfileDisplay = ({ userVoters, states }) => {
   };
 
   const [values, setValues] = useState(initialValues);
-
+console.log(values)
   const handleInputChange = (e) => {
     //const name = e.target.name
     //const value = e.target.value
@@ -124,10 +136,31 @@ const ProfileDisplay = ({ userVoters, states }) => {
     });
   };
 
+
+
   //FORM SUBMIT FUNCTION
   const handleUpdate = (e) => {
     e.preventDefault();
-    // console.log(values)
+    const headers = {
+      'Content-Type': 'application/json',
+      // Accept: 'application/json',
+      Authorization: `Bearer ${token}`,
+    };
+    console.log(values)
+    try {
+      axios.put('https://api.23forobi.com/user-details', {
+        firstname: values.firstname,
+        lastname: values.lastname,
+        email: values.email,
+        village: values.village,
+        state: values.state
+      }, {headers: headers}).then(res => {
+      console.log(res)
+    })
+      
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   const clear = () => {
@@ -175,16 +208,16 @@ const ProfileDisplay = ({ userVoters, states }) => {
                 type="text"
                 control="input"
                 placeholder="First Name"
-                name="firstName"
-                value={values.firstName}
+                name="firstname"
+                value={values.firstname}
                 onChange={handleInputChange}
               />
               <input
                 type="text"
                 control="input"
                 placeholder="Last Name"
-                name="lastName"
-                value={values.lastName}
+                name="lastname"
+                value={values.lastname}
                 onChange={handleInputChange}
               />
               <input
@@ -421,5 +454,24 @@ const ProfileDisplay = ({ userVoters, states }) => {
     </div>
   );
 };
+
+// export async function getServerSideProps(value) {
+//   try {
+//     const stateData = await getVillages();
+
+//     return {
+//       props: {
+//         allState: stateData?.data
+//       }
+//     }
+    
+//   } catch (error) {
+//     return {
+//       props: {
+//         stateData: []
+//       }
+//     }
+//   }
+// }
 
 export default ProfileDisplay;
