@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import useSWR from 'swr';
 import Image from 'next/image';
 import FileBase from 'react-file-base64';
+import { useRouter } from 'next/router';
 import styles from './Styles.module.scss';
 import avatar from '../../assets/avatar.png';
 // import SelectInput from './../misc/SelectInput';
@@ -40,7 +41,7 @@ import SelectInput from '../Forms/SelectInput';
 import Loader from '../Loader';
 
 //data
-import StateContext from '../../Context/StateContext'
+import StateContext from '../../Context/StateContext';
 import { getStates } from '../../adapters/requests';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -52,15 +53,12 @@ const FormikControl = dynamic(() => import('../Forms/FormikControl'), {
 });
 
 const ProfileDisplay = ({ userVoters, states }) => {
-
   const { userProfile, accessToken } = useAuthStore();
   let token = accessToken;
+  const router = useRouter();
 
- 
   const { userStates } = useUserStore();
   const { userVillages, addVillages } = useUserStore();
-
-  
 
   //console.log(userVoters)
   const [state, setState] = useState({
@@ -83,8 +81,6 @@ const ProfileDisplay = ({ userVoters, states }) => {
   };
 
   // console.log(userStates)
- 
-  
 
   const first_name = userProfile?.user?.first_name;
   const last_name = userProfile?.user?.last_name;
@@ -92,7 +88,7 @@ const ProfileDisplay = ({ userVoters, states }) => {
   const image = userProfile?.image;
   const userState = userProfile?.user_data?.data?.state;
   const userVillage = userProfile?.user_data?.data?.village;
-console.log(userProfile)
+  console.log(userProfile);
   /////////////// FORM /////////////////////
   // Initial form values
   const initialValues = {
@@ -106,7 +102,7 @@ console.log(userProfile)
   };
 
   const [values, setValues] = useState(initialValues);
-// console.log(values)
+  // console.log(values)
   const handleInputChange = (e) => {
     //const name = e.target.name
     //const value = e.target.value
@@ -136,8 +132,6 @@ console.log(userProfile)
     });
   };
 
-
-
   //FORM SUBMIT FUNCTION
   const handleUpdate = (e) => {
     e.preventDefault();
@@ -146,20 +140,28 @@ console.log(userProfile)
       // Accept: 'application/json',
       Authorization: `Bearer ${token}`,
     };
-    console.log(values)
+    console.log(values);
     try {
-      axios.put('https://api.23forobi.com/user-details', {
-        firstname: values.firstname,
-        lastname: values.lastname,
-        email: values.email,
-        village: values.village ,
-        state: values.state,
-      }, {headers: headers}).then(res => {
-      console.log(res)
-    })
-      
+      axios
+        .put(
+          'https://api.23forobi.com/user-details',
+          {
+            firstname: values.firstname,
+            lastname: values.lastname,
+            email: values.email,
+            village: values.village,
+            state: values.state,
+          },
+          { headers: headers }
+        )
+        .then((res) => {
+          console.log(res);
+          if (res.status === 200) {
+            router.push('/dashboard');
+          }
+        });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
@@ -234,9 +236,7 @@ console.log(userProfile)
                 name="state"
                 control="selectState"
               >
-                <option value={values.state}>
-                  {values.state}
-                </option>
+                <option value={values.state}>{values.state}</option>
                 {states?.map((item) => {
                   return (
                     <option value={item.id} key={item.id}>
@@ -251,9 +251,7 @@ console.log(userProfile)
                 name="village"
                 onChange={handleInputChange}
               >
-                <option value={values.village}>
-                  {values.village}
-                </option>
+                <option value={values.village}>{values.village}</option>
                 {userVillages?.list_of_villages?.map((item) => {
                   return (
                     <option value={item.id} key={item.id}>
@@ -464,7 +462,7 @@ console.log(userProfile)
 //         allState: stateData?.data
 //       }
 //     }
-    
+
 //   } catch (error) {
 //     return {
 //       props: {
