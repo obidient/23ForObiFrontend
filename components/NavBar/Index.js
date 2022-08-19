@@ -21,6 +21,8 @@ import { googleLogout } from '@react-oauth/google';
 const NavBar = () => {
   const { userProfile, removeUser } = useAuthStore();
   const first_name = userProfile?.user?.first_name;
+  const user_image =
+    userProfile?.user?.google_image || userProfile?.user?.image;
   const navRef = useRef();
 
   const showNavbar = () => {
@@ -52,7 +54,7 @@ const NavBar = () => {
         <nav className={styles.navbar}>
           <div className={styles.navbar__logo}>
             <Link href="/">
-              <Image src={logo}  width={130} height={33} alt="23forObi logo" />
+              <Image src={logo} width={130} height={33} alt="23forObi logo" />
             </Link>
           </div>
           <div ref={navRef} className={styles.navbar__menu}>
@@ -109,7 +111,12 @@ const NavBar = () => {
                 <div className="lg:hidden md:block cursor-pointer">
                   <Link href="/dashboard">
                     <a className="flex items-center">
-                      <Image src={avatar} alt='' width={35} height={35} />
+                      <Image
+                        src={user_image ? user_image : avatar}
+                        alt=""
+                        width={35}
+                        height={35}
+                      />
                       <h2 className="text-[#fff] px-3">{first_name}</h2>
                     </a>
                   </Link>
@@ -136,7 +143,12 @@ const NavBar = () => {
             <div className="hidden lg:flex items-center justify-center cursor-pointer">
               <Link href="/dashboard">
                 <a className="flex items-center">
-                  <Image src={avatar} alt='' width={35} height={35} />
+                  <Image
+                    src={user_image ? user_image : avatar}
+                    alt=""
+                    width={35}
+                    height={35}
+                  />
                   <h2 className="px-3 text-3xl">{first_name}</h2>
                 </a>
               </Link>

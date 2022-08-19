@@ -10,10 +10,13 @@ import { useRouter } from 'next/router';
 import useAuthStore from '../../store/authStore';
 
 const DashboardLink = ({ option, name, value, onChange }) => {
-  const { removeUser,userProfile } = useAuthStore();
-  const first_name = userProfile?.user?.first_name
+  const { removeUser, userProfile } = useAuthStore();
+  const first_name = userProfile?.user?.first_name;
+  const user_image =
+    userProfile?.user?.google_image || userProfile?.user?.image;
 
-  const router = useRouter()
+  // console.log(userProfile)
+  const router = useRouter();
   const [isDropDownVisible, setIsDropDownVisible] = useState(false);
 
   //dropdown items
@@ -39,7 +42,6 @@ const DashboardLink = ({ option, name, value, onChange }) => {
   // console.log(itemsList);
   const [selectedItemIndex, setSelectedItemsIndex] = useState(null);
 
- 
   return (
     <div>
       <div className={styles.dropdown}>
@@ -52,7 +54,7 @@ const DashboardLink = ({ option, name, value, onChange }) => {
           }}
         >
           <div className={styles.profile__user_img}>
-            <Image src={avatar} />
+            <Image src={user_image ? user_image : avatar} />
             <h2>{first_name}</h2>
           </div>
         </div>
