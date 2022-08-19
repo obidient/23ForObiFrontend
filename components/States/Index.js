@@ -14,6 +14,8 @@ const States = () => {
   // const [states, setStates] = useState(STATES);
   const [searchParam] = useState(['state_name']);
 
+
+
   const handleChange = (e) => {
     e.preventDefault();
     setSearchQuery(e.target.value);
