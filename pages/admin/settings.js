@@ -212,7 +212,7 @@ const settings = () => {
             </div>
           </TabPanel>
           <TabPanel>
-            <div className="border border-[#F1F1F1] rounded-2xl bg-white h-[70vh] w-[95%] m-10 text-[#2F3733] p-10 cursor-pointer">
+            <div className="border border-[#F1F1F1] rounded-2xl bg-white h-[70vh] w-[95%] m-10 text-[#2F3733] p-20 cursor-pointer">
               <div className="flex items-center justify-between border-b border-[#F1F1F1]">
                 <h2 className="pb-4 pt-6 text-3xl">Get notifications</h2>
                 <Toggle
@@ -234,7 +234,7 @@ const settings = () => {
             </div>
           </TabPanel>
           <TabPanel>
-            <div className="border border-[#F1F1F1] rounded-2xl bg-white h-[70vh] w-[95%] p-[5rem]">
+            <div className="border border-[#F1F1F1] rounded-2xl bg-white h-[70vh] w-[95%] m-10 p-[5rem]">
               <div className="flex items-center mb-8">
                 <button
                   className="bg-[#018226] w-[197px] h-[44px] rounded-full text-white flex items-center justify-center ml-auto"
@@ -249,8 +249,8 @@ const settings = () => {
               <div className="my-6 bg-white p-3 border border-[#FFFFFF] rounded-xl m-10">
                 <table className="table-fixed w-full text-justify">
                   <thead>
-                    <tr className="h-[47px] border border-b-[#F1F1F1] text-[#979797] text-xl">
-                      <th className="px-5">NAME</th>
+                    <tr className="h-[5rem] border-t-[#F1F1F1] border-t-[2px] text-[#979797] text-xl">
+                      <th className="px-0">NAME</th>
                       <th>STATUS</th>
                       <th>NO OF USERS</th>
                       <th>ACTION</th>
@@ -261,7 +261,7 @@ const settings = () => {
                       userList.map((item, index) => (
                         <tr
                           key={index}
-                          className="capitalize h-[47px] border border-b-[#F1F1F1] text-[#979797] text-2xl"
+                          className="capitalize h-[5rem] border-t-[2px] border-t-[#F1F1F1] text-[#979797] text-2xl"
                         >
                           <td className="capitalize text-[#2F3733]">
                             {item.name}
@@ -269,20 +269,19 @@ const settings = () => {
                           <td className="capitalize text-[#2F3733]">
                             {item.status}
                           </td>
-                          <td className=" text-[#2F3733]">{item.users}</td>
-
-                          <td className="text-xl ">
+                          <td className=" text-[#2F3733]">
+                            {item.users}
+                          </td>
+                          <td className="text-2xl underline cursor-pointer">
                             <span
-                              className="mx-5 text-[#5678CE] underline cursor-pointer"
+                              className="text-[#5678CE]"
                               onClick={() => setOpenEdit(true)}
                             >
                               Edit
                             </span>
                             <span
-                              className="mx-5 text-[#D60602] underline cursor-pointer"
-                              onClick={() => {
-                                setOpenDelete(true);
-                              }}
+                              className="ml-[11rem] text-[#D60602]"
+                              onClick={() => setOpenDelete(true)}
                             >
                               Delete
                             </span>
@@ -301,12 +300,12 @@ const settings = () => {
           </TabPanel>
         </Tabs>
       </div>
-      {/**Delete Modal */}
+      {/**Delete Modal Start*/}
       {openDelete && (
         <Modal
           show={showModal}
           onClose={() => setOpenDelete(false)}
-          width="44.5rem"
+          width="58rem"
         >
           <div className={styles.modal}>
             <div className={`${styles.modal__heading} modal_heading`}>
@@ -339,7 +338,102 @@ const settings = () => {
           </div>
         </Modal>
       )}
-      {/**Create Gropu Modal */}
+      {/* Delete Modal End */}
+      {/**Edit Member Modal Start */}
+      {openEdit && (
+        <Modal
+          show={showModal}
+          onClose={() => setOpenEdit(false)}
+          width="90rem"
+        >
+          <div className={styles.modal}>
+            <div className={`${styles.modal__heading} modal_heading`}>
+              <h2>
+                Edit Member
+                <br />
+                <span className="font-bold">Information</span>
+              </h2>
+              <button
+                className={`closeBtn`}
+                onClick={() => setOpenEdit(false)}
+              >
+                &times;
+              </button>
+            </div>
+            <div className={styles.modal__body}>
+              <div className="">
+                <Formik
+                  initialValues={{
+                    first_name: 'Mark',
+                    last_name: 'Essien',
+                    email: 'Markessien@gmail.com',
+                    phone: '',
+                    password: '',
+                  }}
+                  validationSchema={userValidationSchema}
+                  onSubmit={(values) => console.log('Form data', values)}
+                >
+                  {({ values }) => (
+                    <Form autoComplete="off" className='flex flex-col'>
+                      <div className="w-[100%] mb-8">
+                        <FormikControl
+                          values={values}
+                          control="input"
+                          placeholder="Enter email"
+                          name="email"
+                          type="text"
+                        />
+                      </div>
+                      <div className="flex items-center justify-between gap-16 mb-8">
+                        <FormikControl
+                          values={values}
+                          control="input"
+                          placeholder="First Name"
+                          name="first_name"
+                          type="text"
+                        />
+                        <FormikControl
+                          values={values}
+                          control="input"
+                          placeholder="Last Name"
+                          name="last_name"
+                          type="text"
+                        />
+                      </div>
+                      <div className="flex flex-row w-full justify-between gap-16">
+                        <FormikControl
+                          values={values}
+                          control="input"
+                          placeholder="Enter phone number"
+                          name="phone"
+                          type="text"
+                        />
+                        <FormikControl
+                          values={values}
+                          control="input"
+                          placeholder="Enter password"
+                          name="password"
+                          type="password"
+                        />
+                      </div>
+                    </Form>
+                  )}
+                  </Formik>
+                </div>
+              <div className="flex items-center justify-end mt-16">
+                <button className="px-3 py-3 rounded-full w-[172px] border border-[#D60602] text-[#D60602]">
+                  Remove member
+                </button>
+                <button className="ml-10 w-[172px] bg-[#018226] text-white px-3 py-3 rounded-full">
+                  Save
+                </button>
+              </div>
+            </div>
+          </div>
+        </Modal>
+      )}
+      {/* Edit Member Modal End */}
+      {/**Create Group Modal Start */}
       {groupModal && (
         <Modal
           show={showModal}
