@@ -60,8 +60,6 @@ const ProfileDisplay = ({ userVoters, states }) => {
   const { userStates } = useUserStore();
   const { userVillages, addVillages } = useUserStore();
 
-  
-
   //console.log(userVoters)
   const [state, setState] = useState({
     open: false,
@@ -88,10 +86,10 @@ const ProfileDisplay = ({ userVoters, states }) => {
   const first_name = userProfile?.user?.first_name;
   const last_name = userProfile?.user?.last_name;
   const email = userProfile?.user?.email;
-  const image = userProfile?.user?.image_url || userProfile?.user?.google_image_url;
+  const image = userProfile?.user?.google_image_url;
   //const userState = stateSelect;
   const userVillage = userProfile?.user_data?.data?.village;
-// console.log(userProfile)
+  // console.log(userProfile)
   /////////////// FORM /////////////////////
   // Initial form values
   const initialValues = {
@@ -165,7 +163,7 @@ const ProfileDisplay = ({ userVoters, states }) => {
           }
         });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
@@ -242,16 +240,14 @@ const ProfileDisplay = ({ userVoters, states }) => {
                 name="state"
                 control="selectState"
               >
-                <option value={values.state}>
-                  {values.state}
-                </option>
+                <option value={values.state}>{values.state}</option>
                 {states?.map((item) => {
                   return (
                     <option
                       value={item.id}
                       // selected={item.state_name == stateSelect ? true : false}
                       key={item.id}
-                      >
+                    >
                       {item.state_name}
                     </option>
                   );
@@ -263,9 +259,7 @@ const ProfileDisplay = ({ userVoters, states }) => {
                 name="village"
                 onChange={handleInputChange}
               >
-                <option value={values.village}>
-                  {values.village}
-                </option>
+                <option value={values.village}>{values.village}</option>
                 {userVillages?.list_of_villages?.map((item) => {
                   return (
                     <option value={item.id} key={item.id}>
