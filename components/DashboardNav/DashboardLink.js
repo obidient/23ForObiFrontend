@@ -13,7 +13,7 @@ const DashboardLink = ({ option, name, value, onChange }) => {
   const { removeUser, userProfile } = useAuthStore();
   const first_name = userProfile?.user?.first_name;
   const user_image =
-    userProfile?.user?.google_image || userProfile?.user?.image;
+    userProfile?.user?.google_image_url || userProfile?.user?.image_url;
 
   // console.log(userProfile)
   const router = useRouter();
@@ -54,7 +54,7 @@ const DashboardLink = ({ option, name, value, onChange }) => {
           }}
         >
           <div className={styles.profile__user_img}>
-            <Image src={user_image ? user_image : avatar} />
+            <Image src={user_image ? user_image : avatar} width={35} height={35} />
             <h2>{first_name}</h2>
           </div>
         </div>

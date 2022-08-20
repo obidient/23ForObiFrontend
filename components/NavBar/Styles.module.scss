@@ -2,6 +2,11 @@
     position: relative;
     width: 100%;
     // margin-bottom: -104px;
+    .user_image {
+       img {
+        border-radius: 100% !important;
+       }
+    }
 }
 
 .navbar {

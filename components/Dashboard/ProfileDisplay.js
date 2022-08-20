@@ -88,7 +88,7 @@ const ProfileDisplay = ({ userVoters, states }) => {
   const first_name = userProfile?.user?.first_name;
   const last_name = userProfile?.user?.last_name;
   const email = userProfile?.user?.email;
-  const image = userProfile?.image;
+  const image = userProfile?.user?.image_url || userProfile?.user?.google_image_url;
   //const userState = stateSelect;
   const userVillage = userProfile?.user_data?.data?.village;
 // console.log(userProfile)
@@ -181,7 +181,7 @@ const ProfileDisplay = ({ userVoters, states }) => {
         <div className={styles.profile__profileContent}>
           <div className={styles.avatar}>
             <Image
-              src={values.userImage ? values.userImage : avatar}
+              src={values.userImage ? values.userImage : image}
               width={177}
               height={177}
             />
@@ -193,7 +193,7 @@ const ProfileDisplay = ({ userVoters, states }) => {
                   setValues({ ...values, userImage: base64 })
                 }
               />
-              {values.userImage ? 'edit Image' : 'add Image'}
+              {image ? 'edit Image' : 'add Image'}
             </label>
             {values.userImage && (
               <span className="cursor-pointer" onClick={clear}>
