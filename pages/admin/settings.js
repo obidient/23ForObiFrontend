@@ -82,23 +82,23 @@ const settings = () => {
             ))}
           </TabList>
           <TabPanel>
-            <div className="border border-[#F1F1F1] rounded-2xl bg-white h-auto w-[95%] m-10">
+            <div className="border border-[#F1F1F1] rounded-2xl bg-white h-[70vh] w-[95%] m-10">
               <div className="flex m-10 gap-10">
-                <div className="flex flex-col items-center justify-center text-center">
-                  <Image src={avatar} />
+                <div className="flex flex-col items-center text-center p-[2.5rem]">
+                  <Image src={avatar} className=""/>
                   <div>
-                    <h2 className="p-0 m-0">Mark Essien</h2>
-                    <p className="text-[#979797] text-[13px] m-0 p-0">
+                    <h2 className="p-0 mt-[0.9rem] text-[1.8rem] font-bold">Mark Essien</h2>
+                    <p className="text-[#979797] text-[1.3rem] m-0 p-0">
                       Markessien@gmail.com
                     </p>
-                    <button className="bg-[#018226] text-white rounded-full w-[141px] h-[41px] my-6">
+                    <button className="bg-[#018226] text-white rounded-full w-[100%] h-[41px] mt-[2.5rem] mb-[1.2rem] px-[1.25rem] hover:bg-[#2EE061] hover:text-black">
                       Change avatar
                     </button>
-                    <h2 className="text-[#D60602] text-2xl ">Delete avatar</h2>
+                    <h2 className="text-[#D60602] text-2xl cursor-pointer py-[10px] hover:bg-[#D60602] rounded-full hover:text-white hover:w-[100%] hover:py-[10px]">Delete avatar</h2>
                   </div>
                 </div>
                 <div className=" flex justify-between w-full">
-                  <div className="">
+                  <div className="my-[2.5rem] border-l-2 border-r-[#F1F1F1] px-[2.5rem] w-[100%]">
                     <Formik
                       initialValues={{
                         first_name: 'Mark',
@@ -111,7 +111,7 @@ const settings = () => {
                     >
                       {({ values }) => (
                         <Form autoComplete="off">
-                          <div className="flex items-center justify-between w-[700px] gap-4">
+                          <div className="flex items-center justify-between gap-16 mb-8">
                             <FormikControl
                               values={values}
                               control="input"
@@ -127,7 +127,7 @@ const settings = () => {
                               type="text"
                             />
                           </div>
-                          <div className="flex flex-row w-full justify-between gap-4">
+                          <div className="flex flex-row w-full justify-between gap-16">
                             <FormikControl
                               values={values}
                               control="input"
@@ -146,24 +146,25 @@ const settings = () => {
                         </Form>
                       )}
                     </Formik>
+                    <div className="flex mt-[38rem]">
+                      <button className="ml-auto bg-[#018226] text-white rounded-full h-[5rem] px-[7.5rem] hover:bg-[#2EE061] hover:text-black">
+                        Update Profile
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div className="flex px-10">
-                <button className="ml-auto m-4 bg-[#018226] text-white rounded-full w-[141px] h-[41px]">
-                  Update Profile
-                </button>
-              </div>
+              
             </div>
           </TabPanel>
           <TabPanel>
-            <div className="border border-[#F1F1F1] rounded-2xl bg-white h-[100vh] w-[95%] m-10">
-              <div className="flex m-10">
-                <p className="text-[#979797] text-[16px] m-0 p-0">
+            <div className="border border-[#F1F1F1] rounded-2xl bg-white h-[70vh] w-[95%] m-10 p-[5rem] flex flex-col">
+              <div className="flex mb-[2rem]">
+                <p className="text-[#979797] text-[1.8rem] m-0 p-0">
                   Your current password
                 </p>
               </div>
-              <div className="p-10">
+              <div className="">
                 <Formik
                   initialValues={{
                     password: '',
@@ -183,7 +184,7 @@ const settings = () => {
                           type="password"
                         />
                       </div>
-                      <div className="flex flex-row w-full justify-between gap-4">
+                      <div className="flex flex-row w-full justify-between gap-16 mt-[6.25rem]">
                         <FormikControl
                           values={values}
                           control="input"
@@ -203,15 +204,15 @@ const settings = () => {
                   )}
                 </Formik>
               </div>
-              <div className="flex px-10">
-                <button className="ml-auto m-4 bg-[#018226] text-white rounded-full w-[231px] h-[41px]">
+              <div className="flex mt-[29rem]">
+                <button className="ml-auto bg-[#018226] text-white rounded-full px-[9rem] h-[5rem]">
                   Change password
                 </button>
               </div>
             </div>
           </TabPanel>
           <TabPanel>
-            <div className="border border-[#F1F1F1] rounded-2xl bg-white h-[100vh] w-[95%] m-10 text-[#2F3733] p-10 cursor-pointer">
+            <div className="border border-[#F1F1F1] rounded-2xl bg-white h-[70vh] w-[95%] m-10 text-[#2F3733] p-10 cursor-pointer">
               <div className="flex items-center justify-between border-b border-[#F1F1F1]">
                 <h2 className="pb-4 pt-6 text-3xl">Get notifications</h2>
                 <Toggle
@@ -233,8 +234,8 @@ const settings = () => {
             </div>
           </TabPanel>
           <TabPanel>
-            <div className="border border-[#F1F1F1] rounded-2xl bg-white h-[100%] w-[95%] m-10">
-              <div className="flex items-center mx-4 my-8">
+            <div className="border border-[#F1F1F1] rounded-2xl bg-white h-[70vh] w-[95%] p-[5rem]">
+              <div className="flex items-center mb-8">
                 <button
                   className="bg-[#018226] w-[197px] h-[44px] rounded-full text-white flex items-center justify-center ml-auto"
                   onClick={() => setGroupModal(true)}
