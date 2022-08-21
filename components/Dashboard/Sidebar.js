@@ -5,13 +5,25 @@ import level_1 from '../../assets/level-1.svg';
 import level_2 from '../../assets/level-2.svg';
 import level_3 from '../../assets/level-3.svg';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import Loader from '../Loader'
 
 const Sidebar = ({ voters }) => {
+  const [loading, setLoading] = useState(false)
+  useEffect(() => {
+    if(!voters){
+      setLoading(true)
+    } else {
+      setLoading(false)
+    }
+  }, [])
+  
   return (
     <div className={styles.sidebar}>
       <div className={styles.sidebar__achievements}>
         <h2>Achievements</h2>
         <hr />
+        {!voters && loading && <Loader />}
         {voters && voters.length > 0 ? (
           <>
             <div className={styles.achievements_images}>
