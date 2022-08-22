@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import useSWR from 'swr';
 import Image from 'next/image';
 import FileBase from 'react-file-base64';
+import { useRouter } from 'next/router';
 import styles from './Styles.module.scss';
 import avatar from '../../assets/avatar.png';
 // import SelectInput from './../misc/SelectInput';
@@ -40,7 +41,7 @@ import SelectInput from '../Forms/SelectInput';
 import Loader from '../Loader';
 
 //data
-import StateContext from '../../Context/StateContext'
+import StateContext from '../../Context/StateContext';
 import { getStates } from '../../adapters/requests';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -52,15 +53,21 @@ const FormikControl = dynamic(() => import('../Forms/FormikControl'), {
 });
 
 const ProfileDisplay = ({ userVoters, states }) => {
-
   const { userProfile, accessToken } = useAuthStore();
   let token = accessToken;
+  const router = useRouter();
 
- 
   const { userStates } = useUserStore();
   const { userVillages, addVillages } = useUserStore();
 
-  console.log(userProfile)
+  // const [loading, setLoading] = useState(false);
+  /*useEffect(() => {
+    if (!userVoters) {
+      setLoading(true);
+    } else {
+      setLoading(false);
+    }
+  }, []);*/
 
   //console.log(userVoters)
   const [state, setState] = useState({
@@ -84,38 +91,37 @@ const ProfileDisplay = ({ userVoters, states }) => {
   };
 
   // console.log(userStates)
- 
-  
 
   const first_name = userProfile?.user?.first_name;
   const last_name = userProfile?.user?.last_name;
   const email = userProfile?.user?.email;
-  const image = userProfile?.image;
+  const image = userProfile?.user?.google_image_url;
   const userState = stateSelect;
   const userVillage = userProfile?.user_data?.data?.village;
+  // console.log(userProfile)
+  const [stateSelect, setStateSelect] = useState(
+      userProfile?.user_data?.data?.state
+    );
 
-  const [stateSelect, setStateSelect] = useState(userProfile?.user_data?.data?.state);
-
-
-// console.log(userProfile)
   /////////////// FORM /////////////////////
   // Initial form values
   const initialValues = {
     firstname: first_name,
     lastname: last_name,
     email: email,
-    state: userState,
+    // state: userState,
     // lga: '',
     village: userVillage,
     userImage: '',
   };
 
   const [values, setValues] = useState(initialValues);
-// console.log(values)
+  // console.log(values)
   const handleInputChange = (e) => {
     //const name = e.target.name
     //const value = e.target.value
     const { name, value } = e.target;
+    console.log(e.target.value);
 
     if (name === 'state') {
       const stateID = e.target.value;
@@ -141,8 +147,6 @@ const ProfileDisplay = ({ userVoters, states }) => {
     });
   };
 
-
-
   //FORM SUBMIT FUNCTION
   const handleUpdate = (e) => {
     e.preventDefault();
@@ -151,20 +155,29 @@ const ProfileDisplay = ({ userVoters, states }) => {
       // Accept: 'application/json',
       Authorization: `Bearer ${token}`,
     };
-    console.log(values)
+    console.log(values);
     try {
-      axios.put('https://api.23forobi.com/user-details', {
-        firstname: values.firstname,
-        lastname: values.lastname,
-        email: values.email,
-        village: values.village,
-        state: values.state,
-      }, {headers: headers}).then(res => {
-      console.log(res)
-    })
-      
+      axios
+        .put(
+          'https://api.23forobi.com/user-details',
+          {
+            firstname: values.firstname,
+            lastname: values.lastname,
+            email: values.email,
+            village: values.village,
+            state: values.state,
+            userImage: values.userImage,
+          },
+          { headers: headers }
+        )
+        .then((res) => {
+          console.log(res);
+          if (res.status === 200) {
+            router.push('/dashboard');
+          }
+        });
     } catch (error) {
-      // console.log(error)
+      console.log(error);
     }
   };
 
@@ -180,7 +193,7 @@ const ProfileDisplay = ({ userVoters, states }) => {
         <div className={styles.profile__profileContent}>
           <div className={styles.avatar}>
             <Image
-              src={values.userImage ? values.userImage : avatar}
+              src={values.userImage ? values.userImage : image}
               width={177}
               height={177}
             />
@@ -192,7 +205,7 @@ const ProfileDisplay = ({ userVoters, states }) => {
                   setValues({ ...values, userImage: base64 })
                 }
               />
-              {values.userImage ? 'edit Image' : 'add Image'}
+              {image ? 'edit Image' : 'add Image'}
             </label>
             {values.userImage && (
               <span className="cursor-pointer" onClick={clear}>
@@ -242,12 +255,13 @@ const ProfileDisplay = ({ userVoters, states }) => {
                 control="selectState"
               >
                 {states?.map((item) => {
+                // <option value={item.state_name}>{item.state_name}</option>;
                   return (
                     <option
                       value={item.id}
                       selected={item.state_name == stateSelect ? true : false}
                       key={item.id}
-                      >
+                    >
                       {item.state_name}
                     </option>
                   );
@@ -259,19 +273,14 @@ const ProfileDisplay = ({ userVoters, states }) => {
                 name="village"
                 onChange={handleInputChange}
               >
-                {!userVillages ?                 
-                  <option value={values.village}>
-                    {values.village}
-                  </option> 
-                  : userVillages?.list_of_villages?.map((item) => {
-                    return (
-                      <option
-                        value={item.id}
-                        key={item.id}
-                      >
-                        {item.name}
-                      </option>
-                    );
+              {!userVillages ?                 
+                <option value={values.village}>{values.village}</option>
+                : userVillages?.list_of_villages?.map((item) => {
+                  return (
+                    <option value={item.id} key={item.id}>
+                      {item.name}
+                    </option>
+                  );
                 })}
               </select>
               <button
@@ -288,6 +297,7 @@ const ProfileDisplay = ({ userVoters, states }) => {
       <div className={styles.profile__achievement}>
         <h2>Levels</h2>
         <div className={styles.profile__image}>
+          
           {userVoters && userVoters.length > 0 ? (
             <>
               {userVoters.length >= 3 ? (
@@ -476,7 +486,7 @@ const ProfileDisplay = ({ userVoters, states }) => {
 //         allState: stateData?.data
 //       }
 //     }
-    
+
 //   } catch (error) {
 //     return {
 //       props: {

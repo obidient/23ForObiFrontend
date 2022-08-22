@@ -27,7 +27,7 @@ export default function GoogleAuth(props) {
             if (res.data && res.data.access_token) {
               addUser(res.data);
               addUserAuth(res.data.access_token);
-              // console.log(res.data);
+
               if (res.data.is_new_user === true) {
                 router.push('/dashboard/welcome');
               } else {
@@ -37,7 +37,7 @@ export default function GoogleAuth(props) {
           });
         }}
         // onError={console.log('Login Failed')}
-        text="signup_with"
+        text="continue_with"
         size="large"
         width="250%"
         shape="circle"

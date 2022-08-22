@@ -133,7 +133,7 @@ const DeliverModal = ({
                         <div className={styles.img}>
                           <Image src={slide.image} />
                         </div>
-                        <div className={styles.text}>
+                        {/* <div className={styles.text}>
                           <h3>
                             {slides[index + 1]?.text.heading}
                             <br />
@@ -143,7 +143,7 @@ const DeliverModal = ({
                         </div>
                         <div className={styles.img}>
                           <Image src={slides[1].image} />
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   );
