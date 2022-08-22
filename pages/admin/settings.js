@@ -82,129 +82,126 @@ const settings = () => {
             ))}
           </TabList>
           <TabPanel>
-            <div className="border border-[#F1F1F1] rounded-2xl bg-white h-[70vh] w-[95%] m-10">
-              <div className="flex m-10 gap-10">
-                <div className="flex flex-col items-center text-center p-[2.5rem]">
-                  <Image src={avatar} className=""/>
-                  <div>
-                    <h2 className="p-0 mt-[0.9rem] text-[1.8rem] font-bold">Mark Essien</h2>
-                    <p className="text-[#979797] text-[1.3rem] m-0 p-0">
-                      Markessien@gmail.com
-                    </p>
-                    <button className="bg-[#018226] text-white rounded-full w-[100%] h-[41px] mt-[2.5rem] mb-[1.2rem] px-[1.25rem] hover:bg-[#2EE061] hover:text-black">
-                      Change avatar
-                    </button>
-                    <h2 className="text-[#D60602] text-2xl cursor-pointer py-[10px] hover:bg-[#D60602] rounded-full hover:text-white hover:w-[100%] hover:py-[10px]">Delete avatar</h2>
-                  </div>
-                </div>
-                <div className=" flex justify-between w-full">
-                  <div className="my-[2.5rem] border-l-2 border-r-[#F1F1F1] px-[2.5rem] w-[100%]">
-                    <Formik
-                      initialValues={{
-                        first_name: 'Mark',
-                        last_name: 'Essien',
-                        email: 'Markessien@gmail.com',
-                        phone: '',
-                      }}
-                      validationSchema={userValidationSchema}
-                      onSubmit={(values) => console.log('Form data', values)}
-                    >
-                      {({ values }) => (
-                        <Form autoComplete="off">
-                          <div className="flex items-center justify-between gap-16 mb-8">
-                            <FormikControl
-                              values={values}
-                              control="input"
-                              placeholder="First Name"
-                              name="first_name"
-                              type="text"
-                            />
-                            <FormikControl
-                              values={values}
-                              control="input"
-                              placeholder="Last Name"
-                              name="last_name"
-                              type="text"
-                            />
-                          </div>
-                          <div className="flex flex-row w-full justify-between gap-16">
-                            <FormikControl
-                              values={values}
-                              control="input"
-                              placeholder="Enter email"
-                              name="email"
-                              type="text"
-                            />
-                            <FormikControl
-                              values={values}
-                              control="input"
-                              placeholder="Enter phone number"
-                              name="phone"
-                              type="text"
-                            />
-                          </div>
-                        </Form>
-                      )}
-                    </Formik>
-                    <div className="flex mt-[38rem]">
-                      <button className="ml-auto bg-[#018226] text-white rounded-full h-[5rem] px-[7.5rem] hover:bg-[#2EE061] hover:text-black">
-                        Update Profile
-                      </button>
-                    </div>
-                  </div>
+            <div className="border border-[#F1F1F1] rounded-2xl bg-white h-[70vh] w-[95%] m-10 flex gap-10">
+              <div className="flex flex-col items-center text-center p-[5rem] h-[100%]">
+                <Image src={avatar} className=""/>
+                <div>
+                  <h2 className="p-0 mt-[0.9rem] text-[1.8rem] font-bold">Mark Essien</h2>
+                  <p className="text-[#979797] text-[1.3rem] m-0 p-0">
+                    Markessien@gmail.com
+                  </p>
+                  <button className="bg-[#018226] text-white rounded-full w-[100%] h-[41px] mt-[2.5rem] mb-[1.2rem] px-[1.25rem] hover:bg-[#2EE061] hover:text-black">
+                    Change avatar
+                  </button>
+                  <h2 className="text-[#D60602] text-2xl cursor-pointer py-[10px] hover:bg-[#D60602] rounded-full hover:text-white hover:w-[100%] hover:py-[10px]">Delete avatar</h2>
                 </div>
               </div>
-              
-            </div>
-          </TabPanel>
-          <TabPanel>
-            <div className="border border-[#F1F1F1] rounded-2xl bg-white h-[70vh] w-[95%] m-10 p-[5rem] flex flex-col">
-              <div className="flex mb-[2rem]">
-                <p className="text-[#979797] text-[1.8rem] m-0 p-0">
-                  Your current password
-                </p>
-              </div>
-              <div className="">
+              <div className=" flex flex-col justify-between w-full my-[5rem] border-l-2 border-r-[#F1F1F1] px-[5rem]">
                 <Formik
                   initialValues={{
-                    password: '',
-                    confirm_password: '',
+                    first_name: 'Mark',
+                    last_name: 'Essien',
+                    email: 'Markessien@gmail.com',
+                    phone: '',
                   }}
                   validationSchema={userValidationSchema}
                   onSubmit={(values) => console.log('Form data', values)}
                 >
                   {({ values }) => (
                     <Form autoComplete="off">
-                      <div className="flex items-center w-1/3">
+                      <div className="flex items-center justify-between gap-16 mb-8">
                         <FormikControl
                           values={values}
                           control="input"
                           placeholder="First Name"
-                          name="passowrd"
-                          type="password"
+                          name="first_name"
+                          type="text"
+                        />
+                        <FormikControl
+                          values={values}
+                          control="input"
+                          placeholder="Last Name"
+                          name="last_name"
+                          type="text"
                         />
                       </div>
-                      <div className="flex flex-row w-full justify-between gap-16 mt-[6.25rem]">
+                      <div className="flex flex-row w-full justify-between gap-16">
                         <FormikControl
                           values={values}
                           control="input"
-                          placeholder="Change password"
-                          name="password"
-                          type="password"
+                          placeholder="Enter email"
+                          name="email"
+                          type="text"
                         />
                         <FormikControl
                           values={values}
                           control="input"
-                          placeholder="Confirm password"
-                          name="confirm_password"
-                          type="password"
+                          placeholder="Enter phone number"
+                          name="phone"
+                          type="text"
                         />
                       </div>
                     </Form>
                   )}
                 </Formik>
+                <div className="flex">
+                  <button className="ml-auto bg-[#018226] text-white rounded-full h-[5rem] px-[7.5rem] hover:bg-[#2EE061] hover:text-black">
+                    Update Profile
+                  </button>
+                </div>
               </div>
-              <div className="flex mt-[29rem]">
+            </div>
+          </TabPanel>
+          <TabPanel>
+            <div className="border border-[#F1F1F1] rounded-2xl bg-white h-[70vh] w-[95%] m-10 p-[5rem] flex flex-col justify-between">
+              <div className="">
+                <div className="flex mb-[2rem]">
+                  <p className="text-[#979797] text-[1.8rem] m-0 p-0">
+                    Your current password
+                  </p>
+                </div>
+                <div className="">
+                  <Formik
+                    initialValues={{
+                      password: '',
+                      confirm_password: '',
+                    }}
+                    validationSchema={userValidationSchema}
+                    onSubmit={(values) => console.log('Form data', values)}
+                  >
+                    {({ values }) => (
+                      <Form autoComplete="off">
+                        <div className="flex items-center w-1/3">
+                          <FormikControl
+                            values={values}
+                            control="input"
+                            placeholder="First Name"
+                            name="passowrd"
+                            type="password"
+                          />
+                        </div>
+                        <div className="flex flex-row w-full justify-between gap-16 mt-[4rem]">
+                          <FormikControl
+                            values={values}
+                            control="input"
+                            placeholder="Change password"
+                            name="password"
+                            type="password"
+                          />
+                          <FormikControl
+                            values={values}
+                            control="input"
+                            placeholder="Confirm password"
+                            name="confirm_password"
+                            type="password"
+                          />
+                        </div>
+                      </Form>
+                    )}
+                  </Formik>
+                </div>
+              </div>
+              <div className="flex">
                 <button className="ml-auto bg-[#018226] text-white rounded-full px-[9rem] h-[5rem]">
                   Change password
                 </button>
