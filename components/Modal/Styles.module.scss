@@ -55,18 +55,19 @@
 
         .carousel {
             overflow: hidden;
-            max-width: 900px;
+            max-width: 45rem;
 
             &__inner {
                 // white-space: nowrap;
                 display: flex;
                 column-gap: 3.5rem;
                 transition: ease 1s;
+                padding: 0 2rem;
             }
 
             &__item {
-                display: inline-block;
-                width: 1000vh;
+                // display: inline-block;
+                // width: 1000vh;
 
                 .details {
                     display: flex;
@@ -123,8 +124,11 @@
                 box-shadow: 0px 4px 13px rgba(58, 58, 58, 0.3);
                 cursor: pointer;
                 border-radius: 70px;
-                padding: .7rem 1.1rem
+                padding: .7rem 1.1rem;
                 
+                 @media (max-width: 26.43em) {
+                     top: calc(50% - 40px);                
+                }
             }
             
             .slideNone {
@@ -132,12 +136,12 @@
             }
             .left {
                 // margin: .7rem 1.1rem;
-                left: 0;
+                left: -2rem;
                 color: #2F3733;
                 font-size: 2.5rem;
             }
             .right {
-            right: 0;
+            right: -2rem;
             color: #2F3733;
             font-size: 2.5rem;
             }
