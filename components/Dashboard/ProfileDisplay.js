@@ -60,14 +60,14 @@ const ProfileDisplay = ({ userVoters, states }) => {
   const { userStates } = useUserStore();
   const { userVillages, addVillages } = useUserStore();
 
-  const [loading, setLoading] = useState(false);
-  useEffect(() => {
+  // const [loading, setLoading] = useState(false);
+  /*useEffect(() => {
     if (!userVoters) {
       setLoading(true);
     } else {
       setLoading(false);
     }
-  }, []);
+  }, []);*/
 
   //console.log(userVoters)
   const [state, setState] = useState({
@@ -297,7 +297,7 @@ const ProfileDisplay = ({ userVoters, states }) => {
       <div className={styles.profile__achievement}>
         <h2>Levels</h2>
         <div className={styles.profile__image}>
-          {!userVoters && loading && <Loader />}
+          
           {userVoters && userVoters.length > 0 ? (
             <>
               {userVoters.length >= 3 ? (
