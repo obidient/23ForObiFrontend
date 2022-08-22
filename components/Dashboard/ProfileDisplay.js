@@ -96,9 +96,13 @@ const ProfileDisplay = ({ userVoters, states }) => {
   const last_name = userProfile?.user?.last_name;
   const email = userProfile?.user?.email;
   const image = userProfile?.user?.google_image_url;
-  //const userState = stateSelect;
+  const userState = stateSelect;
   const userVillage = userProfile?.user_data?.data?.village;
   // console.log(userProfile)
+  const [stateSelect, setStateSelect] = useState(
+      userProfile?.user_data?.data?.state
+    );
+
   /////////////// FORM /////////////////////
   // Initial form values
   const initialValues = {
@@ -117,6 +121,7 @@ const ProfileDisplay = ({ userVoters, states }) => {
     //const name = e.target.name
     //const value = e.target.value
     const { name, value } = e.target;
+    console.log(e.target.value);
 
     if (name === 'state') {
       const stateID = e.target.value;
@@ -249,12 +254,12 @@ const ProfileDisplay = ({ userVoters, states }) => {
                 name="state"
                 control="selectState"
               >
-                <option value={values.state}>{values.state}</option>
                 {states?.map((item) => {
+                // <option value={item.state_name}>{item.state_name}</option>;
                   return (
                     <option
                       value={item.id}
-                      // selected={item.state_name == stateSelect ? true : false}
+                      selected={item.state_name == stateSelect ? true : false}
                       key={item.id}
                     >
                       {item.state_name}
@@ -268,8 +273,9 @@ const ProfileDisplay = ({ userVoters, states }) => {
                 name="village"
                 onChange={handleInputChange}
               >
+              {!userVillages ?                 
                 <option value={values.village}>{values.village}</option>
-                {userVillages?.list_of_villages?.map((item) => {
+                : userVillages?.list_of_villages?.map((item) => {
                   return (
                     <option value={item.id} key={item.id}>
                       {item.name}
