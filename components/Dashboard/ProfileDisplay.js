@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import useSWR from 'swr';
 import Image from 'next/image';
 import FileBase from 'react-file-base64';
+import { useRouter } from 'next/router';
 import styles from './Styles.module.scss';
 import avatar from '../../assets/avatar.png';
 // import SelectInput from './../misc/SelectInput';
@@ -40,7 +41,7 @@ import SelectInput from '../Forms/SelectInput';
 import Loader from '../Loader';
 
 //data
-import StateContext from '../../Context/StateContext'
+import StateContext from '../../Context/StateContext';
 import { getStates } from '../../adapters/requests';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -52,15 +53,21 @@ const FormikControl = dynamic(() => import('../Forms/FormikControl'), {
 });
 
 const ProfileDisplay = ({ userVoters, states }) => {
-
-  const { userProfile, registeredUser, accessToken } = useAuthStore();
+  const { userProfile, accessToken } = useAuthStore();
   let token = accessToken;
+  const router = useRouter();
 
- 
   const { userStates } = useUserStore();
   const { userVillages, addVillages } = useUserStore();
 
-  // console.log(registeredUser);
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    if (!userVoters) {
+      setLoading(true);
+    } else {
+      setLoading(false);
+    }
+  }, []);
 
   //console.log(userVoters)
   const [state, setState] = useState({
@@ -68,6 +75,7 @@ const ProfileDisplay = ({ userVoters, states }) => {
     vertical: 'top',
     horizontal: 'center',
   });
+
   const { open } = state;
 
   const handleClose = () => {
@@ -83,30 +91,28 @@ const ProfileDisplay = ({ userVoters, states }) => {
   };
 
   // console.log(userStates)
- 
-  
 
   const first_name = userProfile?.user?.first_name;
   const last_name = userProfile?.user?.last_name;
   const email = userProfile?.user?.email;
-  const image = userProfile?.image;
-  const userState = userProfile?.user_data?.data?.state;
+  const image = userProfile?.user?.google_image_url;
+  //const userState = stateSelect;
   const userVillage = userProfile?.user_data?.data?.village;
-console.log(userProfile)
+  // console.log(userProfile)
   /////////////// FORM /////////////////////
   // Initial form values
   const initialValues = {
     firstname: first_name,
     lastname: last_name,
     email: email,
-    state: userState,
+    // state: userState,
     // lga: '',
     village: userVillage,
-    selectedFile: '',
+    userImage: '',
   };
 
   const [values, setValues] = useState(initialValues);
-console.log(values)
+  // console.log(values)
   const handleInputChange = (e) => {
     //const name = e.target.name
     //const value = e.target.value
@@ -136,8 +142,6 @@ console.log(values)
     });
   };
 
-
-
   //FORM SUBMIT FUNCTION
   const handleUpdate = (e) => {
     e.preventDefault();
@@ -146,25 +150,34 @@ console.log(values)
       // Accept: 'application/json',
       Authorization: `Bearer ${token}`,
     };
-    console.log(values)
+    console.log(values);
     try {
-      axios.put('https://api.23forobi.com/user-details', {
-        firstname: values.firstname,
-        lastname: values.lastname,
-        email: values.email,
-        village: values.village,
-        state: values.state
-      }, {headers: headers}).then(res => {
-      console.log(res)
-    })
-      
+      axios
+        .put(
+          'https://api.23forobi.com/user-details',
+          {
+            firstname: values.firstname,
+            lastname: values.lastname,
+            email: values.email,
+            village: values.village,
+            state: values.state,
+            userImage: values.userImage,
+          },
+          { headers: headers }
+        )
+        .then((res) => {
+          console.log(res);
+          if (res.status === 200) {
+            router.push('/dashboard');
+          }
+        });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
   const clear = () => {
-    setValues({ ...values, selectedFile: '' });
+    setValues({ ...values, userImage: '' });
   };
 
   return (
@@ -175,7 +188,7 @@ console.log(values)
         <div className={styles.profile__profileContent}>
           <div className={styles.avatar}>
             <Image
-              src={values.selectedFile ? values.selectedFile : avatar}
+              src={values.userImage ? values.userImage : image}
               width={177}
               height={177}
             />
@@ -184,12 +197,12 @@ console.log(values)
                 type="file"
                 multiple={false}
                 onDone={({ base64 }) =>
-                  setValues({ ...values, selectedFile: base64 })
+                  setValues({ ...values, userImage: base64 })
                 }
               />
-              {values.selectedFile ? 'edit Image' : 'add Image'}
+              {image ? 'edit Image' : 'add Image'}
             </label>
-            {values.selectedFile && (
+            {values.userImage && (
               <span className="cursor-pointer" onClick={clear}>
                 Remove Image
               </span>
@@ -228,18 +241,22 @@ console.log(values)
                 value={values.email}
                 onChange={handleInputChange}
               />
+              {/* <div > */}
+
               <select
                 onChange={handleInputChange}
                 value={values.state}
                 name="state"
                 control="selectState"
               >
-                <option value={initialValues.state}>
-                  {initialValues.state}
-                </option>
+                <option value={values.state}>{values.state}</option>
                 {states?.map((item) => {
                   return (
-                    <option value={item.id} key={item.id}>
+                    <option
+                      value={item.id}
+                      // selected={item.state_name == stateSelect ? true : false}
+                      key={item.id}
+                    >
                       {item.state_name}
                     </option>
                   );
@@ -251,9 +268,7 @@ console.log(values)
                 name="village"
                 onChange={handleInputChange}
               >
-                <option value={initialValues.village}>
-                  {initialValues.village}
-                </option>
+                <option value={values.village}>{values.village}</option>
                 {userVillages?.list_of_villages?.map((item) => {
                   return (
                     <option value={item.id} key={item.id}>
@@ -276,6 +291,7 @@ console.log(values)
       <div className={styles.profile__achievement}>
         <h2>Levels</h2>
         <div className={styles.profile__image}>
+          {!userVoters && loading && <Loader />}
           {userVoters && userVoters.length > 0 ? (
             <>
               {userVoters.length >= 3 ? (
@@ -464,7 +480,7 @@ console.log(values)
 //         allState: stateData?.data
 //       }
 //     }
-    
+
 //   } catch (error) {
 //     return {
 //       props: {

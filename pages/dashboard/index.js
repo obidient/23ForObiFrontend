@@ -93,6 +93,7 @@ const dashboard = (props) => {
               states={states}
               villageDetails={villageData}
               votersDetails={voterData}
+              awards={votersProgress}
             />
           </div>
           <div className={styles.aside}>

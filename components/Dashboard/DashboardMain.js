@@ -46,9 +46,12 @@ import SelectVillage from './../misc/SelectVillage';
 //   }
 // );
 
-const DashboardMain = ({ states, villageDetails, votersDetails }) => {
+const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
   const { userProfile } = useAuthStore();
   const { accessToken } = useAuthStore();
+  // const { village, state } = registeredUser;
+
+  // console.log(village)
 
   const [otherVillage, setOtherVillage] = useState();
 
@@ -216,7 +219,7 @@ const DashboardMain = ({ states, villageDetails, votersDetails }) => {
         <TabList
           className={`flex border-b border-[#F1F1F1] w-full items-center justify-start text-center mt-8 overflow-x-scroll ${styles.tabs}`}
         >
-          {
+          {/*
             <Tab className="font-bold lg:px-8 py-3 text-3xl lg:text-2xl  md:min-w-[40%] min-w-[70%] cursor-pointer hover:border-[#018226] hover:border-b-[1px] flex gap-2 justify-center">
               {registeredUserVillage && registeredUserVillage}&nbsp;
               <p>
@@ -225,8 +228,8 @@ const DashboardMain = ({ states, villageDetails, votersDetails }) => {
                 })`}</span>
               </p>
             </Tab>
-          }
-          {/*villageDetails?.map((item) => (
+              */}
+          {villageDetails?.map((item) => (
             <Tab
               key={item.village.id}
               className="font-bold lg:px-8 py-3 text-3xl lg:text-2xl  md:min-w-[40%] min-w-[70%] cursor-pointer hover:border-[#018226] hover:border-b-[1px] flex gap-2 justify-center"
@@ -234,7 +237,7 @@ const DashboardMain = ({ states, villageDetails, votersDetails }) => {
               {item.village.name}
               <p className="lowercase">({item.village.location_id})</p>
             </Tab>
-          ))*/}
+          ))}
           {villageDetails && (
             <Tab
               className="font-bold lg:px-8 py-3 lg:text-2xl  min-w-[40%] cursor-pointer hover:border-[#018226] hover:border-b-[1px] flex row-gap-2 border-none"
@@ -254,6 +257,7 @@ const DashboardMain = ({ states, villageDetails, votersDetails }) => {
           <VillageStat
             votersDetails={votersDetails}
             villageDetails={villageDetails}
+            awards={awards}
           />
         </div>
         {villageDetails?.map((items) => (

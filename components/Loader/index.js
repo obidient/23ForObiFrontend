@@ -12,7 +12,7 @@ const Loader = ({
   innerClose,
 }) => {
   const modalRef = useRef();
-  useEffect(() => {
+  /*useEffect(() => {
     //  add when mounted
     document.addEventListener('mousedown', handleClick);
 
@@ -29,7 +29,7 @@ const Loader = ({
     }
     // outside the modal
     onClose();
-  }, []);
+  }, []);*/
 
   return (
     <div className={styles.backdrop} style={{ ...backdropStyles }}>
