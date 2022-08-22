@@ -5,9 +5,15 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import DeliverModal from '../Modal/DeliverModal';
 import Modal from './../Modal/Index';
+import useAuthStore from './../../store/authStore';
+import { useRouter } from 'next/router';
 
 const Footer = () => {
 
+  const router = useRouter();
+
+  const { userProfile, removeUser } = useAuthStore();
+  console.log(userProfile);
     //Show Modal
   const [showModal, setShowModal] = useState(false);
   const [signInIsVisible, setSignInIsVisible] = useState(false);
@@ -33,7 +39,7 @@ const Footer = () => {
             </p>
             <div className={styles.btn_div}>
               {/* <Link href=""> */}
-              <button className="btn_dark" onClick={() => setShowModal(true)}>
+              <button className="btn_dark" onClick={() => {userProfile ? router.push('/dashboard') : setShowModal(true);}}>
                 Deliver votes
               </button>
               {/* </Link> */}
