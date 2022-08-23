@@ -13,6 +13,8 @@ import { getStates } from '../../adapters/requests';
 import useSWR from 'swr';
 import axios from 'axios';
 import { data } from 'autoprefixer';
+import { googleLogout } from '@react-oauth/google';
+
 
 const dashboard = (props) => {
   const { states } = props;
@@ -22,8 +24,8 @@ const dashboard = (props) => {
   const WAIT_TIME = 5000;
 
   /////////// USER VILLAGES /////////////
-  const { accessToken } = useAuthStore();
-  // console.log(accessToken)
+  const { accessToken, removeUser } = useAuthStore();
+  console.log(voterData);
 
   const fetcher = async (url, token) =>
     await axios
@@ -42,36 +44,68 @@ const dashboard = (props) => {
   //GET DATA AND REFRESH AFTER 5 SECONDS
   useEffect(() => {
     const id = setInterval(() => {
-      try {
+      // try {
         axios
           .get('https://api.23forobi.com/voters-by-contributor', {
-            headers: { Authorization: `Bearer ${accessToken}` },
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
           })
           .then((res) => {
             // console.log(res)
             setVoterData(res.data);
+          })
+          .catch((error) => {
+            // console.log(error.response.data.detail);
+            // if (error.response.data.detail == 'Invalid Credentials') {
+            //   // googleLogout();
+            //   removeUser();
+            // }
           });
-      } catch (error) {
-        console.log(error);
-      }
     }, WAIT_TIME);
     return () => clearInterval(id);
   }, [voterData]);
 
-  useEffect(() => {
-    try {
-      const getVotersProgress = async () => {
-        await axios
-          .get('https://api.23forobi.com/voters-by-contributor', {
-            headers: { Authorization: `Bearer ${accessToken}` },
-          })
-          .then((res) => setProgress(res.data.length));
-      };
-      getVotersProgress();
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+    useEffect(() => {
+      // try {
+      // const getVotersProgress = async () => {
+      // await
+      axios
+        .get('https://api.23forobi.com/voters-by-contributor', {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .then((res) => {
+          setProgress(res.data.length);
+        })
+        // }).
+        .catch((error) => {
+          // console.log(error);
+          console.log(error.response.data.detail);
+          if (error.response.data.detail == 'Invalid Credentials') {
+            removeUser();
+          }
+        });
+      // getVotersProgress();
+      // }
+      // }
+    }, []);
+
+  // useEffect(() => {
+  //   try {
+  //     const getVotersProgress = async () => {
+  //       await axios
+  //         .get('https://api.23forobi.com/voters-by-contributor', {
+  //           headers: { Authorization: `Bearer ${accessToken}` },
+  //         })
+  //         .then((res) => setProgress(res.data.length));
+  //     };
+  //     getVotersProgress();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }, []);
 
   const expectedVotes = 30;
   let votersProgress = Math.trunc((100 / expectedVotes) * progress);
