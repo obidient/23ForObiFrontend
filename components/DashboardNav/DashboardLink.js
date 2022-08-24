@@ -14,7 +14,7 @@ const DashboardLink = ({ option, name, value, onChange }) => {
   const first_name = userProfile?.user?.first_name;
   const user_image = userProfile?.user?.google_image_url;
 
-  console.log(userProfile)
+  // console.log(userProfile)
   const router = useRouter();
   const [isDropDownVisible, setIsDropDownVisible] = useState(false);
 
