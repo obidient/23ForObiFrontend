@@ -81,7 +81,7 @@ const contents = [
     height: '285.66px',
   },
   {
-    text1: 'Come out and vote',
+    text1: 'Come out and',
     text2: 'VOTE THE',
     text4: 'LABOUR PARTY',
     text5: 'Peter Obi',

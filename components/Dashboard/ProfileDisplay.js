@@ -60,14 +60,14 @@ const ProfileDisplay = ({ userVoters, states }) => {
   const { userStates } = useUserStore();
   const { userVillages, addVillages } = useUserStore();
 
-  const [loading, setLoading] = useState(false);
-  useEffect(() => {
+  // const [loading, setLoading] = useState(false);
+  /*useEffect(() => {
     if (!userVoters) {
       setLoading(true);
     } else {
       setLoading(false);
     }
-  }, []);
+  }, []);*/
 
   //console.log(userVoters)
   const [state, setState] = useState({
@@ -103,6 +103,9 @@ const ProfileDisplay = ({ userVoters, states }) => {
       userProfile?.user_data?.data?.state
     );
 
+    console.log(userProfile);
+    const defaultState = "Add Your State"
+    const defaultVillage = "Add Your Village"
   /////////////// FORM /////////////////////
   // Initial form values
   const initialValues = {
@@ -254,8 +257,11 @@ const ProfileDisplay = ({ userVoters, states }) => {
                 name="state"
                 control="selectState"
               >
+                <option value="default" disable hidden>
+                  {defaultState}
+                </option>
+                ;
                 {states?.map((item) => {
-                // <option value={item.state_name}>{item.state_name}</option>;
                   return (
                     <option
                       value={item.id}
@@ -273,15 +279,22 @@ const ProfileDisplay = ({ userVoters, states }) => {
                 name="village"
                 onChange={handleInputChange}
               >
-              {!userVillages ?                 
-                <option value={values.village}>{values.village}</option>
-                : userVillages?.list_of_villages?.map((item) => {
-                  return (
-                    <option value={item.id} key={item.id}>
-                      {item.name}
-                    </option>
-                  );
-                })}
+                <option value="default" disable hidden>
+                  {defaultVillage}
+                </option>
+                {
+                  // !userVillages ? (
+                  //   <option value={values.village}>{values.village}</option>
+                  // ) : (
+                  userVillages?.list_of_villages?.map((item) => {
+                    return (
+                      <option value={item.id} key={item.id}>
+                        {item.name}
+                      </option>
+                    );
+                  })
+                  // )
+                }
               </select>
               <button
                 className="btn_dark mt-8"
@@ -297,7 +310,6 @@ const ProfileDisplay = ({ userVoters, states }) => {
       <div className={styles.profile__achievement}>
         <h2>Levels</h2>
         <div className={styles.profile__image}>
-          {!userVoters && loading && <Loader />}
           {userVoters && userVoters.length > 0 ? (
             <>
               {userVoters.length >= 3 ? (
