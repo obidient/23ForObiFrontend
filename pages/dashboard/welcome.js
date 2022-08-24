@@ -91,7 +91,7 @@ const welcome = () => {
   const handleSkip = () => {
     // console.log('Skipped');
     submitForm();
-    // router.push('/dashboard/summary');
+    router.push('/dashboard');
   };
 
   return (
