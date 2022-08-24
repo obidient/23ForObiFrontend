@@ -25,7 +25,7 @@ const dashboard = (props) => {
 
   /////////// USER VILLAGES /////////////
   const { accessToken, removeUser } = useAuthStore();
-  console.log(voterData);
+  // console.log(voterData);
 
   const fetcher = async (url, token) =>
     await axios
@@ -56,11 +56,7 @@ const dashboard = (props) => {
             setVoterData(res.data);
           })
           .catch((error) => {
-            // console.log(error.response.data.detail);
-            // if (error.response.data.detail == 'Invalid Credentials') {
-            //   // googleLogout();
-            //   removeUser();
-            // }
+            // console.log(error.response.data.detail);            
           });
     }, WAIT_TIME);
     return () => clearInterval(id);
@@ -82,7 +78,7 @@ const dashboard = (props) => {
         // }).
         .catch((error) => {
           // console.log(error);
-          console.log(error.response.data.detail);
+          // console.log(error.response.data.detail);
           if (error.response.data.detail == 'Invalid Credentials') {
             removeUser();
           }
@@ -91,21 +87,6 @@ const dashboard = (props) => {
       // }
       // }
     }, []);
-
-  // useEffect(() => {
-  //   try {
-  //     const getVotersProgress = async () => {
-  //       await axios
-  //         .get('https://api.23forobi.com/voters-by-contributor', {
-  //           headers: { Authorization: `Bearer ${accessToken}` },
-  //         })
-  //         .then((res) => setProgress(res.data.length));
-  //     };
-  //     getVotersProgress();
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }, []);
 
   const expectedVotes = 30;
   let votersProgress = Math.trunc((100 / expectedVotes) * progress);
