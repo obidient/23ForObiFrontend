@@ -368,7 +368,7 @@ const about = () => {
                   />
                 </svg>
 
-                <p className={aboutStyles.helppo__stepOne_title}>
+                <p className={aboutStyles.helppo__stepOne_title} >
                   Come out and vote{' '}
                   <span style={{ fontWeight: 600 }}>
                     VOTE THE{' '}

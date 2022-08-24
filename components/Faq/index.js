@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './Styles.module.scss';
 import { BsChevronUp, BsChevronDown } from 'react-icons/bs';
 
@@ -8,9 +8,32 @@ import { BsChevronUp, BsChevronDown } from 'react-icons/bs';
 import search from '../../assets/search.png';
 import Hero from '../Hero';
 
+const faqObject = [
+  {
+    ques: 'What is #23forObi about?',
+    res: '#23forObi is a movement that connects people in the grass root, we aim to educate people about PVC, good governance and how we can use this power to change our nation for the better.With your help and the help of everyone around you, we can better make this country a reliable, sustainable and relevant institution for ourselves and our kids.',
+  },
+  {
+    ques: 'How do I contribute?',
+    res: '#23forObi is a movement that connects people in the grass root, we aim to educate people about PVC, good governance and how we can use this power to change our nation for the better.With your help and the help of everyone around you, we can better make this country a reliable, sustainable and relevant institution for ourselves and our kids.',
+  },
+  {
+    ques: 'What the process of being a part of the movement',
+    res: '#23forObi is a movement that connects people in the grass root, we aim to educate people about PVC, good governance and how we can use this power to change our nation for the better.With your help and the help of everyone around you, we can better make this country a reliable, sustainable and relevant institution for ourselves and our kids.',
+  },
+  {
+    ques: 'What is #23forObi about?',
+    res: '#23forObi is a movement that connects people in the grass root, we aim to educate people about PVC, good governance and how we can use this power to change our nation for the better.With your help and the help of everyone around you, we can better make this country a reliable, sustainable and relevant institution for ourselves and our kids.',
+  },
+  {
+    ques: 'What is #23forObi about?',
+    res: '#23forObi is a movement that connects people in the grass root, we aim to educate people about PVC, good governance and how we can use this power to change our nation for the better.With your help and the help of everyone around you, we can better make this country a reliable, sustainable and relevant institution for ourselves and our kids.',
+  },
+];
+
 const Faq = () => {
   const [searchQuery, setSearchQuery] = useState('');
-
+  const [searchValue, setSearchValue ] = useState(faqObject)
   const [faq, setFaq] = useState(false);
 
   const faqShow = {
@@ -30,32 +53,25 @@ const Faq = () => {
     setFaq(index);
   };
 
-  const faqObject = [
-    {
-      ques: 'What is #23forObi about?',
-      res: '#23forObi is a movement that connects people in the grass root, we aim to educate people about PVC, good governance and how we can use this power to change our nation for the better.With your help and the help of everyone around you, we can better make this country a reliable, sustainable and relevant institution for ourselves and our kids.',
-    },
-    {
-      ques: 'How do I contribute?',
-      res: '#23forObi is a movement that connects people in the grass root, we aim to educate people about PVC, good governance and how we can use this power to change our nation for the better.With your help and the help of everyone around you, we can better make this country a reliable, sustainable and relevant institution for ourselves and our kids.',
-    },
-    {
-      ques: 'What the process of being a part of the movement',
-      res: '#23forObi is a movement that connects people in the grass root, we aim to educate people about PVC, good governance and how we can use this power to change our nation for the better.With your help and the help of everyone around you, we can better make this country a reliable, sustainable and relevant institution for ourselves and our kids.',
-    },
-    {
-      ques: 'What is #23forObi about?',
-      res: '#23forObi is a movement that connects people in the grass root, we aim to educate people about PVC, good governance and how we can use this power to change our nation for the better.With your help and the help of everyone around you, we can better make this country a reliable, sustainable and relevant institution for ourselves and our kids.',
-    },
-    {
-      ques: 'What is #23forObi about?',
-      res: '#23forObi is a movement that connects people in the grass root, we aim to educate people about PVC, good governance and how we can use this power to change our nation for the better.With your help and the help of everyone around you, we can better make this country a reliable, sustainable and relevant institution for ourselves and our kids.',
-    },
-  ];
+
 
   const handleChange = (e) => {
     setSearchQuery(e.target.value);
   };
+
+  useEffect(() => {
+
+    if(searchQuery !== ''){
+      let search = searchValue.filter((value) => {
+          return value.ques.includes(searchQuery.toString().toLowerCase())
+        })
+        setSearchValue(search)
+    }else {
+      setSearchValue(faqObject)
+    }
+  }, [searchQuery])
+
+  
   return (
     <div className='container'>
       <Hero
@@ -79,7 +95,7 @@ const Faq = () => {
         </div>
 
         <div className={styles.main__faq_main}>
-          {faqObject.map((item, index) => (
+          {searchValue.map((item, index) => (
             <div
               style={faq === index ? faqShow : faqHide}
               onClick={() => toggle(index)}
