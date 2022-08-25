@@ -1,0 +1,40 @@
+.main {
+    background-color: #fff;
+    padding: 36px;
+
+    &__filterContainer {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__filterContent {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--text-color-4);
+        font-weight: 400;
+
+        span {
+            font-size: 1.5rem;
+        }
+
+    }
+
+    &__btn {
+        background-color: var(--btn-color);
+        padding: 10px 15px 10px 15px;
+        border-radius: 25px;
+        color: #fff;
+        cursor: pointer;
+
+        button {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #018226;
+            padding: 10px 20px;
+            border-radius: 3rem;
+        }
+        
+    }
+}
