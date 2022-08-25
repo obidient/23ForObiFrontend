@@ -11,6 +11,7 @@ import ThirdStep from '../../components/Welcome/Step3';
 import FourthStep from '../../components/Welcome/Step4';
 import FifthStep from '../../components/Welcome/Step5';
 import StepButton from '../../components/misc/StepButton';
+
 import Head from 'next/head';
 import useAuthStore from '../../store/authStore';
 import axios from 'axios';
@@ -68,6 +69,7 @@ const welcome = () => {
       //Accept: 'application/json',
       Authorization: `Bearer ${token}`,
     };
+    console.log(formData)
     const data = {
       data: formData,
       id: user_id
@@ -121,6 +123,7 @@ const welcome = () => {
         </div>
         <div>
           {conditionalComponent()}
+          
           <StepButton
             steps={steps}
             handleSubmit={handleSubmit}

@@ -10,6 +10,7 @@ const Step2 = ({ formData, setFormData }) => {
       <form>
         <div className="my-5">
           <input
+           className="cursor-pointer"
             type="radio"
             checked={vote === 'yes'}
             value="yes"
@@ -24,6 +25,7 @@ const Step2 = ({ formData, setFormData }) => {
         </div>
         <div className="my-5">
           <input
+           className="cursor-pointer"
             type="radio"
             checked={vote === 'no'}
             value="no"
@@ -38,6 +40,7 @@ const Step2 = ({ formData, setFormData }) => {
         </div>
         <div className="my-5">
           <input
+           className="cursor-pointer"
             type="radio"
             checked={vote === 'undecided'}
             value="undecided"
