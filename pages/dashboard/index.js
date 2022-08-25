@@ -78,8 +78,8 @@ const dashboard = (props) => {
         // }).
         .catch((error) => {
           // console.log(error);
-          // console.log(error.response.data.detail);
-          if (error.response.data.detail == 'Invalid Credentials') {
+          console.log(error.response.data.detail);
+          if (error.response?.data.detail == 'Could not validate credentials') {
             removeUser();
           }
         });
