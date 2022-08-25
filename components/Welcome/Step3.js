@@ -10,6 +10,7 @@ const {available} = formData
       <form>
         <div className="my-5">
           <input
+           className="cursor-pointer"
             type="radio"
             checked={available === 'yes'}
             value="yes"
@@ -24,6 +25,7 @@ const {available} = formData
         </div>
         <div className="my-5">
           <input
+           className="cursor-pointer"
             type="radio"
             checked={available === 'no'}
             value="no"
