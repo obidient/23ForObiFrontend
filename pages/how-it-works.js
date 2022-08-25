@@ -111,10 +111,10 @@ const howItWorks = () => {
             key={index}
           >
             <div className="content flex flex-col justify-center w-1/2 p-5">
-              <h2 className="font-light lg:my-3">
+              <h2 className=" lg:my-3" style={{color: "#7a7b7b"}}>
                 {content.text1 ? content.text1 : ''}
               </h2>
-              <h5 className="font-bold text-4xl">
+              <h5 className="font-black text-4xl">
                 {content.text2 ? content.text2 : ''}{' '}
                 <span className="text-[#D60602]">
                   {content.text4 ? content.text4 : ''}
