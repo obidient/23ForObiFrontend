@@ -16,7 +16,7 @@ const StepButton = ({
 }) => {
   const enabledBtn =
     'flex items-center justify-center w-[173px] h-[44px] bg-[#018226]  rounded-full text-white my-10';
-  const disabledBtn = `${enabledBtn} opacity-40`;
+  const disabledBtn = `${enabledBtn} opacity-40 hover:cursor-not-allowed`;
   switch (steps) {
     case 1:
       return (
@@ -28,7 +28,7 @@ const StepButton = ({
             className={!disabled1 ? enabledBtn : disabledBtn}
           >
             Next
-            <div className="flex items-center pl-4 hover:translate-x-1">
+            <div className="flex items-center pl-4 hover:translate-x-1 ">
               <Image src={nextIcon} />
             </div>
           </button>
