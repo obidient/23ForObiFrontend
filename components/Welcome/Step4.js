@@ -24,7 +24,7 @@ const Step4 = ({ formData, setFormData }) => {
     ));
     */
 
-  const { state, lga, village, selectedVillage, is_village_new } = formData;
+  const { state, lga, village, selectedVillage } = formData;
 
   useEffect(() => {
     const fetchStates = async () => {
@@ -61,7 +61,7 @@ const Step4 = ({ formData, setFormData }) => {
         console.log(res.data);
         setVillages(res.data);
       });
-      setFormData({ ...formData, lga: e.target.value });
+    setFormData({ ...formData, lga: e.target.value });
   };
 
   return (
@@ -123,28 +123,25 @@ const Step4 = ({ formData, setFormData }) => {
                 <select
                   //value={village.id}
                   onChange={(e) => {
-                    setFormData({ ...formData, village: e.target.value });
+                    setFormData({ ...formData, selectedVillage: e.target.value });
                   }}
                   className="cursor-pointer rounded-full lg:w-[496px] w-full h-[44px] border border-[#2F3733] text-[ #979797] lg:text-3xl text-4xl px-5 focus:border-[#018226] focus:bg-[#F3FFF7]"
                 >
                   <option value="">Select your village</option>
-                  {villages && villages.length > 0 ? (
-                    villages.map((item, index) => (
-                      <option key={index} value={item.id}>
-                        {item.name}
-                      </option>
-                    ))
-                  ) : (
-                    <option value='I can"t find my village'>
-                      I can’t find my village
-                    </option>
-                  )}
+                    {villages && villages.length > 0 && (
+                      villages.map((item) => (
+                        <option key={item.id} value={item.id}>{item.name}</option>
+                      ))
+                    )}
+                  <option value='I can"t find my village'>
+                    I can’t find my village
+                  </option>
                 </select>
               </>
             )}
           </div>
           <div className="w-full">
-            {(!village || village !== 'I can"t find my village' ) && (
+            {selectedVillage === 'I can"t find my village' && (
               <>
                 <h2 className="text-[#2F3733] lg:text-3xl my-10">
                   Enter the name of your village
