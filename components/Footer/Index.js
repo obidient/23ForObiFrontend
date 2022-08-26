@@ -13,7 +13,7 @@ const Footer = () => {
   const router = useRouter();
 
   const { userProfile, removeUser } = useAuthStore();
-  console.log(userProfile);
+  // console.log(userProfile);
     //Show Modal
   const [showModal, setShowModal] = useState(false);
   const [signInIsVisible, setSignInIsVisible] = useState(false);

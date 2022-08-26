@@ -6,6 +6,7 @@ const Step4 = ({ formData, setFormData }) => {
   const [states, setStates] = useState([]);
   const [lgas, setLgas] = useState([]);
   const [villages, setVillages] = useState([]);
+  const [selected, setSelected] = useState('');
 
   //const [{ state, lga, village }] = useState({
   //  formData: { state: '', lga: '', village: '' },
@@ -46,7 +47,7 @@ const Step4 = ({ formData, setFormData }) => {
     await axios
       .get(`https://api.23forobi.com/list_lga_in_state/${stateID}`)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setLgas(res.data);
       });
     setFormData({ ...formData, state: e.target.value });
@@ -58,12 +59,15 @@ const Step4 = ({ formData, setFormData }) => {
     await axios
       .get(`https://api.23forobi.com/villages-in-lga/${lgaId}`)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setVillages(res.data);
       });
     setFormData({ ...formData, lga: e.target.value });
   };
 
+  const handleVillageChange = (e) => {
+    e.preventDefault();
+  };
   return (
     <div className="my-5 w-full">
       <h2 className="text-[#2F3733] lg:text-3xl my-10">
@@ -123,16 +127,23 @@ const Step4 = ({ formData, setFormData }) => {
                 <select
                   //value={village.id}
                   onChange={(e) => {
-                    setFormData({ ...formData, selectedVillage: e.target.value });
+                    setSelected(e.target.value);
+                    setFormData({
+                      ...formData,
+                      village: e.target.value,
+                      is_village_new: false,
+                    });
                   }}
                   className="cursor-pointer rounded-full lg:w-[496px] w-full h-[44px] border border-[#2F3733] text-[ #979797] lg:text-3xl text-4xl px-5 focus:border-[#018226] focus:bg-[#F3FFF7]"
                 >
                   <option value="">Select your village</option>
-                    {villages && villages.length > 0 && (
-                      villages.map((item) => (
-                        <option key={item.id} value={item.id}>{item.name}</option>
-                      ))
-                    )}
+                  {villages &&
+                    villages.length > 0 &&
+                    villages.map((item) => (
+                      <option key={item.id} value={item.id}>
+                        {item.name}
+                      </option>
+                    ))}
                   <option value='I can"t find my village'>
                     I can’t find my village
                   </option>
@@ -141,7 +152,7 @@ const Step4 = ({ formData, setFormData }) => {
             )}
           </div>
           <div className="w-full">
-            {selectedVillage === 'I can"t find my village' && (
+            {selected === 'I can"t find my village' && (
               <>
                 <h2 className="text-[#2F3733] lg:text-3xl my-10">
                   Enter the name of your village
