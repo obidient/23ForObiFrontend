@@ -24,7 +24,7 @@ const Step4 = ({ formData, setFormData }) => {
     ));
     */
 
-  const { state, lga, village, selectedVillage, is_village_new } = formData;
+  const { state, lga, village, selectedVillage } = formData;
 
   useEffect(() => {
     const fetchStates = async () => {
@@ -40,7 +40,7 @@ const Step4 = ({ formData, setFormData }) => {
     fetchStates();
   }, []);
 
-  const handleChange = async (e) => {
+  const handleStateChange = async (e) => {
     e.preventDefault();
     let stateID = e.target.value;
     await axios
@@ -52,13 +52,17 @@ const Step4 = ({ formData, setFormData }) => {
     setFormData({ ...formData, state: e.target.value });
   };
 
-  /*const handleVillageChange = async (e) => {
+  const handleLgaChange = async (e) => {
     e.preventDefault();
     let lgaId = e.target.value;
-    await axios.get(``).then((res) => {
-      setVillages(res.data)
-    });
-  };*/
+    await axios
+      .get(`https://api.23forobi.com/villages-in-lga/${lgaId}`)
+      .then((res) => {
+        console.log(res.data);
+        setVillages(res.data);
+      });
+    setFormData({ ...formData, lga: e.target.value });
+  };
 
   return (
     <div className="my-5 w-full">
@@ -74,7 +78,7 @@ const Step4 = ({ formData, setFormData }) => {
               /*onChange={(e) =>
                 setFormData((formData) => ({ ...formData, state: e.target.value }))
               }*/
-              onChange={handleChange}
+              onChange={handleStateChange}
               //value={state}
             >
               <option>Select your state</option>
@@ -94,13 +98,8 @@ const Step4 = ({ formData, setFormData }) => {
                   What local government are you from?
                 </h2>
                 <select
-                  //value={lga}
-                  onChange={(e) =>
-                    setFormData((formData) => ({
-                      ...formData,
-                      lga: e.target.value,
-                    }))
-                  }
+                  //value={lga.id}
+                  onChange={handleLgaChange}
                   className="cursor-pointer rounded-full lg:w-[496px] w-full h-[44px] border border-[#2F3733] text-[ #979797] lg:text-3xl text-4xl px-5 focus:border-[#018226] focus:bg-[#F3FFF7]"
                 >
                   <option>Select your local government area</option>
@@ -122,33 +121,27 @@ const Step4 = ({ formData, setFormData }) => {
                   What village are you from?
                 </h2>
                 <select
-                  // value={lga}
-                  onChange={(e) =>
-                    setFormData((formData) => ({
-                      ...formData,
-                      village: e.target.value || 'I can"t find my village',
-                    }))
-                  }
+                  //value={village.id}
+                  onChange={(e) => {
+                    setFormData({ ...formData, selectedVillage: e.target.value });
+                  }}
                   className="cursor-pointer rounded-full lg:w-[496px] w-full h-[44px] border border-[#2F3733] text-[ #979797] lg:text-3xl text-4xl px-5 focus:border-[#018226] focus:bg-[#F3FFF7]"
                 >
                   <option value="">Select your village</option>
-                  {villages && villages.length > 0 ? (
-                    villages.map((item, index) => (
-                      <option key={index} value={item.id}>
-                        {item.name}
-                      </option>
-                    ))
-                  ) : (
-                    <option value='I can"t find my village'>
-                      I can’t find my village
-                    </option>
-                  )}
+                    {villages && villages.length > 0 && (
+                      villages.map((item) => (
+                        <option key={item.id} value={item.id}>{item.name}</option>
+                      ))
+                    )}
+                  <option value='I can"t find my village'>
+                    I can’t find my village
+                  </option>
                 </select>
               </>
             )}
           </div>
           <div className="w-full">
-            {village && (
+            {selectedVillage === 'I can"t find my village' && (
               <>
                 <h2 className="text-[#2F3733] lg:text-3xl my-10">
                   Enter the name of your village
@@ -158,7 +151,7 @@ const Step4 = ({ formData, setFormData }) => {
                   className="rounded-full lg:w-[496px] w-full h-[44px] border border-[#2F3733] text-[ #979797] lg:text-3xl text-4xl px-5 focus:border-[#018226] focus:bg-[#F3FFF7] outline-none"
                   type="text"
                   placeholder="Enter village name"
-                  value={village.id}
+                  value={village}
                   onChange={(e) =>
                     setFormData((formData) => ({
                       ...formData,
