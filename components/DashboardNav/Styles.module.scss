@@ -120,11 +120,12 @@
 			color: var(--text-color-4);
 			:hover {
 				font-weight: 700;
+				color: #FFFFFF;
 			}
 			&:first-child {
 
 				&:hover {
-					background-color: #F3FFF7;
+					background-color:#018226;
 					
 					border-top-left-radius: 16px;
 					border-top-right-radius: 16px;
@@ -134,14 +135,14 @@
 			&:last-child {
 					
 				&:hover {
-					background-color: #F3FFF7;
+					background-color: #018226;
 					border-bottom-left-radius: 16px;
 					border-bottom-right-radius: 16px;
 				}
 			}
 			
 			&:hover {
-				background-color: #F3FFF7;
+				background-color: #018226;
 			}
 		}
 	}
