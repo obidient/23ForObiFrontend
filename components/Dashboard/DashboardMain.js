@@ -4,7 +4,7 @@ import Image from 'next/image';
 //IMAGES
 import status_check from '../../assets/status_check.png';
 import close from '../../assets/closeW.png';
-import add_img_green from '../../assets/add_img_green.png';
+import add_img_green from '../../assets/circle_add.svg';
 import caret_down from '../../assets/caret_down.png';
 
 import { useContext, useState, useEffect } from 'react';
