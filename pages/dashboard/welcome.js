@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import styles from '../pagestyles/home.module.scss';
 import DashboardNav from '../../components/DashboardNav/Index';
@@ -20,6 +20,9 @@ const welcome = () => {
   const { accessToken, userProfile } = useAuthStore();
   let token = accessToken;
   const user_id = userProfile?.user?.id;
+  const is_new_user = userProfile?.is_new_user;
+  //console.log(userProfile)
+  //console.log(is_new_user)
   //console.log(token);
   //console.log(user_id);
   const router = useRouter();
@@ -36,6 +39,12 @@ const welcome = () => {
     phone: '',
     selectedVillage: '',
   });
+
+  useEffect(() => {
+    if (is_new_user === false) {
+      router.push('/dashboard');
+    }
+  }, [router, is_new_user]);
 
   const conditionalComponent = () => {
     switch (steps) {
