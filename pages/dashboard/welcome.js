@@ -70,7 +70,7 @@ const welcome = () => {
       //Accept: 'application/json',
       Authorization: `Bearer ${token}`,
     };
-    console.log(formData);
+    // console.log(formData);
     const data = {
       data: formData,
       id: user_id,

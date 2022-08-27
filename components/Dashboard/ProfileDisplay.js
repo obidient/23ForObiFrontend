@@ -56,10 +56,10 @@ const ProfileDisplay = ({ userVoters, states }) => {
   const { userProfile, accessToken } = useAuthStore();
   let token = accessToken;
   const router = useRouter();
-  
-  const { userStates } = useUserStore();
-  const { userVillages, addVillages } = useUserStore();
-  
+
+  const { userStates, userVillages, addVillages, userLga, addLga } =
+    useUserStore();
+
   // const [loading, setLoading] = useState(false);
   /*useEffect(() => {
     if (!userVoters) {
@@ -69,7 +69,6 @@ const ProfileDisplay = ({ userVoters, states }) => {
     }
   }, []);*/
 
-  //console.log(userVoters)
   const [state, setState] = useState({
     open: false,
     vertical: 'top',
@@ -101,11 +100,8 @@ const ProfileDisplay = ({ userVoters, states }) => {
   // console.log(userProfile)
   const [stateSelect, setStateSelect] = useState(
     userProfile?.user_data?.data?.state
-  );
+    );
 
-  // console.log(userProfile);
-  const defaultState = 'Add Your State';
-  const defaultVillage = 'Add Your Village';
   /////////////// FORM /////////////////////
   // Initial form values
   const initialValues = {
@@ -113,36 +109,59 @@ const ProfileDisplay = ({ userVoters, states }) => {
     lastname: last_name,
     email: email,
     // state: userState,
-    // lga: '',
+    lga: userLga,
     village: userVillage,
     userImage: '',
   };
-
-  const [values, setValues] = useState(initialValues);
-  // console.log(values)
-  const handleInputChange = (e) => {
+  
+  const [values, setValues] = useState(initialValues);  
+  
+  const [initialUser, setInitialUser] = useState("");
+  useEffect(() => {
+    axios
+    .get(`https://api.23forobi.com/user-data`, {
+      headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((result) => {
+        const res = result.data;
+        setInitialUser(res);
+        return res;
+      });
+    }, [values.village]);
+  
+    const defaultState = initialUser?.state?.state_name;
+    const defaultVillage = initialUser?.village?.name;
+    const defaultLga = initialUser?.lga;
+    /// Change Handler
+  const handleInputChange = async (e) => {
     //const name = e.target.name
     //const value = e.target.value
     const { name, value } = e.target;
-    console.log(e.target.value);
-
+    
     if (name === 'state') {
       const stateID = e.target.value;
-      axios
-        .get(`https://api.23forobi.com/villages/${stateID}`)
+      await axios
+        .get(`https://api.23forobi.com/list_lga_in_state/${stateID}`)
+        .then((result) => {
+          const res = result.data;
+          addLga(res);
+          return res;
+        });
+    }
+
+    if (name === 'lga') {
+      const lgaID = e.target.value;
+      await axios
+        .get(`https://api.23forobi.com/villages-in-lga/${lgaID}`)
         .then((result) => {
           const res = result.data;
           addVillages(res);
-          // console.log(res);
 
           return res;
         });
-      // setValues({
-      //   ...values,
-      //   [e.target.name]: e.target.name,
-      // });
     }
-    // }
 
     setValues({
       ...values,
@@ -158,7 +177,6 @@ const ProfileDisplay = ({ userVoters, states }) => {
       // Accept: 'application/json',
       Authorization: `Bearer ${token}`,
     };
-    console.log(values);
     try {
       axios
         .put(
@@ -174,7 +192,7 @@ const ProfileDisplay = ({ userVoters, states }) => {
           { headers: headers }
         )
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           if (res.status === 200) {
             router.push('/dashboard');
           }
@@ -277,6 +295,29 @@ const ProfileDisplay = ({ userVoters, states }) => {
               </select>
               <select
                 // onChange={handleSelectState}
+                value={values.lga}
+                name="lga"
+                onChange={handleInputChange}
+              >
+                <option value="default" disable hidden>
+                  {defaultLga}
+                </option>
+                {
+                  // !userVillages ? (
+                  //   <option value={values.village}>{values.village}</option>
+                  // ) : (
+                  userLga?.map((item) => {
+                    return (
+                      <option value={item.id} key={item.id}>
+                        {item.name}
+                      </option>
+                    );
+                  })
+                  // )
+                }
+              </select>
+              <select
+                // onChange={handleSelectState}
                 value={values.village}
                 name="village"
                 onChange={handleInputChange}
@@ -288,7 +329,7 @@ const ProfileDisplay = ({ userVoters, states }) => {
                   // !userVillages ? (
                   //   <option value={values.village}>{values.village}</option>
                   // ) : (
-                  userVillages?.list_of_villages?.map((item) => {
+                  userVillages?.map((item) => {
                     return (
                       <option value={item.id} key={item.id}>
                         {item.name}

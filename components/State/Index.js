@@ -119,6 +119,7 @@ const State = ({ stateName, detail, images, villages }) => {
     console.log('Form data', data)
     setVillage("")
     setSelectedLga("")
+    setShowModal(false)
   }
 
   //IMAGE FOR STATE
@@ -399,15 +400,7 @@ const State = ({ stateName, detail, images, villages }) => {
               </div>
               <div className={styles.modal__body}>
                 <p>Kindly add a missing village</p>
-                {/* <Formik
-                  initialValues={{ location: '' }}
-                  validationSchema={Yup.object({
-                    // village: Yup.string().required('Required'),
-                    location: Yup.string().required('Required'),
-                  })}
-                  onSubmit={(values) => console.log('Form data', values)}
-                >
-                  {({ values }) => ( */}
+       
                     <form autoComplete="off">
                       <SelectWithSearch
                         // states={states}
@@ -430,7 +423,6 @@ const State = ({ stateName, detail, images, villages }) => {
                         Continue
                       </button>
                     </form>
-                  )}
               </div>
             </div>
           </Modal>

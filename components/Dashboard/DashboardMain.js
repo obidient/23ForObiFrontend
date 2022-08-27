@@ -84,7 +84,7 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
   ////////////////// Selected Village///////////////////////
   const [selectedVillage, setSelectedVillage] = useState('');
   const [selectedLga, setSelectedLga] = useState('');
-  // console.log(selectedLga);
+  // console.log(accessToken);
 
   const handleVillage = async () => {
     const url = 'https://api.23forobi.com/user-villages';
@@ -203,10 +203,6 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
     }
   }, [userVillages]);
 
-  // console.log(userVillages.length)
-  console.log(isVillageEmpty, "Villa");
-
-  // console.log(isVillageEmpty);
   //Effect to hide scroll
   useEffect(() => {
     const body = document.querySelector('body');
