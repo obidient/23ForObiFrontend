@@ -368,9 +368,10 @@ const about = () => {
                   />
                 </svg>
 
-                <p className={aboutStyles.helppo__stepOne_title} >
-                  Come out and vote{' '}
-                  <span style={{ fontWeight: 600 }}>
+                <p className={`${aboutStyles.helppo__stepOne_title}`}>
+                  Come out and vote
+                  <br />
+                  <span className="font-bold">
                     VOTE THE{' '}
                     <span style={{ color: '#D60602' }}>LABOUR PARTY</span>
                   </span>

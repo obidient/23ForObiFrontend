@@ -2,11 +2,10 @@ import create from 'zustand';
 // import axios from 'axios';
 
 const userStore = (set) => ({
-//   addVillages: '',
-  //   addVillages: null,
   allVillages: [],
-  //   allStateVillages: [],
+  allLga: [],
   addVillages: (villages) => set({ userVillages: villages }),
+  addLga: (lga) => set({ userLga: lga }),
   //   removeUser: () => set({ userProfile: null }),
   //   addAdminUser: (admin) => set({ adminUser: admin }),
   //   removeAdminUser: () => set({ adminUser: null }),

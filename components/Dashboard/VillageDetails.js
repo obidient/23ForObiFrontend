@@ -14,7 +14,7 @@ import useAuthStore from './../../store/authStore';
 import axios from 'axios';
 
 //IMPORT IMAGES
-import add_img_green from '../../assets/add_img_green.png';
+import add_img_green from '../../assets/circle_add.svg';
 import CompleteModal from './../misc/CompleteModal';
 
 const VillageDetails = ({ villageDetails, votersDetails }) => {

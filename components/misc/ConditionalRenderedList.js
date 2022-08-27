@@ -1,14 +1,18 @@
 import styles from './Styles.module.scss'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import useUserStore from './../../store/userStore';
+import axios from 'axios';
 
 const ConditionalRenderedList = ({
   value,
-  villages,
+  location,
   setValue,
   toggle,
-  setSelectedVillage,
+  setSelectedLocation,
   setToggle,
   setIsVillageEmpty,
+  type,
+  setLgaClicked,
 }) => {
   const others = {
     id: 999,
@@ -22,27 +26,38 @@ const ConditionalRenderedList = ({
     },
   ];
 
-  const [villageList, setVillageList] = useState([]);
+  const [locationList, setLocationList] = useState([]);
+  const [isClicked, setIsClicked] = useState(false);
 
-  // console.log(villageList);
+  const { addVillages } = useUserStore();
+
+  // console.log(type);
 
   useEffect(() => {
-    const newList = async () =>
-      setVillageList(villages?.list_of_villages?.concat(others));
-    newList();
-  }, [villages]);
+    const newList = async () => {
+      // setLocationList(type == 'lga' ? location : location?.concat(others));
+      if (type == 'lga') {
+        setLocationList(location);
+      } else {
+        setLocationList(location?.length > 0 ? location?.concat(others) : location);
+      }
+  }  
+      newList();
+    
+  }, [location]);
 
+  // console.log(location)
   useEffect(() => {
     // if (villageList === undefined) {
     //   setIsVillageEmpty(true)
     // } else {
     //   setIsVillageEmpty(false);
     // }
-  }, [villageList]);
-  
+  }, [locationList]);
+
   const itemsList =
-    villageList &&
-    villageList.map((villageItems) => {
+    locationList &&
+    locationList.map((villageItems) => {
       const itemsss = {
         name: villageItems.name,
         value: villageItems.id,
@@ -50,23 +65,45 @@ const ConditionalRenderedList = ({
       return itemsss;
     });
 
-  // console.log(value);
+  const handleClick = async (item) => {
+    setToggle(false);
+    setValue(item.name);
+    setSelectedLocation(item);
+    setIsClicked(!isClicked);
+    // console.log(item)
+
+    if(type == "lga") {
+    await axios
+      .get(`https://api.23forobi.com/villages-in-lga/${item.value}`)
+      .then((result) => {
+        const res = result.data;
+        addVillages(res);
+        // console.log(res);
+        return res;
+      });
+    }
+  };
+
+  useEffect(() => {
+    console.log(isClicked);
+    if(type == "lga") {
+      isClicked == true || false ? setLgaClicked(true) : null;
+    }
+
+  }, [isClicked]);
+
   if (value) {
     const filteredVillages = itemsList?.filter((item) =>
       item.name.toString().toLowerCase().startsWith(value.toLowerCase())
     );
-    // console.log(filteredVillages);
+
     if (filteredVillages?.length) {
       return (
         toggle && (
           <div className={styles.village_dropdown}>
             {filteredVillages?.map((item) => (
               <div
-                onClick={() => {
-                  setToggle(false);
-                  setValue(item.name);
-                  setSelectedVillage(item);
-                }}
+                onClick={() => handleClick(item)}
                 className={styles.dropdown_item}
               >
                 {item.name}
@@ -90,11 +127,7 @@ const ConditionalRenderedList = ({
       <div className={styles.village_dropdown}>
         {itemsList?.map((item) => (
           <div
-            onClick={() => {
-              setToggle(false);
-              setValue(item.name);
-              setSelectedVillage(item);
-            }}
+            onClick={() => handleClick(item)}
             className={styles.dropdown_item}
           >
             {item.name}

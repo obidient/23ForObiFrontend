@@ -40,7 +40,7 @@ const FormikControl = dynamic(() => import('../Forms/FormikControl'), {
 // const CustomSelectInput = dynamic(
 //   () => import('../Forms/SelectInput').then((mod) => mod.CustomSelectInput),
 //   {import CompleteModal from './../misc/CompleteModal';
-import SelectVillage from './../misc/SelectVillage';
+import SelectWithSearch from '../misc/SelectWithSearch';
 
 //     ssr: false,
 //   }
@@ -49,15 +49,19 @@ import SelectVillage from './../misc/SelectVillage';
 const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
   const { userProfile } = useAuthStore();
   const { accessToken } = useAuthStore();
+  const { userVillages, userLga } = useUserStore();
   // const { village, state } = registeredUser;
 
-  
   const [otherVillage, setOtherVillage] = useState();
 
   const [stateId, setStateId] = useState(null);
 
   const [userVillage, setUserVillage] = useState(null);
+
+  //CHECK IF INPUT IS CLICKED SO AS TO RENDER NEXT INPUT
   const [stateClicked, setStateClicked] = useState(false);
+  const [lgaClicked, setLgaClicked] = useState(false);
+  console.log(lgaClicked, "lga");
 
   const [isVillageEmpty, setIsVillageEmpty] = useState(null);
 
@@ -79,10 +83,12 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
 
   ////////////////// Selected Village///////////////////////
   const [selectedVillage, setSelectedVillage] = useState('');
+  const [selectedLga, setSelectedLga] = useState('');
+  // console.log(selectedLga);
 
   const handleVillage = async () => {
     const url = 'https://api.23forobi.com/user-villages';
-    const villageId = selectedVillage.value;
+    const villageId = selectedVillage?.value;
     const data = {
       village_id: villageId,
     };
@@ -91,6 +97,7 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
     const dataCreate = {
       name: otherVillage,
       location_id: stateId,
+      local_government_id: selectedLga.value,
     };
     const headers = {
       'Content-Type': 'application/json',
@@ -98,7 +105,7 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
       Authorization: `Bearer ${accessToken}`,
     };
 
-    if (selectedVillage.name !== 'Others' && !isVillageEmpty) {
+    if (selectedVillage?.name !== 'Others' && !isVillageEmpty) {
       axios.post(url, data, { headers })?.then((res) => {
         try {
           // console.log(res.data);
@@ -117,6 +124,7 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
         setShowCompleteModal(true);
         setOtherVillage('');
         setSelectedVillage('');
+        setLgaClicked(false);
       });
     }
     setShowModal(false);
@@ -186,6 +194,19 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
     village: Yup.string().required('Required'),
   });
 
+  //CHECK IF VILLAGE IS EMPTY
+  useEffect(() => {
+    if (userVillages?.length === 0) {
+      setIsVillageEmpty(true);
+    } else {
+      setIsVillageEmpty(false);
+    }
+  }, [userVillages]);
+
+  // console.log(userVillages.length)
+  console.log(isVillageEmpty, "Villa");
+
+  // console.log(isVillageEmpty);
   //Effect to hide scroll
   useEffect(() => {
     const body = document.querySelector('body');
@@ -289,6 +310,7 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
                 onClick={() => {
                   setShowModal(false);
                   setSelectedVillage(null);
+                  setLgaClicked(false);
                 }}
               >
                 &times;
@@ -316,7 +338,7 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
                     state={states}
                     addVillageHandler={addVillageHandler}
                     setStateId={(val) => setStateId(() => val)}
-                    setIsVillageEmpty={setIsVillageEmpty}
+                    // setIsLocationEmpty={setIsLocationEmpty}
                     setStateClicked={setStateClicked}
                   />
                   <p className={styles.select_desc}>
@@ -332,12 +354,29 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
                   /> */}
 
                   {stateClicked && (
-                    <SelectVillage
+                    <SelectWithSearch
                       states={states}
                       // handleOnChange={(value) => console.log(value)}
-                      setSelectedVillage={setSelectedVillage}
+                      setSelectedLocation={setSelectedLga}
                       setUserVillage={setUserVillage}
-                      setIsVillageEmpty={setIsVillageEmpty}
+                      // setIsLocationEmpty={setIsLocationEmpty}
+                      userLga={userLga}
+                      type="lga"
+                      setLgaClicked={setLgaClicked}
+                      placeholder={'local government'}
+                      // setLgaClicked={setLgaClicked}
+                    />
+                  )}
+                  {lgaClicked && (
+                    <SelectWithSearch
+                      states={states}
+                      // handleOnChange={(value) => console.log(value)}
+                      setSelectedLocation={setSelectedVillage}
+                      setUserVillage={setUserVillage}
+                      // setIsLocationEmpty={setIsLocationEmpty}
+                      userVillages={userVillages}
+                      type="village"
+                      placeholder={'village'}
                     />
                   )}
                   {selectedVillage?.name === 'Others' &&
@@ -352,9 +391,9 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
                       />
                     </div>
                   ) : null}
-                  {isVillageEmpty && stateClicked ? (
+                  {isVillageEmpty && lgaClicked ? (
                     <div className="mt-28">
-                      <p> No Village in this state. Add one</p>
+                      <p> No Village in this local government. Add one</p>
                       <input
                         type="text"
                         placeholder="Add a village"

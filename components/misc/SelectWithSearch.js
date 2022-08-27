@@ -8,37 +8,47 @@ import StateContext from '../../Context/StateContext';
 import useUserStore from '../../store/userStore';
 import { getVillage } from '../../adapters/requests/index';
 import axios from 'axios'
-import useAuthStore from './../../store/authStore';
+import useAuthStore from '../../store/authStore';
 import Input from './Input';
 import ConditionalRenderedList from './ConditionalRenderedList';
 
-const SelectVillage = ({ placeholder, states, setSelectedVillage, handleOnChange, setIsVillageEmpty }) => {
+const SelectVillage = ({
+  userVillages,
+  states,
+  type,
+  setSelectedLocation,
+  handleOnChange,
+  setIsVillageEmpty,
+  userLga,
+  placeholder,
+  setLgaClicked,
+}) => {
   const [toggle, setToggle] = useState(false);
   const [value, setValue] = useState();
 
-  const { userVillages } = useUserStore();
+  // const { userVillages } = useUserStore();
 
   //CLOSE SELECT ON OUTER CLICK
   const selectRef = useRef();
 
-   useEffect(() => {
-     //  add when mounted
-     document.addEventListener('mousedown', handleClose);
+  useEffect(() => {
+    //  add when mounted
+    document.addEventListener('mousedown', handleClose);
 
-     //  clean on unmount
-     return () => {
-       document.removeEventListener('mousedown', handleClose);
-     };
-   }, []);
+    //  clean on unmount
+    return () => {
+      document.removeEventListener('mousedown', handleClose);
+    };
+  }, []);
 
-   const handleClose = useCallback((e) => {
-     // // clicked inside the select
-     if (selectRef?.current?.contains(e.target)) {
-       return;
-     }
-     // outside the select
-     setToggle(false)
-   }, []);
+  const handleClose = useCallback((e) => {
+    // // clicked inside the select
+    if (selectRef?.current?.contains(e.target)) {
+      return;
+    }
+    // outside the select
+    setToggle(false);
+  }, []);
 
   return (
     <div ref={selectRef}>
@@ -49,20 +59,23 @@ const SelectVillage = ({ placeholder, states, setSelectedVillage, handleOnChange
             setToggle(true);
             // handleOnChange(inputValue);
           }}
+          placeholder={placeholder}
           value={value}
         />
       </div>
       <ConditionalRenderedList
         value={value}
-        villages={userVillages}
+        location={type == 'village' ? userVillages : userLga}
         setValue={(value) => {
           setValue(value);
           // handleOnChange(value);
         }}
         toggle={toggle}
         setToggle={setToggle}
-        setSelectedVillage={setSelectedVillage}
+        setSelectedLocation={setSelectedLocation}
         setIsVillageEmpty={setIsVillageEmpty}
+        type={type}
+        setLgaClicked={setLgaClicked}
       />
     </div>
   );

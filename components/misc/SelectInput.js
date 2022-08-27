@@ -9,10 +9,10 @@ import useUserStore from './../../store/userStore';
 import { getVillage } from './../../adapters/requests/index';
 import axios from 'axios'
 
-const SelectInput = ({placeholder, state, setStateId, setIsVillageEmpty, setStateClicked}) => {
+const SelectInput = ({placeholder, state, setStateId, setIsLocationEmpty, setStateClicked}) => {
   const [isDropDownVisible, setIsDropDownVisible] = useState(false);
   
-  const { userVillages } = useUserStore();
+  // const { userLga } = useUserStore();
   
   const { states } = useContext(StateContext);
 
@@ -20,16 +20,16 @@ const SelectInput = ({placeholder, state, setStateId, setIsVillageEmpty, setStat
   //CLOSE SELECT ON OUTER CLICK
   const selectRef = useRef();
 
-  useEffect(() => {
-    if (Array.isArray(userVillages)) {
-      setIsVillageEmpty(true);
-    } else {
-      setIsVillageEmpty(false);
+  // useEffect(() => {
+  //   if (Array.isArray(userLga)) {
+  //     setIsLocationEmpty(true);
+  //   } else {
+  //     setIsLocationEmpty(false);
 
-    }
+  //   }
 
 
-  }, [userVillages]);
+  // }, [userLga]);
 
   useEffect(() => {
     //  add when mounted
@@ -51,7 +51,7 @@ const SelectInput = ({placeholder, state, setStateId, setIsVillageEmpty, setStat
 
   }, []);
 
-  const { addVillages } = useUserStore();
+  const { addLga } = useUserStore();
   
 
   const [itemsList, setItemsList] = useState(state?.map((state) =>  {
@@ -99,12 +99,16 @@ const SelectInput = ({placeholder, state, setStateId, setIsVillageEmpty, setStat
     
     setSelectedItemsIndex(index);
     setIsDropDownVisible(!isDropDownVisible);
-    axios.get(`https://api.23forobi.com/villages/${item.value}`).then(result => {
-          const res = result.data
-          addVillages(res)
-          
-          // console.log(res)
-          return res
+    axios
+      .get(
+        `https://api.23forobi.com/list_lga_in_state/${item.value}`
+      )
+      .then((result) => {
+        const res = result.data;
+        addLga(res);
+
+        // console.log(res)
+        return res;
       });
     // console.log(stateVillages);
   };

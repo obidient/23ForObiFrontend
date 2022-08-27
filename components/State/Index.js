@@ -13,6 +13,9 @@ import Modal from '../Modal/Index';
 import { FaTimes } from 'react-icons/fa';
 import {StateBreadcrumb} from '../misc/Breadcrumb';
 import SOCIALMEDIAIMAGES from '../../data/smImages';
+import SelectWithSearch from '../misc/SelectWithSearch';
+import useUserStore from '../../store/userStore';
+import useAuthStore from '../../store/authStore';
 
 // Forms Import
 import { Form, Formik } from 'formik';
@@ -67,6 +70,56 @@ const State = ({ stateName, detail, images, villages }) => {
   const [villagesIn, setVillagesIn] = useState(VILLAGESINCONTROL);
   const [villagesNotIn, setVillagesNotIn] = useState(villageNotInDetails);
   const [selectedImages, setSelectedImages] = useState([]);
+
+
+  const [selectedLga, setSelectedLga] = useState("");
+  const [userVillage, setUserVillage] = useState(null);
+
+  const { userVillages, userLga, addLga } = useUserStore();
+  const { accessToken } = useAuthStore();
+  const [lgaClicked, setLgaClicked] = useState(false);
+  const [village, setVillage] = useState("");
+
+  // console.log(accessToken);
+  useEffect(() => {
+   axios
+     .get(`https://api.23forobi.com/list_lga_in_state/${detail.id}`)
+     .then((result) => {
+       const res = result.data;
+       addLga(res);
+
+       // console.log(res)
+       return res;
+     });
+  }, []);
+
+  const handleVillageAdd = (e) => {
+    e.preventDefault()
+    const data = {
+      name: village, 
+      local_government_id: selectedLga.value, 
+      location_id: detail.id
+    }
+
+    const url = "https://api.23forobi.com/villages"
+
+    const headers = {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    };
+
+    axios.post(url, data, { headers }).then((res) => {
+      try {
+
+      } catch {
+
+      }
+    });
+    console.log('Form data', data)
+    setVillage("")
+    setSelectedLga("")
+  }
 
   //IMAGE FOR STATE
   const [imgForm, setImgForm] = useState({
@@ -224,12 +277,13 @@ const State = ({ stateName, detail, images, villages }) => {
                 <div className={styles.current_gov__details}>
                   <Image src={image ? image : avatar} width={78} height={78} />
                   <div className={styles.text}>
-                    <h5>
-                      {current_governor
-                        ? current_governor
+                    <h5>{current_governor ? current_governor : ''}</h5>
+                    <p>
+                      Since:{' '}
+                      {current_governor_appointment_date
+                        ? current_governor_appointment_date
                         : ''}
-                    </h5>
-                  <p>Since: {current_governor_appointment_date ? current_governor_appointment_date : ''}</p>
+                    </p>
                     <p>Terms: {terms ? terms : ''}</p>
                   </div>
                 </div>
@@ -241,7 +295,11 @@ const State = ({ stateName, detail, images, villages }) => {
                   {/* <Image src={last_vote_direction ? pdp : apc} /> */}
                   <div className={styles.text}>
                     <h5>{last_vote_direction ? last_vote_direction : ''}</h5>
-                    <p>{last_vote_direction ? 'People Democratic Party': 'All Progressive Congress'}</p>
+                    <p>
+                      {last_vote_direction
+                        ? 'People Democratic Party'
+                        : 'All Progressive Congress'}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -299,17 +357,15 @@ const State = ({ stateName, detail, images, villages }) => {
           </div>
           <div className="cards">
             {villages && villages.length > 0 ? (
-              filter(villages, searchNotInQuery.toLowerCase()).map(
-                (item) => (
-                  <Card
-                    key={item.id}
-                    village={item.name}
-                    type={item.type}
-                    progress={item.progress}
-                    slug={item.slug}
-                  />
-                )
-              )
+              filter(villages, searchNotInQuery.toLowerCase()).map((item) => (
+                <Card
+                  key={item.id}
+                  village={item.name}
+                  type={item.type}
+                  progress={item.progress}
+                  slug={item.slug}
+                />
+              ))
             ) : (
               <h2>No Villages</h2>
             )}
@@ -343,36 +399,38 @@ const State = ({ stateName, detail, images, villages }) => {
               </div>
               <div className={styles.modal__body}>
                 <p>Kindly add a missing village</p>
-                <Formik
-                  initialValues={{ village: '', location: '' }}
+                {/* <Formik
+                  initialValues={{ location: '' }}
                   validationSchema={Yup.object({
-                    village: Yup.string().required('Required'),
+                    // village: Yup.string().required('Required'),
                     location: Yup.string().required('Required'),
                   })}
                   onSubmit={(values) => console.log('Form data', values)}
                 >
-                  {({ values }) => (
-                    <Form autoComplete="off">
-                      <FormikControl
-                        values={values}
-                        control="input"
-                        placeholder="Enter village name"
+                  {({ values }) => ( */}
+                    <form autoComplete="off">
+                      <SelectWithSearch
+                        // states={states}
+                        // handleOnChange={(value) => console.log(value)}
+                        setSelectedLocation={setSelectedLga}
+                        setUserVillage={setUserVillage}
+                        setLgaClicked={setLgaClicked}
+                        userLga={userLga}
+                        type="lga"
+                        placeholder={'lga'}
+                      />
+                      <input
+                        type="text"
+                        placeholder="Add a village"
                         name="village"
-                        type="text"
+                        value={village ?? ''}
+                        onChange={(e) => setVillage(e.target.value)}
                       />
-                      <FormikControl
-                        values={values}
-                        control="input"
-                        placeholder="Enter a Location"
-                        name="location"
-                        type="text"
-                      />
-                      <button className="btn_dark" type="submit">
+                      <button className="btn_dark" type="submit" onClick={handleVillageAdd}>
                         Continue
                       </button>
-                    </Form>
+                    </form>
                   )}
-                </Formik>
               </div>
             </div>
           </Modal>
