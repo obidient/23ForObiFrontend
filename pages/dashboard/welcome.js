@@ -134,7 +134,7 @@ const welcome = () => {
             disabled1={!formData.pvc}
             disabled2={!formData.vote}
             disabled3={!formData.available}
-            disabled4={!formData.state || !formData.lga}
+            disabled4={!formData.state || !formData.lga || !formData.village}
             disabled5={
               !formData.full_name ||
               !formData.phone ||
