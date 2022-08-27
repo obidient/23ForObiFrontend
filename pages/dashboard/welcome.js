@@ -34,6 +34,7 @@ const welcome = () => {
     village: '',
     full_name: '',
     phone: '',
+    selectedVillage: '',
   });
 
   const conditionalComponent = () => {
@@ -69,10 +70,10 @@ const welcome = () => {
       //Accept: 'application/json',
       Authorization: `Bearer ${token}`,
     };
-    console.log(formData)
+    console.log(formData);
     const data = {
       data: formData,
-      id: user_id
+      id: user_id,
     };
     try {
       await axios.post(url, data, { headers: headers }).then((res) => {
@@ -123,7 +124,7 @@ const welcome = () => {
         </div>
         <div>
           {conditionalComponent()}
-          
+
           <StepButton
             steps={steps}
             handleSubmit={handleSubmit}

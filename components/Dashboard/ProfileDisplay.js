@@ -56,10 +56,10 @@ const ProfileDisplay = ({ userVoters, states }) => {
   const { userProfile, accessToken } = useAuthStore();
   let token = accessToken;
   const router = useRouter();
-
+  
   const { userStates } = useUserStore();
   const { userVillages, addVillages } = useUserStore();
-
+  
   // const [loading, setLoading] = useState(false);
   /*useEffect(() => {
     if (!userVoters) {
@@ -91,7 +91,7 @@ const ProfileDisplay = ({ userVoters, states }) => {
   };
 
   // console.log(userStates)
-
+  const manOnGround = userProfile?.user_data?.data?.available;
   const first_name = userProfile?.user?.first_name;
   const last_name = userProfile?.user?.last_name;
   const email = userProfile?.user?.email;
@@ -100,12 +100,12 @@ const ProfileDisplay = ({ userVoters, states }) => {
   const userVillage = userProfile?.user_data?.data?.village;
   // console.log(userProfile)
   const [stateSelect, setStateSelect] = useState(
-      userProfile?.user_data?.data?.state
-    );
+    userProfile?.user_data?.data?.state
+  );
 
-    console.log(userProfile);
-    const defaultState = "Add Your State"
-    const defaultVillage = "Add Your Village"
+  // console.log(userProfile);
+  const defaultState = 'Add Your State';
+  const defaultVillage = 'Add Your Village';
   /////////////// FORM /////////////////////
   // Initial form values
   const initialValues = {
@@ -217,13 +217,15 @@ const ProfileDisplay = ({ userVoters, states }) => {
             )}
           </div>
           <div className={styles.form}>
-            <div className={styles.form__text}>
-              <h3>Man on Ground</h3>
-              <p>
-                You are our man on ground, you will assist in educating others
-                on how to add voters and so much.
-              </p>
-            </div>
+            {manOnGround === 'yes' && (
+              <div className={styles.form__text}>
+                <h3>Man on Ground</h3>
+                <p>
+                  You are our man on ground, you will assist in educating others
+                  on how to add voters and so much.
+                </p>
+              </div>
+            )}
             <form action="">
               <input
                 type="text"
