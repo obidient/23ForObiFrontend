@@ -117,6 +117,7 @@ const ProfileDisplay = ({ userVoters, states }) => {
   const [values, setValues] = useState(initialValues);  
   
   const [initialUser, setInitialUser] = useState("");
+  console.log(initialUser)
   useEffect(() => {
     axios
     .get(`https://api.23forobi.com/user-data`, {
@@ -133,7 +134,7 @@ const ProfileDisplay = ({ userVoters, states }) => {
   
     const defaultState = initialUser?.state?.state_name;
     const defaultVillage = initialUser?.village?.name;
-    const defaultLga = initialUser?.lga;
+    const defaultLga = initialUser?.lga?.name;
     /// Change Handler
   const handleInputChange = async (e) => {
     //const name = e.target.name
