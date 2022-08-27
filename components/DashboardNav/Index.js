@@ -13,7 +13,7 @@ const DashboardNav = ({ progress,progressbar, profile }) => {
   return (
     <div className={styles.dashboardnav}>
       <div className={styles.dashboardnav__top_left}>
-        <Link href="/dashboard">
+        <Link href="/">
           <div className={styles.logo}>
             <Image src={logo} />
           </div>
