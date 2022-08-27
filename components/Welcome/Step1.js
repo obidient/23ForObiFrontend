@@ -1,8 +1,22 @@
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import useAuthStore from '../../store/authStore';
+import Loader from '../Loader';
 
 const Step1 = ({ formData, setFormData }) => {
+  const { userProfile } = useAuthStore();
+  const router = useRouter();
+  //const [loading, setLoading] = useState(true)
   const { pvc } = formData;
 
+  useEffect(() => {
+    if (!userProfile) {
+      router.push('/');
+      //setLoading(false)
+    }
+  }, [userProfile, router]);
+
+  // if(loading) return <Loader />
   return (
     <>
       <div className="my-5">
