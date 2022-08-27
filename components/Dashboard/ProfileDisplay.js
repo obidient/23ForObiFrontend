@@ -117,7 +117,7 @@ const ProfileDisplay = ({ userVoters, states }) => {
   const [values, setValues] = useState(initialValues);  
   
   const [initialUser, setInitialUser] = useState("");
-  console.log(initialUser)
+  // console.log(initialUser)
   useEffect(() => {
     axios
     .get(`https://api.23forobi.com/user-data`, {
