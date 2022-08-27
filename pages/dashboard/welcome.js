@@ -40,12 +40,6 @@ const welcome = () => {
     selectedVillage: '',
   });
 
-  useEffect(() => {
-    if (is_new_user === false) {
-      router.push('/dashboard');
-    }
-  }, [router, is_new_user]);
-
   const conditionalComponent = () => {
     switch (steps) {
       case 1:
