@@ -1,22 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import useAuthStore from '../../store/authStore';
-import { useRouter } from 'next/router';
-import Loader from '../Loader';
 
 const Step1 = ({ formData, setFormData }) => {
-  const { userProfile } = useAuthStore();
-  const router = useRouter();
-  const is_new_user = userProfile?.is_new_user;
-
   const { pvc } = formData;
-
-  useEffect(() => {
-    return () => {
-      if (is_new_user === false) {
-        router.push('/dashboard');
-      }
-    };
-  }, [router, is_new_user]);
 
   return (
     <>

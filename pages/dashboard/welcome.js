@@ -17,15 +17,25 @@ import useAuthStore from '../../store/authStore';
 import axios from 'axios';
 
 const welcome = () => {
+  const router = useRouter();
   const { accessToken, userProfile } = useAuthStore();
   let token = accessToken;
   const user_id = userProfile?.user?.id;
   const is_new_user = userProfile?.is_new_user;
+  
+  useEffect(() => {
+    return () => {
+      if (is_new_user === false) {
+        router.push('/dashboard');
+      }
+    };
+  }, [router, is_new_user]);
+
   //console.log(userProfile)
   //console.log(is_new_user)
   //console.log(token);
   //console.log(user_id);
-  const router = useRouter();
+ 
   const [steps, setSteps] = useState(1);
   const [progress, setProgress] = useState(20);
   const [formData, setFormData] = useState({
@@ -100,6 +110,7 @@ const welcome = () => {
     router.push('/dashboard');
   };
 
+ 
   return (
     <>
       <Head>
