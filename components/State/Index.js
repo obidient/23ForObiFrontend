@@ -11,7 +11,7 @@ import VILLAGESINCONTROL from '../../data/villageDetails';
 import { villageNotInDetails } from '../../data/villageDetails';
 import Modal from '../Modal/Index';
 import { FaTimes } from 'react-icons/fa';
-import {StateBreadcrumb} from '../misc/Breadcrumb';
+import { StateBreadcrumb } from '../misc/Breadcrumb';
 import SOCIALMEDIAIMAGES from '../../data/smImages';
 import SelectWithSearch from '../misc/SelectWithSearch';
 import useUserStore from '../../store/userStore';
@@ -29,7 +29,7 @@ const FormikControl = dynamic(() => import('../Forms/FormikControl'), {
 //Images
 import search from '../../assets/search.png';
 import pdp from '../../assets/pdp.png';
-import apc from '../../assets/apc.png'
+import apc from '../../assets/apc.png';
 import ikpeazu from '../../assets/ikpeazu.png';
 import avatar from '../../assets/avatar.png';
 
@@ -42,6 +42,7 @@ import axios from 'axios';
 import uploaded from '../../assets/uploaded.png';
 
 const State = ({ stateName, detail, images, villages }) => {
+  const { userProfile } = useAuthStore();
   // console.log(detail);
   // console.log(villages)
   const {
@@ -71,37 +72,36 @@ const State = ({ stateName, detail, images, villages }) => {
   const [villagesNotIn, setVillagesNotIn] = useState(villageNotInDetails);
   const [selectedImages, setSelectedImages] = useState([]);
 
-
-  const [selectedLga, setSelectedLga] = useState("");
+  const [selectedLga, setSelectedLga] = useState('');
   const [userVillage, setUserVillage] = useState(null);
 
   const { userVillages, userLga, addLga } = useUserStore();
   const { accessToken } = useAuthStore();
   const [lgaClicked, setLgaClicked] = useState(false);
-  const [village, setVillage] = useState("");
+  const [village, setVillage] = useState('');
 
   // console.log(accessToken);
   useEffect(() => {
-   axios
-     .get(`https://api.23forobi.com/list_lga_in_state/${detail.id}`)
-     .then((result) => {
-       const res = result.data;
-       addLga(res);
+    axios
+      .get(`https://api.23forobi.com/list_lga_in_state/${detail.id}`)
+      .then((result) => {
+        const res = result.data;
+        addLga(res);
 
-       // console.log(res)
-       return res;
-     });
+        // console.log(res)
+        return res;
+      });
   }, []);
 
   const handleVillageAdd = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const data = {
-      name: village, 
-      local_government_id: selectedLga.value, 
-      location_id: detail.id
-    }
+      name: village,
+      local_government_id: selectedLga.value,
+      location_id: detail.id,
+    };
 
-    const url = "https://api.23forobi.com/villages"
+    const url = 'https://api.23forobi.com/villages';
 
     const headers = {
       'Content-Type': 'application/json',
@@ -111,16 +111,13 @@ const State = ({ stateName, detail, images, villages }) => {
 
     axios.post(url, data, { headers }).then((res) => {
       try {
-
-      } catch {
-
-      }
+      } catch {}
     });
-    console.log('Form data', data)
-    setVillage("")
-    setSelectedLga("")
-    setShowModal(false)
-  }
+    console.log('Form data', data);
+    setVillage('');
+    setSelectedLga('');
+    setShowModal(false);
+  };
 
   //IMAGE FOR STATE
   const [imgForm, setImgForm] = useState({
@@ -129,7 +126,7 @@ const State = ({ stateName, detail, images, villages }) => {
     contributed_by: '',
   });
 
-// console.log(last_vote_direction)
+  // console.log(last_vote_direction)
   //ONCHANGE FOR TITLE
   const onImgChange = (e) => {
     setImgForm((prevState) => ({
@@ -230,13 +227,15 @@ const State = ({ stateName, detail, images, villages }) => {
     setSearchQuery(e.target.value);
   };
 
-  const villagesList = villages.list_of_villages 
+  const villagesList = villages.list_of_villages;
   // console.log(villagesList)
 
   const filter = (villages, query) => {
     return villages.filter((village) => {
       return searchParam.some((newVillage) => {
-        return village[newVillage]?.toString().toLowerCase().indexOf(query) > -1;
+        return (
+          village[newVillage]?.toString().toLowerCase().indexOf(query) > -1
+        );
       });
     });
   };
@@ -373,7 +372,16 @@ const State = ({ stateName, detail, images, villages }) => {
           </div>
         </div>
         <div className={styles.btn_missing}>
-          <button onClick={() => setShowModal(true)} className="btn_dark">
+          <button
+            onClick={() => setShowModal(true)}
+            className={
+              !userProfile
+                ? 'btn_dark hover:opacity-70 hover:cursor-not-allowed'
+                : 'btn_dark'
+            }
+            disabled={!userProfile}
+            title={!userProfile ? 'Please login to add a Village' : ''}
+          >
             Add a missing village
           </button>
         </div>
@@ -400,29 +408,33 @@ const State = ({ stateName, detail, images, villages }) => {
               </div>
               <div className={styles.modal__body}>
                 <p>Kindly add a missing village</p>
-       
-                    <form autoComplete="off">
-                      <SelectWithSearch
-                        // states={states}
-                        // handleOnChange={(value) => console.log(value)}
-                        setSelectedLocation={setSelectedLga}
-                        setUserVillage={setUserVillage}
-                        setLgaClicked={setLgaClicked}
-                        userLga={userLga}
-                        type="lga"
-                        placeholder={'lga'}
-                      />
-                      <input
-                        type="text"
-                        placeholder="Add a village"
-                        name="village"
-                        value={village ?? ''}
-                        onChange={(e) => setVillage(e.target.value)}
-                      />
-                      <button className="btn_dark" type="submit" onClick={handleVillageAdd}>
-                        Continue
-                      </button>
-                    </form>
+
+                <form autoComplete="off">
+                  <SelectWithSearch
+                    // states={states}
+                    // handleOnChange={(value) => console.log(value)}
+                    setSelectedLocation={setSelectedLga}
+                    setUserVillage={setUserVillage}
+                    setLgaClicked={setLgaClicked}
+                    userLga={userLga}
+                    type="lga"
+                    placeholder={'lga'}
+                  />
+                  <input
+                    type="text"
+                    placeholder="Add a village"
+                    name="village"
+                    value={village ?? ''}
+                    onChange={(e) => setVillage(e.target.value)}
+                  />
+                  <button
+                    className="btn_dark"
+                    type="submit"
+                    onClick={handleVillageAdd}
+                  >
+                    Continue
+                  </button>
+                </form>
               </div>
             </div>
           </Modal>
