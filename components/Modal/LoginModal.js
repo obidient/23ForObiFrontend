@@ -19,7 +19,7 @@ const LoginModal = ({ setShowModal, setSignInIsVisible, onClose, type }) => {
           </h2>
           <button
             className={`closeBtn`}
-            onClick={ () => {
+            onClick={() => {
               setShowModal(false);
               setSignInIsVisible(false);
             }}
@@ -42,8 +42,9 @@ const LoginModal = ({ setShowModal, setSignInIsVisible, onClose, type }) => {
                 <GoogleAuth />
               </div>
             </div>
-
-            <div className={styles_login.login_modal__body__container__content}>
+            {/**
+                 * 
+                 <div className={styles_login.login_modal__body__container__content}>
               <div
                 style={{ display: 'grid', placeItems: 'end' }}
                 className={
@@ -96,6 +97,7 @@ const LoginModal = ({ setShowModal, setSignInIsVisible, onClose, type }) => {
                 <p>Join with Apple</p>
               </div>
             </div>
+                 */}
           </div>
         </div>
       </div>
@@ -103,4 +105,4 @@ const LoginModal = ({ setShowModal, setSignInIsVisible, onClose, type }) => {
   );
 };
 
-export default LoginModal
+export default LoginModal;
