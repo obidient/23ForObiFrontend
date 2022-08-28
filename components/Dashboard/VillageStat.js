@@ -1,13 +1,14 @@
 import styles from './Styles.module.scss'
 
 const VillageStat = ({ votersDetails, villageDetails, awards }) => {
-const awardStats = awards / 10
+const awardStats = Math.trunc(awards / 10)
 const Awards = () => {
   if(awardStats > 9){
     return `${awardStats}`
   } else {
-    return `0${awardStats}`
+    return `${awardStats}`
   }
+ 
 }
   return (
     <div className={styles.village_stat}>
