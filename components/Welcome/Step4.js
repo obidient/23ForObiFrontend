@@ -162,7 +162,7 @@ const Step4 = ({ formData, setFormData }) => {
                   className="rounded-full lg:w-[496px] w-full h-[44px] border border-[#2F3733] text-[ #979797] lg:text-3xl text-4xl px-5 focus:border-[#018226] focus:bg-[#F3FFF7] outline-none"
                   type="text"
                   placeholder="Enter village name"
-                  value={village}
+                  //value={village}
                   onChange={(e) =>
                     setFormData((formData) => ({
                       ...formData,
