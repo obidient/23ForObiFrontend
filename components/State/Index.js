@@ -3,6 +3,7 @@ import { BsShare, BsDownload } from 'react-icons/bs';
 import styles from './Styles.module.scss';
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
+import ReactTooltip from 'react-tooltip';
 
 import SingleStateProgress from './../misc/SingleStateProgress';
 import Card from '../Card/Card';
@@ -380,9 +381,17 @@ const State = ({ stateName, detail, images, villages }) => {
                 : 'btn_dark'
             }
             disabled={!userProfile}
-            title={!userProfile ? 'Please login to add a Village' : ''}
+            data-tip={!userProfile ? 'Please login to add a Village' : ''}
           >
             Add a missing village
+            <ReactTooltip
+              type="dark"
+              place="top"
+              effect="solid"
+              backgroundColor="#000"
+              borderColor="#fff"
+              delayHide={10}
+            />
           </button>
         </div>
 
