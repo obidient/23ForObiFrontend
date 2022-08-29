@@ -269,19 +269,14 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
             </Tab>
           )}
         </TabList>
-        <div className={styles.village_details__stats}>
-          <VillageStat
-            votersDetails={votersDetails}
-            villageDetails={villageDetails}
-            awards={awards}
-          />
-        </div>
         {villageDetails?.map((items) => (
           <TabPanel key={items.id}>
             <div>
               <VillageDetails
                 villageDetails={items}
+                villageCount={villageDetails.length}
                 votersDetails={votersDetails}
+                awards={awards}
               />
             </div>
           </TabPanel>

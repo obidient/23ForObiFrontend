@@ -17,7 +17,7 @@ import axios from 'axios';
 import add_img_green from '../../assets/circle_add.svg';
 import CompleteModal from './../misc/CompleteModal';
 
-const VillageDetails = ({ villageDetails, votersDetails }) => {
+const VillageDetails = ({ villageDetails, votersDetails, awards, villageCount }) => {
   const [showModal, setShowModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showCompleteModal, setShowCompleteModal] = useState();
@@ -99,8 +99,16 @@ const VillageDetails = ({ villageDetails, votersDetails }) => {
     );
   }
 
+  console.log(villageDetails);
   return (
     <div className={styles.village_details}>
+      <div className='mb-8'>
+        <VillageStat
+          votersDetails={votersInVillage}
+          villageCount={villageCount}
+          awards={awards}
+          />
+      </div>
       <hr />
       <div className={styles.village_details__heading}>
         <h2>Voters</h2>
