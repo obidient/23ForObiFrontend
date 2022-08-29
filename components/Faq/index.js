@@ -65,6 +65,7 @@ const Faq = () => {
       let search = searchValue.filter((value) => {
           return value.ques.toLowerCase().includes(searchQuery.toString().toLowerCase())
         })
+        // console.log(search)
         setSearchValue(search)
     }else {
       setSearchValue(faqObject)

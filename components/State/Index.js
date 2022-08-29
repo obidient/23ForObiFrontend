@@ -42,6 +42,9 @@ import ShareCard from '../ImgCard/ShareCard';
 import axios from 'axios';
 import uploaded from '../../assets/uploaded.png';
 
+//Import Toast
+import toast, { Toaster } from 'react-hot-toast';
+
 const State = ({ stateName, detail, images, villages }) => {
   const { userProfile } = useAuthStore();
   // console.log(detail);
@@ -110,14 +113,20 @@ const State = ({ stateName, detail, images, villages }) => {
       Authorization: `Bearer ${accessToken}`,
     };
 
-    axios.post(url, data, { headers }).then((res) => {
-      try {
-      } catch {}
-    });
-    console.log('Form data', data);
+    try {
+      if (data.name !== "" ) 
+      {
+        axios.post(url, data, { headers }).then((res) => {
+          toast.success(res.data.message)
+        })
+        setShowModal(false);
+      }
+      } catch(err) {
+        console.log(err)
+      }
+    // console.log('Form data', data);
     setVillage('');
     setSelectedLga('');
-    setShowModal(false);
   };
 
   //IMAGE FOR STATE
@@ -256,6 +265,7 @@ const State = ({ stateName, detail, images, villages }) => {
 
   return (
     <div className={styles.state}>
+      <Toaster />
       <div className="container">
         <div className={styles.state_heading}>
           <StateBreadcrumb state={stateName} />

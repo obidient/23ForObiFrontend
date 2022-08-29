@@ -85,7 +85,7 @@ const ConditionalRenderedList = ({
   };
 
   useEffect(() => {
-    console.log(isClicked);
+    // console.log(isClicked);
     if(type == "lga") {
       isClicked == true || false ? setLgaClicked(true) : null;
     }

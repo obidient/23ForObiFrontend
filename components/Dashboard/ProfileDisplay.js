@@ -7,6 +7,9 @@ import styles from './Styles.module.scss';
 import avatar from '../../assets/avatar.png';
 // import SelectInput from './../misc/SelectInput';
 
+//Import Toast
+import toast, { Toaster } from 'react-hot-toast';
+
 //Form Imports
 import { Form, Formik, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -193,9 +196,14 @@ const ProfileDisplay = ({ userVoters, states }) => {
           { headers: headers }
         )
         .then((res) => {
-          // console.log(res);
+          toast.success("Profile Updated Successfully");
           if (res.status === 200) {
             router.push('/dashboard');
+          }
+        }).catch((err) => {
+          if(err.response.status == "422") {
+            toast.error('Complete Form');
+            // toast(err);
           }
         });
     } catch (error) {
@@ -209,6 +217,7 @@ const ProfileDisplay = ({ userVoters, states }) => {
 
   return (
     <div className={styles.profile}>
+      <Toaster />
       <div className={styles.profile__profileMain}>
         <h2>Profile</h2>
 
@@ -533,23 +542,5 @@ const ProfileDisplay = ({ userVoters, states }) => {
   );
 };
 
-// export async function getServerSideProps(value) {
-//   try {
-//     const stateData = await getVillages();
-
-//     return {
-//       props: {
-//         allState: stateData?.data
-//       }
-//     }
-
-//   } catch (error) {
-//     return {
-//       props: {
-//         stateData: []
-//       }
-//     }
-//   }
-// }
 
 export default ProfileDisplay;

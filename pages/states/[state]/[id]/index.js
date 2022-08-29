@@ -38,7 +38,7 @@ export const getServerSideProps = async ({ params }) => {
     const votersData = await getVoters(id);
     return {
       props: {
-        village: village.data,
+        village: village?.data,
         votersData: votersData.data,
       },
     };
