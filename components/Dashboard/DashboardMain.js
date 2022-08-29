@@ -20,6 +20,9 @@ import Team from '../../data/teamImages';
 import TeamCard from '../../components/ImgCard/TeamCard';
 import VillageDetails from './VillageDetails';
 
+//Import Toast
+import toast, { Toaster } from 'react-hot-toast';
+
 import { Form, Formik } from 'formik';
 // import { CustomSelectInput } from '../Forms/SelectInput';
 import * as Yup from 'yup';
@@ -61,7 +64,7 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
   //CHECK IF INPUT IS CLICKED SO AS TO RENDER NEXT INPUT
   const [stateClicked, setStateClicked] = useState(false);
   const [lgaClicked, setLgaClicked] = useState(false);
-  //console.log(lgaClicked, "lga");
+  // console.log(villageDetails, "user");
 
   const [isVillageEmpty, setIsVillageEmpty] = useState(null);
 
@@ -107,24 +110,22 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
 
     if (selectedVillage?.name !== 'Others' && !isVillageEmpty) {
       axios.post(url, data, { headers })?.then((res) => {
-        try {
-          // console.log(res.data);
-        } catch (error) {
-          // console.log(error)
-        }
         setSelectedVillage('');
+      }).catch((err) => {
+        const errorMessage = err.response.data.detail;
+        if (errorMessage === 'User already added this village') {
+          toast.error(errorMessage);
+        }
+        // console.log(err)
       });
     } else {
-      axios.post(urlCreate, dataCreate, { headers })?.then((res) => {
-        try {
-          // console.log(res.data);
-        } catch (error) {
-          // console.log(error)
-        }
+      await axios.post(urlCreate, dataCreate, { headers })?.then((res) => {
         setShowCompleteModal(true);
         setOtherVillage('');
         setSelectedVillage('');
         setLgaClicked(false);
+      }).catch((err) => {
+        // console.log(err)        
       });
     }
     setShowModal(false);
@@ -203,6 +204,22 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
     }
   }, [userVillages]);
 
+  //DELETE USER VILLAGE HANDLER
+  const deleteUserVillage = async (id) => {
+    const headers = {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    };
+    try {
+      await axios.delete(`https://api.23forobi.com/user-villages/${id}`, {headers}).then((res) => {
+        toast.success(res.data.message)
+      })
+    } catch (err) {
+      
+    }
+  }
+
   //Effect to hide scroll
   useEffect(() => {
     const body = document.querySelector('body');
@@ -211,6 +228,7 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
 
   return (
     <div className={styles.dashboardmain}>
+      <Toaster />
       <div className={styles.dashboardmain__top}>
         <div className={styles.dashboardmain_welcome}>
           <h2>Welcome back! {first_name},</h2>
@@ -248,10 +266,11 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
           {villageDetails?.map((item) => (
             <Tab
               key={item.village.id}
-              className="font-bold lg:px-8 py-3 text-3xl lg:text-2xl  md:min-w-[40%] min-w-[70%] cursor-pointer hover:border-[#018226] hover:border-b-[1px] flex gap-2 justify-center"
+              className="font-bold lg:px-8 py-3 text-3xl lg:text-2xl  md:min-w-[40%] min-w-[70%] cursor-pointer hover:border-[#018226] hover:border-b-[1px] flex gap-2 justify-center relative"
             >
               {item.village.name}
               <p className="lowercase">({item.village.location_id})</p>
+              <button className="absolute right-12  text-red-700" onClick={() => deleteUserVillage(item.id)}>X</button>
             </Tab>
           ))}
           {villageDetails && (

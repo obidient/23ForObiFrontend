@@ -33,14 +33,14 @@ export const getServerSideProps = async ({ params, res }) => {
   try {
     const { state } = params;
     const { data } = await getStateDetails(state);
-    const images = await getCampaignImages(state);
+    // const images = await getCampaignImages(state);
 
     const villages = await getVillages(state);
 
     return {
       props: {
         data,
-        images: images.data,
+        // images: images.data,
         villages: villages.data,
       },
     };

@@ -13,6 +13,9 @@ import FormikControl from './../Forms/FormikControl';
 import useAuthStore from './../../store/authStore';
 import axios from 'axios';
 
+//Import Toast
+import toast, { Toaster } from 'react-hot-toast';
+
 //IMPORT IMAGES
 import add_img_green from '../../assets/circle_add.svg';
 import CompleteModal from './../misc/CompleteModal';
@@ -51,20 +54,15 @@ const VillageDetails = ({ villageDetails, votersDetails, awards, villageCount })
 
     try {
       await axios.post(url, data, { headers: headers })?.then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
+        setShowCompleteModal(true);
       });
-    } catch (error) {
-      // console.log(error);
+    } catch (err) {
+      if(err.response.status === 400) {
+        toast.error('Add phone number');
+      }
     }
     setShowModal(false);
-    /*axios.post(url, data, { headers })?.then((res) => {
-      try {
-        //  console.log(res.data);
-      } catch (error) {
-        //  console.log(error);
-      }
-      setShowCompleteModal(true);
-    });*/
   };
 
   const handleUpdateVoters = async (values) => {
@@ -76,15 +74,17 @@ const VillageDetails = ({ villageDetails, votersDetails, awards, villageCount })
     };
 
     setShowEditModal(false);
-    axios.put(url, data, { headers })?.then((res) => {
-      try {
-        //  console.log(res.data);
-      } catch (error) {
-        //  console.log(error);
-      }
-      // setShowCompleteModal(true);
-    });
-  };
+    try {
+      axios.put(url, data, { headers })?.then((res) => {
+         toast.success(res.data.message);
+        });
+
+        } 
+        catch (err) {
+          //  console.log(err);
+          // setShowCompleteModal(true);
+        }
+    };
 
   useEffect(() => {
     const body = document.querySelector('body');
@@ -99,15 +99,16 @@ const VillageDetails = ({ villageDetails, votersDetails, awards, villageCount })
     );
   }
 
-  console.log(villageDetails);
+  // console.log(villageDetails);
   return (
     <div className={styles.village_details}>
-      <div className='mb-8'>
+      <Toaster />
+      <div className="mb-8">
         <VillageStat
           votersDetails={votersInVillage}
           villageCount={villageCount}
           awards={awards}
-          />
+        />
       </div>
       <hr />
       <div className={styles.village_details__heading}>
