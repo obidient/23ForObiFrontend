@@ -38,7 +38,8 @@ const States = () => {
     <div className={styles.states}>
       <div className="container">
         <div className={styles.heading}>
-          <h2>States</h2>
+          {/*<h2>States</h2>*/}
+          <h2>States we are working in</h2>
           <div className={styles.heading__input}>
             <input
               type="text"
