@@ -53,7 +53,7 @@ const Card = ({
           <StateProgress progress={progress} />
           <div className={styles.percent}>
             <p>{progress}%</p>
-            <p>{voters ? `( ${voters} votes guaranteed )` : ''}</p>
+            <span className='text-base font-bold text-red-600'>{voters ? `( ${voters} votes confirmed for Peter Obi)` : ''}</span>
             <p>100%</p>
           </div>
         </div>
