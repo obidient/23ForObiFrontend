@@ -152,13 +152,21 @@ const homepage = ({ data, progress, total_number_of_voters }) => {
           <div className="container">
             <div className={styles.hero__top}>
               <div className={styles.hero__details}>
-                <h2>Can you bring in 23 votes for</h2>
+                {/*<h2>Can you bring in 23 votes for</h2>*/}
+                <h2>Each of us has promised to deliver 23 votes for</h2>
                 <h1>Peter Obi</h1>
-                <p>
+                {/*<p>
                   The goal is to deliver at least{' '}
                   <span>23 votes per village </span>
                   within each state and with your help and the help of your
                   loved ones, we can do this
+                </p>*/}
+                <p>
+                  Our mission is to win the rural votes for Peter Obi.
+                  <br />
+                  If every Obidient on social media delivers{' '}
+                  <span>23 votes</span> from their village, we will have 15
+                  million votes and win the election!
                 </p>
                 {!userProfile && (
                   <button
@@ -170,7 +178,7 @@ const homepage = ({ data, progress, total_number_of_voters }) => {
                 )}
               </div>
               <div className={styles.hero__img}>
-                <Image src={labourparty} width={373} height={280} alt='' />
+                <Image src={labourparty} width={373} height={280} alt="" />
               </div>
             </div>
             <div className={styles.hero__bottom}>
@@ -185,8 +193,8 @@ const homepage = ({ data, progress, total_number_of_voters }) => {
                 <h5>{progress ? progress : 0}%</h5>
                 <h5>
                   {total_number_of_voters
-                    ? `(${total_number_of_voters} votes guaranteed so far)`
-                    : '(No votes guaranteed so far)'}
+                    ? `(${total_number_of_voters} votes for Peter Obi confirmed so far)`
+                    : '(No votes confirmed  so far)'}
                 </h5>
                 <h5>100%</h5>
               </div>
