@@ -65,7 +65,7 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
   //CHECK IF INPUT IS CLICKED SO AS TO RENDER NEXT INPUT
   const [stateClicked, setStateClicked] = useState(false);
   const [lgaClicked, setLgaClicked] = useState(false);
-  // console.log(awards, "awards");
+  // console.log(villageDetails, 'village');
 
   const [isVillageEmpty, setIsVillageEmpty] = useState(null);
 
@@ -252,7 +252,7 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
         selectedTabClassName={`border-b-[1px] border-[#018226] text-[#2F3733] outline-none`}
       >
         <TabList
-          className={`flex border-b border-[#F1F1F1] w-full items-center justify-start text-center mt-8 overflow-x-scroll ${styles.tabs}`}
+          className={`flex border-b border-[#F1F1F1] w-full items-center justify-start text-center mt-8 md:overflow-x-visible overflow-x-scroll md:flex-wrap ${styles.tabs}`}
         >
           {/*
             <Tab className="font-bold lg:px-8 py-3 text-3xl lg:text-2xl  md:min-w-[40%] min-w-[70%] cursor-pointer hover:border-[#018226] hover:border-b-[1px] flex gap-2 justify-center">
@@ -267,11 +267,14 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
           {villageDetails?.map((item) => (
             <Tab
               key={item.village.id}
-              className="font-bold lg:px-8 py-3 text-3xl lg:text-2xl  md:min-w-[40%] min-w-[70%] cursor-pointer hover:border-[#018226] hover:border-b-[1px] flex gap-2 justify-center items-center relative"
+              className="font-bold lg:px-8 py-3 text-3xl lg:text-2xl md:min-w-fit min-w-[70%] cursor-pointer hover:border-[#018226] hover:border-b-[1px] flex gap-2 justify-center items-center relative"
             >
               {item.village.name}
               <p className="lowercase">({item.village.location_id})</p>
-              <button className="absolute right-12  text-red-700" onClick={() => deleteUserVillage(item.id)}>
+              <button
+                className="md:relative absolute right-12 md:right-0 md:px-8 text-red-700"
+                onClick={() => deleteUserVillage(item.id)}
+              >
                 <FaTimes />
               </button>
             </Tab>

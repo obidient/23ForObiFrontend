@@ -101,6 +101,7 @@ const dashboard = (props) => {
           progress={votersProgress}
           progressbar="true"
           profile="true"
+          voterData={voterData}
         />
         <div className={styles.dashboard__body}>
           <div className={styles.main}>

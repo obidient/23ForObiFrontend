@@ -9,7 +9,7 @@ import DashboardLink from './DashboardLink';
 import Link from 'next/link';
 import StateProgress from './../misc/StateProgress';
 
-const DashboardNav = ({ progress,progressbar, profile }) => {
+const DashboardNav = ({ progress, progressbar, profile, voterData }) => {
   return (
     <div className={styles.dashboardnav}>
       <div className={styles.dashboardnav__top_left}>
@@ -25,6 +25,9 @@ const DashboardNav = ({ progress,progressbar, profile }) => {
               <p>{progress}%</p>
             </div>
             <StateProgress progress={progress} />
+            <p className="text-[#979797]">
+              (You have promised to deliver {voterData?.length})
+            </p>
           </div>
         )}
       </div>
