@@ -242,7 +242,7 @@ const State = ({ stateName, detail, images, villages }) => {
   const filter = (villages, query) => {
     return villages.filter((village) => {
         return (
-          village?.name.toString().toLowerCase().includes(query)
+          village?.name?.toString().toLowerCase().includes(query)
         );
 
     }).sort((a,b)=>b.voters - a.voters);
@@ -266,10 +266,10 @@ const State = ({ stateName, detail, images, villages }) => {
   const {name, value } = e.target
 
   if(value !== "all"){
-  const filterByLGA = villages.list_of_villages.find(
+  const filterByLGA = villages.list_of_villages.filter(
     (item) => item.local_government?.name == value
   );
-  setVillagesList([filterByLGA])
+  setVillagesList(filterByLGA)
   }else {
   setVillagesList(villages.list_of_villages)
   }
