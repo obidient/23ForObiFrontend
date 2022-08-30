@@ -65,10 +65,10 @@ const Village = ({
                 {votersData.length > 0
                   ? `We have got ${votersData.length} votes guaranteed in ${
                       village_name ? village_name : ''
-                    } Village in ${villageState}. Robert Okonkwo is our man on ground.Calistus Okafor is coordinating activities in this village`
+                    } Village in ${villageState}. Robert Okonkwo is our man on ground. Calistus Okafor is coordinating activities in this village`
                   : `We do not have anyone on ground in ${
                       village_name ? village_name : ''
-                    } village.Can you help?`}
+                    } village. Can you help?`}
               </p>
             </div>
             <div className={styles.title_btn}>
@@ -190,11 +190,11 @@ const Village = ({
           </div>
         </div>
         <div className={styles.top_contributor}>
-          <h2>{top_contributors ? 'Top' : 'No'} Contributors</h2>
+          <h2>{top_contributors.length > 0 ? 'Top' : 'No'} Contributors</h2>
 
           <p>
-            {top_contributors
-              ? 'These are the top contributors in this village'
+            {top_contributors.l  > 0
+              ? `These are the people working in ${village_name ? village_name : ''} to deliver votes for Peter Obi `
               : 'There are no contributors in this village'}
           </p>
           <div className={styles.contributors}>
@@ -214,13 +214,13 @@ const Village = ({
         </div>
         <div className={styles.votes_guaranteed}>
           <h2>
-            {votersData ? `${votersData.length} Votes` : 'No Votes'} Guaranteed
+            {votersData.length > 0 ? `${votersData.length} Votes Guaranteed` : 'We have not confirmed any votes in this location yet'} 
           </h2>
-          <p>
+          {/*<p>
             {votersData
-              ? 'These are the votes quaranteed in this village'
-              : 'These are no votes quaranteed in this village'}
-          </p>
+              ? `These are the people working in ${village_name ? village_name : ''}`
+              : `These are no votes quaranteed in ${village_name ? village_name : ''}`}
+            </p>*/}
           <div className={styles.contributors}>
             {votersData.length > 0 &&
               votersData.map((item, index) => (
