@@ -120,14 +120,25 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
         // console.log(err)
       });
     } else {
-      await axios.post(urlCreate, dataCreate, { headers })?.then((res) => {
-        setShowCompleteModal(true);
-        setOtherVillage('');
-        setSelectedVillage('');
-        setLgaClicked(false);
-      }).catch((err) => {
+
+      try {
+        await axios.post(urlCreate, dataCreate, { headers })?.then((res) => {
+          // console.log(res.data.village.id)
+          setShowCompleteModal(true);
+          setOtherVillage('');
+          setSelectedVillage('');
+          setLgaClicked(false);
+          
+          axios.post(url, { village_id: res.data.village.id }, { headers }).then((res) => {
+            // console.log(res)
+          })
+          
+        })
+        
+      } catch(err) {
         // console.log(err)        
-      });
+      }
+
     }
     setShowModal(false);
   };

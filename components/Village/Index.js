@@ -193,7 +193,7 @@ const Village = ({
           <h2>{top_contributors.length > 0 ? 'Top' : 'No'} Contributors</h2>
 
           <p>
-            {top_contributors.l  > 0
+            {top_contributors.length  > 0
               ? `These are the people working in ${village_name ? village_name : ''} to deliver votes for Peter Obi `
               : 'There are no contributors in this village'}
           </p>
