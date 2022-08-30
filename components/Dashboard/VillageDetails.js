@@ -59,7 +59,7 @@ const VillageDetails = ({ villageDetails, votersDetails, awards, villageCount })
       });
     } catch (err) {
       if(err.response.status === 400) {
-        // toast.error('Add phone number');
+        toast.error('Voter Already exists');
         // console.log(err)
       }
     }
