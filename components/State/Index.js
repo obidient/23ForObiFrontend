@@ -84,7 +84,7 @@ const State = ({ stateName, detail, images, villages }) => {
   const [lgaClicked, setLgaClicked] = useState(false);
   const [village, setVillage] = useState('');
 
-  // console.log(accessToken);
+  // console.log(userLga);
   useEffect(() => {
     axios
       .get(`https://api.23forobi.com/list_lga_in_state/${detail.id}`)
@@ -121,7 +121,7 @@ const State = ({ stateName, detail, images, villages }) => {
         setShowModal(false);
       }
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
     // console.log('Form data', data);
     setVillage('');
@@ -239,20 +239,10 @@ const State = ({ stateName, detail, images, villages }) => {
   const [villagesList, setVillagesList ]= useState(villages.list_of_villages);
 
 
-  // const filter = (villages, query) => {
-  //   return villages.filter((village) => {
-  //     return searchParam.some((newVillage) => {
-  //       return (
-  //         village[newVillage]?.toString().toLowerCase().indexOf(query) > -1
-  //       );
-  //     });
-  //   });
-  // };
-
   const filter = (villages, query) => {
     return villages.filter((village) => {
         return (
-          village.name.toString().toLowerCase().includes(query)
+          village?.name.toString().toLowerCase().includes(query)
         );
 
     }).sort((a,b)=>b.voters - a.voters);
@@ -276,7 +266,9 @@ const State = ({ stateName, detail, images, villages }) => {
   const {name, value } = e.target
 
   if(value !== "all"){
-  const filterByLGA = villages.list_of_villages.find((item) => item.name == value)
+  const filterByLGA = villages.list_of_villages.find(
+    (item) => item.local_government?.name == value
+  );
   setVillagesList([filterByLGA])
   }else {
   setVillagesList(villages.list_of_villages)
@@ -291,12 +283,12 @@ const State = ({ stateName, detail, images, villages }) => {
           <StateBreadcrumb state={stateName} />
           <div className={styles.state_heading__title}>
            <div>
-           <h1 className="capitalize" style={{color: "#D60602"}}>{stateName} Villages</h1>
-            <p style={{color: "#D60602"}} className="ml-1">Vilages in {stateName} voting for Peter obi</p>
+           <h1 className="capitalize">{stateName} Villages</h1>
+            <p className="ml-1">Vilages in {stateName} voting for Peter obi</p>
            </div>
             <div className={styles.vill_control}>
               <div className={styles.vill_control__text}>
-                <p style={{color: "#D60602"}}>Villages we are sure of votes:</p>
+                <p>Villages we are sure of votes:</p>
               </div>
               <div className={styles.vill_control__progress}>
                 <SingleStateProgress done={progress ? `${progress}` : `${0}`} />
@@ -355,7 +347,7 @@ const State = ({ stateName, detail, images, villages }) => {
                 <option value={"all"}>
                   Filter All
                 </option>
-                {villages.list_of_villages?.map((item) => {
+                {userLga?.map((item) => {
                   return (
                     <option
                       value={item.name}
