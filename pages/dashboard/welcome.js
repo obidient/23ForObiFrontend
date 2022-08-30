@@ -68,8 +68,8 @@ const welcome = () => {
 
       default:
         return <FifthStep formData={formData} setFormData={setFormData} />;
-    }
-  };
+      }
+    };
 
   // handle steps
   const handleSubmit = () => {
@@ -80,7 +80,7 @@ const welcome = () => {
   // submit forms
   const submitForm = async () => {
     // console.log(formData);
-    const url = 'https://api.23forobi.com/user-data';
+    const baseUrl = 'https://api.23forobi.com/';
     const headers = {
       //'Content-Type': 'application/json',
       //Accept: 'application/json',
@@ -91,19 +91,35 @@ const welcome = () => {
       data: formData,
       id: user_id,
     };
+    const villageData = {
+      village_id: formData?.village,
+    };
     try {
-      await axios.post(url, data, { headers: headers }).then((res) => {
-        //console.log(res);
+      await axios
+        .post(`${baseUrl}user-data`, data, { headers: headers })
+        .then((res) => {
+          //console.log(res);
 
-        if (res.data && res.status === 200) {
-          //setNewUser(user)
-          //console.log(newUser)
-          // registerUser(res.data.user_data);
-          router.push('/dashboard/summary');
-        }
-      });
+          if (res.data && res.status === 200) {
+            //setNewUser(user)
+            //console.log(newUser)
+            // registerUser(res.data.user_data);
+
+            router.push('/dashboard/summary');
+          }
+        });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+    }
+
+    try {
+      axios
+        .post(`${baseUrl}user-villages`, villageData, { headers: headers })
+        .then((res) => {
+          // console.log(res)
+        });
+    } catch(error) {
+
     }
   };
 
