@@ -64,7 +64,7 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
   //CHECK IF INPUT IS CLICKED SO AS TO RENDER NEXT INPUT
   const [stateClicked, setStateClicked] = useState(false);
   const [lgaClicked, setLgaClicked] = useState(false);
-  // console.log(villageDetails, "user");
+  // console.log(awards, "awards");
 
   const [isVillageEmpty, setIsVillageEmpty] = useState(null);
 
