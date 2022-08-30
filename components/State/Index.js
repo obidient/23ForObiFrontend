@@ -114,16 +114,15 @@ const State = ({ stateName, detail, images, villages }) => {
     };
 
     try {
-      if (data.name !== "" ) 
-      {
+      if (data.name !== '') {
         axios.post(url, data, { headers }).then((res) => {
-          toast.success(res.data.message)
-        })
+          toast.success(res.data.message);
+        });
         setShowModal(false);
       }
-      } catch(err) {
-        console.log(err)
-      }
+    } catch (err) {
+      console.log(err);
+    }
     // console.log('Form data', data);
     setVillage('');
     setSelectedLga('');
@@ -400,7 +399,7 @@ const State = ({ stateName, detail, images, villages }) => {
           </div>
         </div>
         <div className={styles.state_vilage_not_controlled}>
-          <div className={styles.state_vilage_not_controlled__head}>
+          {/*<div className={styles.state_vilage_not_controlled__head}>
             <h5>Villages not in control</h5>
             <div className={styles.head_input}>
               <input
@@ -413,7 +412,7 @@ const State = ({ stateName, detail, images, villages }) => {
                 <Image src={search} alt="search" />
               </div>
             </div>
-          </div>
+            </div>
           <div className="cards">
             {villages && villages.length > 0 ? (
               filter(villages, searchNotInQuery.toLowerCase()).map((item) => (
@@ -428,7 +427,7 @@ const State = ({ stateName, detail, images, villages }) => {
             ) : (
               <h2>No Villages</h2>
             )}
-          </div>
+          </div>*/}
         </div>
         <div className={styles.btn_missing}>
           <button
@@ -542,10 +541,13 @@ const State = ({ stateName, detail, images, villages }) => {
                       </button>
                     </div>
                     <div className={styles.modal__body}>
-                      <p>
-                      Upload images that can be used for local adverts in {stateName}. File should be in .pdf, .jpeg, .jpg,
+                      {/*<p>
+                        You can add new images from activities around your
+                        states and village. File should be in .pdf, .jpeg, .jpg,
                         .png formats with less than 10 MB size
-                      </p>
+                      </p>*/}
+                      <p>Upload images that can be used for local adverts in {stateName}. Files should be in  .pdf, .jpeg, .jpg,
+                        .png formats with less than 10 MB size</p>
                       <div className={styles.file_input}>
                         <form>
                           {imageUpload && (
@@ -648,10 +650,11 @@ const State = ({ stateName, detail, images, villages }) => {
               {/* END COMPLETE MODAL */}
             </div>
           </div>
-          <div className={styles.state_body_cards}>
+          <div className='flex justify-center p-6' >
             {images && images.length > 0 ? (
               images.map((item, index) => (
-                <ImgCard
+               <div className={styles.state_body_cards}>
+                 <ImgCard
                   src={item.url}
                   key={index}
                   title={item.title}
@@ -659,9 +662,12 @@ const State = ({ stateName, detail, images, villages }) => {
                     showImage(item.url, item.title), setShowModal3(true);
                   }}
                 />
+               </div>
               ))
             ) : (
-              <h2 className="md:w-[113rem]  text-center text-blue-500 text-2xl">No Images </h2>
+              <h2 className="text-3xl">
+                No social media images have been uploaded yet{' '}
+              </h2>
             )}
             {showModal3 && (
               <Modal

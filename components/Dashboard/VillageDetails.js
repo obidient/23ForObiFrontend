@@ -54,12 +54,13 @@ const VillageDetails = ({ villageDetails, votersDetails, awards, villageCount })
 
     try {
       await axios.post(url, data, { headers: headers })?.then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setShowCompleteModal(true);
       });
     } catch (err) {
       if(err.response.status === 400) {
-        toast.error('Add phone number');
+        // toast.error('Add phone number');
+        // console.log(err)
       }
     }
     setShowModal(false);

@@ -285,6 +285,7 @@
         justify-content: space-between;
         align-items: flex-start;
         padding-bottom: 3rem;
+        
 
          @media (max-width: 56.25em) {
             flex-direction: column;
@@ -294,7 +295,7 @@
 	    }
 
         .head_text {
-
+            width: 60%;
             h5 {
                 font-weight: 700;
                 font-size: var(--font-header-1);

@@ -25,7 +25,7 @@ const dashboard = (props) => {
 
   /////////// USER VILLAGES /////////////
   const { accessToken, removeUser } = useAuthStore();
-  // console.log(voterData);
+  // console.log(progress);
 
   const fetcher = async (url, token) =>
     await axios
@@ -101,6 +101,7 @@ const dashboard = (props) => {
           progress={votersProgress}
           progressbar="true"
           profile="true"
+          voterData={voterData}
         />
         <div className={styles.dashboard__body}>
           <div className={styles.main}>
