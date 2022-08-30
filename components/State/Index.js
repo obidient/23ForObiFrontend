@@ -237,17 +237,26 @@ const State = ({ stateName, detail, images, villages }) => {
     setSearchQuery(e.target.value);
   };
 
-  const villagesList = villages.list_of_villages;
-  // console.log(villagesList)
+  const [villagesList, setVillagesList ]= useState(villages.list_of_villages);
+
+
+  // const filter = (villages, query) => {
+  //   return villages.filter((village) => {
+  //     return searchParam.some((newVillage) => {
+  //       return (
+  //         village[newVillage]?.toString().toLowerCase().indexOf(query) > -1
+  //       );
+  //     });
+  //   });
+  // };
 
   const filter = (villages, query) => {
     return villages.filter((village) => {
-      return searchParam.some((newVillage) => {
         return (
-          village[newVillage]?.toString().toLowerCase().indexOf(query) > -1
+          village.name.toString().toLowerCase().includes(query)
         );
-      });
-    });
+
+    }).sort((a,b)=>b.voters - a.voters);
   };
 
   // Handle Change
@@ -263,6 +272,18 @@ const State = ({ stateName, detail, images, villages }) => {
     body.style.overflow = showModal || showModal2 ? 'hidden' : 'auto';
   }, [showModal, showModal2]);
 
+ 
+  const handleInputChange = (e) => {
+  const {name, value } = e.target
+
+  if(value !== "all"){
+  const filterByLGA = villages.list_of_villages.find((item) => item.name == value)
+  setVillagesList([filterByLGA])
+  }else {
+  setVillagesList(villages.list_of_villages)
+  }
+}
+
   return (
     <div className={styles.state}>
       <Toaster />
@@ -270,11 +291,13 @@ const State = ({ stateName, detail, images, villages }) => {
         <div className={styles.state_heading}>
           <StateBreadcrumb state={stateName} />
           <div className={styles.state_heading__title}>
-            <h1 className="capitalize">{stateName} Villages</h1>
+           <div>
+           <h1 className="capitalize" style={{color: "#D60602"}}>{stateName} Villages</h1>
+            <p style={{color: "#D60602"}} className="ml-1">Vilages in {stateName} voting for Peter obi</p>
+           </div>
             <div className={styles.vill_control}>
               <div className={styles.vill_control__text}>
-                <h5>Villages in control</h5>
-                <p>{vote_control ? `${vote_control} %` : `${0}%`} control</p>
+                <p style={{color: "#D60602"}}>Villages we are sure of votes:</p>
               </div>
               <div className={styles.vill_control__progress}>
                 <SingleStateProgress done={progress ? `${progress}` : `${0}`} />
@@ -320,6 +343,31 @@ const State = ({ stateName, detail, images, villages }) => {
         <div className={styles.state_vilage_controlled}>
           <div className={styles.state_vilage_controlled__head}>
             <h5>Villages in control</h5>
+        
+         <select
+          
+                onChange={handleInputChange}
+                
+                
+              >
+                <option value="default" disable hidden>
+                  Filter by LGA
+                </option>
+                <option value={"all"}>
+                  Filter All
+                </option>
+                {villages.list_of_villages?.map((item) => {
+                  return (
+                    <option
+                      value={item.name}
+                      key={item.id}
+                    >
+                      {item.name}
+                    </option>
+                  );
+                })}
+              </select>
+       
             <div className={styles.head_input}>
               <input
                 type="text"
@@ -465,8 +513,8 @@ const State = ({ stateName, detail, images, villages }) => {
             <div className={styles.head_text}>
               <h5>Images</h5>
               <p>
-                These are social media images across your state from the
-                supporters and contributors.
+              Do you have any images that people can use for social media advert(WhatsApp Status, Facebook) <br /> That is specific to {stateName}? Something in the local language, or that addresses local wants and needs?
+              <br />Then please upload it here for people to download and share
               </p>
             </div>
             <div className={styles.head_btn}>
@@ -495,8 +543,7 @@ const State = ({ stateName, detail, images, villages }) => {
                     </div>
                     <div className={styles.modal__body}>
                       <p>
-                        You can add new images from activities around your
-                        states and village. File should be in .pdf, .jpeg, .jpg,
+                      Upload images that can be used for local adverts in {stateName}. File should be in .pdf, .jpeg, .jpg,
                         .png formats with less than 10 MB size
                       </p>
                       <div className={styles.file_input}>
@@ -614,7 +661,7 @@ const State = ({ stateName, detail, images, villages }) => {
                 />
               ))
             ) : (
-              <h2 className="font-bold">No Images </h2>
+              <h2 className="md:w-[113rem]  text-center text-blue-500 text-2xl">No Images </h2>
             )}
             {showModal3 && (
               <Modal
