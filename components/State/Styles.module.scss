@@ -160,8 +160,9 @@
         align-items: center;
         padding-bottom: 6.1rem;
 
-        @media (max-width: 35.25em) {
+        @media (max-width: 65.25em) {
             flex-direction: column;
+            display: block;
             row-gap: 2rem; 
         }  
 
@@ -172,20 +173,42 @@
             
         }
 
+        select {
+            border: 1px solid var(--text-color-1);
+            border-radius: 48px;
+            padding: 1rem;
+            background: #ffffff;
+            outline: none;
+            
+            margin-left: 350px;
+            font-size: var(--font-p-text-1);
+
+            @media (max-width: 45.25em) {
+                margin-left: 0px;
+                margin-top: 10px;
+                margin-bottom: 10px;
+            } 
+
+            
+        }
+
         .head_input {
             position: relative;
-            width: 45rem;
+            width: 30%;
+            
             border-radius: 48px;
             border: 1px solid var(--text-color-4);
-            @media (max-width: 26.43em) {
-                width: 50rem;
+            @media (max-width: 66.43em) {
+                width: 70%;
+                margin-top: 10px;
+               
             }
             input {
                 /* Text_colour/4 */
                 margin-left: 3rem;
                 outline: none;
                 padding: 1.1rem;
-                width: 40rem;
+                // width: 40rem;
                 padding-left: 5rem;
                 color: var(--text-color-3);
 
@@ -226,11 +249,19 @@
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 3rem 2rem;
+
+        p {
+            color: red;
+        }
     
         @media (max-width: 56.25em) {
             grid-template-columns: repeat(2, 1fr);
 	    }
+
+       
     }
+
+    
 
 }
 
