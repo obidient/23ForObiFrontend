@@ -64,7 +64,32 @@
       }
     }
   }
+
+  ///MINILOADER
   
+  .loader {
+        animation:animateC 2s linear infinite;
+      }
+  
+      .spinner {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 3px solid #018226;
+        border-top: 3px solid #fff;
+        animation: spin 0.8s linear infinite;
+
+        @keyframes spin {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+      }
+
+//////////KEYFRAME///////////////      
 @keyframes animateC
 {
   0%
