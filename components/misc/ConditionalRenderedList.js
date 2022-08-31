@@ -19,7 +19,6 @@ const ConditionalRenderedList = ({
     name: 'Others',
   };
 
-  console.log(type)
   const addVillage = [
     {
       id: 999,
