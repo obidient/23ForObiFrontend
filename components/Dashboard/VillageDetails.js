@@ -60,7 +60,7 @@ const VillageDetails = ({ villageDetails, votersDetails, awards, villageCount })
     } catch (err) {
       if(err.response.status === 400) {
         // toast.error('Add phone number');
-        // console.log(err)
+        console.log(err)
       }
     }
     setShowModal(false);
@@ -139,7 +139,7 @@ const VillageDetails = ({ villageDetails, votersDetails, awards, villageCount })
                 <tr>
                   <td>{index + 1}</td>
                   <td className="capitalize">{voters.name}</td>
-                  <td>+234{voters.contact.slice(1, voters.contact.length)}</td>
+                  <td>{voters.contact.slice(1, voters.contact.length)}</td>
                   <td>
                     <p
                       onClick={(e) => {

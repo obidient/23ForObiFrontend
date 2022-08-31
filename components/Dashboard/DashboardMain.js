@@ -7,6 +7,7 @@ import status_check from '../../assets/status_check.png';
 import close from '../../assets/closeW.png';
 import add_img_green from '../../assets/circle_add.svg';
 import caret_down from '../../assets/caret_down.png';
+import bin from '../../assets/Bin.png';
 
 import { useContext, useState, useEffect } from 'react';
 import Modal from './../Modal/Index';
@@ -35,6 +36,7 @@ import { addUserVillage } from '../../adapters/requests';
 import axios from 'axios';
 import VillageStat from './VillageStat';
 import CompleteModal from '../misc/CompleteModal';
+import DeleteModal from '../misc/DeleteModal';
 
 // Prevent serverside redering on the FormikControl Component
 const FormikControl = dynamic(() => import('../Forms/FormikControl'), {
@@ -71,6 +73,10 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
 
   ///////////COMPLTETE MODAL//////////////
   const [showCompleteModal, setShowCompleteModal] = useState();
+
+  ///////////DELETE MODAL//////////////
+  const [showDeleteModal, setShowDeleteModal] = useState();
+  const [idToDelete, setIdToDelete] = useState();
 
   const stateOption = states?.map((state) => {
     return state.state_name;
@@ -231,6 +237,19 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
       
     }
   }
+  
+  //set show delete modal
+  const handleShowDelete = (item) => {
+    
+      setShowDeleteModal(true);
+      setIdToDelete(item);
+      console.log(idToDelete)
+    };
+
+  // //Effect to add id to delete
+  // useEffect(() => {
+  //   handleShowDelete();
+  // }, [handleShowDelete]);
 
   //Effect to hide scroll
   useEffect(() => {
@@ -284,12 +303,43 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
               <p className="lowercase">({item.village.location_id})</p>
               <button
                 className="md:relative absolute right-12 md:right-0 md:px-8 text-red-700"
-                onClick={() => deleteUserVillage(item.id)}
+                onClick={() => handleShowDelete(item.id)}
+                // onClick={() => deleteUserVillage(item.id)}
               >
                 <FaTimes />
               </button>
             </Tab>
           ))}
+          {showDeleteModal && (
+            <DeleteModal
+              setShowDeleteModal={setShowDeleteModal}
+              setShowCompleteModal={setShowDeleteModal}
+              heading={'You are about to remove a village'}
+              description={
+                'Kindly note that when you remove a village, you will lose all your delivered voters. Are you sure?'
+              }
+              image={bin}
+              // deleteVillage={
+              //   // deleteUserVillage(item.id)
+              //   console.log(idToDelete)
+              // }
+            >
+              <div className={`${styles.delete_modal}`}>
+                <button
+                  className={`${styles.delete_modal__btn_submit}`}
+                  onClick={() => setShowDeleteModal(false)}
+                >
+                  No
+                </button>
+                <button
+                  className={`${styles.delete_modal__btn_submit} btn_dark`}
+                  onClick={() => {deleteUserVillage(idToDelete); setShowDeleteModal(false)}}
+                >
+                  Yes, delete village
+                </button>
+              </div>
+            </DeleteModal>
+          )}
           {villageDetails && (
             <Tab
               className="font-bold lg:px-8 py-3 lg:text-2xl  min-w-[40%] cursor-pointer hover:border-[#018226] hover:border-b-[1px] flex row-gap-2 border-none"

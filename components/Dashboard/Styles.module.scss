@@ -656,6 +656,18 @@
   }
 }
 
+//Buttons for delete Modal
+.delete_modal {
+  display: flex;
+  column-gap: 2rem;
+  &__btn_submit {
+    width: 21rem;
+    padding: 1rem 0;
+    border-radius: 48px;
+    border: 1px solid var(--primary-color);
+  }
+}
+
 /////////////////// VILLAGE DETAILS ////////////////////////
 .village_details {
   margin-top: 2.65rem;
