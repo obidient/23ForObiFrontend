@@ -94,7 +94,6 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
   ////////////////// Selected Village///////////////////////
   const [selectedVillage, setSelectedVillage] = useState('');
   const [selectedLga, setSelectedLga] = useState('');
-  // console.log(accessToken);
 
   const handleVillage = async () => {
     const url = 'https://api.23forobi.com/user-villages';
@@ -237,13 +236,13 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
       
     }
   }
+
   
   //set show delete modal
   const handleShowDelete = (item) => {
     
       setShowDeleteModal(true);
       setIdToDelete(item);
-      console.log(idToDelete)
     };
 
   // //Effect to add id to delete
@@ -300,11 +299,10 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
               className="font-bold lg:px-8 py-3 text-3xl lg:text-2xl md:min-w-fit min-w-[70%] cursor-pointer hover:border-[#018226] hover:border-b-[1px] flex gap-2 justify-center items-center relative"
             >
               {item.village.name}
-              <p className="lowercase">({item.village.location_id})</p>
+              <p className="lowercase">({item.state.state_name.split(" ")[0]})</p>
               <button
                 className="md:relative absolute right-12 md:right-0 md:px-8 text-red-700"
                 onClick={() => handleShowDelete(item.id)}
-                // onClick={() => deleteUserVillage(item.id)}
               >
                 <FaTimes />
               </button>
@@ -319,10 +317,6 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
                 'Kindly note that when you remove a village, you will lose all your delivered voters. Are you sure?'
               }
               image={bin}
-              // deleteVillage={
-              //   // deleteUserVillage(item.id)
-              //   console.log(idToDelete)
-              // }
             >
               <div className={`${styles.delete_modal}`}>
                 <button
