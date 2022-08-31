@@ -69,7 +69,7 @@ const Step4 = ({ formData, setFormData }) => {
     e.preventDefault();
   };
   return (
-    <div className="my-5 w-full">
+    <div className="my-5 w-full overflow-auto">
       <h2 className="text-[#2F3733] lg:text-3xl my-10">
         If so, what state are you from?
       </h2>
