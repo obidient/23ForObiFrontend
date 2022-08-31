@@ -514,6 +514,11 @@
 	bottom: 8rem;
 }
 
+ @media (max-width: 35.25em) {
+    // font-size: 45%;
+
+  }
+
 .not_found, .village_dropdown {
 	background: #FFFFFF;
 	border-radius: 16px;
@@ -529,6 +534,10 @@
 	max-height: 22rem;
 	overflow-y: scroll;
 	color: var(--text-color-4);
+
+	 @media (max-width: 35.25em) {
+		max-height: 30rem;
+ 	 }
 
 	&::-webkit-scrollbar {
 			width: 4px;
