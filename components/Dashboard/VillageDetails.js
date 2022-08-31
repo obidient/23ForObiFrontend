@@ -60,7 +60,7 @@ const VillageDetails = ({ villageDetails, votersDetails, awards, villageCount })
     } catch (err) {
       if(err.response.status === 400) {
         // toast.error('Add phone number');
-        console.log(err)
+        // console.log(err)
       }
     }
     setShowModal(false);

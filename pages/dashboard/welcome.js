@@ -135,7 +135,7 @@ const welcome = () => {
       <Head>
         <title>Welcome</title>
       </Head>
-      <div className={`container h-[100%]`}>
+      <div className={`container overflow-auto`}>
         <DashboardNav />
         <div className="flex flex-col justify-center py-11">
           <h2 className="text-4xl font-light mt-10">
