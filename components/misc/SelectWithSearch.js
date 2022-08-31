@@ -51,7 +51,7 @@ const SelectVillage = ({
   }, []);
 
   return (
-    <div ref={selectRef}>
+    <div ref={selectRef} className={styles.select_with_search}>
       <div onClick={() => setToggle(!toggle)}>
         <Input
           onChange={(inputValue) => {

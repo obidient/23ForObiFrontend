@@ -390,17 +390,6 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
             <div className={styles.modal__body}>
               <p>Kindly enter the details for a new village</p>
               <div className={styles.details_form}>
-                {/* <Formik
-                  initialValues={{
-                    firstName: '',
-                    lastName: '',
-                    state: '',
-                    village: '',
-                  }}
-                  validationSchema={contributorValidationSchema}
-                  onSubmit={(values) => console.log('Form data', values)}
-                >
-                  {({ values }) => ( */}
                 <form>
                   <SelectInput
                     placeholder="Select a state"
@@ -409,20 +398,12 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
                     state={states}
                     addVillageHandler={addVillageHandler}
                     setStateId={(val) => setStateId(() => val)}
-                    // setIsLocationEmpty={setIsLocationEmpty}
                     setStateClicked={setStateClicked}
                   />
                   <p className={styles.select_desc}>
                     Kindly note that the state you selected on registration
                     cannot be changed
                   </p>
-                  {/* <SelectInputVillage
-                    placeholder="Select a village"
-                    name="village"
-                    options={states}
-                    setSelectedVillage={setSelectedVillage}
-                    addVillageHandler={addVillageHandler}
-                  /> */}
 
                   {stateClicked && (
                     <SelectWithSearch
