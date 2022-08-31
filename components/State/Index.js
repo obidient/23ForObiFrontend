@@ -438,6 +438,7 @@ const State = ({ stateName, detail, images, villages }) => {
                 : 'btn_dark'
             }
             disabled={!userProfile}
+            title={!userProfile ? 'Please login to add a Village' : ''}
             data-tip={!userProfile ? 'Please login to add a Village' : ''}
           >
             Add a missing village
