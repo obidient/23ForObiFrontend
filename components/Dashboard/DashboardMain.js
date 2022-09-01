@@ -1,6 +1,6 @@
 import styles from './Styles.module.scss';
 import Image from 'next/image';
-import {FaTimes} from 'react-icons/fa'
+import { FaTimes } from 'react-icons/fa';
 
 //IMAGES
 import status_check from '../../assets/status_check.png';
@@ -54,7 +54,24 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
   const { userProfile } = useAuthStore();
   const { accessToken } = useAuthStore();
   const { userVillages, userLga } = useUserStore();
-  // const { village, state } = registeredUser;
+  const [userVilla, setUserVilla] = useState([]);
+
+  useEffect(() => {
+    fetchUserVilla();
+  }, []);
+
+  const fetchUserVilla = async () => {
+    await axios
+      .get('https://api.23forobi.com/user-villages', {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setUserVilla(res.data);
+      });
+  };
 
   const [otherVillage, setOtherVillage] = useState();
 
@@ -110,24 +127,35 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
     };
 
     if (selectedVillage?.name !== 'Others' && !isVillageEmpty) {
-      axios.post(url, data, { headers })?.then((res) => {
-        setSelectedVillage('');
-      }).catch((err) => {
-        const errorMessage = err.response.data.detail;
-        if (errorMessage === 'User already added this village') {
-          toast.error(errorMessage);
-        }
-        // console.log(err)
-      });
+      axios
+        .post(url, data, { headers })
+        ?.then((res) => {
+          console.log(res);
+          if (res.status === 200) {
+            toast.success(res.data.message);
+            fetchUserVilla();
+          }
+          setSelectedVillage('');
+        })
+        .catch((err) => {
+          const errorMessage = err.response.data.detail;
+          if (errorMessage === 'User already added this village') {
+            toast.error(errorMessage);
+          }
+          // console.log(err)
+        });
     } else {
-      await axios.post(urlCreate, dataCreate, { headers })?.then((res) => {
-        setShowCompleteModal(true);
-        setOtherVillage('');
-        setSelectedVillage('');
-        setLgaClicked(false);
-      }).catch((err) => {
-        // console.log(err)        
-      });
+      await axios
+        .post(urlCreate, dataCreate, { headers })
+        ?.then((res) => {
+          setShowCompleteModal(true);
+          setOtherVillage('');
+          setSelectedVillage('');
+          setLgaClicked(false);
+        })
+        .catch((err) => {
+          // console.log(err)
+        });
     }
     setShowModal(false);
   };
@@ -213,13 +241,18 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
       Authorization: `Bearer ${accessToken}`,
     };
     try {
-      await axios.delete(`https://api.23forobi.com/user-villages/${id}`, {headers}).then((res) => {
-        toast.success(res.data.message)
-      })
+      await axios
+        .delete(`https://api.23forobi.com/user-villages/${id}`, { headers })
+        .then((res) => {
+          if (res.status === 200) {
+            toast.success(res.data.message);
+            fetchUserVilla();
+          }
+        });
     } catch (err) {
-      
+      toast.error(err);
     }
-  }
+  };
 
   //Effect to hide scroll
   useEffect(() => {
@@ -235,13 +268,13 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
           <h2>Welcome back! {first_name},</h2>
           <p>We are glad to have you</p>
         </div>
-        {!villageDetails && (
+        {!userVilla && (
           <div
             className={styles.dashboardmain_add_village}
             onClick={() => setShowModal(true)}
           >
             <Image src={add_img_green} />
-            <p>Add a new village</p>
+            <p>Add a new villag</p>
           </div>
         )}
       </div>
@@ -264,48 +297,52 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
               </p>
             </Tab>
               */}
-          {villageDetails?.map((item) => (
-            <Tab
-              key={item.village.id}
-              className="font-bold lg:px-8 py-3 text-3xl lg:text-2xl md:min-w-fit min-w-[70%] cursor-pointer hover:border-[#018226] hover:border-b-[1px] flex gap-2 justify-center items-center relative"
-            >
-              {item.village.name}
-              <p className="lowercase">({item.village.location_id})</p>
-              <button
-                className="md:relative absolute right-12 md:right-0 md:px-8 text-red-700"
-                onClick={() => deleteUserVillage(item.id)}
+          {userVilla &&
+            userVilla.length > 0 &&
+            userVilla?.map((item) => (
+              <Tab
+                key={item.village.id}
+                className="font-bold lg:px-8 py-3 text-3xl lg:text-2xl md:min-w-fit min-w-[70%] cursor-pointer hover:border-[#018226] hover:border-b-[1px] flex gap-2 justify-center items-center relative"
               >
-                <FaTimes />
-              </button>
-            </Tab>
-          ))}
+                {item.village.name}
+                <p className="lowercase">({item.village.location_id})</p>
+                <button
+                  className="md:relative absolute right-12 md:right-0 md:px-8 text-red-700"
+                  onClick={() => deleteUserVillage(item.id)}
+                >
+                  <FaTimes />
+                </button>
+              </Tab>
+            ))}
           {villageDetails && (
             <Tab
               className="font-bold lg:px-8 py-3 lg:text-2xl  min-w-[40%] cursor-pointer hover:border-[#018226] hover:border-b-[1px] flex row-gap-2 border-none"
               disabled={true}
             >
               <div
-                className="flex items-center gap-3 text-[#018226]"
+                className="flex items-center gap-3 text-[#018226] text-4xl md:text-2xl"
                 onClick={() => setShowModal(true)}
               >
                 <Image src={add_img_green} height="15%" width="15%" />
-                <p className="text-lg">Add a new village</p>
+                <p className="">Add a new village</p>
               </div>
             </Tab>
           )}
         </TabList>
-        {villageDetails?.map((items) => (
-          <TabPanel key={items.id}>
-            <div>
-              <VillageDetails
-                villageDetails={items}
-                villageCount={villageDetails.length}
-                votersDetails={votersDetails}
-                awards={awards}
-              />
-            </div>
-          </TabPanel>
-        ))}
+        {userVilla &&
+          userVilla.length > 0 &&
+          userVilla?.map((items) => (
+            <TabPanel key={items.id}>
+              <div>
+                <VillageDetails
+                  villageDetails={items}
+                  villageCount={userVilla.length}
+                  votersDetails={votersDetails}
+                  awards={awards}
+                />
+              </div>
+            </TabPanel>
+          ))}
       </Tabs>
 
       {/* NEW VILLAGE MODAL */}

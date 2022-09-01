@@ -7,16 +7,49 @@ import level_3 from '../../assets/level-3.svg';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import Loader from '../Loader';
+import axios from 'axios';
+import useAuthStore from '../../store/authStore';
 
-const Sidebar = ({ voters }) => {
-  //const [loading, setLoading] = useState(false)
-  /*useEffect(() => {
-    if(!voters){
-      setLoading(true)
-    } else {
-      setLoading(false)
-    }
-  }, [])*/
+const Sidebar = () => {
+  const { accessToken } = useAuthStore();
+  const [voters, setVoters] = useState(0);
+  const [villaId, setVillaId] = useState(null);
+
+  useEffect(() => {
+    const fetchUserVilla = async () => {
+      await axios
+        .get('https://api.23forobi.com/user-villages', {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .then((res) => {
+          if (res.data.length > 0) {
+            // console.log(res.data[0].village.id);
+            setVillaId(res.data[0].village.id);
+          } else {
+            return;
+          }
+        });
+    };
+    fetchUserVilla();
+  }, []);
+
+  useEffect(() => {
+    const fetchVillaById = async () => {
+      await axios
+        .get(`https://api.23forobi.com/voters/${villaId}`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+          setVoters(res.data);
+        });
+    };
+    fetchVillaById();
+  }, [villaId]);
 
   return (
     <div className={styles.sidebar}>
