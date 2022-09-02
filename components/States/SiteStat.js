@@ -42,15 +42,15 @@ const SiteStat = (stats) => {
         <div className={styles.site_stat__count}>
           <div className={styles.users}>
             <h3>Total No of users</h3>
-            <p className="text-[#018226]">300</p>
+            <p className="text-[#018226]">{number_of_users}</p>
           </div>
           <div className={styles.voters}>
             <h3>Total No of voters</h3>
-            <p className="text-[#CE9E56]">300</p>
+            <p className="text-[#CE9E56]">{number_of_voters}</p>
           </div>
           <div className={styles.villages}>
             <h3>Total No of villages</h3>
-            <p className="text-[#CE5D56]">300</p>
+            <p className="text-[#CE5D56]">{number_of_villages}</p>
           </div>
         </div>
         <hr />
