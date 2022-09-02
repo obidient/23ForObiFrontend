@@ -17,7 +17,7 @@ export default function Home({
   stats
 }) {
 
-  // console.log(stats)
+  console.log(initailData);
   return (
     <div>
       <Homepage
