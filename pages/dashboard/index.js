@@ -85,9 +85,6 @@ const dashboard = (props) => {
   }, [voterData]);
 
   useEffect(() => {
-    // try {
-    // const getVotersProgress = async () => {
-    // await
     axios
       .get('https://api.23forobi.com/voters-by-contributor', {
         headers: {
@@ -105,9 +102,6 @@ const dashboard = (props) => {
           removeUser();
         }
       });
-    // getVotersProgress();
-    // }
-    // }
   }, []);
 
   const expectedVotes = 30;
