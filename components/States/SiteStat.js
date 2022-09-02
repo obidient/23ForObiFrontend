@@ -4,8 +4,18 @@ import Modal from './../Modal/Index';
 import DeliverModal from '../Modal/DeliverModal';
 import useAuthStore from './../../store/authStore';
 import { useRouter } from 'next/router';
+import useSWR from 'swr';
+import { getStat } from '../../adapters/requests';
+import axios from 'axios';
 
 const SiteStat = (stats) => {
+  
+    const fetcher = (url) => axios.get(url).then((res) => res.data);
+
+    const { data, error } = useSWR("https://api.23forobi.com/statistcis", fetcher);
+
+    // console.log(data)
+
   //STATES
   const [showDeliverModal, setShowDeliverModal] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -22,9 +32,9 @@ const SiteStat = (stats) => {
     body.style.overflow = showDeliverModal ? 'hidden' : 'auto';
   }, [showDeliverModal]);
 
-  console.log(stats);
+//   console.log(stats);
 
-  const {number_of_users, number_of_voters, number_of_villages} = stats.stats;
+  const { number_of_users, number_of_voters, number_of_villages } = data;
   return (
     <div className={styles.site_stat}>
       <div className="container">
