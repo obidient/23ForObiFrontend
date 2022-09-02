@@ -6,37 +6,36 @@ import Image from 'next/image';
 //IMPORT IMAGES
 import uploaded from '../../assets/uploaded.png';
 
-const CompleteModal = ({ 
-    showCompleteModal, 
-    setShowCompleteModal, 
-    description, 
-    heading}) => {
+const DeleteModal = ({
+  showDeleteModal,
+  setShowDeleteModal,
+  description,
+  heading,
+  deleteVillage,
+  children, 
+  image
+}) => {
   return (
     <div>
       <Modal
-        show={showCompleteModal}
-        onClose={() => setShowCompleteModal(false)}
+        show={showDeleteModal}
+        onClose={() => setShowDeleteModal(false)}
         width="54.4rem"
       >
         <div className={`${styles.modal} ${styles.complete}`}>
           <div>
             <button
               className={`closeBtn ${styles.complete_btn}`}
-              onClick={() => setShowCompleteModal(false)}
+              onClick={() => setShowDeleteModal(false)}
             >
               &times;
             </button>
           </div>
           <div className={styles.complete_body}>
-            <Image src={uploaded} alt="uploaded"/>
+            <Image src={image} alt="bin" />
             <h2>{heading}</h2>
-            <p>{description}</p>
-            <button
-              className={`${styles.btn_submit} btn_dark`}
-              onClick={() => setShowCompleteModal(false)}
-            >
-              Complete
-            </button>
+            <p className="w-full">{description}</p>
+            <div className="mt-16">{children}</div>
           </div>
         </div>
       </Modal>
@@ -44,4 +43,4 @@ const CompleteModal = ({
   );
 };
 
-export default CompleteModal;
+export default DeleteModal;

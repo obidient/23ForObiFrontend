@@ -13,6 +13,10 @@ export function getOverallprogress() {
   return get('/overall-progress/');
 }
 
+export function getStat() {
+  return get('/statistcis/');
+}
+
 export function getStateDetails(state) {
   return get(`/state-details/${state}/`);
 }

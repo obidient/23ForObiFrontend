@@ -67,3 +67,169 @@
     }
 
 }
+
+////////////SITE STAT/////////////
+.site_stat {
+    background-color: #F3FFF6;
+    padding: 10rem 0;
+
+    h2 {
+        font-weight: 700;
+        font-size: var(--font-header-1);
+        line-height: 130%;
+        color: var(--text-color-1);
+        margin-bottom: 3rem;
+    }
+
+    &__count {
+        margin-bottom: 6rem;
+        background-color: var(--tertiary-color);
+        padding: 3rem 6rem;
+        border: 1px solid #E7FFEC;
+        box-shadow: 0px 4px 13px rgba(2, 106, 32, 0.05);
+        border-radius: 20px;
+        display: flex;
+        // column-gap: 22.7rem;
+        justify-content: space-between;
+        
+        @media (max-width: 65.25em) {
+                // column-gap: 15rem;                    
+                }
+
+        @media (max-width: 65em) {
+                flex-direction: column;    
+                row-gap: 1.5rem;          
+                }
+
+        .users, .voters, .villages {            
+            h3 {
+                font-size: var(--font-header-3);
+                line-height: 130%;
+                color: var(--text-color-4);
+            }
+
+            p {
+                font-weight: 700;
+                font-size: 5.86667rem;
+                line-height: 130%;
+            }
+        }
+
+        .villages, .voters {
+            position: relative;
+            &::after {
+                content: "";
+                background-color: #F1F1F1;
+                height: 50%;
+                width: 1px;
+                left: -3rem;
+                top: 2rem;
+                position: absolute;
+                @media (max-width: 65em) {       
+                        // &::after {
+                            content: "";
+                            // background-color: #F1F1F1;
+                            height: 1px;
+                            width: 100%;
+                            left: 0;
+                            top: -1.5rem;
+                            // position: absolute;
+                        // }
+                    }
+            }
+        }
+    }
+
+    hr {
+        // color: #CBFAD5;
+    }
+    
+    &__below_hr {
+        padding-top: 3.5rem;
+
+        h3 {
+            font-weight: 700;
+            font-size: var(--font-header-2);
+            line-height: 130%;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        p {
+            width: 47.4rem;
+            margin-bottom: 3rem;
+
+            @media (max-width: 65.25em) {
+                        width: 100%;                    
+                    }
+        }
+
+        p:last-of-type {
+            color: var(--text-color-9);
+        }
+
+        p:first-of-type, li {
+            font-weight: 400;
+            font-size: var(--font-p-text-1);
+            line-height: 130%;
+            color: var(--text-color-3);
+        }
+
+        ul {
+            display: flex;
+            column-gap: 7rem;
+            margin-bottom: 2rem;
+
+            @media (max-width: 65.25em) {
+                column-gap: 4rem;
+                flex-direction: column;
+            }
+
+                div:first-of-type {
+                    position: relative;
+                    &::before {
+                        content: "";
+                        background-color: #CBFAD5;
+                        height: 100%;
+                        width: 1px;
+                        right: -7rem;
+                        position: absolute;
+
+                        @media (max-width: 65.25em) {
+                            display: none;
+                        }
+                    }
+                }
+            li {
+                width: 49.5rem;
+                position: relative;
+                padding-left: 2.5rem;
+                display: flex;
+                
+                @media (max-width: 65.25em) {
+                        width: 100%;                    
+                    }
+
+                span {
+                    color: var(--text-color-9);
+                    font-weight: 700;
+                }
+
+                
+                &::before {
+                    content: "";
+                    left: 0;
+                    background-color: var(--primary-color);
+                    padding: .8rem;
+                    position: absolute;
+                    border-radius: 100%;
+                }
+            }
+        }
+
+        button {
+            padding: 1rem 3.8rem;
+            border-radius: 48px;
+        }
+    }
+}

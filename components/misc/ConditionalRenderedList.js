@@ -100,7 +100,9 @@ const ConditionalRenderedList = ({
     if (filteredVillages?.length) {
       return (
         toggle && (
-          <div className={styles.village_dropdown}>
+          <div
+            className={`${styles.village_dropdown} ${type == 'village' ? styles.village_dropdown_village : ""}`}
+          >
             {filteredVillages?.map((item) => (
               <div
                 onClick={() => handleClick(item)}
@@ -114,7 +116,7 @@ const ConditionalRenderedList = ({
       );
     }
     return (
-      <div className={styles.not_found}>
+      <div className={`${styles.not_found} ${type == 'village' ? styles.village_dropdown_village : ""}`}>
         <div className={styles.dropdown_item}>
           <p>Not Found</p>
         </div>
@@ -124,7 +126,7 @@ const ConditionalRenderedList = ({
 
   return (
     toggle && (
-      <div className={styles.village_dropdown}>
+      <div className={`${styles.village_dropdown} ${type == 'village' ? styles.village_dropdown_village : ""}`}>
         {itemsList?.map((item) => (
           <div
             onClick={() => handleClick(item)}

@@ -63,39 +63,39 @@ const Sidebar = () => {
               {voters.length >= 3 ? (
                 <>
                   <div>
-                    <Image src={level_1} />
+                    <Image src={level_1} alt="level" />
                   </div>
                 </>
               ) : (
                 <>
                   <div>
-                    <Image src={level_1} style={{ opacity: 0.4 }} />
+                    <Image src={level_1} style={{ opacity: 0.4 }} alt="level" />
                   </div>
                 </>
               )}
               {voters.length >= 6 ? (
                 <>
                   <div>
-                    <Image src={level_2} />
+                    <Image src={level_2} alt="level" />
                   </div>
                 </>
               ) : (
                 <>
                   <div>
-                    <Image src={level_2} style={{ opacity: 0.4 }} />
+                    <Image src={level_2} style={{ opacity: 0.4 }} alt="level" />
                   </div>
                 </>
               )}
               {voters.length >= 9 ? (
                 <>
                   <div>
-                    <Image src={level_3} />
+                    <Image src={level_3} alt="level" />
                   </div>
                 </>
               ) : (
                 <>
                   <div>
-                    <Image src={level_3} style={{ opacity: 0.4 }} />
+                    <Image src={level_3} style={{ opacity: 0.4 }} alt="level" />
                   </div>
                 </>
               )}

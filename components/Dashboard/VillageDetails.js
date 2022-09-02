@@ -59,7 +59,7 @@ const VillageDetails = ({ villageDetails, votersDetails, awards, villageCount })
       });
     } catch (err) {
       if(err.response.status === 400) {
-        toast.error('Voter Already exists');
+        // toast.error('Add phone number');
         // console.log(err)
       }
     }
@@ -119,7 +119,7 @@ const VillageDetails = ({ villageDetails, votersDetails, awards, villageCount })
           className={styles.dashboardmain_add_village}
           onClick={() => setShowModal(true)}
         >
-          <Image src={add_img_green} />
+          <Image src={add_img_green} alt="plus" />
           <p>Add a vote you will deliver</p>
         </div>
       </div>
@@ -139,7 +139,7 @@ const VillageDetails = ({ villageDetails, votersDetails, awards, villageCount })
                 <tr>
                   <td>{index + 1}</td>
                   <td className="capitalize">{voters.name}</td>
-                  <td>+234{voters.contact.slice(1, voters.contact.length)}</td>
+                  <td>{voters.contact.slice(1, voters.contact.length)}</td>
                   <td>
                     <p
                       onClick={(e) => {

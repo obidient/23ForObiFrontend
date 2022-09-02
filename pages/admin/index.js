@@ -53,7 +53,7 @@ const Login = () => {
       <div className="pt-12 pl-1 pb-12 cursor-pointer">
         <Link href="/">
           <div className="">
-            <Image src={logo} />
+            <Image src={logo} alt="logo" />
           </div>
         </Link>
       </div>
@@ -65,7 +65,7 @@ const Login = () => {
               <br /> Your details
             </h2>
             <div>
-              <Image src={close} />
+              <Image src={close} alt="close" />
             </div>
           </div>
           <div className={`flex flex-col py-10 lg:py-5 ${styles.form}`}>

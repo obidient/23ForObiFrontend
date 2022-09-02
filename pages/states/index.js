@@ -11,7 +11,7 @@ import Footer from '../../components/Footer/Index';
 import Loader from '../../components/Loader';
 // import { FetchEvent } from 'next/dist/server/web/spec-compliant/fetch-event';
 import { countryContext } from './../../Context/countryContext';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import Page from './../../components/Page';
 import SGCard from '../../components/SupportGroups/SGCard';
 
@@ -36,8 +36,14 @@ import { addSupportGroup } from './../../adapters/requests/index';
 import DeliverModal from './../../components/Modal/DeliverModal';
 import Modal from '../../components/Modal/Index';
 import useAuthStore from '../../store/authStore';
+import SiteStat from './../../components/States/SiteStat';
 
-const homepage = ({ data, progress, total_number_of_voters }) => {
+const homepage = ({
+  data,
+  progress,
+  total_number_of_voters,
+  stats
+}) => {
   const { userProfile } = useAuthStore();
   const [showModal, setShowModal] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
@@ -121,6 +127,12 @@ const homepage = ({ data, progress, total_number_of_voters }) => {
     },
   ];
 
+  //Effect to hide scroll
+  useEffect(() => {
+    const body = document.querySelector('body');
+    body.style.overflow = showDeliverModal ? 'hidden' : 'auto';
+  }, [showDeliverModal]);
+
   return (
     <Page
       description="deliver 23 votes per village for peter obi"
@@ -178,7 +190,7 @@ const homepage = ({ data, progress, total_number_of_voters }) => {
                 )}
               </div>
               <div className={styles.hero__img}>
-                <Image src={labourparty} width={373} height={280} alt="" />
+                <Image src={labourparty} width={373} height={280} alt="labour party" />
               </div>
             </div>
             <div className={styles.hero__bottom}>
@@ -200,6 +212,9 @@ const homepage = ({ data, progress, total_number_of_voters }) => {
               </div>
             </div>
           </div>
+        </div>
+        <div className={styles.site_stat}>
+          <SiteStat stats={stats} />
         </div>
         <div className={styles.states}>
           <States />
@@ -352,7 +367,7 @@ const homepage = ({ data, progress, total_number_of_voters }) => {
                               styles.login_modal__body__container__content__image
                             }
                           >
-                            <Image src={facebook} alt="google icon" />
+                            <Image src={facebook} alt="facebook icon" />
                           </div>
                           <div
                             className={
@@ -374,7 +389,7 @@ const homepage = ({ data, progress, total_number_of_voters }) => {
                               styles.login_modal__body__container__content__image
                             }
                           >
-                            <Image src={twitter} alt="google icon" />
+                            <Image src={twitter} alt="twitter icon" />
                           </div>
                           <div
                             className={
@@ -396,7 +411,7 @@ const homepage = ({ data, progress, total_number_of_voters }) => {
                               styles.login_modal__body__container__content__image
                             }
                           >
-                            <Image src={apple} alt="google icon" />
+                            <Image src={apple} alt="apple icon" />
                           </div>
                           <div
                             className={

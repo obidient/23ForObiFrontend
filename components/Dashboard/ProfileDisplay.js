@@ -227,6 +227,7 @@ const ProfileDisplay = ({ userVoters, states }) => {
               src={values.userImage ? values.userImage : image}
               width={177}
               height={177}
+              alt="level"
             />
             <label className={styles.avatar__pTag}>
               <FileBase

@@ -10,6 +10,7 @@ import * as Yup from 'yup';
 import FormikControl from '../../components/Forms/FormikControl';
 import Modal from '../../components/Modal/Index';
 import Toggle from '../../components/misc/Toggle';
+import ProtectedAdmin from './../../components/misc/ProtectedAdmin';
 
 const roles = ['Profile', 'Security', 'Notifications', 'Groups'];
 const settings = () => {
@@ -532,4 +533,4 @@ const settings = () => {
   );
 };
 
-export default settings;
+export default ProtectedAdmin(settings);

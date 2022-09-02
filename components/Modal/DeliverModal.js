@@ -131,7 +131,7 @@ const DeliverModal = ({
                           <p>{slide.text.body}</p>
                         </div>
                         <div className={styles.img}>
-                          <Image src={slide.image} />
+                          <Image src={slide.image} alt="instruction image" />
                         </div>
                         {/* <div className={styles.text}>
                           <h3>

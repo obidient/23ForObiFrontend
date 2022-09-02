@@ -63,8 +63,8 @@ const DashboardNav = ({ progressbar, profile, voterData }) => {
               <p>{progress}%</p>
             </div>
             <StateProgress progress={progress} />
-            <p className="text-[#979797]">
-              (You have promised to deliver {votersProgress})
+            <p className="text-[#979797] text-2xl">
+              (You have promised to deliver {votersProgress} votes)
             </p>
           </div>
         )}

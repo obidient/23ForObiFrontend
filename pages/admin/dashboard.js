@@ -7,6 +7,7 @@ import AdminNav from '../../components/Admin/AdminNav';
 import AdminPage from '../../components/Admin/AdminPage';
 import AdminDashboard from '../../components/Admin/AdminDashboard';
 import useAuthStore from '../../store/authStore';
+import ProtectedAdmin from './../../components/misc/ProtectedAdmin';
 
 const admin = () => {
   const { adminUser } = useAuthStore();
@@ -31,4 +32,4 @@ const admin = () => {
   );
 };
 
-export default admin;
+export default ProtectedAdmin(admin);

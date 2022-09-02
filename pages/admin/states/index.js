@@ -1,5 +1,6 @@
 import React from 'react'
 import States from '../../../components/Admin/adminState/States'
+import ProtectedAdmin from './../../../components/misc/ProtectedAdmin';
 
 
 const states = () => {
@@ -11,4 +12,4 @@ const states = () => {
   )
 }
 
-export default states
+export default ProtectedAdmin(states);

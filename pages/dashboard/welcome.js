@@ -15,6 +15,7 @@ import StepButton from '../../components/misc/StepButton';
 import Head from 'next/head';
 import useAuthStore from '../../store/authStore';
 import axios from 'axios';
+import ProtectedHOC from './../../components/misc/ProtectedHOC';
 
 const welcome = () => {
   const router = useRouter();
@@ -24,6 +25,7 @@ const welcome = () => {
   const is_new_user = userProfile?.is_new_user;
 
   useEffect(() => {
+    
     return () => {
       if(!userProfile){
         router.push('/')
@@ -180,4 +182,4 @@ const welcome = () => {
   );
 };
 
-export default welcome;
+export default ProtectedHOC(welcome);

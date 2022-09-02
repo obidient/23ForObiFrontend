@@ -9,7 +9,7 @@ const contributeComplete = () => {
     <div className={`container`}>
       <div className={styles.contribute}>
         <div className={styles.logo}>
-          <Image src={logo} />
+          <Image src={logo} alt="logo" />
         </div>
         <h1>
           Please select how <br />

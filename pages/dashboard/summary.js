@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import DashboardNav from '../../components/DashboardNav/Index';
 import StateProgress from '../../components/misc/StateProgress';
@@ -9,11 +9,26 @@ import nextIcon from '../../assets/arrow-right-2.png';
 import Modal from '../../components/Modal/Index';
 import Loader from '../../components/Loader';
 import Head from 'next/head';
+import ProtectedHOC from './../../components/misc/ProtectedHOC';
+import useAuthStore from '../../store/authStore';
 
 const summary = () => {
   const router = useRouter();
   const [progress, setProgress] = useState(20);
   const [showModal, setShowModal] = useState(false);
+  const { accessToken, userProfile } = useAuthStore();
+  const is_new_user = userProfile?.is_new_user;
+
+  useEffect(() => {
+    return () => {
+      if (!userProfile) {
+        router.push('/');
+      }
+      if (is_new_user === false) {
+        router.push('/dashboard');
+      }
+    };
+  }, [router, is_new_user]);
 
   return (
     <>
@@ -47,7 +62,7 @@ const summary = () => {
               </p>
             </div>
             <div className="lg:w-1/4 w-1/2 py-5 lg:py-0 text-center">
-              <Image src={awards} />
+              <Image src={awards} alt="awards" />
               <p className="text-[#7A7B7B] lg:text-2xl text-3xl my-4">
                 Hurray! you’ve earned your first badge
               </p>
@@ -66,7 +81,7 @@ const summary = () => {
             >
               Yes, I can
               <div className="flex items-center pl-4 hover:translate-x-1">
-                <Image src={nextIcon} />
+                <Image src={nextIcon} alt="next" />
               </div>
             </button>
           </div>
@@ -105,4 +120,4 @@ const summary = () => {
   );
 };
 
-export default summary;
+export default ProtectedHOC(summary);

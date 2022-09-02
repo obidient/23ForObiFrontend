@@ -193,7 +193,7 @@ const Village = ({
           <h2>{top_contributors.length > 0 ? 'Top' : 'No'} Contributors</h2>
 
           <p>
-            {top_contributors.l  > 0
+            {top_contributors.length  > 0
               ? `These are the people working in ${village_name ? village_name : ''} to deliver votes for Peter Obi `
               : 'There are no contributors in this village'}
           </p>
@@ -234,19 +234,6 @@ const Village = ({
               ))}
           </div>
         </div>
-        {/* <div className={styles.votes_delivered}>
-          <h2>Vote delivered</h2>
-          <div className={styles.detail}>
-            <Image src={village_img_1} />
-            <div className={styles.name}>
-              <h5>Ejima Benson</h5>
-              <div className={styles.guaranteed}>
-                <Image src={check} />
-                <p>Guaranteed</p>
-              </div>
-            </div>
-          </div>
-        </div> */}
       </div>
     </div>
   );

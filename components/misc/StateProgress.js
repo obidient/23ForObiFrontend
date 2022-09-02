@@ -9,15 +9,22 @@ const StateProgress = ({ progress }) => {
       const newStyle = {
         opacity: 1,
         width: `${progress}%`,
-        backgroundColor: `${progress < 50 ? '#CE9E56' : '#018226'}`,
+        backgroundColor: `${
+          progress == 0 ? '#CE5D56' : progress <= 10 ? '#CE9E56' : '#03D13F'
+        }`,
       };
 
+      // 018226;
+      
+      // progress == 0 ? '#CE5D56' : progress <= 10 ? '#CE9E56' : '#56CE70';
       setStyle(newStyle);
     }, 200);
   });
 
   const progressBgStyle = {
-    backgroundColor: `${progress < 50 ? '#FAF1E4' : '#E7FFEC'}`,
+    backgroundColor: `${
+      progress == 0 ? '#FFE5E4' : progress <= 10 ? '#FAF1E4' : '#E4FFEC'
+    }`,
   };
 
   return (

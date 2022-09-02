@@ -7,6 +7,7 @@ import status_check from '../../assets/status_check.png';
 import close from '../../assets/closeW.png';
 import add_img_green from '../../assets/circle_add.svg';
 import caret_down from '../../assets/caret_down.png';
+import bin from '../../assets/Bin.png';
 
 import { useContext, useState, useEffect } from 'react';
 import Modal from './../Modal/Index';
@@ -35,6 +36,7 @@ import { addUserVillage } from '../../adapters/requests';
 import axios from 'axios';
 import VillageStat from './VillageStat';
 import CompleteModal from '../misc/CompleteModal';
+import DeleteModal from '../misc/DeleteModal';
 
 // Prevent serverside redering on the FormikControl Component
 const FormikControl = dynamic(() => import('../Forms/FormikControl'), {
@@ -45,6 +47,7 @@ const FormikControl = dynamic(() => import('../Forms/FormikControl'), {
 //   () => import('../Forms/SelectInput').then((mod) => mod.CustomSelectInput),
 //   {import CompleteModal from './../misc/CompleteModal';
 import SelectWithSearch from '../misc/SelectWithSearch';
+import MiniLoader from './../Loader/MiniLoader';
 
 //     ssr: false,
 //   }
@@ -82,7 +85,7 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
   //CHECK IF INPUT IS CLICKED SO AS TO RENDER NEXT INPUT
   const [stateClicked, setStateClicked] = useState(false);
   const [lgaClicked, setLgaClicked] = useState(false);
-  // console.log(villageDetails, 'village');
+  // console.log(villageDetails, votersDetails);
 
   const [isVillageEmpty, setIsVillageEmpty] = useState(null);
 
@@ -105,7 +108,6 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
   ////////////////// Selected Village///////////////////////
   const [selectedVillage, setSelectedVillage] = useState('');
   const [selectedLga, setSelectedLga] = useState('');
-  // console.log(accessToken);
 
   const handleVillage = async () => {
     const url = 'https://api.23forobi.com/user-villages';
@@ -260,6 +262,16 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
     body.style.overflow = showModal ? 'hidden' : 'auto';
   }, [showModal]);
 
+  ///LOADING STATE FOR VILLAGE AND VOTER DETAILS
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!votersDetails && !villageDetails) {
+    } else {
+      setLoading(false);
+    }
+  }, [votersDetails, villageDetails]);
+  
   return (
     <div className={styles.dashboardmain}>
       <Toaster />
@@ -279,15 +291,21 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
         )}
       </div>
       <hr />
-      <Tabs
-        selectedIndex={tabIndex}
-        onSelect={(index) => setTabIndex(index)}
-        selectedTabClassName={`border-b-[1px] border-[#018226] text-[#2F3733] outline-none`}
-      >
-        <TabList
-          className={`flex border-b border-[#F1F1F1] w-full items-center justify-start text-center mt-8 md:overflow-x-visible overflow-x-scroll md:flex-wrap ${styles.tabs}`}
+
+      {loading ? (
+        <div className="flex justify-center pt-6">
+          <MiniLoader />
+        </div>
+      ) : (
+        <Tabs
+          selectedIndex={tabIndex}
+          onSelect={(index) => setTabIndex(index)}
+          selectedTabClassName={`border-b-[1px] border-[#018226] text-[#2F3733] outline-none`}
         >
-          {/*
+          <TabList
+            className={`flex border-b border-[#F1F1F1] w-full items-center justify-start text-center mt-8 md:overflow-x-visible overflow-x-scroll md:flex-wrap ${styles.tabs}`}
+          >
+            {/*
             <Tab className="font-bold lg:px-8 py-3 text-3xl lg:text-2xl  md:min-w-[40%] min-w-[70%] cursor-pointer hover:border-[#018226] hover:border-b-[1px] flex gap-2 justify-center">
               {registeredUserVillage && registeredUserVillage}&nbsp;
               <p>
@@ -372,17 +390,6 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
             <div className={styles.modal__body}>
               <p>Kindly enter the details for a new village</p>
               <div className={styles.details_form}>
-                {/* <Formik
-                  initialValues={{
-                    firstName: '',
-                    lastName: '',
-                    state: '',
-                    village: '',
-                  }}
-                  validationSchema={contributorValidationSchema}
-                  onSubmit={(values) => console.log('Form data', values)}
-                >
-                  {({ values }) => ( */}
                 <form>
                   <SelectInput
                     placeholder="Select a state"
@@ -391,20 +398,12 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
                     state={states}
                     addVillageHandler={addVillageHandler}
                     setStateId={(val) => setStateId(() => val)}
-                    // setIsLocationEmpty={setIsLocationEmpty}
                     setStateClicked={setStateClicked}
                   />
                   <p className={styles.select_desc}>
                     Kindly note that the state you selected on registration
                     cannot be changed
                   </p>
-                  {/* <SelectInputVillage
-                    placeholder="Select a village"
-                    name="village"
-                    options={states}
-                    setSelectedVillage={setSelectedVillage}
-                    addVillageHandler={addVillageHandler}
-                  /> */}
 
                   {stateClicked && (
                     <SelectWithSearch
