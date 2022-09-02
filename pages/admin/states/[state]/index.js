@@ -1,4 +1,5 @@
 import React from 'react'
+import ProtectedAdmin from './../../../../components/misc/ProtectedAdmin';
 
 const state = () => {
   return (
@@ -6,4 +7,4 @@ const state = () => {
   )
 }
 
-export default state
+export default ProtectedAdmin(state);

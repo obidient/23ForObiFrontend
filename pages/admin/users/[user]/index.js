@@ -3,6 +3,7 @@ import Sidebar from '../../../../components/Admin/Sidebar';
 import styles from './Styles.module.scss'
 import village_img_3 from '../../../../assets/village_img_3.png'
 import Image from 'next/image';
+import ProtectedAdmin from './../../../../components/misc/ProtectedAdmin';
 
 const user = () => {
   return (
@@ -44,4 +45,4 @@ const user = () => {
   );
 }
 
-export default user
+export default ProtectedAdmin(user);

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import DashboardNav from '../../components/DashboardNav/Index';
 import StateProgress from '../../components/misc/StateProgress';
@@ -9,11 +9,26 @@ import nextIcon from '../../assets/arrow-right-2.png';
 import Modal from '../../components/Modal/Index';
 import Loader from '../../components/Loader';
 import Head from 'next/head';
+import ProtectedHOC from './../../components/misc/ProtectedHOC';
+import useAuthStore from '../../store/authStore';
 
 const summary = () => {
   const router = useRouter();
   const [progress, setProgress] = useState(20);
   const [showModal, setShowModal] = useState(false);
+  const { accessToken, userProfile } = useAuthStore();
+  const is_new_user = userProfile?.is_new_user;
+
+  useEffect(() => {
+    return () => {
+      if (!userProfile) {
+        router.push('/');
+      }
+      if (is_new_user === false) {
+        router.push('/dashboard');
+      }
+    };
+  }, [router, is_new_user]);
 
   return (
     <>
@@ -105,4 +120,4 @@ const summary = () => {
   );
 };
 
-export default summary;
+export default ProtectedHOC(summary);

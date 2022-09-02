@@ -13,6 +13,7 @@ import * as Yup from 'yup';
 import FormikControl from '../../../components/Forms/FormikControl';
 import stateDetails from '../../../data/stateDetails';
 import success from '../../../assets/success.png';
+import ProtectedAdmin from './../../../components/misc/ProtectedAdmin';
 
 const villages = ({ villages }) => {
   const [showModal, setShowModal] = useState(false);
@@ -381,4 +382,4 @@ const villages = ({ villages }) => {
   );
 };
 
-export default villages;
+export default ProtectedAdmin(villages);
