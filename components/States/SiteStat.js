@@ -34,7 +34,7 @@ const SiteStat = (stats) => {
 
   console.log(stats);
 
-//   const { number_of_users, number_of_voters, number_of_villages } = stats.stats;
+  const { number_of_users, number_of_voters, number_of_villages } = stats.stats;
   return (
     <div className={styles.site_stat}>
       <div className="container">
