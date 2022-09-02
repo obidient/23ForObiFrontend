@@ -15,7 +15,7 @@ const DashboardNav = ({ progress, progressbar, profile, voterData }) => {
       <div className={styles.dashboardnav__top_left}>
         <Link href="/">
           <div className={styles.logo}>
-            <Image src={logo} alt="logo" />
+            <Image src={logo} />
           </div>
         </Link>
         {progressbar && (
@@ -26,7 +26,7 @@ const DashboardNav = ({ progress, progressbar, profile, voterData }) => {
             </div>
             <StateProgress progress={progress} />
             <p className="text-[#979797] text-2xl">
-              (You have promised to deliver {voterData?.length || '-'} votes)
+              (You have promised to deliver {voterData?.length || "-"} votes)
             </p>
           </div>
         )}
