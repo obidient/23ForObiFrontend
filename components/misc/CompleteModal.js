@@ -28,7 +28,7 @@ const CompleteModal = ({
             </button>
           </div>
           <div className={styles.complete_body}>
-            <Image src={uploaded} />
+            <Image src={uploaded} alt="uploaded"/>
             <h2>{heading}</h2>
             <p>{description}</p>
             <button

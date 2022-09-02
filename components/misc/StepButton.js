@@ -29,7 +29,7 @@ const StepButton = ({
           >
             Next
             <div className="flex items-center pl-4 hover:translate-x-1 ">
-              <Image src={nextIcon} />
+              <Image src={nextIcon} alt="next" />
             </div>
           </button>
         </>
@@ -45,7 +45,7 @@ const StepButton = ({
           >
             Next
             <div className="flex items-center pl-4 hover:translate-x-1">
-              <Image src={nextIcon} />
+              <Image src={nextIcon} alt="next" />
             </div>
           </button>
         </>
@@ -61,7 +61,7 @@ const StepButton = ({
           >
             Next
             <div className="flex items-center pl-4 hover:translate-x-1">
-              <Image src={nextIcon} />
+              <Image src={nextIcon} alt="next" />
             </div>
           </button>
         </>
@@ -77,7 +77,7 @@ const StepButton = ({
           >
             Next
             <div className="flex items-center pl-4 hover:translate-x-1">
-              <Image src={nextIcon} />
+              <Image src={nextIcon} alt="next" />
             </div>
           </button>
         </>
@@ -100,7 +100,7 @@ const StepButton = ({
           >
             Next
             <div className="flex items-center pl-4 hover:translate-x-1">
-              <Image src={nextIcon} />
+              <Image src={nextIcon} alt="next" />
             </div>
           </button>
         </div>

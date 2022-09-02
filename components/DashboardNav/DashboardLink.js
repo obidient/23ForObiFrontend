@@ -57,6 +57,7 @@ const DashboardLink = ({ option, name, value, onChange }) => {
               src={user_image ? user_image : avatar}
               width={35}
               height={35}
+              alt="user"
             />
             <h2>{first_name}</h2>
           </div>

@@ -282,10 +282,12 @@ const State = ({ stateName, detail, images, villages }) => {
         <div className={styles.state_heading}>
           <StateBreadcrumb state={stateName} />
           <div className={styles.state_heading__title}>
-           <div>
-           <h1 className="capitalize">{stateName} Villages</h1>
-            <p className="ml-1">Vilages in {stateName} voting for Peter obi</p>
-           </div>
+            <div>
+              <h1 className="capitalize">{stateName} Villages</h1>
+              <p className="ml-1">
+                Vilages in {stateName} voting for Peter obi
+              </p>
+            </div>
             <div className={styles.vill_control}>
               <div className={styles.vill_control__text}>
                 <p>Villages we are sure of votes:</p>
@@ -300,7 +302,12 @@ const State = ({ stateName, detail, images, villages }) => {
               <div className={styles.current_gov}>
                 <p>Current governor</p>
                 <div className={styles.current_gov__details}>
-                  <Image src={image ? image : avatar} width={78} height={78} />
+                  <Image
+                    src={image ? image : avatar}
+                    width={78}
+                    height={78}
+                    alt="avatar"
+                  />
                   <div className={styles.text}>
                     <h5>{current_governor ? current_governor : ''}</h5>
                     <p>
@@ -317,7 +324,6 @@ const State = ({ stateName, detail, images, villages }) => {
               <div className={styles.vote_dir}>
                 <p>Last vote direction</p>
                 <div className={styles.vote_dir__details}>
-                  {/* <Image src={last_vote_direction ? pdp : apc} /> */}
                   <div className={styles.text}>
                     <h5>{last_vote_direction ? last_vote_direction : ''}</h5>
                     <p>
@@ -334,31 +340,21 @@ const State = ({ stateName, detail, images, villages }) => {
         <div className={styles.state_vilage_controlled}>
           <div className={styles.state_vilage_controlled__head}>
             <h5>Villages in control</h5>
-        
-         <select
-          
-                onChange={handleInputChange}
-                
-                
-              >
-                <option value="default" disable hidden>
-                  Filter by LGA
-                </option>
-                <option value={"all"}>
-                  Filter All
-                </option>
-                {userLga?.map((item) => {
-                  return (
-                    <option
-                      value={item.name}
-                      key={item.id}
-                    >
-                      {item.name}
-                    </option>
-                  );
-                })}
-              </select>
-       
+
+            <select onChange={handleInputChange}>
+              <option value="default" disable hidden>
+                Filter by LGA
+              </option>
+              <option value={'all'}>Filter All</option>
+              {userLga?.map((item) => {
+                return (
+                  <option value={item.name} key={item.id}>
+                    {item.name}
+                  </option>
+                );
+              })}
+            </select>
+
             <div className={styles.head_input}>
               <input
                 type="text"
@@ -390,37 +386,9 @@ const State = ({ stateName, detail, images, villages }) => {
             )}
           </div>
         </div>
-        <div className={styles.state_vilage_not_controlled}>
-          {/*<div className={styles.state_vilage_not_controlled__head}>
-            <h5>Villages not in control</h5>
-            <div className={styles.head_input}>
-              <input
-                type="text"
-                placeholder="Search state here"
-                value={searchNotInQuery}
-                onChange={handleNotInVillageChange}
-              />
-              <div className={styles.search_icon}>
-                <Image src={search} alt="search" />
-              </div>
-            </div>
-            </div>
-          <div className="cards">
-            {villages && villages.length > 0 ? (
-              filter(villages, searchNotInQuery.toLowerCase()).map((item) => (
-                <Card
-                  key={item.id}
-                  village={item.name}
-                  type={item.type}
-                  progress={item.progress}
-                  slug={item.slug}
-                />
-              ))
-            ) : (
-              <h2>No Villages</h2>
-            )}
-          </div>*/}
-        </div>
+        {/* <div className={styles.state_vilage_not_controlled}>
+          
+        </div> */}
         <div className={styles.btn_missing}>
           <button
             onClick={() => setShowModal(true)}
@@ -505,8 +473,12 @@ const State = ({ stateName, detail, images, villages }) => {
             <div className={styles.head_text}>
               <h5>Images</h5>
               <p>
-              Do you have any images that people can use for social media advert(WhatsApp Status, Facebook) <br /> That is specific to {stateName}? Something in the local language, or that addresses local wants and needs?
-              <br />Then please upload it here for people to download and share
+                Do you have any images that people can use for social media
+                advert(WhatsApp Status, Facebook) <br /> That is specific to{' '}
+                {stateName}? Something in the local language, or that addresses
+                local wants and needs?
+                <br />
+                Then please upload it here for people to download and share
               </p>
             </div>
             <div className={styles.head_btn}>
@@ -539,8 +511,11 @@ const State = ({ stateName, detail, images, villages }) => {
                         states and village. File should be in .pdf, .jpeg, .jpg,
                         .png formats with less than 10 MB size
                       </p>*/}
-                      <p>Upload images that can be used for local adverts in {stateName}. Files should be in  .pdf, .jpeg, .jpg,
-                        .png formats with less than 10 MB size</p>
+                      <p>
+                        Upload images that can be used for local adverts in{' '}
+                        {stateName}. Files should be in .pdf, .jpeg, .jpg, .png
+                        formats with less than 10 MB size
+                      </p>
                       <div className={styles.file_input}>
                         <form>
                           {imageUpload && (
@@ -550,6 +525,7 @@ const State = ({ stateName, detail, images, villages }) => {
                                   src={imageUpload}
                                   width={100}
                                   height={100}
+                                  alt="upload"
                                 />
                                 <div
                                   onClick={deleteImage}
@@ -562,7 +538,7 @@ const State = ({ stateName, detail, images, villages }) => {
                           )}
                           <div className={styles.upload}>
                             <button type="button" className={styles.btn_upload}>
-                              <Image src={add_img} />
+                              <Image src={add_img} alt="add image" />
                               <p>Add a new image</p>
                               <input
                                 type="file"
@@ -643,19 +619,19 @@ const State = ({ stateName, detail, images, villages }) => {
               {/* END COMPLETE MODAL */}
             </div>
           </div>
-          <div className='flex justify-center p-6' >
+          <div className="flex justify-center p-6">
             {images && images.length > 0 ? (
               images.map((item, index) => (
-               <div className={styles.state_body_cards}>
-                 <ImgCard
-                  src={item.url}
-                  key={index}
-                  title={item.title}
-                  onClick={() => {
-                    showImage(item.url, item.title), setShowModal3(true);
-                  }}
-                />
-               </div>
+                <div className={styles.state_body_cards}>
+                  <ImgCard
+                    src={item.url}
+                    key={index}
+                    title={item.title}
+                    onClick={() => {
+                      showImage(item.url, item.title), setShowModal3(true);
+                    }}
+                  />
+                </div>
               ))
             ) : (
               <h2 className="text-3xl">
@@ -680,7 +656,7 @@ const State = ({ stateName, detail, images, villages }) => {
                         src={activeImage}
                         width="612px"
                         height="278px"
-                        alt=""
+                        alt="social image"
                       />
                     </div>
                   ) : (

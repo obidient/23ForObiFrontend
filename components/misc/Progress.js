@@ -34,7 +34,7 @@ const ProgressBar = ({ done, bgColor, pgColor, type }) => {
         style={style}
       >
         <div className={styles.img}>
-          {type === 'village' ? '' : <Image src={peterobi} width={95.92} height={99}  alt='' />}
+          {type === 'village' ? '' : <Image src={peterobi} width={95.92} height={99}  alt='peter obi' />}
         </div>
       </div>
     </div>

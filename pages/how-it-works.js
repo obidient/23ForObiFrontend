@@ -111,7 +111,7 @@ const howItWorks = () => {
             key={index}
           >
             <div className="content flex flex-col justify-center w-1/2 p-5">
-              <h2 className=" lg:my-3" style={{color: "#7a7b7b"}}>
+              <h2 className=" lg:my-3" style={{ color: '#7a7b7b' }}>
                 {content.text1 ? content.text1 : ''}
               </h2>
               <h5 className="font-black text-4xl">
@@ -142,6 +142,7 @@ const howItWorks = () => {
                   width={content.width}
                   height={content.height}
                   className="lg:my-2"
+                  alt="instruction image"
                 />
               </div>
             </div>

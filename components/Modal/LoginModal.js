@@ -41,63 +41,7 @@ const LoginModal = ({ setShowModal, setSignInIsVisible, onClose, type }) => {
               >
                 <GoogleAuth />
               </div>
-            </div>
-            {/**
-                 * 
-                 <div className={styles_login.login_modal__body__container__content}>
-              <div
-                style={{ display: 'grid', placeItems: 'end' }}
-                className={
-                  styles_login.login_modal__body__container__content__image
-                }
-              >
-                <Image src={facebook} alt="google icon" />
-              </div>
-              <div
-                className={
-                  styles_login.login_modal__body__container__content__para
-                }
-              >
-                <p>Join with Facebook</p>
-              </div>
-            </div>
-
-            <div className={styles_login.login_modal__body__container__content}>
-              <div
-                style={{ display: 'grid', placeItems: 'end' }}
-                className={
-                  styles_login.login_modal__body__container__content__image
-                }
-              >
-                <Image src={twitter} alt="google icon" />
-              </div>
-              <div
-                className={
-                  styles_login.login_modal__body__container__content__para
-                }
-              >
-                <p>Join with Twitter</p>
-              </div>
-            </div>
-
-            <div className={styles_login.login_modal__body__container__content}>
-              <div
-                style={{ display: 'grid', placeItems: 'end' }}
-                className={
-                  styles_login.login_modal__body__container__content__image
-                }
-              >
-                <Image src={apple} alt="google icon" />
-              </div>
-              <div
-                className={
-                  styles_login.login_modal__body__container__content__para
-                }
-              >
-                <p>Join with Apple</p>
-              </div>
-            </div>
-                 */}
+            </div>         
           </div>
         </div>
       </div>

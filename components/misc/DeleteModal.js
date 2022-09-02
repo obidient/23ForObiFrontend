@@ -32,12 +32,10 @@ const DeleteModal = ({
             </button>
           </div>
           <div className={styles.complete_body}>
-            <Image src={image} />
+            <Image src={image} alt="bin" />
             <h2>{heading}</h2>
             <p className="w-full">{description}</p>
-            <div className="mt-16">
-                {children}
-            </div>
+            <div className="mt-16">{children}</div>
           </div>
         </div>
       </Modal>

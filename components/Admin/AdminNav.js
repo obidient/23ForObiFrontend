@@ -25,7 +25,7 @@ const AdminNav = () => {
         </div>
         <div className='mb-7'>
           <div className="flex items-center justify-center cursor-pointer">
-            <Image src={notification} />
+            <Image src={notification} alt="notification"/>
           </div>
         </div>
       </div>

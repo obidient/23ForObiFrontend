@@ -52,7 +52,7 @@ const about = () => {
               ></Image>
             </div>
             <div className={aboutStyles.about__aim}>
-              <Image src={footprints} width="47.36px" height="75px" alt="" />
+              <Image src={footprints} width="47.36px" height="75px" alt="aim" />
               <div className={aboutStyles.about__heading}>
                 <h5 className="text-[#2F3733] font-bold text-5xl">774 LGAs</h5>
                 <p className="text-[#000000] font-normal py-2 text-justify">
@@ -78,7 +78,7 @@ const about = () => {
               <Image src={poparty.src} layout="fill" alt="labor party"></Image>
             </div>
             <div className={aboutStyles.about__aim}>
-              <Image src={map} alt="" />
+              <Image src={map} alt="across the 36" />
               <div className={aboutStyles.about__heading}>
                 <h5 className="text-[#2F3733] font-bold text-5xl">36 states</h5>
                 <p className="text-[#000000] font-normal py-2 text-justify">

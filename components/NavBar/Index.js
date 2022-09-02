@@ -113,7 +113,7 @@ const NavBar = () => {
                       <div className={styles.user_image}>
                         <Image
                           src={user_image ? user_image : avatar}
-                          alt=""
+                          alt="user"
                           width={35}
                           height={35}
                         />
@@ -147,7 +147,7 @@ const NavBar = () => {
                   <div className={styles.user_image}>
                     <Image
                       src={user_image ? user_image : avatar}
-                      alt=""
+                      alt="user"
                       width={35}
                       height={35}
                     />

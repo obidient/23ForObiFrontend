@@ -24,7 +24,7 @@ const Sidebar = () => {
     <div className={styles.sidebar}>
       <div className={styles.logo}>
         <Link href="/admin/dashboard">
-          <Image src={logo} />
+          <Image src={logo} alt="logo" />
         </Link>
       </div>
       <div className="my-3 w-[200px] text-justify">
@@ -37,7 +37,7 @@ const Sidebar = () => {
             }
           >
             <span className="font-bold text-2xl xl:text-md">
-              <Image src={dashIcon} />
+              <Image src={dashIcon} alt="dash-icon" />
             </span>
             <span className="text-3xl font-medium text-white  capitalize">
               Dashboard
@@ -53,7 +53,7 @@ const Sidebar = () => {
             }
           >
             <span className="font-bold text-2xl xl:text-md">
-              <Image src={profileIcon} />
+              <Image src={profileIcon} alt="profile-icon" />
             </span>
             <span className="text-3xl font-medium text-white capitalize">
               Contributors
@@ -69,7 +69,7 @@ const Sidebar = () => {
             }
           >
             <span className="font-bold text-2xl xl:text-md">
-              <Image src={map} />
+              <Image src={map} alt="map" />
             </span>
             <span className="text-3xl font-medium text-white capitalize">
               Villages
@@ -85,7 +85,7 @@ const Sidebar = () => {
             }
           >
             <span className="font-bold text-2xl xl:text-md">
-              <Image src={noteIcon} />
+              <Image src={noteIcon} alt="note-icon" />
             </span>
             <span className="text-3xl font-medium text-white capitalize">
               States
@@ -101,7 +101,7 @@ const Sidebar = () => {
             }
           >
             <span className="font-bold text-2xl xl:text-md">
-              <Image src={settings} />
+              <Image src={settings} alt="settings"/>
             </span>
             <span className="text-3xl font-medium text-white capitalize">
               Settings
@@ -109,14 +109,14 @@ const Sidebar = () => {
           </div>
         </Link>
       </div>
-      <div className='w-[200px] text-justify absolute bottom-0'>
+      <div className="w-[200px] text-justify absolute bottom-0">
         <button className={inactiveStyle}>
           <span className="flex items-center justify-center font-bold text-2xl xl:text-md">
             <Image src={logoutIcon} />
           </span>
           <span className="text-3xl font-medium text-white capitalize">
-              log-out
-            </span>
+            log-out
+          </span>
         </button>
       </div>
     </div>

@@ -119,7 +119,7 @@ const VillageDetails = ({ villageDetails, votersDetails, awards, villageCount })
           className={styles.dashboardmain_add_village}
           onClick={() => setShowModal(true)}
         >
-          <Image src={add_img_green} />
+          <Image src={add_img_green} alt="plus" />
           <p>Add a vote you will deliver</p>
         </div>
       </div>

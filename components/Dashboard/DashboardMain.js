@@ -285,7 +285,7 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
             className={styles.dashboardmain_add_village}
             onClick={() => setShowModal(true)}
           >
-            <Image src={add_img_green} />
+            <Image src={add_img_green} alt="plus-sign" />
             <p>Add a new village</p>
           </div>
         )}
@@ -370,7 +370,7 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
                   className="flex items-center gap-3 text-[#018226]"
                   onClick={() => setShowModal(true)}
                 >
-                  <Image src={add_img_green} height="15%" width="15%" />
+                  <Image src={add_img_green} height="15%" width="15%" alt="plus-sign" />
                   <p className="text-lg">Add a new village</p>
                 </div>
               </Tab>

@@ -190,7 +190,7 @@ const homepage = ({
                 )}
               </div>
               <div className={styles.hero__img}>
-                <Image src={labourparty} width={373} height={280} alt="" />
+                <Image src={labourparty} width={373} height={280} alt="labour party" />
               </div>
             </div>
             <div className={styles.hero__bottom}>
@@ -367,7 +367,7 @@ const homepage = ({
                               styles.login_modal__body__container__content__image
                             }
                           >
-                            <Image src={facebook} alt="google icon" />
+                            <Image src={facebook} alt="facebook icon" />
                           </div>
                           <div
                             className={
@@ -389,7 +389,7 @@ const homepage = ({
                               styles.login_modal__body__container__content__image
                             }
                           >
-                            <Image src={twitter} alt="google icon" />
+                            <Image src={twitter} alt="twitter icon" />
                           </div>
                           <div
                             className={
@@ -411,7 +411,7 @@ const homepage = ({
                               styles.login_modal__body__container__content__image
                             }
                           >
-                            <Image src={apple} alt="google icon" />
+                            <Image src={apple} alt="apple icon" />
                           </div>
                           <div
                             className={

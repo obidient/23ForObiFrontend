@@ -234,19 +234,6 @@ const Village = ({
               ))}
           </div>
         </div>
-        {/* <div className={styles.votes_delivered}>
-          <h2>Vote delivered</h2>
-          <div className={styles.detail}>
-            <Image src={village_img_1} />
-            <div className={styles.name}>
-              <h5>Ejima Benson</h5>
-              <div className={styles.guaranteed}>
-                <Image src={check} />
-                <p>Guaranteed</p>
-              </div>
-            </div>
-          </div>
-        </div> */}
       </div>
     </div>
   );

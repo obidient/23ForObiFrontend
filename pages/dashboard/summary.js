@@ -62,7 +62,7 @@ const summary = () => {
               </p>
             </div>
             <div className="lg:w-1/4 w-1/2 py-5 lg:py-0 text-center">
-              <Image src={awards} />
+              <Image src={awards} alt="awards" />
               <p className="text-[#7A7B7B] lg:text-2xl text-3xl my-4">
                 Hurray! you’ve earned your first badge
               </p>
@@ -81,7 +81,7 @@ const summary = () => {
             >
               Yes, I can
               <div className="flex items-center pl-4 hover:translate-x-1">
-                <Image src={nextIcon} />
+                <Image src={nextIcon} alt="next" />
               </div>
             </button>
           </div>
