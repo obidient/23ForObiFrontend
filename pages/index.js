@@ -17,6 +17,7 @@ export default function Home({
   stats
 }) {
 
+  // console.log(stats)
   return (
     <div>
       <Homepage
@@ -49,6 +50,7 @@ export async function getServerSideProps() {
     return {
       props: {
         states: [],
+        stats: []
       },
     };
   }
