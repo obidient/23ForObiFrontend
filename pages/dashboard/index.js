@@ -113,12 +113,12 @@ const dashboard = (props) => {
         <title>Dashboard</title>
       </Head>
       <div className={`${styles.dashboard} container`}>
-        {/* <DashboardNav
+        <DashboardNav
           progress={votersProgress}
           progressbar="true"
           profile="true"
           voterData={voterData}
-        /> */}
+        />
         <div className={styles.dashboard__body}>
           <div className={styles.main}>
             <DashboardMain
