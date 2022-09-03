@@ -25,10 +25,9 @@ const welcome = () => {
   const is_new_user = userProfile?.is_new_user;
 
   useEffect(() => {
-    
     return () => {
-      if(!userProfile){
-        router.push('/')
+      if (!userProfile) {
+        router.push('/');
       }
       if (is_new_user === false) {
         router.push('/dashboard');
@@ -40,7 +39,7 @@ const welcome = () => {
   //console.log(is_new_user)
   //console.log(token);
   //console.log(user_id);
- 
+
   const [steps, setSteps] = useState(1);
   const [progress, setProgress] = useState(20);
   const [formData, setFormData] = useState({
@@ -70,8 +69,8 @@ const welcome = () => {
 
       default:
         return <FifthStep formData={formData} setFormData={setFormData} />;
-      }
-    };
+    }
+  };
 
   // handle steps
   const handleSubmit = () => {
@@ -120,9 +119,7 @@ const welcome = () => {
         .then((res) => {
           // console.log(res)
         });
-    } catch(error) {
-
-    }
+    } catch (error) {}
   };
 
   const handleSkip = () => {
@@ -131,7 +128,6 @@ const welcome = () => {
     router.push('/dashboard');
   };
 
- 
   return (
     <>
       <Head>
@@ -157,7 +153,7 @@ const welcome = () => {
             </div>
           </div>
         </div>
-        <div>
+        <div className="overfloe-auto">
           {conditionalComponent()}
 
           <StepButton
