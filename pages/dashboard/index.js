@@ -68,7 +68,7 @@ const dashboard = (props) => {
     const id = setInterval(() => {
       // try {
       axios
-        .get('https://api.23forobi.com/user-villages', {
+        .get('https://api.23forobi.com/voters-by-contributor', {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
@@ -117,7 +117,7 @@ const dashboard = (props) => {
           progress={votersProgress}
           progressbar="true"
           profile="true"
-          voterData={villageData}
+          voterData={voterData}
         />
         <div className={styles.dashboard__body}>
           <div className={styles.main}>
@@ -129,7 +129,7 @@ const dashboard = (props) => {
             />
           </div>
           <div className={styles.aside}>
-            <Sidebar />
+            <Sidebar voters={voterData} />
           </div>
         </div>
       </div>

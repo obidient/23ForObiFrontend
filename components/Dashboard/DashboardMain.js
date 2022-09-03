@@ -1,6 +1,6 @@
 import styles from './Styles.module.scss';
 import Image from 'next/image';
-import { FaTimes } from 'react-icons/fa';
+import {FaTimes} from 'react-icons/fa'
 
 //IMAGES
 import status_check from '../../assets/status_check.png';
@@ -57,24 +57,7 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
   const { userProfile } = useAuthStore();
   const { accessToken } = useAuthStore();
   const { userVillages, userLga } = useUserStore();
-  const [userVilla, setUserVilla] = useState([]);
-
-  useEffect(() => {
-    fetchUserVilla();
-  }, []);
-
-  const fetchUserVilla = async () => {
-    await axios
-      .get('https://api.23forobi.com/user-villages', {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
-      .then((res) => {
-        console.log(res.data);
-        setUserVilla(res.data);
-      });
-  };
+  // const { village, state } = registeredUser;
 
   const [otherVillage, setOtherVillage] = useState();
 
@@ -91,6 +74,10 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
 
   ///////////COMPLTETE MODAL//////////////
   const [showCompleteModal, setShowCompleteModal] = useState();
+
+  ///////////DELETE MODAL//////////////
+  const [showDeleteModal, setShowDeleteModal] = useState();
+  const [idToDelete, setIdToDelete] = useState();
 
   const stateOption = states?.map((state) => {
     return state.state_name;
@@ -132,11 +119,6 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
       axios
         .post(url, data, { headers })
         ?.then((res) => {
-          console.log(res);
-          if (res.status === 200) {
-            toast.success(res.data.message);
-            fetchUserVilla();
-          }
           setSelectedVillage('');
         })
         .catch((err) => {
@@ -147,17 +129,23 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
           // console.log(err)
         });
     } else {
-      await axios
-        .post(urlCreate, dataCreate, { headers })
-        ?.then((res) => {
+      try {
+        await axios.post(urlCreate, dataCreate, { headers })?.then((res) => {
+          // console.log(res.data.village.id)
           setShowCompleteModal(true);
           setOtherVillage('');
           setSelectedVillage('');
           setLgaClicked(false);
-        })
-        .catch((err) => {
-          // console.log(err)
+
+          axios
+            .post(url, { village_id: res.data.village.id }, { headers })
+            .then((res) => {
+              // console.log(res)
+            });
         });
+      } catch (err) {
+        // console.log(err)
+      }
     }
     setShowModal(false);
   };
@@ -246,15 +234,27 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
       await axios
         .delete(`https://api.23forobi.com/user-villages/${id}`, { headers })
         .then((res) => {
-          if (res.status === 200) {
-            toast.success(res.data.message);
-            fetchUserVilla();
-          }
+          toast.success(res.data.message);
         });
-    } catch (err) {
-      toast.error(err);
-    }
+    } catch (err) {}
   };
+
+  //set show delete modal
+  const handleShowDelete = (item) => {
+    setShowDeleteModal(true);
+    setIdToDelete(item);
+  };
+
+  // //Effect to add id to delete
+  // useEffect(() => {
+  //   handleShowDelete();
+  // }, [handleShowDelete]);
+
+  //Effect to hide scroll
+  useEffect(() => {
+    const body = document.querySelector('body');
+    body.style.overflow = showModal ? 'hidden' : 'auto';
+  }, [showModal]);
 
   //Effect to hide scroll
   useEffect(() => {
@@ -280,13 +280,13 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
           <h2>Welcome back! {first_name},</h2>
           <p>We are glad to have you</p>
         </div>
-        {!userVilla && (
+        {!villageDetails && (
           <div
             className={styles.dashboardmain_add_village}
             onClick={() => setShowModal(true)}
           >
-            <Image src={add_img_green} />
-            <p>Add a new villag</p>
+            <Image src={add_img_green} alt="plus-sign" />
+            <p>Add a new village</p>
           </div>
         )}
       </div>
@@ -315,54 +315,81 @@ const DashboardMain = ({ states, villageDetails, votersDetails, awards }) => {
               </p>
             </Tab>
               */}
-          {userVilla &&
-            userVilla.length > 0 &&
-            userVilla?.map((item) => (
+            {villageDetails?.map((item) => (
               <Tab
                 key={item.village.id}
                 className="font-bold lg:px-8 py-3 text-3xl lg:text-2xl md:min-w-fit min-w-[70%] cursor-pointer hover:border-[#018226] hover:border-b-[1px] flex gap-2 justify-center items-center relative"
               >
                 {item.village.name}
-                <p className="lowercase">({item.village.location_id})</p>
+                <p className="lowercase">
+                  ({item.state.state_name.split(' ')[0]})
+                </p>
                 <button
                   className="md:relative absolute right-12 md:right-0 md:px-8 text-red-700"
-                  onClick={() => deleteUserVillage(item.id)}
+                  onClick={() => handleShowDelete(item.id)}
                 >
                   <FaTimes />
                 </button>
               </Tab>
             ))}
-          {villageDetails && (
-            <Tab
-              className="font-bold lg:px-8 py-3 lg:text-2xl  min-w-[40%] cursor-pointer hover:border-[#018226] hover:border-b-[1px] flex row-gap-2 border-none"
-              disabled={true}
-            >
-              <div
-                className="flex items-center gap-3 text-[#018226] text-4xl md:text-2xl"
-                onClick={() => setShowModal(true)}
+            {showDeleteModal && (
+              <DeleteModal
+                setShowDeleteModal={setShowDeleteModal}
+                setShowCompleteModal={setShowDeleteModal}
+                heading={'You are about to remove a village'}
+                description={
+                  'Kindly note that when you remove a village, you will lose all your delivered voters. Are you sure?'
+                }
+                image={bin}
               >
-                <Image src={add_img_green} height="15%" width="15%" />
-                <p className="">Add a new village</p>
-              </div>
-            </Tab>
-          )}
-        </TabList>
-        {userVilla &&
-          userVilla.length > 0 &&
-          userVilla?.map((items) => (
+                <div className={`${styles.delete_modal}`}>
+                  <button
+                    className={`${styles.delete_modal__btn_submit}`}
+                    onClick={() => setShowDeleteModal(false)}
+                  >
+                    No
+                  </button>
+                  <button
+                    className={`${styles.delete_modal__btn_submit} btn_dark`}
+                    onClick={() => {
+                      deleteUserVillage(idToDelete);
+                      setShowDeleteModal(false);
+                    }}
+                  >
+                    Yes, delete village
+                  </button>
+                </div>
+              </DeleteModal>
+            )}
+            {villageDetails && (
+              <Tab
+                className="font-bold lg:px-8 py-3 lg:text-2xl  min-w-[40%] cursor-pointer hover:border-[#018226] hover:border-b-[1px] flex row-gap-2 border-none"
+                disabled={true}
+              >
+                <div
+                  className="flex items-center gap-3 text-[#018226]"
+                  onClick={() => setShowModal(true)}
+                >
+                  <Image src={add_img_green} height="15%" width="15%" alt="plus-sign" />
+                  <p className="text-lg">Add a new village</p>
+                </div>
+              </Tab>
+            )}
+          </TabList>
+          {villageDetails?.map((items) => (
             <TabPanel key={items.id}>
               <div>
                 <VillageDetails
                   villageDetails={items}
-                  villageCount={userVilla.length}
+                  villageCount={villageDetails.length}
                   votersDetails={votersDetails}
                   awards={awards}
                 />
               </div>
             </TabPanel>
           ))}
-      </Tabs>
-
+        </Tabs>
+      )}
       {/* NEW VILLAGE MODAL */}
       {showModal && (
         <Modal
