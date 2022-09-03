@@ -153,7 +153,7 @@ const welcome = () => {
             </div>
           </div>
         </div>
-        <div className="overfloe-auto">
+        <div className="overflow-auto">
           {conditionalComponent()}
 
           <StepButton
