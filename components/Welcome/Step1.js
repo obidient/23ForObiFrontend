@@ -8,12 +8,12 @@ const Step1 = ({ formData, setFormData }) => {
   //const [loading, setLoading] = useState(true)
   const { pvc } = formData;
 
-  useEffect(() => {
+  /*useEffect(() => {
     if (!userProfile) {
       router.push('/');
       //setLoading(false)
     }
-  }, [userProfile, router]);
+  }, [userProfile, router]);*/
 
   // if(loading) return <Loader />
   return (
