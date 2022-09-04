@@ -24,7 +24,7 @@ const welcome = () => {
   const user_id = userProfile?.user?.id;
   const is_new_user = userProfile?.is_new_user;
 
-  /*useEffect(() => {
+  useEffect(() => {
     return () => {
       if (!userProfile) {
         router.push('/');
@@ -33,7 +33,7 @@ const welcome = () => {
         router.push('/dashboard');
       }
     };
-  }, [router, is_new_user]);*/
+  }, [router, is_new_user]);
 
   //console.log(userProfile)
   //console.log(is_new_user)
