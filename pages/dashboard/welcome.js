@@ -192,4 +192,4 @@ const welcome = () => {
   );
 };
 
-export default ProtectedHOC(welcome);
+export default welcome;
