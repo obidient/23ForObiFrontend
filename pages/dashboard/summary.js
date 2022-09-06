@@ -120,4 +120,4 @@ const summary = () => {
   );
 };
 
-export default ProtectedHOC(summary);
+export default summary;
