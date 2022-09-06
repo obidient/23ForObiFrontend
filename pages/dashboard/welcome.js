@@ -31,7 +31,7 @@ const welcome = () => {
       if (!userProfile) {
         router.push('/');
       }
-      if (is_new_user === false) {
+      if (is_new_user == false) {
         router.push('/dashboard');
       }
     };
