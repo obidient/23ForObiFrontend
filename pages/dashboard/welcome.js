@@ -24,14 +24,12 @@ const welcome = () => {
   const user_id = userProfile?.user?.id;
   const is_new_user = userProfile?.is_new_user;
 
-  console.log(is_new_user)
-
   useEffect(() => {
     return () => {
       if (!userProfile) {
         router.push('/');
       }
-      if (is_new_user === false) {
+      if (is_new_user == false) {
         router.push('/dashboard');
       }
     };
