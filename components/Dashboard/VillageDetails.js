@@ -139,7 +139,7 @@ const VillageDetails = ({ villageDetails, votersDetails, awards, villageCount })
                 <tr>
                   <td>{index + 1}</td>
                   <td className="capitalize">{voters.name}</td>
-                  <td>{voters.contact.slice(1, voters.contact.length)}</td>
+                  <td>{voters.contact}</td>
                   <td>
                     <p
                       onClick={(e) => {

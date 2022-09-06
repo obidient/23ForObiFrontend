@@ -42,6 +42,7 @@ const welcome = () => {
 
   const [steps, setSteps] = useState(1);
   const [progress, setProgress] = useState(20);
+  const [newVillage, setNewVillage] = useState("")
   const [formData, setFormData] = useState({
     pvc: '',
     vote: '',
@@ -54,6 +55,7 @@ const welcome = () => {
     selectedVillage: '',
   });
 
+  console.log(formData);
   const conditionalComponent = () => {
     switch (steps) {
       case 1:
@@ -91,10 +93,15 @@ const welcome = () => {
     const data = {
       data: formData,
       id: user_id,
-    };
-    const villageData = {
-      village_id: formData?.village,
-    };
+    }; 
+
+    const dataVoter = {
+      name: formData?.full_name,
+      village_id: formData.is_village_new ? newVillage : formData?.village,
+      contact: formData?.phone,
+    }; 
+    
+    
     try {
       await axios
         .post(`${baseUrl}user-data`, data, { headers: headers })
@@ -115,9 +122,11 @@ const welcome = () => {
 
     try {
       axios
-        .post(`${baseUrl}user-villages`, villageData, { headers: headers })
+        .post(`${baseUrl}voters`, dataVoter, {
+          headers: headers,
+        })
         .then((res) => {
-          // console.log(res)
+          // console.log(res);
         });
     } catch (error) {}
   };
@@ -158,9 +167,14 @@ const welcome = () => {
 
           <StepButton
             steps={steps}
+            progress={progress}
+            setProgress={setProgress}
+            setSteps={setSteps}
+            setNewVillage={setNewVillage}
             handleSubmit={handleSubmit}
             submitForm={submitForm}
             handleSkip={handleSkip}
+            formData={formData}
             type="submit"
             disabled1={!formData.pvc}
             disabled2={!formData.vote}
