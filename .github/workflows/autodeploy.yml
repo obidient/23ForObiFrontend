@@ -25,4 +25,4 @@ jobs:
             git pull origin main
             npm install
             npm run build
-            pm2 restart front
+            pm2 restart front4obi
